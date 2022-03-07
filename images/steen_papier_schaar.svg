@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg 	xmlns="http://www.w3.org/2000/svg" 
+		xmlns:xlink="http://www.w3.org/1999/xlink" 
+		fill-opacity="1" 
+		color-rendering="auto" 
+		color-interpolation="auto" 
+		text-rendering="auto" 
+		stroke="black" 
+		stroke-linecap="square" 
+		stroke-miterlimit="10" 
+		shape-rendering="auto" 
+		stroke-opacity="1" 
+		fill="black" 
+		stroke-dasharray="none" 
+		font-weight="normal" 
+		stroke-width="1" 
+		font-family="Arial" 
+		font-style="normal" 
+		stroke-linejoin="miter" 
+		font-size="18px" 
+		stroke-dashoffset="0" 
+		image-rendering="auto" 
+		width="100%" 
+		height="100%" 
+		viewBox="0 0 400 160">
+
+ 
+  <g id='rowGroup' transform='translate(0, 0)' role="table">
+  <!-- titel -->
+	<text dx='50%' dy='0.5em' font-weight='bold' fill='crimson' text-anchor='middle' >Steen papier schaar</text>
+  <!-- header row -->
+	<rect x='0' 	y='15'   width='7ex' height='20' fill='gainsboro'/>
+    <rect x='7ex' 	y='15' 	 width='100%' height='20' fill='gainsboro'/>
+    <rect x='0' 	y='35'   width='7ex' height='100%' fill='gainsboro'/>
+    
+	<text x='30' y='30' font-weight='bold' fill='crimson' text-anchor='middle' role="row">
+      <tspan role="columnheader" x='3ex'>Speler</tspan>
+      <tspan role="columnheader" x='250'>A</tspan>
+    </text>
+	<text x='30' dy='1.5em' font-weight='bold' fill='crimson' text-anchor='middle' role="row">
+      <tspan role="columnheader" dy='50%'>B</tspan>
+    </text>
+	
+	<!--
+	<rect x='0' y='calc(30 + 10)'   width='7ex' height='20' fill='gainsboro'/>
+    <rect x='100' y='calc(30 + 10)' width='100' height='20' fill='gainsboro'/>
+    <rect x='200' y='calc(30 + 10)' width='100' height='20' fill='gainsboro'/>
+    <rect x='300' y='calc(30 + 10)'  width='100' height='20' fill='gainsboro'/>
+    
+	
+	<rect x='0' y='76' width='100%' height='20' fill='red'/>
+	-->
+    <text x='30' y='30' text-anchor='middle' role="row">
+      <tspan role="rowheader" x='30' dy='1.5em' font-weight='bold' fill='crimson' text-anchor='start'>Q1</tspan>
+      <tspan role="cell" x='100'>$ 223</tspan>
+      <tspan role="cell" x='200'>$ 195</tspan>
+      <tspan role="cell" x='300'>$ 28</tspan>
+    </text>
+
+    <text x='30' y='30'  text-anchor='middle' role="row">
+      <tspan role="rowheader" x='30' dy='2.5em' font-weight='bold' fill='crimson' text-anchor='start'>Q2</tspan>
+      <tspan role="cell" x='100'>$ 183</tspan>
+      <tspan role="cell" x='200'>$ 70</tspan>
+      <tspan role="cell" x='300'>$ 113</tspan>
+    </text>
+
+    <text x='30' y='30' text-anchor='middle' role="row">
+      <tspan role="rowheader" x='30' dy='3.5em' font-weight='bold' fill='crimson' text-anchor='start'>Q3</tspan>
+      <tspan role="cell" x='100'>$ 277</tspan>
+      <tspan role="cell" x='200'>$ 88</tspan>
+      <tspan role="cell" x='300'>$ 189</tspan>
+    </text>
+
+    <text x='30' y='30' text-anchor='middle' role="row">
+      <tspan id="q4" role="rowheader" x='30' dy='4.5em' font-weight='bold' fill='crimson' text-anchor='start'>Q4</tspan>
+      <tspan role="cell" x='100'>$ 402</tspan>
+      <tspan role="cell" x='200'>$ 133</tspan>
+      <tspan role="cell" x='300'>$ 269</tspan>
+    </text>
+  </g>
+</svg>

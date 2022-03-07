@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+version="1.1"
+width="200"
+height="200">
+<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />
+<line x1="0" y1="200" x2="200" y2="0" style="stroke:rgb(0,0,255);stroke-width:2" />
+<text x="15" y="15" fill="red">hond-lijn</text>
+<text x="40" y="35" font-size="1.5em" fill="red">+</text>
+<text x="15" y="45" font-size="2em" fill="red">-</text>
+<text x="15" y="195" fill="blue">kat-lijn</text>
+<text x="35" y="180" font-size="2em" fill="blue">-</text>
+<text x="15" y="165" font-size="1.5em" fill="blue">+</text>
+</svg>

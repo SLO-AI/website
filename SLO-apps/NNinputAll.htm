@@ -1,0 +1,241 @@
+<!DOCTYPE html >
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />    
+		<link href="perceptron.ico" rel="icon" type="image/ico"> 
+		<script src="js/brain-browser.js"></script> 
+		<script src="js/utils.js"></script> 
+		<script type="text/javascript" charset="UTF-8" src="js/jsxgraphcore.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+		  });
+		</script>
+		<script type="text/javascript" charset="UTF-8"
+		 src="js/jsxgraphcore.js"></script>
+		<link href="perceptron.ico" rel="icon" type="image/ico">
+        <!-- Einde JSX graphics code -->		
+		<script src="js/nn_input_g_json.js"></script>
+		<script src="js/examples_nn_input_g_all.js"></script>
+		<script src="js/ajax.js"></script>
+		
+		<link href="../css/normalize.css" rel="stylesheet">
+		<link href="../css/jsxgraph.css" rel="stylesheet" />					
+		<link href="../css/style.css" rel="stylesheet">
+		<link href="../css/ai.css" rel="stylesheet" />
+		<link href="../css/mybrains.css" rel="stylesheet" /> 
+	</head>
+    <body onload='setExample("or");'>
+	<div>
+	<button class="knop" onclick='toon("uitleg")'>uitleg app</button>
+	<button class="knop" onclick='setExample("or")'>or (of-poort)</button>
+	<button class="knop" onclick='setExample("xor")'>xor</button>
+	<button class="knop" onclick='setExample("and")'>and</button>
+	<button class="knop" onclick='setExample("line")'>lijn</button>
+    <button class="knop" onclick='setExample("lineErrors")'>lijn met fouten</button>
+	<button class="knop" onclick='setExample("2linesAnd")'>boven 2 lijnen</button>
+    <button class="knop" onclick='setExample("2linesXor")'>tussen 2 lijnen</button>
+   </div>
+	<div class="popup" id="uitleg" onclick="verberg(this)">
+	<div class="rechts sluit">&times;</div>
+	<h2>Uitleg elementen in deze app</h2>
+	<h3>invoervelden</h3>
+	<dl style="clear: both;">
+		<dt>lagen
+		</dt>
+		<dd>In brain.js definieer je het netwerk via een lijst van getallen. Deze lijst geef je op in het veld lagen. In het <b>of-poort
+		</b> voorbeeld, is de lijst leeg <b>[]</b>. Dit betekent dat er 
+		geen verborgen laag is, ofwel de input is direct gekoppeld aan de output node. 
+		Deze situatie is gelijk aan	het perceptron voorbeeld uit hoofdstuk <a href="../neuraalNetwerk.htm">neuraalnetwerk 1</a>. In het <b>xor
+		</b> voorbeeld is deze lijst <b>[2]</b>. Dit betekent dat er één verborgen laag is met 2 knopen.  Het <b>tussen twee lijnen </b> voorbeeld tenslotte 
+		geeft met de lijst <b>[2,2]</b> dat er twee verborgen lagen zijn (twee getallen in de lijst) zowel in de eerste als in de tweede verborgen laag zijn
+		er 2 knopen.
+		In deze app zijn er maximaal 2 verborgen lagen in te voeren. Brain.js heeft deze beperking niet.
+		</dd>
+		<dt>leersnelheid
+		</dt>
+		<dd>Zoals in het hoofdstuk <a href="../neuraalNetwerk.htm">neuraalnetwerk 1</a> is 
+		aangegeven kan het gebeuren dat de stap in het iteratieve leerproces te groot is 
+		om het leerproces goed af te ronden. Met het invoerveld <b>leersnelheid</b> kun je 
+		stapgrootte aanpassen. De leersnelheid is een factor tussen 0 en 1 waarmee de fout 
+		(deze bepaald de grootte van stap) kan worden gecorrigeerd.
+		</dd>
+		<dt>grens fout
+		</dt>
+		<dd>Het leerproces moet ergens stoppen. Brain.js biedt een mogelijkheid om te 
+		stoppen als de fouten ten opzichte van de trainingsdata klein genoeg is geworden. 
+		Deze grens kun je zelf aangeven in het invoerveld <b>grens fout</b>. 
+		</dd>
+		<dt>max aantal iteraties
+		</dt>
+		<dd>Een andere mogelijkheid is het zetten van een grens aan het aantal 
+		leerstappen(iteraties) in het invoerveld <b>max aantal iteraties</b>.
+		</dd>
+		<dt>activeringsfunctie
+		</dt>
+		<dd>In logische schakelingen is de output 0 of 1. De sigmoïde activeringsfunctie (<a href="../neuraalNetwerk.htm#figactivering">neuraalnetwerk 1</a>) is hiervoor geschikt. Bij de voorbeelden van de
+		twee lijnen is de output -1 of 1, daar past de tangens hyperbolicus meer bij. 
+		</dd>
+		<dt>trainigsdata
+		</dt>
+		<dd>Trainingsdata in brain.js moeten worden geleverd als een 
+		lijst van objecten<br/>
+		<b>[object<sub>1</sub>,object<sub>2</sub>, ... ,object<sub>n</sub> ]</b>.<br/>
+		Ieder object moet een input en een output lijst bevatten en in de volgende
+		vorm worden aangeboden:<br/>
+		<b>{ input: [ ... ], output: [ ... ]}</b><br/>
+		</dd>
+		<dt>venster tekening
+		</dt>
+		<dd>Als een laag 2 knopen bevat dan maakt deze app er 
+		een grafische voorstelling van. Het venster kun je bepalen 
+		door de volgende lijst in dit veld te plaatsen [xmin,ymax,xmax,ymin]
+		</dd>
+		<dt>wat is de voorspelling voor
+		</dt>
+		<dd>Voer hier een lijst in met de zelfde dimensie per punt als een punt in de input lijst
+		van het veld trainingsdata.
+		</dd>
+	</dl>
+	<h3>uitvoervelden</h3>
+	<dl style="clear: both;">
+		<dt>Invoer in x<sub>1</sub>,x<sub>2</sub> diagram
+		</dt>
+		<dd>Grafische weergave van de input per en de laag en de vergelijkingen die
+		door de training in de knopen van die laag zijn ontstaan. Blauwe punten hebben
+		een gewenste output groter dan 0.5, rode punten lager dan 0.5
+		</dd>
+		<dt>Vergelijkingen
+		</dt>
+		<dd>
+		Iedere knoop traint een lineaire vergelijking in de vorm w<sub>1</sub>x<sub>1</sub>+w<sub>2</sub>x<sub>2</sub>+...+w<sub>n</sub>x<sub>n</sub>=w<sub>0</sub>$, waarin n het aantal knopen uit de vorige laag is, de x-en zijn de 
+		waarden die uit de knopen van de vorige laag komen en de w's zijn de getrainde gewichten waarmee output wordt voorspeld. x<sub>1</sub> is de as behorende bij
+		het eerste getal in de invoer van een punt,  x<sub>2</sub> de as bij het tweede getal, enz..
+		Om vergelijkingen onderling te kunnen
+		vergelijken wordt er eerst een geschaalde versie gegeven, alle gewichten zijn dan door w<sub>1</sub> gedeeld.
+		</dd>
+		<dt>Voorspellingen
+		</dt>
+		<dd>In het veld voorspellingen wordt alle trainingsdata vergeleken met de uitvoer van het netwerk. Zijn er verborgen lagen dan wordt ook de invoer naar de volgende	laag gegeven. Iedere foute voorspelling geeft een rode regel in de
+		lijst voorspellingen.
+		<p>
+		Als het leerproces stopt als het maximale aantal stappen is gepasseerd, is het leerproces waarschijnlijk niet succesvol. In het uitvoerveld <b>Iteraties</b> kun je dan zien of de
+	fout nog steeds voldoende afneemt. Als dat het geval is verhoog dan het maximum aantal iteraties.
+	Als dit niet het geval is moet of de leersnelheid worden verkleind of er moet een ander netwerk worden gemaakt.</p>
+		</dd>
+		<dt>Netwerk
+		</dt>
+		<dd>In dit uitvoer veld zie je een grafische voorstelling van het netwerk
+		dat in het veld lagen is aangegeven.
+		</dd>
+		<dt>Iteraties
+		</dt>
+		<dd>In dit veld kun je de progressie zien van het netwerk tijdens het leren.
+		</dd>
+		<dt>Status
+		</dt>
+		<dd>In dit veld wordt de volledige status van het brain netwerk weergegeven.
+		Je ziet een aantal van deze waarden heb je zelf in de invoervelden kunnen
+		invullen. Wil je meer weten ga dan naar <a href="https://github.com/BrainJS/brain.js#json">brain.js</a>.
+		</dd>
+	</dl>
+
+	</div>
+	<header id="discription" style="height: auto; padding: 0px;">
+	<h1>Logische schakeling: or</h1>
+	</header>
+	<div id="xydiagram" style="float:right">
+		<h2>Invoer in x<sub>1</sub>,x<sub>2</sub> diagram</h2>
+		<div id="box0" class="jxgbox" 
+			 style="width:300px;height:300px;align-self:center;">
+		</div>
+		<div id="box1" class="jxgbox" 
+			 style="display:none; width:300px; height:300px;align-self:center;">
+		</div>
+		<div id="box2" class="jxgbox" 
+			 style="display:none; width:300px; height:300px;align-self:center;">
+		</div>
+	</div>
+	<table class="nnapp">
+		<tr>
+			<td>lagen (layers)</td>
+			<td><input id="layers" value="[]"> vb: [3,2] = 2 hidden layers met 3 en 2 knopen</td>
+		</tr>
+		<tr>
+			<td>leersnelheid</td>
+			<td><input type="number" id="leersnelheid" value="0.3" min="0.1" max="0.9"step="0.01"></td>
+		</tr>
+		<tr>
+			<td>grens fout (error threshold)</td>
+			<td><input type="number" id="errorThresh" value="0.01" min="0.001"></td>
+		</tr>
+		<tr>
+			<td>max aantal iteraties</td>
+			<td><input type="number" id="Iterations" value="30000" min="0" step="10000"></td>
+		</tr>
+		<tr>
+			<td>activeringsfunctie</td>
+			<td>
+			  <label for="tanh">Tangens hyperbolicys, bereik output:&lt;-1,1&gt;</label>
+			  <input type="radio" name="activeringsfunctie" id="tanh" value="tanh"><br>
+			  <label for="sigmoid">Sigmo&iuml;de functie, bereik output:&lt;0,1&gt;</label>
+			  <input type="radio" name="activeringsfunctie" id="sigmoid" value="sigmoid" checked><br/>
+
+		<tr>
+			<td>trainingsdata</td>
+			<td><textarea cols="60" rows="10"
+				id="trainingsdata">
+[
+  { input: [0, 0], output: [0] },
+  { input: [0, 1], output: [1] },
+  { input: [1, 0], output: [1] },
+  { input: [1, 1], output: [1] }
+]
+			</textarea>
+		</td>
+		<tr>
+			<td>venster tekening<br/>[xmin,ymax,xmax,ymin]</td>
+			<td><textarea cols="60" rows="3" id="boundingbox">
+[-1, 2, 2, -1]
+			</textarea>
+		</td>
+		</tr>		
+		<tr>
+			<td><button id="startknop" class="knop" onclick="this.style.backgroundColor='red';setTimeout(startBrain,0)">Train</button></td></td>
+		</tr>
+		<tr>
+			<td valign="top">wat is de voorspelling voor<br/>
+			<button class="knop" onclick="askBrain()">Voorspel</button><br/>
+			<span id="voorspeld">&nbsp;</span>
+			</td>
+			<td valign="top"><textarea cols="60" rows="3" id="voorspel">
+[0,0.9]
+		</textarea>
+			</td>
+		</tr>	
+	</table>
+	<div id="resultaatTraining" ></div>
+	</div>
+<div>
+	<div id="tabs" style="float: left;">
+		<div class="tab_header">
+			<button class="knop" onclick="toonElementTab(this)">Vergelijkingen</button>
+			<button class="knop" onclick="toonElementTab(this)">Voorspelling</button>
+			<button class="knop" onclick="toonElementTab(this)">Netwerk</button>
+			<button class="knop" onclick="toonElementTab(this)">Iteraties</button>
+			<button class="knop" onclick="toonElementTab(this)">Status</button>
+		</div>
+		<div id="tab_main">
+			<div id="lijnen" class="popup links"></div>
+			<div id="voorspelling" class="popup links"></div>
+			<div id="svgoutput" class="popup links"></div>
+			<div id="iteraties" class="popup links"></div>
+			<div id="status" class="popup links"></div>
+		</div>
+	</div>
+	<div id="output" style="float: left">
+	</div>
+</div>
+</body>
+</html>

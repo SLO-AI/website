@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <title>Kunstmatige Intelligentie</title>
+    <script src="utils.js"></script>
+	<script src="treeview.js"></script>
+  </head>
+  <body  id="achtergrond" onload="addPathLead();initTreeview()" >
+    <a name="Inleiding" style="counter-reset: subsection 2;"></a>
+    <header class="paragraaf titel">Wanneer is iets intelligent?</header>
+	<section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/
+	<a href="achtergrond_introductie.html" target="_parent">Achtergrond</a>/
+	Wanneer is iets intelligent?</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+				4.0
+			<br />International License</a>.
+		</div>
+			</div>
+	</section>
+	<div class="navbar">
+		<div class="centreer">
+		<a href="#Inleiding">Intelligentie</a>
+		<a href="#Imitatiespellen">Imitatiespellen</a>
+		<a href="#mate_intelligentie">Sterke en zwakke kunstmatige intelligentie</a>
+		</div>
+	</div>
+	<article>
+	<p>
+	<h2>Intelligentie</h2>
+	<p>Wanneer is iemand eigenlijk precies slim of intelligent? Als je er lang genoeg over nadenkt, dan kom je erachter dat het antwoord niet zo eenvoudig is. Er zijn zo veel factoren die meespelen bij intelligentie. Denk bijvoorbeeld aan leervermogen, taalbegrip, logisch inzicht (dit wordt vaak getoetst bij intelligentietesten), sociaal vermogen, vermogen om te kunnen plannen en nog veel meer. Er lijkt niet echt een eenduidige definitie te zijn voor intelligentie. Of in andere woorden: iedereen geeft zijn/haar eigen betekenis aan dit begrip.
+	</p>
+	<p>Neem iemand als Jar Jar Binks uit StarWars, of Disney's Goofy, die ken je vast wel. Deze karikaturen maken vaak blunder na blunder of laten een grote puinhopen achter. Hun onbegrip van hoe dingen werken zorgen er vaak voor dat zij in lastige situaties terecht komen. De meesten zullen het erover eens zijn dat zowel Jar Jar als Goofy niet bepaald intelligent zijn.
+	</p>
+	<p>Toch gaan sommige dingen hen redelijk goed af. Denk bijvoorbeeld aan ‘eenvoudige’ dingen als lezen, autorijden of een tandartsafspraak maken. Vergelijk dit eens met bijvoorbeeld een chimpansee, die zul je dit niet zo snel zien doen. Toch worden apen als intelligent gezien en wordt Goofy juist gezien als dom. Chimpansees leren snel en zullen zich anders gedragen in vergelijkbare situaties in de toekomst. Zie je het dilemma? Het is niet eenvoudig om te bepalen of iets intelligent of onintelligent is.
+	</p>
+	<p>De term <i>kunstmatige intelligentie</i> is al een aantal malen gevallen, maar wat is de precieze definitie? Er zijn meerdere definities in omloop. We geven er drie.
+	</p>
+	<div class="theorie important">Kunstmatige intelligentie
+		<ol>
+			<li>Een document van het <a href="https://obamawhitehouse.archives.gov/sites/default/files/whitehouse_files/microsites/ostp/NSTC/preparing_for_the_future_of_ai.pdf" target="achtergrond">Amerikaanse Witte Huis</a>definieert KI als:
+			<div style="border-left: solid black 3px; padding-left:5px;">“Kunstmatige intelligentie is een geautomatiseerd systeem dat gedrag vertoont waarbij men normaal gesproken verwacht dat er intelligentie voor nodig is.”
+			</div>
+			</li>
+			<li>Bertram Raphael geeft in zijn boek <i><a href="https://openlibrary.org/books/OL5205255M/The_thinking_computer" target="achtergrond">The thinking computer</a></i>als definitie:
+			<div style="border-left: solid black 3px; padding-left:5px;">“Kunstmatige intelligentie is de wetenschap die machines ontwikkelt om vaardigheden te laten uitvoeren waarvoor intelligentie van menselijk niveau vereist is.”
+			</div>
+			</li>
+			<li>De geestelijke vader van AI, <a href="https://nl.wikipedia.org/wiki/Alan_Turing" target="achtergrond">Alan Turing</a>, definieert het als volgt:
+			<div style="border-left: solid black 3px; padding-left:5px;">“AI is de wetenschap en de techniek van het vervaardigen van intelligente machines, voornamelijk intelligente computerprogramma’s.”
+			</div>    
+		</ol>
+	</div>
+	<p>In deze definities wordt intelligentie beschouwd als een vermogen om te plannen, te redeneren en daarvan te leren, waar te nemen en die waarneming te begrijpen en te communiceren in natuurlijke taal.
+	</p>
+	<div class ='hammer treeview' style="clear: both;">Vragen
+		<ol>
+			<li>Wat is een essentieel verschil tussen de algemene definities (1) en (2) voor AI? En tussen (2) en (3)?
+			</li>
+			<li>Bedenk een taak waarvan jij denkt dat het heel lastig is voor AI en een taak die jij zelf lastig vind, maar waarvan je denkt dat een AI systeem het beter dan jij zal doen. Bediscussieer jouw bedachte taken met medeleerlingen.
+			</li>			
+		</ol>
+	</div>	
+	<div class ='treeview' style="clear: both;">
+		<div id="myUL">
+			<span class="caret">Antwoord</span>
+			<div class="nested">
+				<ol>
+					<li>(2) is het proces dat het product in (1) levert: Een automatisch systeem is een machine voortvloeiend uit wetenschapelijk onderzoek.<br/>
+					(3) verwijst niet naar de noodzaak van intelligentie van menselijk niveau en deze definitie is daarom weer breder dan definitie (2). Daarnaast moet de machine in (3) zelf intelligent zijn, terwijl bij (2) de machine intelligentie toont.
+					</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<a id="Imitatiespellen"></a><br/>
+	<h2>Imitatiespellen</h2>
+	<h3>Chatten met een bot</h3>
+	<div class="rechts theorie">
+		 <a href="https://www.cleverbot.com/" taret="achtergrond"><img src="images/cleverbot.png"  style="width: 300px;"/></a><br/>
+		<caption>Open de <a href="https://www.cleverbot.com/" taret="achtergrond">Cleverbot website</a>
+		</caption>
+	</div>
+	<p>In de <a href="https://www.cleverbot.com/" taret="achtergrond">Cleverbot website</a> kun je chatten met een chatbot. In één van de <a href="neurale_netwerken_chatbot.html" class="book">latere opdrachten in deze cursus</a> kun je zelf aan de slag met het opzetten van een chatbot.
+	</p>
+	<div class ='hammer treeview' style="overflow:hidden;">Vragen
+		<ol start="3">
+			<li>Lijkt het alsof je met een echt persoon chat? Waarom wel/niet?
+			</li>
+			<li>Heb je het idee dat deze chatbot een eigen bewustzijn of persoonlijkheid heeft?
+			</li>			
+		</ol>
+	</div>	
+	<div class ='treeview' style="overflow:hidden;">
+		<div id="myUL">
+			<span class="caret">Antwoorden</span>
+			<div class="nested">
+				<ol start="3">
+					<li>Heb je het idee dat deze chatbot een eigen bewustzijn of persoonlijkheid heeft?erwijl bij (2) de machine intelligentie toont.
+					</li>
+					<li>De chatbot lijkt op sommige woorden te zoeken en ingeprogrammeerde antwoorden te geven. Met vragen over gevoelens weet de chatbot eigenlijk geen raad. Je merkt ook dat de chatbot het gesprek niet goed volgt. Als je bijvoorbeeld ergens op doorvraagt, verandert zij van onderwerp. Deze chatbot heeft geen bewustzijn of persoonlijkheid. De programmeur van de chatbot wel.
+					</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<h3>Turing Test</h3>
+	<div class="rechts theorie idea" style="width: 300px;">Alan Turing
+		<div style="padding-left: 20px;">
+		<p>
+		Alan Mathison Turing (Londen, 1912 – Wilmslow, 1954) was een Britse wiskundige, computerpionier en informaticus, mathematisch bioloog en logicus. Hij ontwikkelde o.a. de Turing machine, die nog steeds de basis vormt van onze huidige computers.
+		</p>
+		<div class="midden">
+			<img src="images/alan-turing.webp" style="width: 150px;"><br/>
+			<caption><a href="https://www.scienceabc.com" target="achtergrond">
+			Alan Turing (scienceabc.com)</a></caption>
+		</div>
+		<p>Gedurende de Tweede Wereldoorlog werkte hij mee aan het kraken van de Enigma, het apparaat waarmee de Duitsers  berichten gedecodeerd verstuurden. Het kraken hiervan heeft o.a. geleid tot de overwinning van de geallieerden.
+		</p>
+		<p>Ondanks zijn vele bijdragen aan de informatica, werd hij in 1952 gearresteerd wegens homoseksuele handelingen en veroordeeld tot chemische castratie. In 2009 heeft de Britse regering hem postuum excuses aangeboden.
+		</p>
+		</div>
+	</div>
+	<p>Deze vragen spelen ook binnen het vakgebied van kunstmatige intelligentie. Er zijn wetenschappers die zich hiermee bezighouden: wanneer is kunstmatige intelligentie intelligent? Een van de oudste en bekendste oplossingen voor deze vraag kwam van Alan Turing. Hij bedacht een test waaruit zou moeten blijken of een computerprogramma menselijk gedrag kan vertonen, wat niet te onderscheiden is van echte mensen. Hij noemde de test het <i>imitatiespel</i>, maar tegenwoordig kennen we het als de <i>Turing Test</i>.
+	</p>
+	<p>De test werkt als volgt. Er zijn drie afgesloten kamers met in elke kamer een computer. Deze computers zijn met elkaar verbonden met een chatprogramma. In de eerste kamer zit een persoon. De tweede kamer bevat een computerprogramma dat het chatprogramma kan bedienen: een chatbot. De derde kamer bevat weer een persoon, dit is de jury. Deze jury chat met de persoon en met de chatbot, zonder te weten in welke kamer deze zich bevinden. De jury moet vervolgens door te chatten beslissen wie de persoon van vlees en bloed is. Als de chatbot er in minstens 50% van de gevallen in weet te slagen om als persoon aangemerkt te worden, dan bestempelt Turing deze als intelligent. Want, zo redeneerde hij, de chatbot heeft met succes een mens gesimuleerd.
+	</p>
+	<div class="links theorie idea" style="width: 300px;">John Rogers Searle
+		<div style="padding-left: 20px;">
+		<p>(Denver (Colorado), 31 juli 1932) is een Amerikaans filosoof en hoogleraar aan de Universiteit van Californië in Berkeley. Hij is vooral bekend van zijn bijdragen aan de <a href="https://nl.wikipedia.org/wiki/Taalfilosofie" target="achtergrond">taalfilosofie</a> en de <a href="https://nl.wikipedia.org/wiki/Filosofie_van_de_geest" target="achtergrond">filosofie van de geest</a>, en zijn bijdrage aan het concept van "sociale realiteit". Hij wordt beschouwd als een van de toonaangevende taalfilosofen uit de twintigste eeuw, en wordt geplaatst in de stroming van de <i><a href="https://nl.wikipedia.org/wiki/Ordinary_language_philosophy" target="achtergrond">Ordinary language philosophy</a></i>. 
+		</p>
+		<div class="midden">
+			<img src="images/johnsearle.jpg" style="width: 150px;"><br/>
+		</div>
+		<p>In Berkeley ondersteunde Searle de opkomende studentenprotesten en was de eerste, van de vast aangestelde professoren, die de zogenaamde "Free Speech Movement" ondersteunde.
+
+		</p>
+		<p>Voor zijn bijdragen op het gebied van de filosofie van de geest ontving Searle in 2000 de <a href="https://nl.wikipedia.org/wiki/Jean_Nicod_Prijs" target="achtergrond">Jean Nicod Prijs</a> In 2004 werd hij ook onderscheiden met de National Humanities Medal.
+		Echter in 2019 is hij zijn Emiritus-status kwijtgeraakt is vanwege <a href="https://www.reddit.com/r/Heimspeki/comments/c3gq8y/searle_found_to_have_violated_sexual_harassment/" target="achtergrond">seksueel onaanvaardbaar gedrag</a>
+
+		</p>
+		</div>
+	</div>
+	<h3>Chinese Kamer</h3>
+		
+	<p>Niet iedereen kan zich vinden in de test van Alan Turing. In 1980 kwam John Searle met een tegenargument: <i><a href="https://nl.wikipedia.org/wiki/Chinese_kamer" target="achtergrond">de Chinese Kamer</a></i>. Bij dit argument bevindt zich in een denkbeeldige kamer een persoon. Deze persoon spreekt of leest geen woord Chinees. Daarnaast bevindt zich in deze kamer een boekje met instructies over wat de persoon moet doen. In de kamer zitten bovendien twee gleuven. Door één van de gleuven wordt af en toe een vel papier met een Chinees symbool geschoven. De persoon bekijkt het symbool, raadpleegt de instructies en schrijft volgens de instructies een bepaald Chinees symbool op een ander vel papier. Dit nieuwe vel schuift de persoon door de tweede gleuf naar buiten.
+	</p>
+	<div class="midden">
+		<img src="images/chinesekamer.png" style="width: 300px;"><br/>
+	</div>
+	<p>Voor iemand die buiten deze kamer staat, lijkt het alsof deze kamer Chinees kan begrijpen en erin kan communiceren. Maar Searle redeneert dat de kamer alleen maar pretendeert Chinees te kunnen praten. Met andere woorden: de kamer is slechts een simulatie van iemand die Chinees praat. En, zo vindt Searle, ditzelfde zou gelden voor een computer die slaagt voor de Turing Test. Deze computer zou niet écht begrijpen waarover gecommuniceerd wordt.
+	</p>
+	<p>Voor zowel de Turing Test als de Chinese Kamer zijn er voor- en tegenargumenten. Het is dus niet zo dat iedereen in het vakgebied voor het een of het andere is. De argumenten van Alan Turing en John Searle worden vooral veel gebruikt bij discussies over kunstmatige intelligentie.
+	</p>
+	<div class ='hammer treeview' style="overflow:hidden;">Vragen
+		<ol start="5">
+			<li>Vind jij dat de Turing Test een goede test is voor intelligentie bij computers? Onderbouw je mening.
+			</li>
+			<li>Vind jij dat de Chinese Kamer inderdaad intelligent is en Chinees kan vertalen of niet? Onderbouw je mening.
+			</li>			
+			<li>Ga nu eens op internet op zoek naar argumenten voor of tegen de Turing Test (minstens 2 argumenten). Welke argumenten vind je sterk? Welke minder?
+			</li>
+			<li>Doe nu hetzelfde voor de Chinese Kamer (minstens 2 argumenten). Welke argumenten vind je sterk? Welke minder?
+			</li>
+			<li>Wat zou volgens jou een goede test zijn om intelligentie aan te tonen bij computers?
+			</li>
+		</ol>
+	</div>	
+	<div class ='treeview' style="overflow:hidden;">
+		<div id="myUL">
+			<span class="caret">Antwoorden</span>
+			<div class="nested">
+				<ol start="5">
+					<li>Bij deze vraag wordt om jouw mening gevraagd. Het is dan vooral belangrijk dat de onderbouwing klopt. Je zou bijvoorbeeld kunnen zeggen dat de Turing Test geen goede test is, omdat deze alleen maar over tekst gaat. Wie zegt er dat intelligentie gemeten kan worden door taal? En wat als de jury zelf niet al te intelligent is? Dan wordt het ineens makkelijker voor de chatbot om intelligent te zijn.
+					</li>
+					<li>Ook bij deze vraag is jouw onderbouwing belangrijk. Je zou kunnen zeggen dat de Chinese Kamer niet intelligent is, omdat er steeds hetzelfde trucje herhaald wordt. Dat lijkt eigenlijk gewoon op een normaal computerprogramma.
+					</li>
+					<li>Argument voor:
+					<ul>
+						<li>Voor het goed voeren van een gesprek is intelligentie nodig.
+						</li>
+					</ul>
+					Argument tegen:
+					<ul>
+						<li>De Turing Test meet geen intelligentie, maar hoe goed een computer kan imiteren.
+						</li>
+					</ul>
+					</li>
+					<li>Argument voor:
+					<ul>
+						<li>De Chinese Kamer verstaat geen Chinees, net zoals Google Translate geen Nederlands verstaat.
+						</li>
+					</ul>
+					Argument tegen:
+					<ul>
+						<li>De man in de kamer verstaat zelf geen Chinees, maar de kamer in zijn geheel wel.
+						</li>
+					</ul>
+					</li>
+					<li>Dit is een lastige vraag, omdat intelligentie een lastig begrip is. Je kunt misschien het beste kijken naar mensen. Wanneer ben je intelligent? Misschien als je een diploma haalt en je kennis weet toe te passen. Of misschien als je een goed idee weet uit te werken. Je zou kunnen zeggen dat een computer intelligent is als deze (met een aantal jaar opvoeding) deze zaken zelfstandig weet te bereiken.
+					</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<a id="mate_intelligentie"></a><br/>
+	<h2>Sterke en zwakke kunstmatige intelligentie</h2>
+	<p>Binnen de toepassingen van kunstmatige intelligentie maken we onderscheid tussen <i>zwakke</i> (of <i>beperkte</i>) en <i>sterke</i> (of <i>algemene</i>) KI. Sterke systemen kunnen meerdere taken tegelijkertijd verwerken en zwakke slechts één taak.
+	</p>
+	<p>De term ‘zwak’ of ‘sterk’ geeft hier aan hoe breed het expertisegebied van de machine is. Zo heeft een zwakke kunstmatig intelligente machine een smal expertisegebied. Met andere woorden: zwakke kunstmatige intelligentie is maar in één of een paar taken heel erg goed. Zwak wil hier niet zeggen dat het niet goed is. Een chatbot van een webwinkel is heel goed in het helpen van de klant, maar kan niet autorijden. Een zelfrijdende auto daarentegen kan weer niet helpen bij het terugvragen van je geld bij een webshop.
+	</p>
+	<p>Als we spreken van <i>sterke</i> kunstmatige intelligentie, dan hebben we het over een machine die de intelligentie van een mens evenaart of zelfs overstijgt. Daarnaast is een machine met sterke kunstmatige intelligentie zelfbewust. Dat houdt in dat de machine weet dat hij bestaat en onderscheid kan maken tussen zichzelf en de omgeving. Vooral dit laatste is een struikelblok. We begrijpen bewustzijn bij mensen niet eens, laat staan dat we het kunnen (na)maken.
+	</p>
+	<p>In populaire science fiction films zijn het vooral de sterke kunstmatig intelligente machines die in een verre toekomst voor een hoop drama zorgen (denk bijvoorbeeld aan WALL-E van Disney of BB-8 uit Start Wars). Toch behoort sterke kunstmatige intelligentie in de hedendaagse wereld nog slechts tot de fantasie. Er bestaat nog geen sterke kunstmatige intelligentie en sommige wetenschappers twijfelen of het überhaupt mogelijk is om het te bouwen.
+	</p>
+	<p>Bij de ChatBot heb je kennisgemaakt met een <i>zwakke</i> kunstmatige intelligentie. Van de technieken die we gaan bespreken in  <a href="inleiding_technieken.html" class="book">Technieken</a>
+	is <a href="techniek_cluster_analyse.html" class="book">Cluster analyse</a> een voorbeeld van een zwakke AI en zijn <a href="techniek_neurale_netwerken.html" class="book">Neurale netwerken</a> voorbeelden van sterkere AI.
+	</p>
+	<div class ='hammer treeview' style="overflow:hidden;">Vragen
+		<ol start="10">
+			<li>Wat is het verschil tussen een toepassing waarvan men zegt dat het zwakke AI is en een toepassing waarvan men zegt dat het sterke AI is?
+			</li>
+			<li>Zet de volgende lijst in de volgorde van zwakke naar sterke AI:
+			<ol>
+				<li>zelfrijdende auto</li>
+				<li>gezichtsherkenning</li>
+				<li>chatbot bij webwinkel</li>
+				<li>postcode lezen</li>
+				<li>beeldverwerking bij kankerscreening
+				</li>
+			</ol>
+			</li>			
+			<li>Is Deep Blue, de schaakcomputer van IBM, een voorbeeld van een sterke of zwakke KI?
+			</li>
+		</ol>
+	</div>	
+	<div class ='treeview' style="overflow:hidden;">
+		<div id="myUL">
+			<span class="caret">Antwoorden</span>
+			<div class="nested">
+				<ol start="10">
+					<li>Een toepassing in de klasse zwakke AI kan slechts een beperkt aantal taken uitvoeren. Een toepassing in de klasse sterke AI is breder inzetbaar en evenaart of overstijgt de intelligente vaardigheden van een mens.
+					</li>
+					<li>d, e, b, c, a
+					</li>
+					<li>
+					In 1997 won Deep Blue een schaaktoernooi van de toenmalige schaakkampioen Garry Kasparov. Dat was een enorme prestatie en een mijlpaal in de informatica en kunstmatige intelligentie. Zou je echter Deep Blue vragen om te ganzenborden, dan zou er niets van terecht komen. Deep Blue was dus een zwakke kunstmatige intelligentie.
+					</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	</article>
+  </body>
+</html>

@@ -1,0 +1,175 @@
+<html>
+    <head>
+		<title>ANN plusmin 1</title>
+		<script type="text/javascript" charset="UTF-8"
+		 src="js/jsxgraphcore.js"></script>
+		<link rel="stylesheet" type="text/css" 
+		 href="../css/jsxgraph.css" />
+		<link href="../css/normalize.css" rel="stylesheet">
+		<link href="../css/style.css" rel="stylesheet">
+		<link href="perceptron.ico" rel="icon" type="image/ico">        <!-- Einde JSX graphics code -->
+		<script>
+		    
+			const volgproces=false; // variabele wordt straks gebruikt om naar het console te schrijven
+			var myPerceptron=null;  // myPerceptron wordt strak gemaakt 
+			
+			// Het gebruik van objecten in javascript
+			// wordt uitgelegd op https://www.w3schools.com/js/js_classes.asp
+			
+			// Definitie class Perceptron
+			class Perceptron
+			{
+				/*
+				 * de methode constructor wordt aangeroepen als we straks
+				 * een Perceptron maken.
+				 * @param: n is het aantal inputs (inclusief de bias) die de perceptron krijgt
+				 */
+				constructor(n) 
+				{
+					// Overal waar "this." voorstaat is een eigenschap
+					// van een Perceptron object.
+					// Wijs het aantal knopen aan 
+					this.aantalInvoerKnopen = n;
+					// We maken nu een eerste gok voor de gewichten voor de Perceptron
+					this.gewichten=[];
+					// maak random gewichten voor het perceptron	
+					for(var i=0;i<n;i++)
+					{
+						// Trek een toevalsgetal tussen 0 en 1. Door deze
+						// met 2 te vermenigvuldigen en er 1 van af
+						// te trekken wordt het dus een toevals getal tussen -1 en 1
+						this.gewichten[i]=2*Math.random()-1; 
+					}
+				}
+				/*
+				 * geefDoor is de feed-forward functie. De invoer [1,x1,...,xn]
+				 * wordt verwerkt tot de uitvoer
+				 */
+				geefDoor(invoer)
+				{
+					var som =0;
+					var i,uitvoer;
+					// bepaal de som van de gewogen invoer
+					for(i=0;i<this.aantalInvoerKnopen;i++)
+					{
+						som += invoer[i] * this.gewichten[i];
+					}
+					
+					if(volgproces) console.log("De som van de gewogen invoer is "+ som);
+					
+					// verwerk de som met de activeringsfunctie
+					return uitvoer = Math.sign(som);
+				}
+				
+			}
+			//einde definitie Perceptron
+
+			// De vind lijn app code
+			
+			/*
+			 * functie maakt een globaal Perceptron object myPerceptron
+			 * als die nog niet bestaat met n invoer knopen
+			 */
+			function maakPerceptron(n)
+			{
+				if(myPerceptron==null) myPerceptron = new Perceptron(n);
+			}
+			
+			/*
+			 * functie vraagt aan de perceptron in welk gebied het punt ligt
+			 * @param punt: [1, x-coördinaat , y - coördinaat ]
+			 */
+			function waarLigtPunt(punt)
+			{
+				var invoer = eval(document.getElementById(punt).value)
+				if(myPerceptron==null) maakPerceptron(invoer.length);
+				var out=myPerceptron.geefDoor(invoer);
+				document.getElementById("uitvoer").innerHTML=
+					"De uitvoer voor het punt " + invoer + " is " + out;
+				if(p1) 
+				{	
+					p1.moveTo([invoer[1],invoer[2]]);
+					p1.setName('uitvoer ='+out);
+				}
+			}
+			// einde vind lijn app code
+		</script>
+		<script> 
+			// Graphics
+			var tekening=null;
+			var linePerceptron=null;
+			var p1=null,p3,p4;
+			function yLine(a,b,x)
+			{
+				return a*x+b;
+			}
+			
+			function init()
+			{
+				if(tekening==null)
+				{
+					tekening = JXG.JSXGraph.initBoard('box', 
+						{boundingbox: [-4, 4, 4, -4]});
+					//var line = tekening.create('line',[p1,p2],{strokeColor:'#aaaa00',strokeWidth:2, dash:1});
+					toonVergelijkingPerceptron(tekening);
+					p1= tekening.create('point',
+									[-2,3], 
+									{name:'uitvoer ='+myPerceptron.geefDoor([1,-2,3]) + " Versleep mij!",size:2});
+					p1.on('drag', function(e){
+							this.name='uitvoer ='+myPerceptron.geefDoor([1,this.X(),this.Y()]);
+							document.getElementById("punt").value=
+								"[1,"+this.X().toFixed(2)+","+this.Y().toFixed(2)+"]"
+					});
+					p1.on('move', function(e){
+							this.name='uitvoer ='+myPerceptron.geefDoor([1,this.X(),this.Y()]);
+					});
+				}
+				
+			}
+
+			function toonVergelijkingPerceptron(jsx)
+			{
+				if(myPerceptron==null) maakPerceptron(3);
+				var laatsteGewicht=myPerceptron.gewichten[myPerceptron.aantalInvoerKnopen-1]	
+				var a = -myPerceptron.gewichten[myPerceptron.aantalInvoerKnopen-2]/laatsteGewicht;
+				var b = -myPerceptron.gewichten[0]/laatsteGewicht;
+				if(linePerceptron==null)
+				{
+					p3= jsx.create('point',
+										[-3,yLine(a,b,-3)], 
+										{name:'A',size:2});
+					p4= jsx.create('point',
+									[3,yLine(a,b,3)],  
+									{name:'B',size:2});
+					linePerceptron = jsx.create('line',[p3,p4],{strokeColor:'#0000FF',strokeWidth:2, dash:2});
+				}
+				else
+				{
+					p3.moveTo([-3,yLine(a,b,-3)]);
+					p3.moveTo([3,yLine(a,b,3)]);
+				}
+			
+			}
+		</script>
+    </head>
+	<!-- onload roept de functie init aan die de graphics toont -->
+    <body onload="init()">
+		
+		<header class="center midden" style="width: 200px; height: auto; padding: 0px;">
+			Perceptron: plus min
+		</header>
+		<main class="center midden" style="width: 200px; padding: 0px;" >
+		<button onclick="location.reload();"
+		style="width: 100%;">Maak nieuw perceptron</button><br/>
+		Geef de invoer voor de perceptron:
+		</br>
+		<input id="punt" value="[1, -2 , 3]">
+		</br>
+		<button onclick="waarLigtPunt('punt')" style="width: 100%;">
+		Bereken de uitvoer<br/>van de perceptron </button><br/>
+		<span id="uitvoer"></span>
+		<div id="box" class="jxgbox" style="width:200px; height:200px; float: left;">
+		</div>
+		</main>
+    </body>
+</html>

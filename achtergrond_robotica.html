@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <title>Kunstmatige Intelligentie</title>
+    <script src="utils.js"></script>
+	<script src="treeview.js"></script>
+  </head>
+  <body  id="achtergrond" onload="addPathLead();initTreeview()" >
+    <a name="Inleiding" style="counter-reset: subsection 1;"></a>
+    <header class="paragraaf titel">1 Robotica</header>
+	<section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/
+	<a href="achtergrond_introductie.html" target="_parent">Achtergrond</a>/
+	<a href="achtergrond_geschiedenis.html" target="_parent"> Geschiedenis en toekomst</a>/
+	Robotica</h4> 
+	<div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+				4.0
+			<br />International License</a>.
+		</div>
+			</div>
+	</section>
+	<div class="navbar">
+		<div class="centreer">
+		<a href="achtergrond_geschiedenis.html">&#9664;</a>
+		<a href="#Inleiding">Robotica</a>
+		<a href="#Shakey">Shakey</a>
+		<a href="#ASIMO">ASIMO</a>
+		<a href="#BostonDynamics">Boston Dynamics</a>
+		<a href="#Sophia">Sophia</sup></a>
+		</div>
+	</div>
+	<article>
+	<p>Bij robots komen veel vlakken van AI samen. Zo moeten zij vaak kunnen bewegen, reageren op handelingen en de wereld om zich heen kunnen interpreteren. Door de ontwikkelingen in technieken en hardware is het tegenwoordig mogelijk om veel gecompliceerdere robots te creëren. We gaan naar een aantal kijken om te zien hoe ze veranderd zijn.
+	</p>
+	<a id="Shakey"></a><br/>
+	<h2>Shakey</h2>
+	<p>Onderhand zijn robots redelijk indrukwekkend, maar hier zijn redelijk wat iteraties aan vooraf gegaan. In 1966 begon men aan het werken van de eerste robot die gebruikt maakt van AI technieken. Deze robot heette *Shakey*, vernoemd naar de schuddende bewegingen die de robot maakte. De robot was geprogrammeerd in de taal LISP om missies die bedacht waren door onderzoekers op te lossen. Shakey kon een aantal acties bedenken of uitvoeren, zoals: bewegen naar een locatie, een lampschakelaar aan of uit zetten, deuren openen en sluiten en objecten bewegen. Shakey kon niet alle acties die het bedacht ook echt uitvoeren, daarvoor had de robot te weinig actuatoren.
+	</p>
+	<p>Missies waren heel erg simpel, Shakey werd bijvoorbeeld opgedragen om een doos van een tafel af te drukken. Shakey moest dan de tafel met de doos vinden, een manier vinden om naar de tafel te komen. Zodra hij wist wat hij moest doen, moet hij er nog achter komen hoe hij het moest doen.
+	</p>
+	<div class="midden">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/7bsEN8mwUB8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>	
+
+	<a id="ASIMO"></a><br/>
+	<h2>ASIMO</h2>
+	<p>Later in de jaren 80 begon Honda te werken aan menselijke robots. Deze waren initieel erg simpel, maar groeiden uit tot ASIMO (vernoemd naar Isaac Asimov). Deze robot komt uit de jaren 2000 en was destijds het beste van het beste. De robot kon al redelijk wat herkennen; bewegende objecten, houdingen, gebaren, zijn omgeving, geluiden en gezichten. Hierdoor kon het communiceren met mensen.
+	</p>
+	<p>Hieronder kan je een video zien van James May die in 2008 naar Duitsland is gegaan om een versie van ASIMO te testen. Je kan zien dat de robot inderdaad al redelijk wat mogelijkheden heeft.
+	</p>
+	<p>Wat goed te zien is in het filmpje van James May, is dat er veel verschillende technieken samenkomen bij ASIMO. De robot is niet alleen in staat om te bewegen in de ruimte, maar het kan ook objecten leren herkennen en reageren op vragen en acties van de gebruiker. De laatste functies hoeven natuurlijk niet door een robot uitgevoerd worden, zo kan je ook neurale netwerken op je computer trainen, zolang je een camera of plaatjes hebt werkt dat ook prima.
+	</p>
+	<div class="midden">
+		<div class="midden" style="display: inline-block;">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/QfPkHU_36Cs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br/><caption>
+		James May - ASIMO Robot learns object identity *HQ*</caption>
+		</div>
+		<div class="midden" style="display: inline-block;">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/VTlV0Y5yAww" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br/>
+		<caption>Een erg bekende clip van ASIMO. Hier gaat alles niet helemaal zoals gepland.</caption>
+		</div>
+	</div>		
+	<a id="BostonDynamics"></a><br/>
+	<h2>Boston Dynamics</h2>
+	<p>Het bedrijf boston dynamics is een bedrijf gericht op robotica, wat opgericht is door voormalig medewerkers van de Amerikaanse universiteit MIT. 
+	</p>
+	<p>Zij genereerden veel bekendheid door hun robot BigDog op YouTube. Deze vierpotige robot kon autonoom door verschillende terreinen heen ploeteren en was ook goed bestand tegen een stoot! 
+	</p>
+	<p>BigDog was in ontwikkeling vanaf 2005. Het idee van de robot was om een robotische pakezel te bouwen die in oorlogsgebieden mee kon lopen met soldaten. BigDog kon tot 150 kilo dragen, 6.4 km/u lopen door ruig terrein. Het werd onder andere gesubsidieerd door DARPA, een onderdeel van het Amerikaanse leger.
+	</p>
+	<p>In 2016 maakte het bedrijf nog een nieuwe robot met vier poten, die doet denken aan een hond. Spot weegt maar 25 kilo en kan door middel van een optionele greep aan het hoofdeinde handelingen verrichten zoals deuren openen. De robot wordt ook verkocht door Boston Dynamics voor ongeveer 75.000 dollar. Kopers van spot zijn onder andere SpaceX, NASA, politiemachten over de wereld (ook Nederland), bouwbedrijven en nog veel meer.
+	</p>
+	<div class="midden">
+		<div class="midden" style="display: inline-block;vertical-align: text-top;">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/cNZPRsrwumQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br/><caption>
+		BigDog in 2010. Let op: het geluid is erg hard.</caption>
+		</div>
+		<div class="midden" style="display: inline-block;vertical-align: text-top;">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/aFuA50H9uek" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br/>
+		<caption>Spot die een deur open probeert te maken</caption>
+		</div>
+	</div>		
+	<p>Boston Dynamics maakt naast viervoeters ook nog andere soorten robots. Zo zijn ze al jaren bezig met de mensactige robot ATLAS, hier links te zien in een video. Ook zijn ze met robots als Handle bezig, deze robots moeten gaan werken in magazijnen (van bijvoorbeeld grote online winkels).
+	</p>
+	<div class="midden">
+		<div class="midden" style="display: inline-block;vertical-align: text-top;">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/tF4DML7FIWk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br/><caption>
+		Een parkoers afgelegd door de robot ATLAS.</caption>
+		</div>
+		<div class="midden" style="display: inline-block;vertical-align: text-top;">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/5iV_hB08Uns" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br/>
+		<caption>De robot Handle. Het bedrijf laat zien hoe het kan functioneren in magazijnen.</caption>
+		</div>
+	</div>	
+	<a id="Sophia"></a><br/>
+	<h2>Sophia</h2>
+	<p>Een robot die je misschien wel kent is Sophia, een mensachtige robot die kan reageren op vragen en opmerkingen van gebruikers. De robot is vanaf 2016 in gebruik en wordt ontwikkeld door <a href="https://en.wikipedia.org/wiki/Hanson_Robotics_Limited" target="achtergrond">Hanson Robotics</a>in Hong Kong. Vanaf die tijd is het veel te gast geweest in bekende (veelal Amerikaanse) TV programma's en youtube filmpjes. 
+	</p>
+	<p>Sophia kan naast praten ook menselijke gezichtsuitdrukkingen en gebaren simuleren, zodat het menselijker overkomt. Het maakt verder gebruik van de spraakherkenning software van Alphabet (het moederbedrijf van Google). 
+	</p>
+	<p>Het bedrijf heeft Sophia bedacht om ouderen gezelschap te houden of in te zetten bij grote evenementen en pretparken.
+	</p>
+	<h3>Kritiek</h3>
+	<p>Er was echter ook veel kritiek op Sophia. Zo hebben onderzoekers de robot onder andere beschreven als "een chatbot met een gezicht". Het hoofd van AI bij Facebook in 2018 noemde Sophia "complete onzin" en "oplichterij", waarna hij stelde dat de media er te veel aandacht aan zou geven. Het bedrijf heeft zich verdedigd door te stellen dat ze nooit hebben beweerd dat de AI perfect is 
+	</p>
+	<p>Een voormalig medewerker van het bedrijf heeft gesteld dat Sophia geen algemene kunstmatige intelligentie (<i>Artificial General Intelligence</i>) is, maar dat het wel een complex systeem is dat gebruikt maakt van meerdere AI technieken.
+	</p>
+	<div class="theorie" style="overflow:hidden;">
+		<h3 class="idea">Kunstmatige Algemene Intelligentie?</h3>
+		<p>
+		Dit is ook wel <i>Artificial General Intelligence</i> in het Engels genoemd en afgekort naar AGI. Bij deze vorm van AI wordt gerefereerd naar een model wat precies kan doen wat een mens kan. Waar tegenwoordig AI modellen getraind worden voor een specifiek doel, moet een AGI alles kunnen leren en doen, net als jij en ik. Veel onderzoekers zien AGI als ultieme doel als het gaat om kunstmatige intelligentie.
+		</p>
+	</div>
+	<div class="midden">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/oZzw_9YISjY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br/>
+		<caption>Sophia in 2018 op bezoek in Nederland. Ze wordt geïnterviewd door een NOS reporter</caption>
+	</div>		
+	<div class ='hammer treeview' style="clear: both;">Vragen
+		<ol>
+			<li>Kijk naar het filmpje over Sophia en zoek online naar andere voorbeelden van haar. Wat vind jij? Is Sophia een goed voorbeeld van AI? Waarom wel of niet?
+			</li>
+			<li>Hoe denk jij dat robotica in de toekomst eruit gaat zien? Hoe en hoe vaak zullen ze gebruikt gaan worden?
+			</li>
+		</ol>
+	</div>
+	</article>
+  </body>
+</html>

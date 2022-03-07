@@ -1,0 +1,110 @@
+body { 
+  background-color: #dddddd;
+  counter-reset: subsection;
+}
+
+.knop{
+  border-style: outset;
+  font-family: Century Gothic;
+  color:  var(--main-color);
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.knop:hover{
+    background: inherit;
+    color:  var(--secondary-blue);
+}
+
+textarea {
+    font-size:11pt;
+    overflow-y: auto;
+}
+
+h1
+{
+ color: var(--text-color-white);
+ font-family: Century Gothic;
+ text-align: center;
+}
+
+@media not print
+{
+	.popup
+	{
+		display: none;
+		background-color: #eeeeee;
+	}
+	.refer
+	{
+		display: none;
+		background-color: lightblue;
+		width:100%
+	}
+	.referAuto
+	{
+		display: none;
+		background-color: lightblue;
+	}
+}
+
+@media only print
+{
+	.popup
+	{
+		display: initial;
+		background-color: #FFFFE0;
+	}
+	.refer
+	{
+		display: initial;
+		background-color: lightblue;
+	}
+	.referAuto
+	{
+		display: initial;
+		background-color: lightblue;
+	}
+	.topmenu
+	{
+		display: none;
+	}
+}
+
+@media print {
+  .pagebreak {page-break-before: always;}
+}
+
+
+.rechts{
+	float: right;
+	margin-left: +20px;
+}
+.links{
+	float: left;
+	margin-right: +20px;
+}
+
+.extra
+{
+	border-style: outset;
+	color: #ff3333;
+	font-style: italic;
+}
+
+.voldoet
+{
+	background-color: lightseagreen;
+}
+
+.voldoetNiet
+{
+	background-color: red
+}
+
+.sluit
+{
+	border: black 1pt;
+	background-color: red;
+	color: white;
+}

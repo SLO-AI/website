@@ -1,0 +1,104 @@
+<!DOCTYPE html >
+
+<html>
+<head>
+<link href="../css/ai.css" rel="stylesheet" type="text/css" />
+<link href="../css/mybrains.css" rel="stylesheet" type="text/css" />
+<link href="../images/favicon.ico" rel="icon" type="image/ico"> 
+		
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!--
+<script type="text/javascript" 
+   async src="/js/MathJax/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+-->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+  });
+</script>
+<script src="js/aiAssoc.js" language="JavaScript" type="text/javascript">
+</script>
+<script>
+function run_assoc(id)
+{
+	var sup =Number(document.getElementById('sup').value);
+	var conf =Number(document.getElementById('conf').value);
+	var Ct=document.getElementById('C').value;
+	var C;
+	var hashNames=[]; // used for text arrays
+	if( Ct.includes("'") ||  Ct.includes('"'))
+	{
+		C=mapStringArray(Ct,hashNames);
+	}
+	else
+	{
+		C=JSON.parse(document.getElementById('C').value);
+	}
+	var res="";
+	var foutje = false;
+	var obj = document.getElementById(id);
+	
+	if( C == undefined ){
+		res+="Geen objecten gegeven<br/>";
+		foutje = true;
+	}
+	if( sup < 0 || sup > 1)
+	{
+		res+="support voldoet niet<br/>";
+		foutje = true;
+	}
+	if( conf < 0 || conf > 1) {
+		res+="confidence voldoet niet<br/>";
+		foutje = true;
+	}
+	if( !foutje )
+	{
+		res="Oplossing:<br/>"+apriori(C,sup,conf,hashNames);
+		
+	}
+	obj.innerHTML=res;
+	MathJax.Hub.Queue(["Typeset",MathJax.Hub,obj]);
+}
+</script>
+</head>
+<body>
+<h1>Apriori</h1>
+<table class="nnapp">
+<tr>
+	<td>Geef minimale support 0 &lt; sup &lt; 1
+	</td>
+	<td><input type="number" id="sup" value="0.4">
+	</td>
+</tr>
+<tr>
+	<td>Geef minimale confidence 0 &lt; conf &lt; 1
+	</td>
+	<td><input type="number" id="conf" value="0.5">
+	</td>
+</tr>
+<tr>
+	<td>Geef objecten lijst
+	</td>
+	<td>
+	<textarea name="message" rows="10" cols="80" id="C">[
+ ["Spaghetti","Tomatensaus"],
+ ["Spaghetti","Brood"],
+ ["Spaghetti","Tomatensaus","Brood"],
+ ["Brood","Boter"],
+ ["Brood","Tomatensaus"]
+]
+</textarea>
+
+	</td>
+</tr>
+
+</table>
+<button onclick="run_assoc('hier')">Voer uit</button>
+<p id="hier"></p>
+<!-- [[6,3,4],[2,3,5,4],[5,4,6,3],[7,4,6,3],[6,3]]
+[['Spaghetti','Tomatensaus'],['Spaghetti','Brood'],['Spaghetti','Tomatensaus','Brood'],['Brood','Boter'],['Brood','Tomatensaus']]
+	 -->
+</body>
+</html>

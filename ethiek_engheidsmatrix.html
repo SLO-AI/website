@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <script src="treeview.js"></script>
+	<title>Kunstmatige Intelligentie</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+		tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+	  });
+	</script>
+  </head>
+  <body  id="ethiekenai" onload="addPathLead();initTreeview();" >
+    <a name="Inleiding" style="counter-reset: subsection 2;"></a>
+    <header class="paragraaf titel">De engheidsmatrix</header>
+    <section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/<a href="inleiding_ethiek.html" target="_parent">Ethiek en AI</a>/De engheidsmatrix</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+				4.0
+			<br />International License</a>.
+		</div>
+			</div>
+	</section>
+	<div class="navbar">
+		<a href="#Inleiding">Inleiding</a>
+		<a href="#Checklistx">Checklist x-as</a>
+		<a href="#Checklisty">Checklist y-as</a>
+		<a href="#Plaats">Plaats in de matrix</a>
+		<span class="dropdown">
+			<div class="dropbtn" onclick="window.location='#Beoordeel'">Beoordeel een echte AI-toepassing  &#9660;</div>
+			<div class="dropdown-content">
+				<a class="submenuitem" href="#Verkeer">Afleiding in het verkeer ⭐⭐⭐⭐⭐</a> 
+				<a class="submenuitem" href="#Vragen">Automatisch beantwoorden van vragen ⭐⭐</a> 
+				<a class="submenuitem" href="#Oogscreening">Diabetische oogscreening  ⭐⭐</a> 
+				<a class="submenuitem" href="#Operations">IT Operations Analytics ⭐⭐⭐⭐⭐</a> 
+				<a class="submenuitem" href="#Robots">Robots in retail ⭐⭐⭐⭐</a> 
+				<a class="submenuitem" href="#CT-scans">Analyseren van CT-scans ⭐⭐⭐⭐</a> 
+				<a class="submenuitem" href="#Hiring">AI hiring tool ⭐⭐</a> 
+				<a class="submenuitem" href="#Fraudemelding">Chatbot fraudemelding ⭐⭐</a>
+			</div>
+		</span>
+	</div>
+	<article>
+	<h2>Inleiding</h2>
+	<p>In paragraaf <a href="ethiek_gevarenAI.html" class="book">Gevaren van kunstmatige intelligentie</a> maakte je al kennis met de <i>engheidsmatrix</i>; een handige manier om zélf te beginnen met kritisch nadenken over AI. De matrix is afgebeeld in figuur 1. In zo'n matrix geef je een plaats aan verschillende AI-toepassingen om te ontdekken wat duidelijke voorbeelden van goede, nuttige en leuke AI-toepassingen zijn, en wat typische voorbeelden zijn van "enge AI".</p>
+	<div class="theorie center" style="width: 600px;"><img src="images/Engheidsmatrix-leeg.png" style="width: inherit;"/>
+	<br/><caption>Figuur 1: De engheidsmatrix</caption></div>
+	<p>In deze les ga je écht aan de gang met de engheidsmatrix: je gaat één of meer AI-toepassingen op een zo objectief mogelijke manier in deze matrix plaatsen. Zorg ervoor dat de matrix bij voorkeur groot op een muur of op een whiteboard getekend wordt.  Gebruik yellow notes (plakbriefjes) om een AI-toepassing te beschrijven en in de matrix te plaatsen, zodat je er na afloop van de les met anderen over kunt discussiëren.
+	</p>
+	
+	<a id="Checklistx"></a><br/>
+	<h2>Maak een checklist voor de x-as</h2>
+	<p>Op de horizontale as plaatsen we de mate van van ethische verantwoording van een toepassing. Deze ethische verantwoording laten we van "eng" tot "absoluut ethisch verantwoord lopen". Maar hoe bepaal je hoe ethisch verantwoord een toepassing is? Om tot een objectief oordeel te kunnen komen moet je een checklist voor deze as maken. Maak hiervoor gebruik van de kennis die je hebt opgedaan in de paragrafen 
+	<a href="ethiek_fast_fair.html.html" class="book">FAST &amp; FAIR</a>	
+	en <a href="ethiek_standaarden_richtlijnen.html" class="book">AI standaarden en richtlijnen</a> van dit hoofdstuk.
+	</p>
+	<p>Een voorbeeld hoe je dat kunt doen (maar kies vooral je eigen manier om de manier van beoordelen uit te werken): maak gebruik van een zogenaamde <a href="https://nl.surveymonkey.com/mp/likert-scale/" target="ethiek">5-punts Likert-schaal</a> om criteria in de vorm van stellingen met betrekking tot de FAST principes aan de AI-toepassing te toetsen. Likert-schalen worden veel gebruikt om houdingen en meningen genuanceerder in kaart te brengen dan mogelijk is met een eenvoudige ja/nee-vragen. Aan de hand van een aantal criteria kun je dan op een onderbouwde manier in kaart brengen hoe ethisch verantwoord een specifieke AI-toepassing is.
+	</p>
+	
+	Een voorbeeld van zo'n criterium en de manier hoe je een 5-punts schaal kunt maken waarop je een AI-toepassing kunt scoren:
+	</p>
+	<div class="theorie center" style="width: 800px"><img style="width: inherit" src="images/Likert_schaal_1.png"/></div>
+	<p>In het voorbeeld hierboven is de AI-toepassing, de witte cirkel, gescoord op het antwoord 'mee eens' . Aan de verschillende scores zijn waardes gekoppeld: van 1 tot en met 5. In dit geval heeft de beoordeling dus 4 punten opgeleverd. Om de beoordeling van een AI-toepassing zo objectief mogelijk te maken is het belangrijk om meerdere criteria te gebruiken. Zorg ervoor dat je criteria duidelijk te begrijpen zijn en dat de benaming van je scores voor iedereen helder is. Zorg er ook voor dat je voldoende criteria gebruikt; niet té veel, maar ook weer niet zo weinig dat ze niet representatief zijn. Een voorbeeld van een tweede criterium, inclusief de beoordeling:</p>
+	</p>
+	<div class="theorie center" style="width: 800px"><img style="width: inherit" src="images//Likert_schaal_2.png"/></div>
+	<p>Het tweede criterium resulteerde in dit voorbeeld in een score van 1 punt. De gemiddelde score van de twee criteria in het voorbeeld is dus (4 + 1)/2 = 2,5. 
+	</p>
+	<div class="speciaal idea">
+	<span>
+	<b>Tip:</b>maak bij het gebruiken van Likert-schalen in verschillende criteria altijd gebruik van dezelfde waarden. In allebei de voorbeelden gebruiken we een schaal die loopt van 'zeer mee oneens', 'mee oneens', 'neutraal', 'mee eens' tot 'zeer mee eens'. Als je overal dezelfde schaalwaarderingen gebruikt kun je de uitkomsten later gemakkelijker onderling vergelijken.</span>
+	</div>
+	<div class ='treeview hammer' style="overflow: hidden;">
+		<span class="caret">Vraag en opdracht</span>
+		<div id="myUL" class="nested">
+			<ol>
+				<li>Waarom is het beter om voor de criteria zoals hierboven beschreven een Likert-schaal te gebruiken dan een simpel ja/nee antwoord?
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>Er is detail in de mening mogelijk als er meer opties zijn om uit te kiezen. De 2 punts ja/nee schaal biedt deze mogelijkheid niet.
+						</li>
+					</ul>
+				</li>		
+				<li>Maak zelf een checklist met minimaal vijf verschillende criteria waarmee je de 'engheid' van een AI-toepassing kunt beoordelen. Gebruik als input voor je checklist de FAST-principes, de FAIR-data principes en eventueel de informatie over standaarden en regelgeving uit de lessen <a href="ethiek_fast_fair.html" class="book">FASt &amp; FAIR</a> en <a href="ethiek_standaarden_richtlijnen.html"  class="book">AI standaarden en richtlijnen</a>
+				</li>		
+			</ol>
+		</div>
+	</div>	
+
+	<a id="Checklisty"></a><br/>
+	<h2>Maak een checklist voor de y-as</h2>
+	<p>
+	Op de verticale as plaatsen we het nut van de AI toepassing. Deze schaal loopt van ‘zit niemand op te wachten’ tot ‘hartstikke nuttig’. Net als bij de horizontale as maak je een checklist waarmee je een AI-toepassing zo objectief mogelijk kunt beoordelen. 
+	</p>
+	<p>Ook hier  (maar kies vooral je eigen manier om de manier van beoordelen uit te werken) kun je weer gebruik maken van een zogenaamde <a href="https://nl.surveymonkey.com/mp/likert-scale/" target="ethiek">5-punts Likert-schaal</a> om criteria in de vorm van stellingen met betrekking tot het doel van de AI-toepassing te toetsen. Probeer te denken vanuit een persoon voor wie de AI-toepassing gemaakt is, dit kan de eindgebruiker zijn, maar ook de opdrachtgever of een persoon die in het ontwerpproces een wens heeft neergelegd. Vul voor zoveel mogelijk rollen de zin volgende zin in:
+	</p>
+	<div class="special important">
+	<span>'Als ...... wil ik ...... hebben, zodat ik kan .......'
+	</span>
+	</div>
+	<p>Aan de hand van een aantal criteria kun je dan op een onderbouwde manier in kaart brengen hoe nuttig en noodzakelijk een specifieke AI-toepassing voor alle betrokkenen is. Voor opdrachtgever en ontwikkelaars kun je hiervoor het SMART concept gebruiken. De letters in SMART staan voor:
+	</p>
+	<ol><li><strong>Specifiek</strong>: dit houdt in dat het doel erg duidelijk en concreet beschreven wordt.</li>
+	<li><strong>Meetbaar</strong>: er moet een objectieve meting van resultaten mogelijk zijn.</li>
+	<li><strong>Acceptabel</strong>: de doelstelling is ook aanvaardbaar voor degene die het doel moet bereiken.</li>
+	<li><strong>Realistisch</strong>: het voor ogen gestelde doel is realistisch, en dus haalbaar.</li>
+	<li><strong>Tijdsgebonden</strong>: het gestelde doel heeft een tijdstip waarop de resultaten gehaald moeten zijn.
+	</li>
+	</ol>
+	<p>Een voorbeeld van zo'n criterium en de manier hoe je een 5-punts schaal kunt maken waarop je een AI-toepassing kunt scoren:
+	</p>
+	<div class="theorie center" style="width: 800px"><img style="width: inherit" src="images/Likert_schaal_3.png"/></div>
+	</p>Uit de score van 5 punten blijkt dat de beoordelaar vond dat de toepassing erg duidelijk en concreet is uitgelegd in de videoles. Een tweede voorbeeld van een criterium waarmee een AI-toepassing beoordeeld kan worden heeft betrekking op de meetbaarheid ervan:
+	</p>
+	<div class="theorie center" style="width: 800px"><img style="width: inherit" src="images/Likert_schaal_4.png"/></div>
+	<p>Hier scoort de toepassing duidelijk wat minder: 3 punten voor de meetbaarheid die als neutraal werd beoordeeld. Gemiddeld scoort de toepassing dus (5+3)/2 = 4 punten: een behoorlijk nuttige AI-toepassing dus. 
+	</p>
+	<div class ='treeview hammer' style="overflow: hidden;">
+		<span class="caret">Opdracht</span>
+		<div id="myUL" class="nested">
+			<ol start="3">
+				<li>Maak zelf een checklist met minimaal vijf verschillende criteria waarmee je het nut en de noodzaak van een AI-toepassing kunt beoordelen.
+				</li>			
+			</ol>
+		</div>
+	</div>
+	<a id="Plaats"></a><br/>
+	<h2>Plaats een AI-toepassing in de matrix</h2>
+	<p>Wanneer je die gemiddelde score uitzet op de x-as en op de y-as van de engheidsmatrix dan ziet dat er voor de AI-toepassing in het hierboven geschetste voorbeeld zó uit:
+	</p>
+	<div class="theorie center" style="width: 800px"><img style="width: inherit" src="images/Engheidsmatrix.png"/></div>
+	<p>In het voorbeeld zou de AI-toepassing dus behoorlijk nuttig zijn, maar de ethische verantwoording zou wat onder de maat zijn en verbetering behoeven.
+	</p>
+	<div class ='treeview hammer' style="overflow: hidden;">
+		<span class="caret">Vraag</span>
+		<div id="myUL" class="nested">
+			<ol start="4">
+				<li>Wanneer - zoals in het voorbeeld hierboven - uit de beoordeling blijkt dat een AI-toepassing nuttig is, maar de ethische verantwoording beter moet, wat voor maatregelen zou je dan kunnen nemen om de toepassing tóch acceptabel te maken?
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>e zou in dat geval kunnen gaan onderzoeken of er maatregelen kunnen worden genomen waardoor de ethische aspecten beter aangepakt kunnen worden: denk bijvoorbeeld aan het maken van een code-of-conduct, het verbeteren van de manier waarop een AI-toepassing aansluit op ethische richtlijnen door het aanpassen van het ontwerp ervan. 
+						</li>
+					</ul>
+				</li>		
+
+			</ol>
+		</div>
+	</div>
+	<a id="Beoordeel"></a><br/>
+	<h2>Beoordeel een echte AI-toepassing</h2>
+	<p>Doe nu hetzelfde als hierboven, maar dan met voor echte AI-toepassing. Gebruik de aanpak die je in de voorgaande paragrafen hebt uitgewerkt voor het beoordelen van de mate van ethische verantwoording en die voor het beoordelen van het nut van de AI-toepassing en plot de gemiddelde scores op respectievelijk de x-as en op de y-as. Als AI-toepassing kun je kiezen uit één van de volgende videolessen waarin een specifieke AI-toepassing wordt besproken en uitgelegd, maar je mag ook zélf een AI-toepassing kiezen en de documentatie daarvan verzamelen op het Internet.
+	</p>
+	<p>Hieronder hebben we videolessen opgenomen van verschillende AI-toepassingen die in échte onderzoekslaboratoria zijn uitgewerkt voor échte organisaties. Niet elke videoles is even gemakkelijk te gebruiken voor het doel van onze les: soms is de AI-toepassing die in een videoles wordt toegelicht nog niet erg ver uitgewerkt, of soms wordt de AI-toepassing niet al te duidelijk besproken en blijft er veel over om te gissen. Daarom helpen wij je een beetje op weg: we hebben door middel van een sterrenrating aangegeven hoe goed een videoles is voor het doel van ónze les (het beoordelen van de ethische aspecten en het nut van een AI-toepassing):
+	</p>
+	<div class="speciaal important">
+	<span>
+	⭐: de videoles beschrijft de AI-toepassing erg mager. Deze videoles is voor 'daredevils only'.<br/>
+	⭐⭐ : de AI-toepassing is maar gedeeltelijk beschreven. Voor leerlingen met veel fantasie.<br/>
+	⭐⭐⭐ : de AI-toepassing is redelijk compleet beschreven, maar er blijft wat te gissen over.<br/>
+	⭐⭐⭐⭐ : de AI-toepassing is goed beschreven alhoewel er nog wat onduidelijkheden zijn.<br/>
+	⭐⭐⭐⭐⭐ : de AI-toepassing is perfect beschreven, dus dit kan niet fout gaan...
+	</span>
+	</div>
+	<p>
+	Voor alle videolessen geldt dat ze Engelstalig zijn. Als het goed is krijg je gelijk een Nederlandse ondertiteling. Je kunt ondertiteling aan en uitzetten en je voorkeurstaal instellen door in de video rechtsonder  <i>⚙️/Instellingen</i> aan te klikken en daar bij ondertiteling de gewenste optie te selecteren. 
+	</p>
+	<div class ='treeview hammer' style="overflow: hidden;">
+		<span class="caret">Vragen</span>
+		<div id="myUL" class="nested">
+			<ol>
+				<li>Kies één van de onderstaande videolessen waarin een specifieke AI-toepassing wordt gepresenteerd en beoordeel aan de hand van de checklists die je, op basis van FAST, FAIR en SMART, gemaakt hebt de mate van ethische onderbouwing en het nut ervan. Leg je checklist naast je als je een videoles bekijkt en maak aantekeningen tijdens het luisteren. Plaats als je alle criteria hebt beoordeeld de AI-toepassing in de engheidsmatrix. Bespreek het eindresultaat met andere leerlingen.
+				</li>			
+			</ol>
+		</div>
+	</div>
+	<a id="Verkeer"></a><br/>
+	<h3> Afleiding in het verkeer (De Nationale Politie) ⭐⭐⭐⭐⭐</h3>
+	<p>In deze videoles 'Afleiding in het verkeer' bespreekt Marius Kok van de Nationale Politie de Monocam: een AI-toepassing die ervoor moet zorgen dat het autorijden op snelwegen veel veiliger wordt:
+	</p>
+	<div class="theorie center" style="width: 560px;">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/SB23SooOMmc?hl=nl&pref=nl&cc_lang=nl&Cc_load_policy=1&rel=0&hd=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+	<p>
+	De Monocam toepassing is als voorbeeld gebruikt in de criteria voor de x- en y-as in de theorie boven. Kun jij je vinden in de beoordelingen die wij aan deze toepassing hebben gegeven?
+	</p>
+	<a id="Vragen"></a><br/>
+	<h3>Automatisch beantwoorden van vragen (VU) ⭐⭐</h3>
+	<p>
+	In deze videoles wordt uitgelegd hoe onderzoekers aan de VU bezig zijn met AI voor vraagbeantwoording en conversatie. Hoe werkt een spraakassistent? En tegen welke uitdagingen lopen zij daarbij aan? En wat is BERT eigenlijk?</p>
+	<div class="theorie center" style="width: 560px;">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/_Lx5DwBvHHc?hl=nl&pref=nl&cc_lang=nl&Cc_load_policy=1&rel=0&hd=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+	<a id="Oogscreening"></a><br/>
+	<h3> Diabetische oogscreening (RadboudUMC) ⭐⭐</h3>
+	<p>In deze videoles wordt uitgelegd hoe in het Radboudumc kunstmatige intelligentie wordt gebruikt voor het controleren van diabetespatiënten op oogziekten, waarbij afbeeldingen worden gekwalificeerd in "doorverwijzen naar een oog-specialist" of "niet-doorverwijzen". Een waarschuwing: best lastige materie met veel moeilijke medische terminologie.
+	</p>
+	<div class="theorie center" style="width: 560px;">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/9V9vBpF01rM?hl=nl&pref=nl&cc_lang=nl&Cc_load_policy=1&rel=0&hd=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+	<a id="Operations"></a><br/>
+	<h3>IT Operations Analytics (ING) ⭐⭐⭐⭐⭐</h3>
+	<p>In deze videoles wordt uitgelegd hoe onderzoekers bij ING gebruik maken van AI om ervoor te zorgen dat ING’s software systemen 99,9% beschikbaar zijn. Ze gebruiken daar onder andere predictive monitoring van de betaalsystemen en natural language processing voor. Een leuke les met een duidelijke AI-component.</p>
+	<div class="theorie center" style="width: 560px;">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/fzxZLa7Uvs8?hl=nl&pref=nl&cc_lang=nl&Cc_load_policy=1&rel=0&hd=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>	
+	<a id="Robots"></a><br/>
+	<h3>Robots in retail (Ahold Delhaize) ⭐⭐⭐⭐</h3>
+	<p>In deze videoles gaat een onderzoeker van het AI for Retail Lab van TU Delft in op onderzoek naar hoe robots kunnen worden gebruikt voor onder andere het vakkenvullen in supermarkten.  Een superleuke les met video’s en simulaties van trainende robotarmen.  Soms een beetje technisch, maar absoluut een interessante ontwikkeling in AI.
+	</p>
+	<div class="theorie center" style="width: 560px;">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/CJic34EvpJE?hl=nl&pref=nl&cc_lang=nl&Cc_load_policy=1&rel=0&hd=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>	
+	<a id="CT-scans"></a><br/>
+	<h3>Analyseren van CT-scans op Covid-19 (RadboudUMC) ⭐⭐⭐⭐</h3>
+	<p>Corona en tuberculose ontdekken op röntgenfoto's. In deze videoles legt Bram van Ginneken van het Thira Lab uit hoe dat in de praktijk wordt gebruikt en welke ethische aspecten daarbij een belangrijke rol spelen. Een interessante videoles met soms wel wat medische terminologie.
+	</p>
+	<div class="theorie center" style="width: 560px;">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/I2GEKAFSMho?hl=nl&pref=nl&cc_lang=nl&Cc_load_policy=1&rel=0&hd=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+	<a id="Hiring"></a><br/>
+	<h3>AI hiring tool (VU) ⭐⭐⭐</h3>
+	<p>In deze videoles laten onderzoekers van het KIN-center van de Vrije Universiteit zien hoe AI wordt gebruikt in een toepassing voor het selecteren en aannemen van nieuwe medewerkers.
+	</p>
+	<div class="theorie center" style="width: 560px;">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/J_mQ1A-aY9A?hl=nl&pref=nl&cc_lang=nl&Cc_load_policy=1&rel=0&hd=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+	<a id="Fraudemelding"></a><br/>
+	<h3>Online chatbot voor het melden van fraude (Nationale Politie)⭐⭐⭐</h3>
+	<p>Heb je ook weleens iets gekocht op een online website en is het gekochte daarna nooit geleverd? In deze videoles vertelt een specialist uit het Police AI Lab hoe AI wordt ingezet in een toepassing voor het melden van online fraude. De toepassing geeft de aanvrager snel een resultaat dat vertelt of de melding van fraude terecht is of niet.
+	</p>
+	<div class="theorie center" style="width: 560px;">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/WPMSkjPMcuY?hl=nl&pref=nl&cc_lang=nl&Cc_load_policy=1&rel=0&hd=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+	</article>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg 
+xmlns="http://www.w3.org/2000/svg" 
+xmlns:xlink="http://www.w3.org/1999/xlink"  
+width="100" height="78">
+<circle cx="39" cy="39" r="37" stroke="green" stroke-width="4" fill="yellow" />
+<circle cx="26" cy="35" r="20" stroke="green" stroke-width="4" fill="lightblue" />
+<text x="60" y="40" fill="blue">Y</text>
+<text x="20" y="40" fill="blue">X</text>
+</svg>

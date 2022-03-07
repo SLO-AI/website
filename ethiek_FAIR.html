@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <script src="treeview.js"></script>
+	<title>Kunstmatige Intelligentie</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+		tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+	  });
+	</script>
+  </head>
+  <body  id="ethiek" onload="addPathLead();initTreeview();" >
+    <a name="Inleiding" style="counter-reset: subsection 2;"></a>
+    <header class="paragraaf titel">FAIR data</header>
+    <section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/<a href="inleiding_ethiek.html" target="_parent">Ethiek</a>/FAIR data</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+				4.0
+			<br />International License</a>.
+		</div>
+			</div>
+	</section>
+	<div class="navbar">
+		<a href="#Inleiding">De FAIR data principes</a>
+		<a href="#Findability">Findability</a>
+		<a href="#Accessibility">Accessibility</a>
+		<a href="#Interoperability">Interoperability</a>
+		<a href="#Reusability">Reusability</a>
+	</div>
+	<article>
+	
+	<a id="aspecten"></a><br/>
+	<h2>De FAIR data principes</h2>
+	<div class="theorie center" style="width: 360px;"><img src="images/FAIR.png"/>
+	</div>
+	<p>Naast de FAST-principes wordt ook vaak nog een afkorting gebruikt die specifiek gericht is op het gebruik van data: FAIR data. FAIR data zijn data die voldoen aan principes van vindbaarheid (<strong>findability</strong>), toegankelijkheid (<strong>accessibility</strong>), interoperabiliteit (<strong>interoperability</strong>) en herbruikbaarheid (<strong>reusability)</strong>. In eerste instantie gaat het daarbij om wetenschappelijke data, waarbij de nadruk ligt op machine-actionability: het vermogen van computersystemen om gegevens te vinden, toegang te krijgen, samen te werken en te hergebruiken zonder of met minimale menselijke tussenkomst. De vier principes van FAIR data zijn elk weer onderverdeeld in een aantal uitgangspunten:</p>
+	<div class="theorie center" style="width: 600px;"><img src="images/FAIR data.png" style="width: 600px;"/></div>
+	<a id="Findability"></a><br/>
+	<h2>Vindbaarheid (findability)</h2>
+	<p>Vindbaarheid van data gaat over het principe dat metadata – gegevens die de karakteristieken van bepaalde gegevens beschrijven: data over data – en data gemakkelijk vindbaar moet zijn voor zowel mensen als computers. Goede metadata zijn essentieel voor automatische detectie van datasets en services. Stel je eens voor dat een data scientist van een winkelketen een analyse wil maken van de klantdata om te ontdekken hoe vaste klanten vaker een specifieke, geïndividualiseerde aanbieding kan worden gedaan. Maar zij kan in het databestand met klantgegevens eigenlijk niet goed kan identificeren wat nou de aankopen van klanten zijn. Dan wordt zo’n onderzoek moeilijk. Wanneer vooraf bij het ontwerpen van de klantdataset duidelijk in de metadata was aangegeven wat aankopen zijn dan zou dat veel extra werk hebben gescheeld.</p>
+	
+	<div class ='treeview hammer' style="overflow: hidden;">
+		<span class="caret">Vragen</span>
+		<div id="myUL" class="nested">
+			<ol>
+				<li>Welke van de volgende gegevens zou je als metadata mogen beschouwen?
+						<ol style="list-style-type: lower-alpha">
+							<li>Het bestandsformaat van een databestand.</li>
+							<li>De naam van een databestand.</li>
+							<li>Het moment van creatie van een databestand.</li>
+							<li>De naam van een klant in een databestand met klantaankopen.</li>
+						</ol>
+						<span class="caret doel">antwoord</span>
+						<ul class="nested">
+							<li>
+								a, b en c zijn goed. d is fout.
+							</li>
+						</ul>
+				</li>		
+				<li>Bezoek de volgende tabel over het VO-onderwijs in Nederland:<a href="https://opendata.cbs.nl/statline/#/CBS/nl/dataset/80041ned/table?ts=1640693574043" target="ethiek">CBS Statline</a><br/>
+										<ol style="list-style-type: lower-alpha">
+							<li>Geef de metadata over geslacht, migratieachtergrond en havo leerjaar 3-5.</li>
+							<li>Wat zijn de bronnen waarop deze tabel is gebaseerd?</li>
+						</ol>
+						<span class="caret doel">antwoord</span>
+						<ul class="nested">
+							<li>Om deze metadata te vinden beweeg je je muis over de kolomtitels of druk je op de knop I.
+								<ol style="list-style-type: lower-alpha">
+									<li>
+									geslacht: inclusief leerlingen waarvan het geslacht onbekend is migratieachtergrond: Kenmerk dat weergeeft met welk land een persoon verbonden is op basis van het geboorteland van de ouders of van zichzelf. Inclusief deelnemers met een onbekende migratieachtergrond. havo leerjaar 3-5: Hoger algemeen voortgezet onderwijs (havo) inclusief Engelse Stroom.
+									</li>
+									<li>Gebruikte databron(nen):
+										<ul style="list-style-type: disc">
+										<li>Schooljaren 2003/'04 tot en met 2004/'05: Onderwijsnummerbestand Voortgezet Onderwijs (BRON-vo), Dienst Uitvoering Onderwijs (DUO)/CBS én leerlingtellingen vmbo landbouwonderwijs, Ministerie van Economische Zaken.
+										</li><li>Schooljaar 2005/'06: Onderwijsnummerbestand Voortgezet Onderwijs (BRON-vo), Dienst Uitvoering Onderwijs (DUO)/CBS.
+										</li><li>Vanaf 2006/'07: Eéncijferbestand Voortgezet Onderwijs, Dienst Uitvoering Onderwijs (DUO)/CBS
+										</li>
+										<li>Stelsel van Sociaal-statistische Bestanden (SSB), CBS.
+										</li>
+										</ul>
+									</li>
+								</ol>
+							</li>
+						</ul>
+				</li>		
+			</ol>
+		</div>
+	</div>		
+	<a id="Accessibility"></a><br/>
+	<h2>Toegankelijkheid (accessibility)</h2>
+	<p>Wanneer een gebruiker data heeft gevonden, dan wordt het belangrijk hoe die data kunnen worden geraadpleegd, eventueel inclusief authenticatie en autorisatie ervan. Bedenk maar eens  hoe moeilijk het wordt om de klantaankopen uit het bovenstaande voorbeeld te analyseren wanneer het bestand is beveiligd met een wachtwoord dat alleen een medewerker van een ICT-bedrijf kent dat al twee jaar geen diensten meer aan de winkelketen levert.</p>
+	<div class ='treeview hammer' style="overflow: hidden;">
+		<span class="caret">Vragen</span>
+		<div id="myUL" class="nested">
+			<ol start="3">
+				<li>Welke voorbeelden in de onderstaande lijst zijn goede voorbeelden van data accessibility?
+					<ol style="list-style-type: lower-alpha;">
+					<li>Het bouwen van een dashboard dat gegevens uit verschillende tabellen in een database haalt, kan alleen worden voltooid door een teamlid dat weet hoe een database te doorzoeken met behulp van SQL of een andere gespecialiseerde querytaal.
+					</li>
+					<li>Het bouwen van een dashboard dat gegevens uit verschillende tabellen in een database haalt, kan alleen worden voltooid wanneer er formele toestemming is van de eigenaar van de data om die te mogen gebruiken.
+					</li>
+					<li>Het bouwen van een dashboard dat gegevens uit verschillende tabellen in een database haalt, kan alleen worden voltooid wanneer alle data is geprogrammeerd in dezelfde programmeertaal.
+					</li>
+					</ol>
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>
+							a en b zijn juist. c is geen goed voorbeeld van data accessability, maar gaat over interoperabiliteit.
+						</li>
+					</ul>
+				</li>		
+				<li>Één van de bronnen waarop de tabel over het VO onderwijs in Nederland is het Eéncijferbestand Voortgezet Onderwijs, Dienst Uitvoering Onderwijs (DUO)/CBS. Een korte zoektocht op het internet brengt je naar de <a href="https://duo.nl/open_onderwijsdata/" target="ethiek">open data site van DUO</a>
+					<ol style="list-style-type: lower-alpha;">
+					<li>Doe deze zoektocht ook zelf.
+					</li>
+					<li>Ga op de site van DUO opzoek naar het aantal leerlingen op jouw school in de afdeling waar je nu zit in het vorige schooljaar. (b.v. havo lj 4-5 Natuur en Techniek  of vwo lj 4-6 Natuur en Gezondheid).
+					</li>
+					<li>In welke mate voldoet de gevonden data aan vindbaarheid en toegankelijkheid?
+					</li>
+					<li> Vind je in dit bestand alle informatie nodig om de CBS tabel te vormen?
+					</li>
+					</ol>
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>
+							<ol style="list-style-type: lower-alpha;">
+							<li>...
+							</li>
+							<li>Binnen opendata kies je voor Databestanden <strong>→</strong> Voortgezet onderwijs  <strong>→</strong> Leerlingen <strong>→</strong> Leerlingen per vestiging naar onderwijstype, sector, afdeling, opleiding. Kies daar het bovenste Excel bestand en ga op zoek naar de gegevens van jouw school.
+							</li>
+							<li>Vanuit de CBS tabel was niet direct een link naar de data, dat bemoeilijkt de vindbaarheid. De toegankelijkheid bij zowel het CBS als DUO is open, er is geen authenticatie en autorisatie aanwezig.
+							</li>
+							<li>Er zijn geen gegevens over migratieachtergrond aanwezig.
+							</li>
+							</ol>
+					</li>
+					</ul>
+				</li>		
+			</ol>
+		</div>
+	</div>
+	<a id="Interoperability"></a><br/>
+	<h2>Interoperabiliteit (interoperability)</h2>
+	<p>Je moet data samen met andere data kunnen gebruiken: gegevens moeten geschikt zijn voor het samenwerken met applicaties of workflows voor analyse, opslag en verwerking. Om dat mogelijk te maken, moeten data gebruikmaken van een formele, toegankelijke, gedeelde en breed toepasbare taal voor kennisrepresentatie. Stel je eens voor dat het programma waarmee het databestand met klantaankopen kan worden uitgelezen nu ook nog eens geprogrammeerd is in taal die niemand, behalve het oorspronkelijke ICT-bedrijf, nog kan lezen en schrijven.
+	</p>
+	<div class ='treeview hammer' style="overflow: hidden;">
+		<span class="caret">Vragen</span>
+		<div id="myUL" class="nested">
+			<ol start="5">
+				<li>Welke voorbeelden in de onderstaande lijst zijn goede voorbeelden van interoperabiliteit van data?
+					<ol style="list-style-type: lower-alpha;">
+					<li>De interne data-architectuur van een ziekenhuis en een huisartsenpraktijk is goed ingericht, waardoor deze twee zelfstandig opererende organisaties goed kunnen samenwerken.
+					</li>
+					<li>Een dierenartspraktijk heeft haar hrm-data zo ingericht dat zij zonder problemen data over medewerkers kan delen met een huisartsenpraktijk.
+					</li>
+					<li>De bedrijfsprocessen van een metaalfabriek en een toeleveringsbedrijf zijn zo op elkaar afgestemd dat zij onderling zonder problemen data over het productieproces kunnen delen.
+					</li>
+					</ol>
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>a en c zijn goede voorbeelden van interopearbiliteit. Voorbeeld b is geen goed voorbeeld omdat het delen van hrm-data van medewerkers in dit geval niet noodzakelijk (en wellicht zelfs niet wenselijk) is.
+						</li>
+					</ul>
+				</li>		
+				<li>Je hebt het databestand bij DUO opgehaald. Daar staat niets in over de migratieachtergrond. Die informatie staat waarschijnlijk in de bron <a href="https://www.cbs.nl/nl-nl/onze-diensten/methoden/onderzoeksomschrijvingen/korte-onderzoeksbeschrijvingen/stelsel-van-sociaal-statistische-bestanden--ssb--" target="ethiek">Stelsel van Sociaal-statistische Bestanden</a>.
+					<ol style="list-style-type: lower-alpha;">
+					<li>Wat is er minimaal nodig om deze koppeling te maken?
+					</li>
+					<li>Waarom zal je als buitenstaander niet alle gegevens over een leerling kunnen vinden?
+					</li>
+					<li>Zou je toegang tot de individuele gegevens kunnen krijgen?
+					</li>
+					</ol>
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>In de tabel bij het CBS is er een uitsplitsing op migratieachtergrond aanwezig.
+						<ol style="list-style-type: lower-alpha;">
+						<li>Dus of er moet een uitsplitsing aanwezig zijn per school naar migratieachtergrond in de DUO bestanden of het CBS moet toegang hebben tot alle gegevens van alle leerlingen via DUO en van alle leerlingen via de bron <a href="https://www.cbs.nl/nl-nl/onze-diensten/methoden/onderzoeksomschrijvingen/korte-onderzoeksbeschrijvingen/stelsel-van-sociaal-statistische-bestanden--ssb--" target="ethiek">Stelsel van Sociaal-statistische Bestanden</a> waaruit de migratieachtergrond wordt geleverd. Voor geautomatiseerde verwerking is het dus nodig dat de data van deze bestanden overeenkomstige metadata hebben.
+						</li>
+						<li>Vanwege onze privacy wetgeving mag niet iedereen individuele gegevens bekijken.
+						</li>
+						<li>In de <a href="https://www.cbs.nl/nl-nl/over-ons/organisatie/privacy" target="ethiek">privacy statemen</a>t van het CBS staan onder meer:<br/>    "<i>Het CBS gebruikt de gegevens alléén voor statistisch en wetenschappelijk doel. Gebruik voor fiscale, administratieve, controle en gerechtelijke doeleinden is wettelijk uitgesloten. Ook gebruiken we de gegevens niet voor marketing.</i>"<br/>
+						en<br/>
+						"<i>Ook worden persoonsgegevens verwerkt bij <a href="https://www.cbs.nl/nl-nl/onze-diensten/maatwerk-en-microdata/microdata-zelf-onderzoek-doen/publicaties" target="ethiek">wetenschappelijke studies van derden</a>.</i>"
+						Geautoriseerde medewerkers en geautoriseerde onderzoekers kunnen dus toegang krijgen tot individuele gegevens.
+						</li>
+						</ol>
+						</li>
+					</ul>
+				</li>		
+			</ol>
+		</div>
+	</div>
+	<a id="Reusability"></a><br/>
+	<h2>Herbruikbaarheid (reusability)</h2>
+	<p>Het laatste principe van FAIR data gaat over de (her)bruikbaarheid van data. Data en metadata moeten om de herbruikbaarheid ervan te optimaliseren, goed worden beschreven met meerdere relevante attributen. Op die manier is data in verschillende omstandigheden en systemen mogelijk. Kijk maar eens naar het voorbeeld van de klantaankopen hierboven; stel je voor dat een andere data scientist een jaar later de klantaankopen wil hergebruiken in een ander onderzoek, dan zou het goed zijn wanneer de informatie over het bestand (de metadata) inmiddels is bijgewerkt zodat de problemen van een jaar eerder niet opnieuw optreden.</p>
+	<div class ='treeview hammer' style="overflow: hidden;">
+		<span class="caret">Vragen</span>
+		<div id="myUL" class="nested">
+			<ol start="7">
+				<li>De overheid verzamelt van oudsher op reguliere basis data over personen, bedrijven, instellingen, markten, wegen, natuur, emissies, woningen, et cetera. We noemen dit publieke data. Het CBS is daarin een belangrijke organisatie. Welke van de volgende beweringen over het belang van hergebruik van publieke data zijn juist? 
+				<ol style="list-style-type: lower-alpha;">
+					<li>Voor wetenschappers zijn publieke data van waarde omdat ze vaak een grote populatie en/of een lang tijdsbestek bestrijken, en doorgaans valt niemand buiten de populatie van overheidsadministraties.
+					</li>
+					<li>Voor bedrijven zijn publieke data belangrijk omdat ze daarmee een betrouwbare database van potentiële klanten voor hun producten en diensten kunnen opbouwen. Iedereen zit immers in die publieke data.
+					</li>
+					<li>Voor overheden zijn publieke data een potentiële bron van kennis. Kennis die licht werpt op het effect van hun beleid, en hen helpt om complexe taken uit te voeren. Zo’n complexe taak is bijvoorbeeld het bewaken van waarden als veiligheid, privacy, zelfbeschikking, solidariteit en eerlijke concurrentie.
+					</li>
+				</ol>
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>a en c zijn goede redenen waarom hergebruik van publieke data belangrijk is. b is een slecht voorbeeld omdat publieke data geen persoonsgegevens bevatten die door bedrijven gebruikt kan en mag worden.
+						</li>
+					</ul>
+				</li>			
+			</ol>
+		</div>
+	</div>
+	<p>
+	We zijn aan het einde gekomen van de introductie van de ethische principes waaraan AI-systemen en meer algemeen systemen die zijn gebaseerd op persoonlijke gegevens aan zouden moeten voldoen. Dat niet alle systemen aan deze principes voldoen is een zorg voor de samenleving en dus ook voor de politiek. Het is niet altijd makkelijk om aan alle principes te voldoen. In de verdieping <a href="inleiding_ethiekenai.html" class="book">Ethiek en AI</a> kun je zelf aan de slag gaan met het analyseren van AI-systemen in relatie tot de principes FAST en FAIR.
+	</p>
+	
+	
+	</article>
+  </body>
+</html>

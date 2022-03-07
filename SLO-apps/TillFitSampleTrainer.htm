@@ -1,0 +1,609 @@
+<html>
+    <head>
+		<!-- JSX graphics code -->
+		<script type="text/javascript" charset="UTF-8"
+		 src="js/jsxgraphcore.js"></script>
+		<link rel="stylesheet" type="text/css" 
+		 href="../css/jsxgraph.css" />
+		<link rel="stylesheet" type="text/css" 
+		 href="../css/jsxgraph.css" />
+		<link href="../css/normalize.css" rel="stylesheet">
+		<link href="../css/style.css" rel="stylesheet">
+		<link href="perceptron.ico" rel="icon" type="image/ico">		
+        <!-- Einde JSX graphics code -->
+        <script>
+		    const volgproces=false; // variabele wordt straks gebruikt om naar het console te schrijven
+			var trainer=null;
+			function init()
+			{
+				trainer = new Trainer(3, Math.sign, 0.01);
+			}
+
+			// Het gebruik van objecten in javascript
+			// wordt uitgelegd op https://www.w3schools.com/js/js_classes.asp
+			// Definitie class Perceptron
+			class Perceptron
+			{
+				/*
+				 * de methode constructor wordt aangeroepen als we straks
+				 * een Perceptron maken.
+				 * @param: n is het aantal inputs (inclusief de bias) die de perceptron krijgt
+				 * @param: f is de activeringsfunctie
+				 * @param: c is de snelheid van het leerproces
+				 */
+				constructor(n,f,c) 
+				{
+					// Overal waar "this." voorstaat is een eigenschap
+					// van een Perceptron object.
+					// Wijs het aantal knopen aan 
+					this.aantalInvoerKnopen = n;
+					// Zet de leersnelheid 
+					this.leersnelheid = c;
+					// Zet de activeringsfunctie 
+					this.activeringsfunctie = f;
+					
+					// We maken nu een eerste gok voor de gewichten voor de Perceptron
+					this.gewichten=[];
+					// maak random gewichten voor het perceptron	
+					for(var i=0;i<n;i++)
+					{
+						// Trek een toevalsgetal tussen 0 en 1. Door deze
+						// met 2 te vermenigvuldigen en er 1 van af
+						// te trekken wordt het dus een toevals getal tussen -1 en 1
+						this.gewichten[i]=2*Math.random()-1; 
+					}
+				}
+				/*
+				 * geefDoor is de feed-forward functie. De invoer [1,x1,...,xn]
+				 * wordt verwerkt tot de uitvoer
+				 * @param invoer: [1,,x1,...,xn]. De 1 is er voor de bias
+				 */
+				geefDoor(invoer)
+				{
+					var som =0;
+					var i,uitvoer;
+					// bepaal de som van de gewogen invoer
+					for(i=0;i<this.aantalInvoerKnopen;i++)
+					{
+						som += invoer[i] * this.gewichten[i];
+					}
+					
+					if(volgproces) console.log("De som van de gewogen invoer is "+ som);
+					
+					// verwerk de som met de activeringsfunctie
+					return uitvoer = this.activeringsfunctie(som);
+				}
+				
+				/* train is de functie die de gewichten aanpast bij 
+				 * één invoer.
+				 * @param invoer: de waarden van de invoer knopen 
+				 * vooraf gegaan door de bias=x0=1
+				 * dus invoer = [1, x1,x2,...]
+				 * @param gewensteUitvoer: wat zou de output van de percptron moeten zijn.
+				 */
+				train(invoer,gewensteUitvoer)
+				{
+					var voorspelling=this.geefDoor(invoer); // Dit geeft de perceptron als voorspelling
+					var fout = gewensteUitvoer - voorspelling; 
+					// Pas alle gewichten aan
+					for (var i = 0; i < this.aantalInvoerKnopen; i++) 
+					{
+						this.gewichten[i] += this.leersnelheid * fout * invoer[i];
+					}
+					if(volgproces) console.log("De nieuwe gewichten zijn "+ this.gewichten);
+				}
+				
+				/* 
+				 * schaalPerceptron schaalt w0 terug naar 1
+				 * Dit is handig voor de weergave van de lijn.
+				 */
+				schaalPerceptron()
+				{
+					var lijngewichten=[1];
+					var w0 = this.gewichten[0];
+					for(var i=1;i<this.aantalInvoerKnopen;i++)
+					{
+						lijngewichten[i] = this.gewichten[i]/w0;
+					}
+					return lijngewichten;
+				}
+			}
+			//einde definitie Perceptron
+			
+			// begin definitie van de trainer class 
+			/* 
+				De class trainer wordt ingezet om een perceptron te trainen
+			 */
+			class Trainer
+			{
+				/* @param: n is het aantal inputs (inclusief de bias) die de 	perceptron krijgt
+				* @param: c is de snelheid van het leerproces
+				* @param: f is de activeringsfunctie
+				*/
+				constructor(n,f,c) {
+					this.settings={
+						myPreceptron:null,
+						mygrapics:null,
+						puntenVerzameling:[]
+					};
+					this.setPerceptron(n,f,c)
+					this.settings.mygrapics=
+						new Graphics(this.settings.myPerceptron);
+				}
+				
+				setPerceptron(n,f,c)
+				{
+					this.settings.myPerceptron = new Perceptron(n,f,c);
+				}
+				
+				/*
+				 * functie  eenTraining(a,b) voert één training stap uit. In de functie wordt
+				 * 		eerst een nieuw punt gemaakt in het vierkant met zijden 8 en middelpunt
+				 *		(0,0). Met dat punt doet de perceptron een training.
+				 *		Resultaten worden in het uitvoer object getoond.
+				 * $param a: richtingscoëfficient in y=ax+b 
+				 * $param b: y-coördinaat snijpunt y-as in y=ax+b 
+				 */
+				eenTraining(a,b)
+				{
+					// wat kortere benamingen
+					var myPerceptron=this.settings.myPerceptron;
+					var tekening = this.settings.mygrapics;
+					
+					// Maak een punt met toevalsgetallen
+					var x = 8*Math.random()-4;
+					var y = 8*Math.random()-4;
+					// bepaal afwijking voor deze x en y t.o.v. lijn y=ax+b
+					var som = -b - a*x + y;
+					// maak de invoer met bias
+					// bepaal gewenste voorspelling
+					var gewenst=myPerceptron.activeringsfunctie(som);
+					// bepaal de som met de juiste punten
+					var invoer=[1,x,y];
+					
+					var tekstGewichtenVoor = arrayToString(myPerceptron.gewichten,3);
+					var voorspelling = myPerceptron.geefDoor(invoer);
+					// train de percptron
+					myPerceptron.train(invoer,gewenst);
+					var tekstGewichtenNa = arrayToString(myPerceptron.gewichten,3);
+					var voorspellingNaTraining = myPerceptron.geefDoor(invoer);
+					
+					// produceer tekst voor de gebruiker over de huidige toestand
+					var tekst="Gewenste voorspelling voor<br/>"+
+						"punt [" + arrayToString(invoer,2) + "] is " + gewenst +
+						"<br/> bij de lijn y="+a+"x + "+b+"."+
+						"<br/>Voorspelling voor training is " + voorspelling + 
+						".<br/>Gewichten:<br/>"+
+						"voor training: [" + tekstGewichtenVoor+"]."+
+						".<br/>na training: [" + tekstGewichtenNa +"]." +
+						".<br/>De voorspelling na training: " + voorspellingNaTraining;
+						
+					if(voorspelling==gewenst)
+					{
+						tekst+=".<br/>Gewenst en voorspelling zijn gelijk dus er is niets gebeurd";
+					}
+					else
+					{
+						tekst+=".<br/>Gewenst en voorspelling zijn niet gelijk dus de gewichten zijn veranderd";
+					
+					}
+										
+					// plaats de tekst in het uitvoerveld
+					document.getElementById("uitvoer").innerHTML=tekst;
+					// teken de perceptron lijn
+					tekening.toonVergelijkingPerceptron();
+					tekening.settings.p1.name='uitvoer = '+myPerceptron.geefDoor([1,x,y]) + '<br/>gewenst= '+gewenst;
+					tekening.settings.p1.moveTo([x,y]);					
+				}
+				
+				/*
+				 * functie  nTraining(a,b) voert één training stap per punt uit. In de functie wordt
+				 * 		n keer een nieuw punt gemaakt in het vierkant met zijden 8 en middelpunt
+				 *		(0,0). Met dat punt doet de perceptron één training.
+				 *		Resultaten worden in het uitvoer object getoond.
+				 * $param a: richtingscoëfficient in y=ax+b 
+				 * $param b: y-coördinaat snijpunt y-as in y=ax+b 
+				 */
+				nTraining(a,b,n=100)
+				{
+					var myPerceptron=this.settings.myPerceptron;
+					var tekening = this.settings.mygrapics;
+					
+					tekening.removeObjects();
+					var i,k=0,gewenst,voorspelling;
+					var x,y,som,invoer,tekst="";
+					for(i=0;i<n;i++)
+					{
+						// Maak een punt met toevalsgetallen
+						x = 8*Math.random()-4;
+						y = 8*Math.random()-4;
+						tekening.voegToeTrainingsPunt([x,y],"rgb(0, "+((20*i)%255)+", "+((255-20*i)%255)+")")
+						som = -b - a*x + y;
+						// maak de invoer met bias
+						// bepaal gewenste voorspelling
+						gewenst=myPerceptron.activeringsfunctie(som);
+						// bepaal de som met de juiste punten
+						invoer=[1,x,y];
+						// bepaal de voorspelling van het perceptron
+						voorspelling = myPerceptron.geefDoor(invoer);
+						if(gewenst!=voorspelling)
+						{
+							// voer een perceptron training uit
+							myPerceptron.train(invoer,gewenst);
+							// produceer tekst voor de gebruiker over de nieuwe toestand
+							k++;
+							tekst+=
+								"Nieuwe gewichten bij punt "+i+" : [" + 
+								arrayToString(myPerceptron.gewichten,3) +"]<br/>";			
+						}
+					}
+					// geen aanpassingen gewichten geweest
+					if( k==0 )
+					{
+						tekst = "Gewichten blijven : [" + 
+							arrayToString(myPerceptron.gewichten,3) +"]<br/>";	
+					}
+					// plaats de tekst in het uitvoerveld
+					var gewichtenGeschaald = myPerceptron.schaalPerceptron();
+					document.getElementById("uitvoer").innerHTML="Er "+(k!=1?"zijn "+k+" punten":" is één punt")+
+							" effectief geweest.<br/>"+
+							"Gevonden vergelijking van de lijn is nu<br/>0 = 1 + " + gewichtenGeschaald[1].toFixed(3) + "x + " + gewichtenGeschaald[2].toFixed(3) +"y<br/>Als benadering voor de lijn<br/>0="+(-b)+"+"
+							+ (-a)+"x + y<br/>"+tekst ;
+					// teken de perceptron lijn
+					tekening.toonVergelijkingPerceptron();
+					tekening.settings.p1.name='uitvoer = '+myPerceptron.geefDoor([1,x,y]) + '<br/>gewenst= '+gewenst;
+					tekening.settings.p1.moveTo([x,y]);
+				}
+
+				/*
+				 * functie eenTrainingTotKlopt(a,b) voert meerdere trainingen met het zelfde uit, 
+				 * 		tot dat het punt goed wordt voorspeld.
+				 *		In de functie wordt	eerst een nieuw punt gemaakt in het vierkant met zijden 8 
+				 *		en middelpunt (0,0). Met dat punt doet de perceptron een training.
+				 *		Resultaten worden in het uitvoer object getoond evenals de lijnenwaaier van
+				 *		de tussenstappen.
+				 * $param a: richtingscoëfficient in y=ax+b 
+				 * $param b: y-coördinaat snijpunt y-as in y=ax+b 
+				 */
+				eenTrainingTotKlopt(a,b)
+				{
+					var myPerceptron=this.settings.myPerceptron;
+					var tekening = this.settings.mygrapics;
+					
+					tekening.removeObjects();
+					var tekst,x,y,invoer,gewenst,uitgevoerd,som,i=1;
+					x = 8*Math.random()-4;
+					y = 8*Math.random()-4;
+					som = -b - a*x + y;
+					invoer=[1,x,y];
+					gewenst=myPerceptron.activeringsfunctie(som);
+					tekst="Stap 0: Begingewichten: [" + arrayToString(myPerceptron.gewichten,3) +"]<br/>";
+					tekst+="Trainings punt ["+arrayToString(invoer,2)  + "]<br/>met gewenste uitvoer: "+gewenst+ "<br/><br/>";
+						
+					do
+					{
+						tekst+="Stap "+i+":Voorspelling:<br/>";
+						tekst+="voor training "+myPerceptron.geefDoor(invoer) +"<br/>";
+						myPerceptron.train(invoer,gewenst);
+						tekst+="na training "+myPerceptron.geefDoor(invoer) +"<br/>";
+						tekst+=
+							"Nieuwe gewichten: [" + arrayToString(myPerceptron.gewichten,3) +"]<br/><br/>";
+						uitgevoerd=myPerceptron.geefDoor(invoer);
+						tekening.voegToeVergelijkingPerceptron(
+								"stap "+i,
+								"rgb(0, "+((20*i)%255)+", "+((255-20*i)%255)+")");
+						i++;
+					}
+					while(uitgevoerd!=gewenst)
+					var gewichtenGeschaald = myPerceptron.schaalPerceptron();
+					document.getElementById("uitvoer").innerHTML =
+						"Aantal aanpassingen: "+ i+
+						"<br/>Gevonden vergelijking van de lijn is<br/>0 = 1 + " +
+						gewichtenGeschaald[1].toFixed(3) + "x + " + 
+						gewichtenGeschaald[2].toFixed(3) +
+						"y<br/>Als benadering voor de lijn<br/>0="
+						+(-b)+"+" + (-a)+"x + y<br/><br/>"+tekst;
+					
+					tekening.toonVergelijkingPerceptron();
+					tekening.settings.p1.name='uitvoer ='+myPerceptron.geefDoor([1,x,y]);
+					tekening.settings.p1.moveTo([x,y]);
+				}
+
+				/*
+				 * functie nTrainingTotKlopt(a,b) voert 100 keer
+				 *		meerdere trainingen met een zelfde punt uit, 
+				 * 		tot dat het punt goed wordt voorspeld.
+				 *		In de functie wordt	100 keer 
+				 *		eerst een nieuw punt gemaakt in het vierkant met zijden 8 
+				 *		en middelpunt (0,0). Met dat punt doet de perceptron een training.
+				 *		Het laatste resultaat wordt in het uitvoer object getoond.
+				 * $param a: richtingscoëfficient in y=ax+b 
+				 * $param b: y-coördinaat snijpunt y-as in y=ax+b 
+				 */
+				nTrainingTotKlopt(a,b,n=100)
+				{
+					var myPerceptron=this.settings.myPerceptron;
+					var tekening = this.settings.mygrapics;
+					tekening.removeObjects();
+					var x,y,invoer,som,i=1,j,k=0;
+					var gewenst,voorspeld
+					var tekst="";
+					for(j=0;j<n;j++)
+					{
+						x = 8*Math.random()-4;
+						y = 8*Math.random()-4;
+						tekening.voegToeTrainingsPunt([x,y],"rgb(0, "+((20*j)%255)+", "+((255-20*j)%255)+")")
+						som = -b - a*x + y;
+						invoer=[1,x,y];
+						i=0;
+						gewenst=myPerceptron.activeringsfunctie(som);
+						while(gewenst!=(voorspeld=myPerceptron.geefDoor(invoer)))
+						{
+							myPerceptron.train(invoer,gewenst);
+							i++;
+						}
+						if(i>0)
+						{
+							k++;
+							tekst+=
+								"Nieuwe gewichten bij punt "+j+" in "+i+(i>1?" stappen":" stap")+": [" + 
+								arrayToString(myPerceptron.gewichten,3) +"]<br/>";
+						}
+					}
+					// geen aanpassingen gewichten geweest
+					if( k==0 )
+					{
+						tekst = "Gewichten blijven : [" + 
+							arrayToString(myPerceptron.gewichten,3) +"]<br/>";	
+					}				
+					var gewichtenGeschaald = myPerceptron.schaalPerceptron();
+					document.getElementById("uitvoer").innerHTML = 
+						"<br/>Gevonden vergelijking van de lijn is<br/>0 = 1 + " +
+						gewichtenGeschaald[1].toFixed(3) + "x + " + 
+						gewichtenGeschaald[2].toFixed(3) +
+						"y<br/>Als benadering voor de lijn<br/>0="
+						+(-b)+"+" + (-a)+"x + y<br/><br/>"+tekst;
+							
+					tekening.toonVergelijkingPerceptron();
+					tekening.settings.p1.name='uitvoer ='+myPerceptron.geefDoor([1,x,y]);
+					tekening.settings.p1.moveTo([x,y]);
+				}
+
+				/*
+				 * functie sampleTrainingTotKlopt(a,b,n) voert 
+				 *		meerdere trainingen op een punten verzameling uit, 
+				 * 		tot dat de verzameling goed wordt voorspeld.
+				 *		In de functie wordt	n keer 
+				 *		eerst een nieuw punt gemaakt in het vierkant met zijden 8
+				 *		en middelpunt (0,0)  en toegevoegd aan de puntenverzameling. 
+				 * 		Met de punten in de verzameling doet de perceptron een training.
+				 *		De verzameling wordt net zolang aangeboden
+				 *		tot alle punten goed worden voorspeld
+				 * $param a: richtingscoëfficient in y=ax+b 
+				 * $param b: y-coördinaat snijpunt y-as in y=ax+b 
+				 * $param n: punten die aan de verzameling moeten worden toegevoegd			 
+				 */
+				sampleTrainingTotKlopt(a,b,n = 25)
+				{
+					var myPerceptron=this.settings.myPerceptron;
+					var tekening = this.settings.mygrapics;
+					var puntenVerzameling = this.settings.puntenVerzameling;
+					
+					var i,x,y,som,invoer,gewenst;
+					var veranderd = 0;
+					var ronde = 0;
+					var tekst = "";
+					var vl = puntenVerzameling.length;
+					if(vl==0) tekening.removeObjects();
+					// voeg punten toe
+					var eind = vl+n;
+					for(i=vl;i<eind;i++)
+					{
+						x = 8*Math.random()-4;
+						y = 8*Math.random()-4;
+						tekening.voegToeTrainingsPunt(
+								[x,y],
+								"rgb(0, "+((20*i)%255)+", "+((255-20*i)%255)+")")
+						som = -b - a*x + y;
+						invoer=[1,x,y];
+						gewenst=myPerceptron.activeringsfunctie(som);
+						puntenVerzameling[i]=[invoer,gewenst];
+					}
+					// herhaal training tot er geen foute plaatsing meer is
+					do
+					{
+						veranderd = 0;
+						// ga alle punten af (we gaan van eind naar begin 
+						// om eerst de toegevoegde punten te behandelen)
+						for(i=eind-1;i>=0;i--)
+						{
+							if(puntenVerzameling[i][1]!=myPerceptron.geefDoor(puntenVerzameling[i][0]))
+							{
+								myPerceptron.train(puntenVerzameling[i][0],puntenVerzameling[i][1]);
+								veranderd++;
+							}
+						}
+						ronde++;
+						tekst += "Ronde "+ronde + ":Aantal veranderingen: "+veranderd +"<br/>"+"Perceptron gewichten: ["+arrayToString(myPerceptron.gewichten,3)+"]<br/>";
+					}
+					while (veranderd!=0)
+					tekening.toonVergelijkingPerceptron();
+					var gewichtenGeschaald = myPerceptron.schaalPerceptron();
+					document.getElementById("uitvoer").innerHTML = 
+						"Aantal rondes:"+ronde+
+						"<br/>Gevonden vergelijking van de lijn is<br/>0 = 1 + " +
+						gewichtenGeschaald[1].toFixed(3) + "x + " + 
+						gewichtenGeschaald[2].toFixed(3) +
+						"y<br/>Als benadering voor de lijn<br/>0="
+						+(-b)+"+" + (-a)+"x + y<br/><br/>"+tekst;
+				}
+			}
+			
+			//einde trainer
+			// andere functies
+			
+			// bereken y waarde bij gegeven x
+			function yLine(a,b,x)
+			{
+				return a*x+b;
+			}
+			
+			/*
+			 * functie vraagt aan de perceptron in welk gebied het punt ligt
+			 * @param punt: [1, x-coördinaat , y - coördinaat ]
+			 */
+			function waarLigtPunt(punt)
+			{
+				var invoer = eval(document.getElementById(punt).value)
+				if(trainer==null) trainer = new Trainer( invoer.length, Math.sign, 0.01 );
+				document.getElementById("uitvoer").innerHTML=
+					"De output voor het punt " + invoer + " is " + trainer.settings.myPerceptron.geefDoor(invoer);
+			}
+			
+			function arrayToString(array,decimals)
+			{
+				var tekst="";
+				var first=true;
+				for(var i=0;i<array.length;i++)
+				{
+					if(first) first=false;
+					else tekst+=",";
+					tekst+=array[i].toFixed(decimals);
+				}
+				return tekst;
+			}			
+		</script> 
+		<script> 
+			class Graphics
+			{	
+				constructor(perceptron)
+				{
+					this.settings=
+					{	
+						tekening:null,
+						myPerceptron:perceptron,
+						linePerceptron:null,
+						objects:[],
+						p1:null,
+						p2:null,
+						p3:null
+					}
+					this.init();
+				}	
+				
+				init()
+				{
+					var s = this.settings;
+					if(s.tekening==null)
+					{
+						s.tekening = JXG.JSXGraph.initBoard('box', 
+							{boundingbox: [-4, 4, 4, -4]});
+						var line = s.tekening.create(
+								'line',
+								[1,-2,1],
+								{strokeColor:'#aaaa00',strokeWidth:2, dash:1,});
+						this.toonVergelijkingPerceptron();
+						s.p1= s.tekening.create('point',
+										[-2,3], 
+										{	color: "blue",
+										name:'uitvoer ='+s.myPerceptron.geefDoor([1,-2,3]) + " Versleep mij!",size:2});
+						s.p1.on('drag', function(e){
+								this.name='uitvoer ='+s.myPerceptron.geefDoor([1,this.X(),this.Y()]);
+						});
+						s.p1.on('move', function(e){
+								this.name='uitvoer ='+s.myPerceptron.geefDoor([1,this.X(),this.Y()]);
+						});
+					}
+				}
+				
+				toonVergelijkingPerceptron()
+				{
+					var jsx = this.settings.tekening;
+					var myPerceptron=this.settings.myPerceptron;
+					
+					var laatsteGewicht=myPerceptron.gewichten[myPerceptron.aantalInvoerKnopen-1]	
+					var a = -myPerceptron.gewichten[myPerceptron.aantalInvoerKnopen-2]/laatsteGewicht;
+					var b = -myPerceptron.gewichten[0]/laatsteGewicht;
+					if(this.settings.linePerceptron==null)
+					{
+						var p3=this.settings.p3= jsx.create('point',
+											[-5,yLine(a,b,-5)], 
+											{name:'A',size:2});
+						var p4=this.settings.p4= jsx.create('point',
+										[5,yLine(a,b,5)],  
+										{name:'B',size:2});
+						this.settings.linePerceptron = jsx.create('line',[p3,p4],{strokeColor:'#0000FF',strokeWidth:2, dash:2});
+					}
+					else
+					{
+						this.settings.p3.moveTo([-3,yLine(a,b,-3)]);
+						this.settings.p4.moveTo([3,yLine(a,b,3)]);
+					}
+				
+				}
+				removeObjects()
+				{
+					this.settings.tekening.removeObject(this.settings.objects);
+					this.settings.objects=[];
+				}
+				
+				voegToeTrainingsPunt(point,color)
+				{
+					var jsx = this.settings.tekening;
+					var myPerceptron=this.settings.myPerceptron;
+					var obj= jsx.create('point',
+						point,
+						{color: color});
+					this.settings.objects.push(obj);
+				}
+				
+				voegToeVergelijkingPerceptron(myname,color)
+				{
+					var jsx = this.settings.tekening;
+					var myPerceptron=this.settings.myPerceptron;
+					
+					var line= jsx.create('line',
+						myPerceptron.gewichten,
+						{strokeColor: color ,strokeWidth:2, dash:2, name: myname,
+							withLabel: true,
+							label: {
+								// the y-axis is a corner case, play with the position values a little
+								//position: 'lrt',
+								// fine tuning the position
+								offsets: [-3, 3],
+								// this is important for rotating the text
+								display: 'internal'
+							}});
+					this.settings.objects.push(line);
+				}
+				
+			}
+
+		</script>
+    </head>
+    <body onload="init()" style="margin:0px; ">
+		<!--<p><b>Trainen met de lijn<br/>y=2x-1 ofwel 1-2x+1y=0</b></p>
+		Train de perceptron met een willekeurig
+		gekozen punt<br/>-->
+	<header class="center midden" style="width: 250px; height: auto; padding: 0px;">
+		Perceptron: lijn
+	</header>
+	<main class="center midden" style="width: 250px; height: auto; padding: 0px; text-align: justify;">
+		Per punt één training:<br/>
+		<button class="knop" onclick="location.reload();"
+			style="width: 31%;">Herlaad</button>
+		<button class="knop" style="width: 30%;" onclick="trainer.eenTraining(2,-1)">Één keer</button>
+		<button class="knop" style="width: 30%;" onclick="trainer.nTraining(2,-1,100)">100 keer</button>
+		<br/>
+		Tot goede voorspelling:<br/>
+		-per punt:<br/>
+		<button style="width: 47%;" class="knop" onclick="trainer.eenTrainingTotKlopt(2,-1)">Één keer</button>
+		<button class="knop" style="width: 47%;"  onclick="trainer.nTrainingTotKlopt(2,-1,100)">100 keer</button><br/>
+		-per verzameling:<br/>
+		<button style="width: 100%;" class="knop" onclick="trainer.sampleTrainingTotKlopt(2,-1,25)">voeg 25 punten toe</button>
+		<div id="box" class="jxgbox" style="width:inherit; height:250px;align-self:center;">
+		</div>	
+		<p id="uitvoer" style="font-size: smaller; overflow-y: auto; width: inherit; height: 100px;"></p>
+	  </main>
+    </body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <title>Kunstmatige Intelligentie</title>
+    <script src="utils.js"></script>
+	<script src="treeview.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+		tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+	  });
+	</script>
+  </head>
+  <body  id="achtergrond" onload="addPathLead();initTreeview()"  >
+    <a name="Inleiding" style="counter-reset: subsection 3;"></a>
+    <header class="paragraaf titel">In de praktijk</header>
+	<section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/
+	<a href="inleiding_technieken.html" target="_parent">Technieken</a>/
+	Neurale netwerken</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+				4.0
+			<br />International License</a>.
+		</div>
+			</div>
+	</section>
+	<div class="navbar">
+		<div class="centreer">
+		<a href="#Inleiding">A</a>
+		<a href="#datamining">Datamining en AI</a>
+		<a href="#definitie">Definitie</a>
+		<span class="dropdown">
+			<div class="dropbtn" onclick="window.location='#cogana'">Enige vormen AI  &#9660;</div>
+			<div class="dropdown-content">
+				<a class="submenuitem" href="#zelf">Zelflerende systemen</a> 
+				<a class="submenuitem" href="#cogana">Cognitieve Analytics</a> 
+				<a class="submenuitem" href="#robotica">Robotica</a> 
+				<a class="submenuitem" href="#slimmeMachines">Slimme machines</a>
+			</div>
+		</span>
+		<a href="#about">About</a>
+		</div>
+	</div>
+	<article>
+	<div class="theorie example" style="overflow: hidden">
+		<div style="padding-left:25px;">
+		</div>
+	</div>
+💡🛠🚨👓📘📙📗 
+	<div class ='hammer treeview' style="overflow: hidden;">
+		<div style="padding-left:25px;">
+			<span class="caret">Opdrachten</span>
+			<div class="nested">
+				<ol>
+					<li>De vraag
+						<div class="caret doel">antwoord</div>
+						<div class="nested">
+							Het antwoord
+						</div>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<div class ='hammer treeview' style="overflow: hidden;">
+		<div style="padding-left:25px;">
+			<ol>
+				<li>De vraag
+					<div class="caret doel">antwoord</div>
+					<div class="nested">
+						Het antwoord
+					</div>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<div class ='hammer treeview' style="overflow: hidden;">
+		<div style="padding-left:25px;">
+			<ol>
+				<li>De vraag
+					<ol style="list-style-type: lower-alpha;">
+						<li>Vraag
+							<div class="caret doel">antwoord</div>
+							<div class="nested">
+								Het antwoord
+							</div>
+						</li>
+					</ol>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<div class ='hammer treeview' style="overflow: hidden;">
+		<div style="padding-left:25px;">
+			<ul>
+			<li>
+			<div class="caret doel">antwoord</div>
+			<div class="nested">
+				Het antwoord1
+			</div>
+			</li>
+			<li>
+			<div class="caret doel">antwoord</div>
+			<div class="nested">
+				Het antwoord2
+			</div>
+			</li>
+			<li>
+			<div class="caret doel">antwoord</div>
+			<div class="nested">
+				Het antwoord3
+			</div>
+		</li>
+			</ul>
+			
+		</div>
+	</div>		
+	
+<div class ='treeview hammer' style="overflow: hidden;">
+	<span class="caret">Vragen</span>
+	<div id="myUL" class="nested">
+		<ol>
+			<li>
+				<span class="caret doel">antwoord</span>
+				<ul class="nested">
+					<li>
+					</li>
+				</ul>
+			</li>		
+			<li>
+				<span class="caret doel">antwoord</span>
+				<ul class="nested">
+					<li>
+					</li>
+				</ul>
+			</li>		
+		</ol>
+	</div>
+</div>
+
+	
+	</article>
+  </body>
+</html>

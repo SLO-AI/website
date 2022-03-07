@@ -1,0 +1,233 @@
+
+/* Menubalk */
+/* Plaats de navigatiebalk aan de bovenkant van de pagina en maak het plakkend (stick)*/
+
+/* Navigatiebalk wordt vast aan de bovenkant van het scherm geplaatst. Teveel  items op de balk geven een scrollbar*/
+.sidenav {
+  height: 100%;
+  width:  var(--menu-width);
+  position: fixed;
+  z-index: 1;
+  //top: 0;
+  left: 0;
+  background-color: var(--main-color);
+  //padding-top: 20px;
+  margin:0px;
+  font-size: var(--menu-fontsize);
+}
+
+.sidenav a , .sidenav .noitem{
+  padding: 8px 10px;
+  text-decoration: none;
+  font-size: inherit;
+  color: var(--menu-color);
+  display: block;
+}
+.sidenav hr{
+	margin: 0px;
+	width: 93%;
+}
+
+.sidenav a:hover {
+  color: var(--main-color);
+  background-color: var(--menu-color);
+}
+
+.main {
+  margin-left: var(--main-left); /* Same as the width of the sidenav */
+  font-size: 1.625em; /* Increased text to enable scrolling */
+}
+
+.navbar {
+    background-color: var(--main-color);
+	position: sticky;
+    top: 0;
+    border: none;
+	border-top: solid 1px var(--background-color);
+	padding:0px;
+	z-index: 100;
+	text-align: center;
+	font-size: var(--menu-fontsize);
+      
+}
+.centernavbar
+{
+	background-color: var(--background-color);
+	margin: 0px 10% 0px 10%;
+	position: relative;
+	display: inlineblock;
+	font-size: var(--menu-fontsize-smaller);
+}
+
+/* Style de  menuitems binnen de navigatiebalk die geen dropdown menuitem is */
+.navbar a {
+    //float: left;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+	padding: 0px 16px;
+    text-decoration: none;
+    font-size: inherit;
+	color: var(--menu-color);
+	background-color: var(--main-color);
+}
+
+.navbar .dropdown {
+  background-color: var(--main-color);
+  display: inline-block;
+  padding: 0x;
+  margin: 0px;
+  vertical-align: top;
+  //overflow-x: hidden;
+}
+
+/* The dropdown container voor submenuitems */
+.sidenav .dropdown {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  margin: 4px 4px;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: inherit;
+  border: none;
+  outline: none;
+  color:  var(--text-color-white);
+  background-color: var(--main-color);
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0px; /* Important for vertical align on mobile phones */
+}
+
+.sidenav .dropbtn {
+  border: none;
+  outline: none;
+  width:90%;
+  color:  var(--text-color-white);
+  background-color: var(--main-color);
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0px; /* Important for vertical align on mobile phones */
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: inherit;
+  background-color: #F62B82;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+
+.sidenav .dropdown-content {
+  display: none;
+  position: absolute;
+  font-size: smaller;
+  right: inherit;
+  top: 0px;
+  left: calc(var(--menu-width) - 15px);
+  background-color: #F62B82;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+
+/* Verander de kleur als je over de link beweegt (hover) */
+.navbar a:hover , .dropbtn:hover, .dropdown:hover  {
+    background-color: var(--text-color-white);
+    color: var(--main-color);
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 4px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: lightblue;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+  z-index: 100;
+}
+
+/* Verberg de link die de navigatiebalk opent en sluit bij kleine schermen */
+.navbar #icon {
+    display: none;
+}
+
+/* Verberg de link die de navigatiebalk opent en sluit bij kleine schermen */
+.sidenav #icon {
+    display: none;
+}
+
+#iconh {
+    display: none;
+	//margin-right: var(--main-left);
+}
+
+
+#toptitel
+{
+  height: auto;
+  font-size: 1.750em;	
+}
+@media screen and (max-width: 844px)
+{
+        .navbar {
+          display: none;
+        }
+		
+}
+@media screen and not (max-width: 844px)
+{
+        .navbar {
+          display: block;
+        }
+
+}
+@media screen and (max-width: 1024px)
+{
+
+		article{
+			font-size: 1.500em;
+		}
+
+		.sidenav #icon {
+			display: inline-block;
+		}		
+		#iconh {
+			display: inline-block;
+		}		
+		.sidenav {
+          display: none;
+        }
+		
+		.main {
+		  margin-left: inherit; /* Same as the width of the sidenav */
+		  font-size: 1.750em; /* Increased text to enable scrolling */
+		}
+		header{
+			justify-content: left;
+		}
+    		
+      }
+@media and not (max-width: 1024px) {
+
+		.sidenav #icon {
+			display: n0ne;
+		}		
+		#iconh {
+			display: none;
+		}		
+    		
+      }
+ 

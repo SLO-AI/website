@@ -1,0 +1,145 @@
+<!DOCTYPE html >
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="images/favicon.ico" rel="icon" type="image/ico"> 
+<link href="css/ai.css" rel="stylesheet"> 
+<link href="css/menus.css" rel="stylesheet"> 
+<meta name="keywords" content="Javascript, AI , Kunstmatige Intelligentie, k-means, ann, apriori, basket analysis, neural network">
+<meta name="description" content="Cursus Kunstmatige Intelligentie">
+<meta name="author" content="John Val, Hans van den Burg, Hennie Huijgens, Daniël Haitink, Tim Steenvoorden,Jochem Baas">
+<title>Artificiële Intelligentie</title>
+<script language="JavaScript" type="text/javascript">
+<!--
+function zetFrameHoogte()
+{
+ // height window
+ const htobj=document.getElementById("toonschermAI");
+ const menuObj=document.getElementById("theMenu");
+
+ if(htobj)
+ {
+	const h=window.innerHeight
+     || document.documentElement.clientHeight
+     || document.body.clientHeight; 
+	const topCanvas=htobj.getBoundingClientRect().top;
+	// console.log("Top canvas " + topCanvas);
+	// console.log("heigt " + h);
+	// console.log("window.innerHeight " + window.innerHeight);
+	htobj.style.height=(h-topCanvas)+"px";
+    htobj.height=(h-topCanvas);
+ }
+ if(menuObj)
+ {
+	const iconObj=document.getElementById("iconh");
+	const width  = window.innerWidth 
+		|| document.documentElement.clientWidth 
+		|| document.body.clientWidth;
+	if(width > 1024 )
+	{
+		menuObj.style.display="block";
+		if(iconObj) iconObj.style.display="none";		
+	}
+	else
+	{
+		menuObj.style.display="none";
+		if(iconObj) iconObj.style.display="inline-block";		
+	}
+ }
+}
+function toggleMenu()
+{
+	var menuObj=document.getElementById("theMenu");
+	var iconObj=document.getElementById("iconh");
+	if(menuObj.style.display=="block")
+	{
+		menuObj.style.display="none";
+		iconObj.style.display="inline-block";
+	}
+	else
+	{	
+		menuObj.style.display="block";
+		iconObj.style.display="none";
+	}
+}
+window.onresize=zetFrameHoogte;
+//-->
+</script>
+
+</head>
+<body onload="zetFrameHoogte();" class="index">
+<div class="sidenav links" id="theMenu">
+	<a id="icon" onclick="toggleMenu();">&#10060;</a> 
+	<a href="introductie.html"  id="introductie" class="Ahoofdstuk" target="NtoonschermAI">Introductie</a>
+	<hr>
+	<div class="noitem">Algemeen</div>
+	<hr>
+	<div class="dropdown">
+	  <button class="dropbtn Ahoofdstuk" >Achtergrond &#9654;</button>
+	  <div class="dropdown-content">
+		<a class="Aparagraaf" href="inleiding_achtergrond.html" target="NtoonschermAI">Inleiding</a>
+		<a class="Aparagraaf" href="achtergrond_introductie.html" target="NtoonschermAI">Introductie</a>
+		<a class="Aparagraaf" href="achtergrond_geschiedenis.html" target="NtoonschermAI">Geschiedenis en toekomst</a>
+		<a class="Aparagraaf" href="achtergrond_intelligentie.html" target="NtoonschermAI">Wanneer is iets intelligent</a>
+		<a class="Aparagraaf" href="achtergrond_praktijk.html" target="NtoonschermAI">In de praktijk</a>
+		<a class="Aparagraaf" href="terugkoppeling_achtergrond.html" target="NtoonschermAI">Terugkoppeling</a>
+	  </div>
+	</div>
+	<div class="dropdown">
+	  <button class="dropbtn Ahoofdstuk">Ethiek &#9654;</button>
+	  <div class="dropdown-content">
+		<a class="Aparagraaf" href="inleiding_ethiek.html" target="NtoonschermAI">Inleiding</a>
+		<a class="Aparagraaf" href="ethiek_gevarenAI.html" target="NtoonschermAI">Gevaren van AI</a>
+		<a class="Aparagraaf" href="ethiek_FAST.html" target="NtoonschermAI">De FAST principes</a>
+		<a class="Aparagraaf" href="ethiek_FAIR.html" target="NtoonschermAI">FAIR data</a>
+		<a class="Aparagraaf" href="terugkoppeling_ethiek.html" target="NtoonschermAI">Terugkoppeling</a>
+	  </div>
+	</div>	
+	<div class="dropdown">
+	  <button class="dropbtn Ahoofdstuk">Technieken &#9654;</button>
+	  <div class="dropdown-content">
+		<a class="Aparagraaf" href="inleiding_technieken.html" target="NtoonschermAI">Inleiding</a>
+		<a class="Aparagraaf" href="techniek_introductie.html" target="NtoonschermAI">Introductie</a>
+		<a class="Aparagraaf" href="techniek_machine_learning.html" target="NtoonschermAI">Machine learning</a>
+		<a class="Aparagraaf" href="techniek_associatie_analyse.html" target="NtoonschermAI">Associatie analyse</a>
+		<a class="Aparagraaf" href="techniek_cluster_analyse.html" target="NtoonschermAI">Cluster analyse</a>
+		<a class="Aparagraaf" href="techniek_neurale_netwerken.html" target="NtoonschermAI">Neurale netwerken</a>
+		<a class="Aparagraaf" href="techniek_eigen_quickdraw.html" target="NtoonschermAI">Eigen quickdraw</a>
+		<a class="Aparagraaf" href="techniek_multi_agent.html" target="NtoonschermAI">Multi-agentsystemen</a>
+		<a class="Aparagraaf" href="terugkoppeling_technieken.html" target="NtoonschermAI">Terugkoppeling</a>
+	  </div>
+	</div>	
+	<hr>
+	<div class="noitem">Verdieping</div>
+	<hr>
+	<div class="dropdown">
+	  <button class="dropbtn Ahoofdstuk">Ethiek en AI &#9654;</button>
+	  <div class="dropdown-content">
+		<a class="Aparagraaf" href="inleiding_ethiekenai.html" target="NtoonschermAI">Inleiding</a>
+		<a class="Aparagraaf" href="ethiek_fast_fair.html" target="NtoonschermAI">FAST en FAIR</a>
+		<a class="Aparagraaf" href="ethiek_standaarden_richtlijnen.html" target="NtoonschermAI">AI-standaarden en -richtlijnen</a>
+		<a class="Aparagraaf" href="ethiek_engheidsmatrix.html" target="NtoonschermAI">De engheidsmatrix</a>
+		<a class="Aparagraaf" href="ethiek_opdracht_essay.html" target="NtoonschermAI">Opdracht: Essay ethiek en AI</a>
+		<a class="Aparagraaf" href="ethiek_opdracht_ontwerp.html" target="NtoonschermAI">Opdracht: ontwerp een AI toepassing</a>
+	  </div>
+	</div>
+	<hr>
+	<div class="dropdown">
+	  <button class="dropbtn Ahoofdstuk">Neurale netwerken &#9654;</button>
+	  <div class="dropdown-content">
+		<a class="Aparagraaf" href="inleiding_neurale_netwerken.html" target="NtoonschermAI">Inleiding</a>
+		<a class="Aparagraaf" href="neurale_netwerken_leren.html" target="NtoonschermAI">Hoe een neuraal netwerk leert.</a>
+		<a class="Aparagraaf" href="neurale_netwerken_meer_lagen.html" target="NtoonschermAI">Op weg naar meer lagen</a>
+		<a class="Aparagraaf" href="neurale_netwerken_tensorflow.html" target="NtoonschermAI">Opdracht: Tensorflow app</a>
+		<a class="Aparagraaf" href="neurale_netwerken_chatbot.html" target="NtoonschermAI">Opdracht: Chatbot</a>
+	  </div>
+	</div>	
+</div>
+<div class="main">
+
+<header id="toptitel" ><a id="iconh" class="links" onclick="toggleMenu();">&#8801;</a> Kunstmatige intelligentie</header>
+<iframe class='pagina' id="toonschermAI" name="NtoonschermAI" src="introductie.html"></iframe>
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+{
+  "name": "Bol.com",
+  "locale": "nl",
+  "data": [
+    {
+      "intent": "agent.greeting",
+      "utterances": [
+        "Hallo",
+        "Dag",
+        "Goedemiddag",
+        "Goedenavond",
+        "Goededag",
+        "Goedendag",
+        "Hey",
+        "Hoi"
+      ],
+      "answers": [
+        "Dag! Hoe kan ik je van dienst zijn?",
+        "Hallo! Wat kan ik voor je doen?",
+        "Hey! Heb je een vraag voor mij?"
+      ]
+    },
+    {
+      "intent": "agent.waarispakketje",
+      "utterances": [
+        "Waar is mijn pakketje?",
+	    "Waar is mijn pakketje",
+        "Komt mijn pakketje nog?",
+	    "Wacht op mijn pakketje"
+      ],
+      "answers": [
+        "Als je inlogt, kan ik zien welke bestelling je bedoelt. Wil je inloggen op je bol.com account?",
+        "Zou je willen inloggen, dan kan ik zien welk pakketje je bedoelt"
+      ]
+    },
+    {
+      "intent": "agent.retourneren",
+      "utterances": [
+        "Ik wil iets retourneren",
+        "Ik wil iets terugsturen",
+	    "Ik wil iets terug sturen"
+      ],
+      "answers": [
+        "Artikelen terugsturen is bijna altijd mogelijk. Als je inlogt, kijk ik graag met je mee. Wil je inloggen op je bol.com account?",
+        "Zou je willen inloggen, dan kunnen we samen verder kijken hoe je je pakketje terug kunt sturen"
+      ]
+    },
+    {
+      "intent": "agent.profanity",
+      "utterances": [
+        "Fuck you",
+        "Eikel",
+        "Homo",
+        "Tering",
+        "Klootzak",
+        "Hoer",
+        "Slet",
+        "Kut"
+      ],
+      "answers": [
+        "Hey! Dat is niet nodig!! Een bot heeft ook gevoelens! 101001110",
+        "Dat vind ik niet netjes.",
+        "Deze actie is gerapporteerd aan mijn eigenaar."
+      ]
+    },
+    {
+      "intent": "None",
+      "utterances": [
+        ""
+      ],
+      "answers": [
+        "Sorry, dat begreep ik niet helemaal!"
+      ]
+    }
+   ]
+}

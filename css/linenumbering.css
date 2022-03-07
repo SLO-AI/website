@@ -1,0 +1,35 @@
+	.codeTextarea
+	 {
+      width:100%;
+			align: left;
+   }
+   .preWithLines{
+      font-family:courier;      
+      border:2px solid #F00;
+			margin: 30px;
+			width:100%;
+   }
+   .preWithLines pre, .preWithLines div{
+      line-height:124%;
+      font-size:12px;
+   }
+
+   .textAreaWithLines{
+      font-family:courier;      
+      border:2px solid #F00;
+			margin: 30px;
+   }
+   .textAreaWithLines textarea, .textAreaWithLines div{
+      line-height:124%;
+      font-size:12px;
+   }
+	 
+   .lineObj{
+      border-right-style: solid;
+			border-right-width: 1px;
+			border-right-color: black;
+			padding-top: 0px;
+			padding-bottom: 2px;
+			margin-top: 0px;
+			color:red;
+   }

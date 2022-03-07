@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <title>Kunstmatige Intelligentie</title>
+    <script src="treeview.js"></script>
+  </head>
+  <body  id="achtergrond" onload="addPathLead();initTreeview()" >
+    <a name="Inleiding" style="counter-reset: subsection 0;"></a>
+    <header class="paragraaf titel">Introductie</header>
+	<section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>
+	/Achtergrond / Geschiedenis en toekomst</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+				4.0
+			<br />International License</a>.
+		</div>
+			</div>
+	</section>
+	<div class="navbar">
+		<div class="centreer">
+		<a href="#Inleiding">Introductie</a>
+		<a href="#intelligentie">Natuurlijke en artificiële intelligentie</a>
+		<a href="#automatiseren">Automatiseren</a>
+		<a href="#invloeden">Invloeden</a>
+		</div>
+	</div>
+	<article>
+	<p>Computers lijken bijna dagelijks niet alleen sneller, maar ook slimmer te worden. Dit levert ons een hoop gemak op. Zo kunnen we tegen computers gamen, kunnen we onze spelling laten controleren, ons laten helpen bij het kiezen van zoektermen in Google, de besturing van auto’s en vliegtuigen over laten nemen en ga zo maar door. Kortom: slimme computers kunnen het leven een stuk aangenamer maken.
+	</p>
+	Helaas zijn er niet alleen mooie kanten aan deze ontwikkelingen. Mensen maken zich ook zorgen over het slimmer worden van computers. Verliezen mensen banen aan computers? Worden wapens ook slimmer en is dat wel iets dat we moeten willen? Worden computers ooit slimmer dan de mens en nemen ze dan de complete macht over op aarde? Het moment dat dit gaat plaatsvinden noemt men de technologische singulariteit. Er zijn mensen die geloven dat dit moment in de "nabije" toekomst plaats zal vinden en zij spreken dit ook uit.
+	<p>
+	<div class ='hammer treeview' style="clear: both;">Vragen
+		<ol>
+			<li>Wat is kunstmatige intelligentie volgens jou?
+			</li>
+			<li>Waar komt kunstmatige intelligentie in voor? Heb jij er zelf wel eens mee te maken?
+			</li>
+			<li>Denk je dat kunstmatige intelligentie gevaarlijk is?
+			</li>
+		</ol>
+	</div>	
+	<div class ='treeview' style="clear: both;">
+		<div id="myUL">
+			<span class="caret">Antwoorden</span>
+			<div class="nested">Passen jouw antwoorden ook bij het door ons gegeven antwoord?
+				<ol>
+					<li>Sommige computerprogramma’s lijken slim. Bijvoorbeeld een sudoku oplosser. Maar zulke programma’s doorlopen eigenlijk gewoon een patroon. Niet het programma, maar de programmeur van zulke programma’s is intelligent.<br/>
+					Bij kunstmatige intelligentie is dat anders. Door de KI gemeenschap doorontwikkelde algoritmen herkennen zelf patronen uit grote data sets. Deze patronen worden dus niet door de programmeur in het algoritme gestopt. Uiteindelijk kun je ontdekte patronen weer gebruiken in vervolg applicaties.
+					</li>
+					<li>Kunstmatige intelligentie komt op steeds meer plekken voor. Waarschijnlijk heb ook jij er regelmatig mee te maken. Zo is er bijvoorbeeld spraakherkenning door Google. Of door Siri op de iPhone. Sociale netwerken zoals Facebook en Instagram, gebruiken ook kunstmatige intelligentie om gerichte advertenties te kunnen tonen.
+					</li>
+					<li>Hier zijn de meningen over verdeeld. Eigenlijk schuilt er in elke technologie wel een gevaar, omdat mensen er misbruik van kunnen maken. Bij kunstmatige intelligentie kan het gevaar misschien ook zitten in de technologie zelf. Wat gaan robots doen als ze net zo slim of slimmer zijn dan wij?
+					</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<a id="intelligentie"></a><br/>
+	<h2>Natuurlijke en artificiële intelligentie</h2>
+	<p>Samen op de bank met pa en ma zit je in het fotoalbum van jouw jeugd te bladeren. Trots vertellen je ouders over jouw mijlpalen: jouw eerste woordjes, jouw eerste stapjes, jouw ontwerpen met de legoblokken en de door jouw verzonnen rollenspellen met de poppen. Laatst zag ik een filmpje van een kraai die het vistuig van een ijsvisser ophaalde en er met de buit vandoor ging. Kortom, er wordt nogal wat geleerd in onze wereld om problemen op te lossen - en dus niet alleen door mensen!
+	</p>
+	<div class="rechts theorie">
+		<img src="images/csm_okt_1_themaAI-nl2_CartoonAuke_7e8bd9f64f.png"  style="width: 300px;"/><br/>
+		<caption><a href="https://aukeherrema.nl/" target="achtergrond">
+		Auke Herrema</a>
+		</caption>
+	</div>
+	<p>Probleemoplossend vermogen, creërend denkvermogen en invoelend vermogen worden tot de <i>menselijke intelligentie</i> gerekend. Soms noemen we dit ook <i>natuurlijke intelligentie</i>. Jij bent in staat om in elke situatie jouw intelligentie aan te spreken om te reageren op die situatie. Meestal is die reactie niet de meest optimale, maar daar leer je dan ook weer van. 
+	</p>
+	<p>Binnen de computerwetenschap wordt er ook gewerkt aan zelflerende systemen. Deze werkzaamheden vallen onder de term <i>Artificiële Intelligentie</i> (AI), ofwel kunstmatige intelligentie (KI). De heilige graal van het onderzoek in artificiële intelligentie is de zoektocht naar één systeem dat vaardigheden kan leren en vervolgens elk probleem kan oplossen waarmee het te maken krijgt, precies zoals een mens dat kan en liefst nog beter. 
+	</p>
+	<p>Is de wetenschap al in de buurt van die heilige graal? Helaas, één systeem dat overal op kan reageren is nog ver weg. Er zijn echter voor specifieke doeleinden al heel wat computeralgoritmen met een lerend vermogen. Nog beter, veel van die algoritmen doen het na training beter en/of sneller dan de mens. Rest nog één heel groot voordeel, als één computer het kunstje heeft geleerd hoeft een andere vergelijkbare computer dat niet meer. De status van het leerproces kan naar andere systemen gekopieerd worden. Jij als leerling kan helaas de inhoud van het brein van je docent niet simpel uploaden in jouw brein, een computer kan dat wel.
+	</p>
+	<div class ='hammer treeview' style="clear: both;">Vragen
+		<ol start="4">
+			<li>Wat is de heilige graal van AI?
+			</li>
+			<li>Je hebt bij de Quick Draw app gezien dat er verschrikkelijk veel data nodig is om AI een goede voorspeller te laten zijn. Weet jij nog hoeveel voorbeelden je nodig had om een hond van een kat te onderscheiden?
+			</li>
+
+		</ol>
+	</div>	
+	<div class ='treeview' style="clear: both;">
+		<div id="myUL">
+			<span class="caret">Antwoorden</span>
+			<div class="nested">
+				<ol start="4">
+					<li>De heilige graal van het onderzoek in kunstmatige intelligentie is de zoektocht naar één systeem dat vaardigheden kan leren en vervolgens elk probleem kan oplossen waarmee het te maken krijgt, precies zoals een mens dat kan en liefst nog beter.
+					</li>
+					<li>Als kind heb je waarschijnlijk met je ouders, opa's, oma's, etc. heel veel plaatjes bekeken, maar 50 miljoen is erg veel. Waarschijnlijk had jij er veel minder nodig om nu tekeningen van anderen te kunnen herkennen.
+					</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<a id="automatiseren"></a><br/>
+	<h2>Automatiseren, automatiseren, automatiseren</h2>
+	<p>Machines en computers hebben al veel werk geautomatiseerd, maar niet alles kan zomaar door een computer worden gedaan. Er wordt verwacht dat kunstmatige intelligentie nog verder gaat en ons nog meer werk uit handen neemt.
+	</p>
+	<p>Een goed voorbeeld is een zelfrijdende auto. Met kunstmatige intelligentie kun je een auto zelf laten rijden. Als we niet meer zelf hoeven te sturen en te remmen, dan kunnen we andere dingen doen tijdens het autorijden. Echter, wie is er dan verantwoordelijk wanneer er een ongeluk gebeurd? De maker van de auto omdat zij 'm hebben geprogrammeerd, de auto zelf omdat hij niet goed heeft geleerd een ongeluk af te wenden, of jij, omdat je niet zat op te letten? Best een ingewikkeld vraagstuk waarin <i>ethiek</i> en belangrijke rol speelt.
+	</p>
+	<p>
+	Een ander voorbeeld: je zou kunstmatige intelligentie met het <i>Internet Of Things</i> (IOT) kunnen combineren. Bij het Internet Of Things zijn allerlei apparaten met elkaar gekoppeld via het internet. Zo zou bijvoorbeeld jouw koelkast gekoppeld kunnen zijn met de lokale supermarkt. De koelkast herkent, bijvoorbeeld door middel van een camera met beeldherkenning, dat de boter op is en kan dat voor je bestellen. De supermarkt stuurt dan bijvoorbeeld een drone die zelfstandig kan landen in bijvoorbeeld jouw achtertuin en daar de boodschappen achterlaat. 
+	</p>
+	<p>
+	Een ander voorbeeld is om de apparaten in je huis dusdanig af te stellen, dat ze je dagelijkse routine volgen. Stel dat het je dagelijkse routine is om na het opstaan te douchen en daarna een kop koffie te drinken. Het is al mogelijk om je radiator en je koffiezetter hierop in te stellen, bijvoorbeeld met een tijdschakelaar. Kunstmatige intelligentie zou jouw ochtendroutine kunnen herkennen, jouw patronen leren, en jouw apparaten automatisch afstellen. Daarmee zou AI het leven nog gemakkelijker en aangenamer kunnen maken.
+	</p>
+	<div class ='hammer treeview' style="clear: both;">Opdracht
+		<ol start="7">
+			<li>Bedenk nog een toepassing van AI, bespreek die met een klasgenoot. Waarom is AI nodig in je voorbeeld? In hoeverre vinden jullie deze toepassing eng en nuttig?
+			</li>
+		</ol>
+	</div>	
+	<a id="invloeden"></a><br/>
+	<h2>Invloeden</h2>
+	<p>Zoals we hierboven bespraken, wordt kunstmatige intelligentie vaak als de heilige graal van de informatica gezien: het ultieme doel waarmee alles geautomatiseerd kan worden en de mensheid op haar lauweren kan rusten. Toch is kunstmatige intelligentie niet alleen een stroming die voortkomt uit het vakgebied informatica. Zo worden er studies ontleend aan:
+	<ol>
+		<li><strong>Psychologie</strong>: hoe zitten de gedachten van een mens in elkaar en hoe kunnen we dat met machines simuleren?</li>
+		<li><strong>Biologie</strong>: hoe kunnen we de complexe structuren in de natuur en bij dieren vertalen naar machines?</li>
+		<li><strong>Sociologie</strong>: waarom gaan mensen op een bepaalde manier met elkaar om en wat betekent dat voor de omgang tussen machines en mensen?</li></li>
+		<li><strong>Neurologie</strong>: hoe werkt het brein en hoe kunnen we dat met machines nabootsen?</li>
+		<li><strong>Filosofie</strong>: wat is intelligentie eigenlijk en kúnnen we het wel met machines maken?
+		</li>
+	</ol>
+	<p>
+	Informatica is misschien uiteindelijk wel het belangrijkst voor kunstmatige intelligentie, omdat we slimme machines proberen te maken met computers. Je zou kunnen zeggen dat alle bovengenoemde disciplines voedingsbodem geven, maar dat informatica uiteindelijk over de implementatie gaat.
+	</p>
+	<div class ='hammer treeview' style="clear: both;">Opdracht
+		<ol start="8">
+			<li>Geef twee stromingen die zich bezighouden met AI en geef daarbij een onderliggende vraag.
+			</li>
+		</ol>
+	</div>	
+	<div class ='treeview' style="clear: both;">
+		<div id="myUL">
+			<span class="caret">Antwoord</span>
+			<div class="nested">
+				<ol start="8">
+					<li>Twee uit bovengenoemde lijst.
+					</li>
+
+				</ol>
+			</div>
+		</div>
+	</div>
+	</article>
+  </body>
+</html>

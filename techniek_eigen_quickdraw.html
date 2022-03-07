@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <title>Kunstmatige Intelligentie</title>
+    <script src="treeview.js"></script>
+  </head>
+  <body  id="technieken" onload="addPathLead();initTreeview()"  >
+    <a name="Inleiding" style="counter-reset: subsection 5;"></a>
+    <header class="paragraaf titel">Eigen Quickdraw</header>
+	<section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/<a href="inleiding_technieken.html" target="_parent">Technieken</a>/Eigen Quickdraw</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+				4.0
+			<br />International License</a>.
+		</div>
+			</div>
+	</section>
+	<article>
+	<p>Na de theorie over neurale netwerken is het tijd om kennis te maken met het trainen en gebruiken van neurale netwerken. In de Quickdraw opdracht heb je een getraind neuraal netwerk gebruikt. Misschien heb je daar doorgeklikt naar de manier waarop Quickdraw is getraind en heb je gelezen dat er miljoenen door gebruikers geleverde plaatjes zijn gebruikt in deze training. In de sectie <a href="techniek_neurale_netwerken.html" class="book">Ecologische voetafdruk</a> uit de vorige paragraaf heb je gelezen dat veel data veel rekenkracht kost om een model te trainen. De kracht van een gewone PC is niet toereikend, de jouwe dus waarschijnlijk ook niet, om deze training even over te doen. In de app die we je in deze sectie aanbieden gebruiken we wel de afbeeldingen uit de Quickdraw trainingsdataset maar hebben we de informatie behoorlijk verkleind om trainingen in een korte tijd plaats te kunnen laten vinden. In de app is, net als in de Quickdraw app, een schetsblok aanwezig waarmee je kunt kijken of je training een beetje succesvol is.
+	</p>
+	<dl>
+		<dt>Stap 1:</dt>
+		<dd><a href="SLO-apps/data/quickdraw.zip">download de dieren plaatjes</a> en pak de gecomprimeerde mappen uit in een map naar keuze. Maak een map <strong>mixed</strong> aan en kopieer een aantal plaatjes van de map cat en de map dog naar de map <strong>mixed</strong>.
+		</dd>
+		<dt>Stap 2:</dt>
+		<dd><a href="SLO-apps/Emoticons/index.html" target="_blank">Ga naar de app</a> , die moet er uitzien als hieronder.
+		<div class="theorie center" style="overflow: hidden; width:470px;">
+			<img src="images/Emoticons.png"/>
+		</div>
+		</dd>
+		<dt>Stap 3:</dt>
+		<dd>Selecteer in de map <strong>mixed</strong> de plaatjes en sleep die in het train veld in het gestippelde kader.
+		</dd>
+		<dt>Stap 4:</dt>
+		<dd>Druk op train. Je krijgt rechtsboven in het scherm een resultaat te zien.
+		</dd>
+		<dt>Stap 5:</dt>
+		<dd>Selecteer uit de map cat of dog of de map mixed één plaatje en sleep die naar het test veld in het gestippelde kader. Of maak een eigen tekening in het tekenen veld en druk op inladen.
+		</dd>
+		<dt>Stap 6:</dt>
+		<dd>Druk op test. Je krijgt rechtsboven in het scherm te zien of de app een kat of een hond detecteert.
+		</dd>
+	</dl>
+	<p>Je kunt naar believen de stappen 3/m 6 hierboven herhalen met andere dieren. Ook is er nog een kleine verzameling of deze
+		<a href="SLO-apps/data/emoticons.zip">emoticons</a> die je zou kunnen gebruiken.
+	</p>
+	<div class ='hammer treeview' style="overflow: hidden;">Vragen
+		<div style="padding-left:25px;">
+			<ol>
+				<li>In de app wordt een neuraal netwerk gebruikt met als input al de pixels (beeldpunten) van het plaatje (ieder pixel is één input), één verborgen laag met 5 knopen. Het aantal uitvoer knopen is gelijk aan het aantal dieren in de trainingsset. Hoeveel pixels bevat een plaatje? Hoeveel parameters moeten er worden geschat bij twee dieren?
+					<div class="caret doel">antwoord</div>
+					<div class="nested">
+						aantal pixels: 64 &times; 64 =  4096.<br/>
+						aantal parameters: (4096+1)&times;5+ 2&times;6 = 20497
+					</div>
+				</li>
+				<li>Wordt een plaatje dat je in de training hebt gebruikt altijd juist beoordeeld?
+					<div class="caret doel">antwoord</div>
+					<div class="nested">
+						Hoogstwaarschijnlijk wel, maar als twee plaatjes voor verschillende dieren veel op elkaar lijken kan het best mis gaan.
+					</div>
+				</li>
+				<li>Wordt een plaatje dat je niet in de training zit altijd juist beoordeeld?
+					<div class="caret doel">antwoord</div>
+					<div class="nested">
+						De kans op een misser is groter dan bij plaatjes die in de training zijn gebruikt. De informatie in de tekening is nog niet door de applicatie gezien. Hopelijk is de overeenkomst met andere plaatjes groot genoeg. 
+					</div>
+				</li>
+				<li>Lukt het om meerdere diersoorten toe te voegen?
+					<div class="caret doel">antwoord</div>
+					<div class="nested">
+						Voor iedere soort komt een extra output knoop.
+					</div>
+				</li>
+				<li>Voer trainingen uit met respectievelijk 16, 32 en 64 plaatjes per dier uit. Hoe zit het met de trainingstijden in deze gevallen? Herlaad wel na iedere poging de app, de plaatjes worden namelijk toegevoegd.
+					<div class="caret doel">antwoord</div>
+					<div class="nested">
+						Onze poging: 16 minder dan een seconde, 32 net een seconde, 64 ongeveer 6 seconden.
+					</div>
+				</li>
+			</ol>
+		</div>
+	</div>	
+	</article>
+  </body>
+</html>

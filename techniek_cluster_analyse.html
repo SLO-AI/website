@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <title>Kunstmatige Intelligentie</title>
+    <script src="utils.js"></script>
+	<script src="treeview.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+		tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+	  });
+	</script>
+	<script src="ai.js" language="JavaScript" type="text/javascript"></script>
+<script>
+
+function run(id)
+{
+	var k =Number(document.getElementById('K').value);
+	var O = eval(document.getElementById('O').value);
+	var M = eval(document.getElementById('M').value);
+	var res="";
+	var foutje = false;
+	var obj = document.getElementById(id);
+	
+	if( O == undefined ){
+		res+="Geen objecten gegeven<br/>";
+		foutje = true;
+	}
+	if( M == undefined || M==null ) M=null;
+	else if( M.length!=k ) 
+	{
+		res+="Aantal centra moet gelijk zijn aan het aantal gewenste clusters"+k+"<br/>";
+		foutje = true;
+	}
+	if( !foutje )
+	{
+		res="Oplossing:"+kMeansSteps(O,k,C=null,M,4);
+		
+	}
+	obj.innerHTML=res;
+	MathJax.Hub.Queue(["Typeset",MathJax.Hub,obj]);
+}
+</script>
+</head>
+  <body  id="technieken" onload="addPathLead();initTreeview()"  >
+    <a name="Inleiding" style="counter-reset: subsection 3;"></a>
+    <header class="paragraaf titel">Clusteranalyse</header>
+	<section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/<a href="inleiding_technieken.html" target="_parent">Technieken</a>/Clusteranalyse</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+				4.0
+			<br />International License</a>.
+		</div>
+		<h2>Autors</h2>John Val, Hans van den Burg, Daniël Haitink, Tim Steenvoorden, Hennie Huijgens, Jochem Baas<br/>
+		<a name="Inleiding"></a>bron:<a href="../Informatie/Big Data studenten OCE/Lesmodule Big Data.pdf">Lesmodule Big Data</a>
+	</div>
+	</section>
+<article>
+	<div class="navbar">
+		<div class="centreer">
+			<a href="#Inleiding">Inleiding</a> 
+			<a href="#Toepassingen">Toepassingen</a> 
+			<span class="dropdown">
+			<div class="dropbtn" onclick="window.location='#begrippen'">Begrippen &#9660;</div>
+			<div class="dropdown-content">
+			<a class="submenuitem" href="#afstand">Afstandsmaten</a>
+			<a class="submenuitem" href="#matrix">Afstandsmatrix</a>
+			<a class="submenuitem" href="#clusterafstand">Clusterafstand</a>
+			</div>
+			</span>			
+			<span class="dropdown">
+			<div class="dropbtn" onclick="window.location='#methoden'">Methoden  &#9660;</div>
+			<div class="dropdown-content">
+				<a class="submenuitem" href="#methode">k-means methode</a>
+				<a class="submenuitem" href="#andere">andere methoden</a>
+			</div>
+			</span>
+			<span class="dropdown">
+			<div class="dropbtn">Vragen  &#9660;</div>
+			<div class="dropdown-content">
+			<a class="submenuitem" href="#vragen">vragen k-means</a>
+			<a class="submenuitem" href="#vragen2">vragen andere methoden</a>
+			</div>
+			</span>
+		</div>
+	</div>
+<button class="doel" onclick="toon('leerdoelen')">Leerdoelen</button>
+<div class="popup" id="leerdoelen" onclick="verberg(this);">
+<h3>Leerdoelen</h3>
+Na dit hoofdstuk:
+<ul>
+	<li>weet je het doel en de taak van clusteranalyse bij datamining.
+	</li>
+	<li>kun je een paar toepassingen van clustering noemen.
+	</li>
+	<li>kun je de begrippen datapunt, object, cluster, centrum, centroide, Euclidische afstand, Manhattan afstand en centrum uitleggen.
+	</li>
+	<li>kun je de afstand tussen zowel twee objecten als twee clusters met behulp van afstandsmaten zoals Euclidische afstand en Manhattan afstand berekenen.
+	</li>
+	<li>kun je het centrum of de centroide van een cluster bepalen.
+	</li>
+	<li>ben je in staat de $K$-means methode op passende problemen toepassen
+	</li>
+	<li>weet je dat er ook nog andere clustermethoden zijn.
+	</li>
+	<li>ben je je bewust van de problemen die bij clustering op kunnen treden
+	</li>
+	</ul>
+</div>
+
+<h2 class='paragraaf'><a name="Inleiding">Inleiding</h2>
+<div class="theorie example">Voorbeeld
+	<div style="padding-left:25px;">
+	<p>Stel er komt een aantal buitenlandse studenten binnen op de hogeschool waar jij als studiecoördinator werkt en jij moet er voor zorgen dat deze studenten worden bijgeschoold in Engels voordat zij mogen beginnen met de rest van de opleiding.
+	</p>
+	<p>Er zijn twee docenten beschikbaar en je wilt de studenten indelen in twee groepen (een groep noemen we in het vervolg een <strong>cluster</strong>), groep A en groep B. Bij de indeling wil je clusters maken van studenten van gelijk niveau. De grootte van de clusters is onbelangrijk.
+	</p>
+	<p>Je wilt indelen op de twee eigenschappen lezen en verstaan van Engels. Je laat daarom alle studenten een test maken waaruit een score van 1 tot 10 komt. Daarbij geef je alleen gehele punten als cijfer.
+	</p>
+	<p>Om inzicht te krijgen hoe je de clusters kunt indelen zet je de studenten in een schema waarbij de horizontale as het cijfer voor  lezen aangeeft en de verticale as het cijfer voor verstaan. In het onderstaande schema zijn de resultaten van de vijf studenten s1 t/m s5 weergegeven.
+	</p>
+	<div class="midden theorie">
+		<img src="images/vbCluster1.png"  style="width: 600px;"/>
+	</div>
+	<div class="caret doel">Welke clusters zou jij maken?</div>
+	<div class="nested">
+		<div class="midden theorie">
+			<img src="images/vbCluster2.png"  style="width: 600px;"/><br/>
+			De meest logische indeling is om s1 en s4 in groep A te stoppen en s2,s3 en s5 in groep B.
+		</div>
+		
+	</div>
+
+	<p>
+	</p>
+	</div>
+</div>
+	<p>In het voorbeeld was het niet zo moeilijk om te bepalen welke clusters je het best kon maken. Maar wat nu als er veel meer studenten zijn en/of veel meer eigenschappen zijn waar je rekening mee wilt houden?
+	</p>
+<p><strong>Clusteranalyse</strong> is het classificeren of het groeperen in 'clusters' of 'klassen' van objecten op grond van hun kenmerken zonder vooraf de clusters vast te leggen. De gebruikte algoritmen bepalen wel de weg om tot clusters te komen, maar de gegevens bepalen welke clusters het worden. Deze algoritmen zijn, net als de algoritmen uit de associatie analyse, vormen van <strong>unsupervised learning</strong> (= ongestuurd leren). Het belangrijkste AI-kenmerk is ook hier: <strong>de invoer die het programma krijgt, is niet volledig te bepalen en is complex.
+</strong>
+</p>
+	<div class ='hammer treeview' style="clear: both;">Vraag
+		<div style="padding-left:25px;">
+			<ol>
+				<li>Wat zijn in het voorbeeld de objecten en de kenmerken?
+					<div class="caret doel">antwoord</div>
+					<ul class="nested">
+						<li>De objecten zijn de studenten, de kenmerken de resultaten voor lezen en verstaan.
+						</li>
+					</ul>
+				</li>
+			</ol>
+		</div>
+	</div>
+<div class="theorie rechts">
+<img src="images/classObj.png"/><br/>
+<caption>Figuur 1: Het classificeren<br/>van objecten</caption><br/>
+</div>	
+<p>
+Het doel van clusteranalyse (<strong>trainingsfase</strong>) is het vormen van deelverzamelingen (clusters of groepen) die elk hun eigen gedeelde kenmerken bevatten. De clusters en liefst ook het aantal clusters zijn vooraf niet bekend. Het streven is zoveel mogelijk gelijkenis binnen een groep en zoveel mogelijk verschil tussen de groepen te krijgen. 
+</p>
+<p>
+Is de clusteranalyse uitgevoerd dan kan de collectie (=<strong>verzameling</strong> ) van deelverzamelingen worden gebruikt om een nieuw object te classificeren. Bij classificatie achteraf van een nieuw object liggen de eigenschappen van een groep dus al vast. Dit dus in tegenstelling tot de trainingsfase.
+</p>
+	<div class ='hammer treeview' style="overflow: hidden;">Vraag
+		<div style="padding-left:25px;">
+			<ol start="2">
+				<li>Er meldt zich weer een nieuwe buitenlandse student bij de hogeschool, een week na de start van de bijscholing. Deze student haalt een 4 voor lezen en een 3 voor verstaan. In welke groep wordt deze student geplaatst?
+					<div class="caret doel">antwoord</div>
+					<ul class="nested">
+						<li>Deze leerling past het best in groep A.
+						</li>
+					</ul>
+				</li>
+			</ol>
+		</div>
+	</div>
+<p>
+Voor we één algoritme ($K$-means-clustering) meer in detail uitwerken en jullie laten kennismaken met alternatieven geven we eerst een aantal voorbeelden van terreinen waarin clusteranalyse wordt toegepast. Meer voorbeelden zijn onder andere <a href="https://datafloq.com/read/7-innovative-uses-of-clustering-algorithms/6224" target="uitleg">hier</a> en <a href="https://www.analytixlabs.co.in/blog/types-of-clustering-algorithms/#sub4" target="uitleg">hier</a> te vinden.
+</p>
+<a id="Toepassingen"></a><br/>
+<h2>Toepassingen</h2>
+<p>
+<dl>
+	<dt>Identificatie van nepnieuws</dt>
+	<dd><p>Nepnieuws is geen nieuw fenomeen, maar het treedt meer en meer op de voorgrond vooral binnen sociale media. Zelfs president Trump schaamde zich niet om zijn campagne met nepnieuws te voeren of ander onwelgevallige berichten tot nepnieuws te bombarderen.
+	</p>
+	<p>In een <a href="http://snap.stanford.edu/mis2/files/MIS2_paper_2.pdf" target="uitleg">
+	artikel</a> gepubliceerd door twee informaticastudenten (Seyedmehdi Hosseinimotlagh en Evangelos E. Papalexakis, University of California, Riverside) wordt een clusteralgoritme gebruikt om nepnieuws te identificeren. Het algoritme krijgt (nep)nieuwsartikelen aangeboden. Uit deze artikelen worden de belangrijkste en meest sensatierijke woorden gevist. Op deze woorden wordt dan geclusterd. Omdat sensatie beluste woorden de aandacht van mensen trekt komen deze woorden vaker voor in nepnieuwsartikelen. De clusters bevatten dus combinaties van dit soort woorden waarmee nieuwe berichten geclassificeerd kunnen worden op mate van nepnieuws.
+	</dd>
+	<dt>Biologie
+	</dt>
+	<dd>In de biologie zijn er meerdere gebieden waar clusteranalyse wordt toegepast. Denk bijvoorbeeld aan de classificatie van verschillende organismen. Elk organisme hoort bij een soort. Soorten kunnen op hun beurt weer worden onderverdeeld in lagere taxa, zoals ondersoort en variëteit. Soorten zelf worden samengevoegd in geslachten en deze weer in families en in taxa van nog hogere rang. Een ander voorbeeld van het gebruiken clustertechnieken in de biologie is het maken van groepen met genen die een bepaalde erfelijke ziekte kunnen bevatten. Door het gebruik van clustermethoden kunnen groepen met samenwerkende genen gevonden worden. Als deze groepen bekend zijn, kan deze kennis helpen om meer gericht onderzoek te doen naar medicijnen die een erfelijke ziekte gekoppeld aan de groep genen kan voorkomen of genezen.
+	</dd>
+	<dt>Marketing
+	</dt>
+	<dd>
+	Personalisatie en bepaling van doelgroepen in marketing is big business. Dit wordt bereikt door naar specifieke kenmerken van een persoon te kijken en campagnes met hen te delen die succesvol zijn geweest met andere vergelijkbare mensen. Doet een bedrijf dat niet of verkeerd dan loopt het bedrijf de kans niets te verkopen of nog erger het vertrouwen van klanten te verliezen. Clusteranalyse helpt de doelgroepen te bepalen.
+	</dd>
+</dl>
+</p>
+<a id="begrippen"></a><br/>
+<h2>Begrippen</h2>
+<p>We gaan straks $K$-means-clustering als algoritme presenteren. Het voorbeeld van de studenten aan het begin van het hoofdstuk past hierin. Daartoe moeten er eerst wat begrippen worden geïntroduceerd die in dit algoritme worden gebruikt. Deze begrippen spelen ook in andere clustermethoden een rol.
+</p>
+<a id="afstand"></a><br/>
+<h3>Afstandsmaten</h3>
+<p>
+In clustering speelt afstand tussen gegevens een grote rol. Een computer heeft daar meestal getallen voor nodig. Vaak moet er eerst een bewerking van gegevens plaatsvinden om deze om te zetten in getallen. Combinatie van verschillende eigenschappen leveren dan datapunten op in een assenstelsel (iedere eigenschap zijn eigen as, b.v. leeftijd, sociale klasse, salaris ).
+</p>
+	<div class ='hammer treeview' style="overflow: hidden;">Vraag
+		<div style="padding-left:25px;">
+			<ol start="3">
+				<li>Welke assen zijn er in het hogeschool voorbeeld?
+					<div class="caret doel">antwoord</div>
+					<ul class="nested">
+						<li>Er is een as voor verstaan en een as voor lezen.
+						</li>
+					</ul>
+				</li>
+			</ol>
+		</div>
+	</div>
+
+<h4>Afstand tussen datapunten (objecten):</h4>
+	<div class="theorie example">Vervolg voorbeeld
+		<div style="padding-left:25px;">
+		De weergave voor studenten in een schema is niet handig om afstanden te meten. Het is beter deze te plaatsen in een assenstelsel zoals je dat in de wiskunde doet.	
+		<div class="theorie midden">
+		<img src="images/clust_analyse.svg" style="width: 300px;"/><br/>
+		</div>
+		</div>
+	</div>
+<br/>
+<div class="theorie rechts clearfix">
+<img src="images/Pythagoras.png" width="200"/><br/>
+<caption>Figuur 2: De stelling van Pythagoras</caption><br/><br/>
+<img src="images/Manhattan.png" width="200"/><br/>
+<caption>Figuur 3: Stukje Manhattan,<br/>Je kunt alleen over de weg.</caption><br/>
+</div>
+<p>Hebben we datapunten zoals hierboven dan kunnen we wiskundig de afstand tussen punten uitrekenen. Je hebt waarschijnlijk de vorige vraag beantwoord met de stelling van Pythagoras. De stelling van Pythagoras (Figuur 2) is de manier om de afstand van de schuine zijde in een tweedimensionale rechthoekige driehoek te berekenen. In een assenstelsel vormen de verplaatsingen langs de assen de rechthoekzijden en de lengte van schuine zijde de kortste afstand tussen de punten. Deze afstand noemt men ook wel de <strong>Euclidische</strong> afstand. In drie dimensies en hoger wordt op een zelfde manier de afstand tussen twee punten berekend.
+</p>
+	<div class="theorie important" style="overflow: hidden"><strong>Definitie: Euclidische afstand</strong> 
+		<div style="padding-left:25px;">
+		De <i>Euclidische afstand</i> 
+tussen twee punten $A=(a_{1},a_{2},\dots , a_{n-1}, a_{n})$ en
+$B=(b_{1},b_{2},\dots , b_{n-1}, b_{n})$ is:<br/>
+$$\begin{array}{rcl}d(A,B)& = &\sqrt{\sum_{i=1}^{n}(a_{i}-b_{i})^{2} }\\ 
+  & = &\sqrt{(a_{1}-b_{1})^{2}+ (a_{2}-b_{2})^{2}+ \dots + (a_{n}-b_{n})^{2}}\end{array}$$
+  Twee dimensionale Euclidische afstand: $d(A,B)=\sqrt{(a_{1}-b_{1})^{2}+ (a_{2}-b_{2})^{2}}$
+		</div>
+	</div>
+
+<p>
+Naast de Euclidische afstand is er een andere maat die vaak gebruikt wordt,
+de <strong>Manhattan of City-block afstand</strong>. In figuur 3 zie je een stukje van de kaart van Manhattan. Je kunt alleen van hoek naar hoek
+komen als je door de straten gaat. In een rooster dus alleen evenwijdig aan de assen.
+</p>
+	<div class="theorie important" style="overflow: hidden"><strong>Definitie: Manhattan of City-block afstand</strong> 
+		<div style="padding-left:25px;">
+		De <i> Manhattan of City-block afstand</i> 
+tussen twee punten $A=(a_{1},a_{2},\dots , a_{n-1}, a_{n})$ en
+$B=(b_{1},b_{2},\dots , b_{n-1}, b_{n})$ is:<br/>
+$$\begin{array}{rcl}d(A,B)& = &\sum_{i=1}^{n} |a_{i}-b_{i}|\\ 
+  & = &|a_{1}-b_{1}|+ |a_{2}-b_{2}|+ \dots + |a_{n}-b_{n}|\end{array}$$
+		Hierin is $|x|$ de absolute waarde van $x$, $|2|=2$ maar ook $|-2|=2$
+		</div>
+	</div>
+
+<p>
+	<div class="theorie example" style="overflow: hidden">
+		Voorbeeld A
+		<div style="padding-left:25px;">
+			Bereken de Manhattan afstand en de Euclidische afstand tussen de volgende objecten in een 5 dimensionale ruimte:
+	<table>
+	<tr>
+	<td>Object $A$</td>
+	<td>
+	10</td>
+	<td>
+	12</td>
+	<td>
+	15</td>
+	<td>
+	13</td>
+	<td>
+	9</td>
+	</tr>
+	<tr>
+	<td>
+	Object $B$</td>
+	<td>
+	18</td>
+	<td>
+	23</td>
+	<td>
+	13</td>
+	<td>
+	15</td>
+	<td>
+	17</td>
+	</tr>
+	</table>
+	<hr/>
+	<p>Om de Manhattan of City-block afstand te bereken moeten we evenwijdig aan de assen lopen langs de eerste as gaan we van 10 naar 18 ofwel afstand 8, dan van 12 naar 23 ofwel 11, etc. Een afstand moet altijd positief zijn, 10-18 en 18-10 moeten beide antwoord 8 geven. Dat doe je door de absolute waarde te nemen van het verschil<br/>
+	$ |10-18|=|18-10|=8$.<br/>
+	Min wordt plus en plus blijft plus.
+	<p>De Manhattan of City-block afstand van object $A$ tot object $B$ is dan:<br/>
+	$d(A,B)= |10−18|+|12−23|+|15−13|+|13−15|+|9−17|=31$</p>
+	</p>
+	<hr/>
+	<p>De Euclidische bereken door al de afstanden langs de assen te kwadrateren, deze kwadraten op te tellen en vervolgens de wortel te trekken van het totaal:<br/>$d(A,B)=\sqrt{(10−18)^{2}+(12−23)^{2}+(15−13)^{2}+(13−15)^{2}+(9−17)^{2}} =16,16$
+	</p>
+
+		</div>
+	</div>
+<p class="pagebreak"></p>
+<a id="matrix"></a><br/>
+<h3>Afstandsmatrix</h3>
+<p>
+Een matrix van afstanden is een matrix waarvan de elementen de afstanden tussen de punten aangeven.</p>
+	<div class="theorie treeview example" style="overflow: hidden">
+		Voorbeeld B
+		<div style="padding-left:27px;">
+			Gegeven een dataset met vier objecten.
+			<table>
+			<tr>
+			<td></td><th>x</th><th>y</th>
+			</tr>
+			<tr>
+			<th>A</th><td>2</td><td>1</td>
+			</tr>
+			<tr>
+			<th>B</th><td>4</td><td>2</td>
+			</tr>
+			<tr>
+			<th>C</th><td>6</td><td>1</td>
+			</tr>
+			<tr>
+			<th>D</th><td>7</td><td>2</td>
+			</tr>
+			</table>
+
+			Laat zien dat de afstand van A naar D $5.10$ is.
+			<br/>Geef de gehele afstandsmatrix.
+			<div class="caret doel">uitwerking</div>
+			<div class="nested">
+				$d(A,B)=\sqrt{(7-2)^{2}+(2-1)^{2}}=\sqrt{26}=5.10$
+				<hr/>
+				Gebruiken we de gewone Euclidische afstand dan<br/>
+				ziet de afstandsmatrix er als volgt uit:
+				<table>
+				<tr>
+				<td></td><th>A</th><th>B</th><th>C</th><th>D</th>
+				</tr>
+				<tr>
+				<th>A</th><td>0</td><td>2.24</td><td>4</td><td>5.1</td>
+				</tr>
+				<tr>
+				<th>B</th><td>2.24</td><td>0</td><td>2.24</td><td>3</td>
+				</tr>
+				<tr>
+				<th>C</th><td>4</td><td>2.24</td><td>0</td><td>1.41</td>
+				</tr>
+				<tr>
+				<th>D</th><td>5.1</td><td>3</td><td>1.41</td><td>0</td>
+				</tr>
+				</table>
+			</div>		
+		</div>
+	</div>
+<a id="clusterafstand"></a><br/>
+<h3>Afstand tussen clusters</h3>
+
+<p>Als je de afstand tussen elk paar van objecten weet, wat is dan de
+afstand tussen twee clusters $C_{1}$ en $C_{2}$?<br>
+We nemen hier de kleinste afstand tussen twee objecten waarvan er één
+in $C_{1}$ aanwezig is en de andere in $C_{2}$. Deze afstand noemt men
+<strong>Single Linkage</strong>.
+</p>
+	<div class="theorie important" style="overflow: hidden">
+		<strong>Definitie: Single Linkage</strong>
+		<div style="padding-left:25px;">
+		Single Linkage: $d(C_{1},C_{2})=\min\{d(A,B)|A \in C_{1}\,\,en\,\, B \in C_{2} \}$
+		</div>
+	</div>
+<br/>
+	<div class="theorie treeview example" style="overflow: hidden">
+		Voorbeeld C
+		<div style="padding-left:27px;">
+		Gegeven een dataset met zes punten.
+		<table>
+		<tr>
+		<td></td><th>x</th><th>y</th>
+		</tr>
+		<tr>
+		<th>$A_{1}$</th><td>1</td><td>3</td>
+		</tr>
+		<tr>
+		<th>$A_{2}$</th><td>1</td><td>4</td>
+		</tr>
+		<tr>
+		<th>$A_{3}$</th><td>2</td><td>2</td>
+		</tr>
+		<tr>
+		<th>$B_{1}$</th><td>5</td><td>1</td>
+		</tr>
+		<tr>
+		<th>$B_{2}$</th><td>5</td><td>2</td>
+		</tr>
+		<tr>
+		<th>$B_{3}$</th><td>7</td><td>2</td>
+		</tr>
+		</table>
+		De clusters zijn $C_{1}=\{A_{1},A_{2},A_{3}\}$ en $C_{2}=\{B_{1},B_{2},B_{3}\}$<br/>
+		Geef de kleinste afstand tussen $C_{1}$ en $C_{2}$
+
+			<div class="caret doel">uitwerking</div>
+			<div class="nested">
+			De afstandsmatrix tussen de objecten in $C_{1}$ en $C_{2}$ is:
+			<table>
+			<tr>
+			<td></td><th>$B_{1}$</th><th style="background-color: green">$B_{2}$</th><th>$B_{3}$</th>
+			</tr>
+			<tr>
+			<th>$A_{1}$</th><td>4.47</td><td>4.12</td><td>6.03</td>
+			</tr>
+			<tr>
+			<th>$A_{2}$</th><td>5</td><td>4.47</td><td>6.32</td>
+			</tr>
+			<tr>
+			<th style="background-color: green">$A_{3}$</th><td>3.16</td><td style="background-color: green">3</td><td>5</td>
+			</tr>
+			</table>
+			Geef de kleinste afstand tussen $C_{1}$ en $C_{2}$ is
+			de kleinste afstand in de matrix:<br/>
+			$d(C_{1},C_{2})=\min\{d(A,B)|A \in C_{1}\,\,en\,\, B \in C_{2} \}$<br/>
+			$d(A_{3},B_{2})=\sqrt{(5-2)^{2}+(2-2)^2}=3$. 
+			</div>		
+		</div>
+	</div>
+<a id="centrum"></a><br/>
+<h3>Centrum cluster</h3>
+<p>Als we straks na de training clusters hebben gevormd en willen bepalen in welk cluster een nieuw object moet worden geplaatst is het heel efficiënt om een cluster op een bepaalde manier samen te vatten. Het centrum $M(m_{1},m_{2}, \dots, m_{n})$ van een cluster is een samenvatting die we straks gaan gebruiken. Het centrum is een punt $M$ met coördinaten. Het centrum wordt bepaald als het gemiddelde van de coördinaten van de punten in de cluster. Wiskundig gezien is het het zwaartepunt van de veelhoek ( een lichaam in hogere dimensie) die door de punten wordt gevormd.
+</p>
+	<div class="theorie example" style="overflow: hidden">
+		<strong>Definitie: Cluster centrum</strong>
+		<div style="padding-left:25px;">Centrum $M$ van een cluster:<br/>
+		$M(m_{1},m_{2}, \dots, m_{n})= \left( \frac{\sum^{1}_{n} a_{1i}}{n},\frac{\sum^{1}_{n} a_{2i}}{n}, \dots, \frac{\sum^{1}_{n} a_{ni}}{n}\right)$.
+		</div>
+	</div>
+	<br/>
+	<div class="theorie treeview example" style="overflow: hidden">
+		Voorbeeld D
+		<div style="padding-left:27px;">
+			Gegeven een cluster $C$ die de volgende objecten bevat:
+			<table>
+			<tr>
+			<td></td><th>x</th><th>y</th>
+			</tr>
+			<tr>
+			<th>$A_{1}$</th><td>0</td><td>0</td>
+			</tr>
+			<tr>
+			<th>$A_{2}$</th><td>7</td><td>8</td>
+			</tr>
+			<tr>
+			<th>$A_{3}$</th><td>4</td><td>8</td>
+			</tr>
+			<tr>
+			<th>$A_{4}$</th><td>3</td><td>0</td>
+			</tr>
+			
+			</table>
+			Bereken het centrum van de cluster $C=\{A_{1},A_{2},A_{3},A_{4}\}$. 
+
+			<div class="caret doel">uitwerking</div>
+			<div class="nested">
+			Het centrum komt uit de volgende berekening:
+			$$M(m_{1},m_{2})= \left( \frac{\sum_{i=1}^{4} x_{i}}{4},\frac{\sum_{i=1}^{4} y_{i}}{4}\right)$$
+			Dat ziet er lastig uit maar $m_{1}$ is niets anders dan het gemiddelde van de $x$-coördinaten en $m_{2}$ is niets anders dan het gemiddelde van de $y$-coördinaten:
+			
+			$$M= \left( \frac{0 + 7 + 4 +3 }{4},\frac{0+8+8+0}{4}\right)=( 3\frac{1 }{2},4)$$
+			</div>		
+		</div>
+	</div>
+
+<p class="pagebreak"></p>
+<a id="methoden"></a><br/>
+<h2>Cluster methoden</h2>
+<div class="links theorie" style="width: 250px;">
+<img src="images/k_means_vid.gif" style="width: 250px;"><br/>
+<caption>Figuur 4: Animatie van het $K$-means algoritme</caption>
+</div>
+<div class="rechts theorie">
+
+<img src="images/K_Means.svg"/><br/>
+<caption>Figuur 5: Het algoritme</caption>
+</div>	
+<p>Zoals eerder vermeld zijn er verschillende methoden die binnen kunstmatige intelligentie
+gebruikt worden om tot clusters te komen.
+We beginnen hier met de <b>$K$-means-clustering</b> de meest eenvoudige 
+methode. Het onderliggende algoritme geeft inzicht in hoe 
+dergelijke methoden van de data leren om later input te kunnen
+classificeren. Ook is gekozen voor deze methode omdat je met pen en papier
+eenvoudig het algoritme na kan spelen.
+</p>
+<h3>$K$-means-clustering</h3>
+<p>
+Het oudste en meest bekende clusteralgoritme is de $K$-means methode. Later zijn er veel varianten ontwikkeld die gebaseerd zijn op deze methode. $K$-means is een eenvoudige en relatief snelle iteratieve manier van clusteren. Vooraf wordt bepaald hoeveel clusters ( b.v. 3) je wilt hebben. De clustering (training) op basis van de gegevens levert dan de clusters samengevat door de bijbehorende centra. In de figuur 4 hiernaast zie je een animatie van een clustering waarin de data stap voor stap in drie groepen wordt verdeeld. De kruisjes die je ziet bewegen zijn de centra van de clusters. In figuur 5 staat de flowchart van het algoritme dat we hieronder in meer detail beschouwen.
+</p>
+<p>
+ Om de optimale clustering te vinden ga je als volgt te werk:
+</p>
+<p>
+<ol>
+	<li style="background-color: #ccffff">Start: Kies de centra van de clusters de eerste keer willekeurig en bepaal
+	het maximaal aantal stappen dat je toestaat.
+	</li>
+	<li style="background-color: #33cccc">Daarna bepaal je van elk datapunt de afstand tot ieder centrum, en wijs je ieder datapunt toe aan de cluster waarvan het centrum het dichtstbij is.</li>
+	<ul>
+	<li style="background-color: #e8eef7">Als er punten zijn die in de vorige stap van cluster zijn veranderd	en je nog niet voorbij het vooraf
+	gekozen maximum aantal iteraties bent gekomen dan ga je naar stap 3. Anders ben je klaar.
+	</li>
+	</ul>
+	<li style="background-color: #ff99cc">Alle datapunten zitten weer in een cluster. Er zijn datapunten 
+	die nu in een nadere cluster zitten. De centra zijn dan niet voor
+	alle clusters meer hetzelfde en moeten dus opnieuw worden berekend.Hiervoor gebruik je voor ieder 
+	cluster apart de volgende formule:<br/>
+	$M(m_{1},m_{2}, \dots, m_{n})= \left( \frac{\sum^{1}_{n} a_{1i}}{n},\frac{\sum^{1}_{n} a_{2i}}{n}, \dots, \frac{\sum^{1}_{n} a_{ni}}{n}\right)$.<br/>
+	$n$ is dan het aantal elementen in één cluster.
+	<hr/>
+	Met die nieuwe centra veranderen ook weer de afstanden van de datapunten
+	tot die centra en moet je dus het hele proces vanaf stap 1 weer herhalen, ofwel start de volgende iteratie.
+	</li>
+</ol>
+Leuk zo'n verhaal maar voorbeelden maken het inzichtelijker.
+</p>
+<p class="pagebreak"></p>
+	<div class="theorie treeview example" style="overflow: hidden">
+		Voorbeeld E
+		<div style="padding-left:27px;">
+		Gegeven een cluster $C$ die de volgende objecten bevat:
+		<table>
+		<tr>
+		<td></td><th>x</th><th>y</th>
+		</tr>
+		<tr>
+		<th>$A_{1}$</th><td>2</td><td>2</td>
+		</tr>
+		<tr>
+		<th>$A_{2}$</th><td>4</td><td>2</td>
+		</tr>
+		<tr>
+		<th>$A_{3}$</th><td>6</td><td>1</td>
+		</tr>
+		<tr>
+		<th>$A_{4}$</th><td>8</td><td>2</td>
+		</tr>
+		</table>
+		We bepalen vooraf dat we twee clusters willen, dus $k=2$.<br/>Bepaal met het $K$-means algoritme een geschikte clustering.<br/>Als afstandsmaat gebruik je de normale (Euclidische) afstand.
+			<div class="caret doel">uitwerking</div>
+			<div class="nested">
+	<div class="rechts" style="display: inline-block; vertical-align: top;width: 30%;">
+	Start<br/>
+	<img src="images/VoorbeeldE1.png" width="300"/><br/>
+	Iteratie 1<br/>
+	<img src="images/VoorbeeldE2.png" width="300"/><br/>
+	</div>
+		<dl>
+		<dt>Start:</dt>
+		<dd>Kies twee willekeurig centra. $M_{1}=(4,4)$ en $M_{2}=(6,2)$
+			voor respectievelijk de clusters $C_{1}$ en $C_{2}$.
+			Dit geeft de figuur Start hiernaast.
+		</dd>
+		<dt>Iteratie 1:</dt>
+		<dd>
+			<ol>
+			<li>Bepaal de afstanden van de datapunten tot de centra en
+			plaats de datapunten in het juiste cluster.<br/>
+			De afstandsmatrix wordt:
+					<div style="color: seagreen">
+					<div class="caret doel">Klap dit uit voor een heel handige tip!</div>
+					<div class="nested">
+						Als je op een ruitjesblaadje de situatie hiernaast natekent, dan kun je de afstanden ook meten met een liniaal in plaats van iedere keer Pythagoras te moeten doen. Dat scheelt heel veel tijd. Het hoeft in deze voorbeelden en de opgaven er na echt niet heel precies.
+					</div>
+					</div>
+				</li>
+				<table>
+				<tr>
+				<td></td><th>$M_{1}$</th><th>$M_{2}$</th><th>toewijzing</th>
+				</tr>
+				<tr>
+				<th>$A_{1}$</th><td>2.83</td><td>4</td><td>$C_{1}$</td>
+				</tr>
+				<tr>
+				<th>$A_{2}$</th><td>2</td><td>2</td><td>$C_{1}$</td>
+				</tr>
+				<tr>
+				<th>$A_{3}$</th><td>3.61</td><td>1</td><td>$C_{2}$</td>
+				</tr>
+				<tr><tr>
+				<th>$A_{4}$</th><td>4.47</td><td>2</td><td>$C_{2}$</td>
+				</tr>
+				<tr>
+				</table>
+			</li>
+			<li>De nieuwe clusters zijn:
+				<table>
+				<tr>
+				<th>$C_{1}$</th><th>$\{A_{1},A_{2}\}$</th>
+				</tr>
+				<tr>
+				<th>$C_{2}$</th><th>$\{A_{3},A_{4}\}$</th>
+				</tr>
+				</table>
+				We moeten door naar stap 3
+			</li>
+			<li>
+			Bereken de nieuwe centra:<br/> 
+			$M_{1}'=(\frac{4+2}{2},\frac{2+2}{2})=(3,2)$ en 
+			$M_{2}'=(\frac{6+8}{2},\frac{1+2}{2})=(7,1.5)$ (zie figuur Iteratie 1)
+			</li>
+			</ol>
+		</dd>
+		<dt>Iteratie 2:</dt>
+		<dd>
+			<ol>
+			<li>Bepaal de afstanden van de datapunten tot de centra en
+			plaats de datapunten in het juiste cluster.<br/>De afstandsmatrix wordt:
+				<table>
+				<tr>
+				<td></td><th>$M_{1}'$</th><th>$M_{2}'$</th><th>toewijzing</th>
+				</tr>
+				<tr>
+				<th>$A_{1}$</th><td>1</td><td>5.02</td><td>$C_{1}$</td>
+				</tr>
+				<tr>
+				<th>$A_{2}$</th><td>1</td><td>3.04</td><td>$C_{1}$</td>
+				</tr>
+				<tr>
+				<th>$A_{3}$</th><td>3.16</td><td>1.12</td><td>$C_{2}$</td>
+				</tr>
+				<tr>
+				<th>$A_{4}$</th><td>5</td><td>1.12</td><td>$C_{2}$</td>
+				</tr>
+				</table>
+			</li>
+			<li>Alle datapunten zitten in de dezelfde cluster uit de vorige
+			iteratie. De clusters zijn niet veranderd er zijn dus ook geen nieuwe centra. We kunnen stoppen. Het doel is bereikt. De geschikte clustering is:
+							<table>
+				<tr>
+				<th>$C_{1}$</th><th>$\{A_{1},A_{2}\}$</th>
+				</tr>
+				<tr>
+				<th>$C_{2}$</th><th>$\{A_{3},A_{4}\}$</th>
+				</tr>
+				</table>
+
+			</li>
+			</ol>
+		</dd>
+	</dl>
+			</div>		
+		</div>
+	</div>
+<p class="pagebreak"></p>
+	<div class="theorie treeview example" style="overflow: hidden">
+		Voorbeeld F
+		<div style="padding-left:27px;">
+		Gegeven een cluster $C$ die de volgende objecten bevat:
+		<table>
+		<tr>
+		<td></td><th>x</th><th>y</th>
+		</tr>
+		<tr>
+		<th>$A_{1}$</th><td>0</td><td>1</td>
+		</tr>
+		<tr>
+		<th>$A_{2}$</th><td>3</td><td>1</td>
+		</tr>
+		<tr>
+		<th>$A_{3}$</th><td>3</td><td>2</td>
+		</tr>
+		<tr>
+		<th>$A_{4}$</th><td>0</td><td>3</td>
+		</tr>
+		<tr>
+		<th>$A_{5}$</th><td>4</td><td>1</td>
+		</tr>
+		
+		</table>
+		We bepalen vooraf dat we twee clusters willen, dus $k=2$.<br/>Bepaal een juiste clustering.<br/>Als afstandsmaat gebruik je de normale (Euclidische) afstand.
+
+			<div class="caret doel">uitwerking</div>
+			<div class="nested">
+	<div class="rechts" style="display: inline-block; vertical-align: top;width: 30%;">
+	Start<br/>
+	<img src="images/VoorbeeldF1.png" width="200"/><br/>
+	Iteratie 1<br/>
+	<img src="images/VoorbeeldF2.png" width="200"/><br/>
+	Iteratie 2<br/>
+	<img src="images/VoorbeeldF3.png" width="200"/><br/>
+	</div>
+		<dl>
+		<dt>Start:</dt>
+		<dd>Kies twee willekeurig centra. $M_{1}=(2,2)$ en $M_{2}=(3,0)$</dd>
+		<dt>Iteratie 1:</dt>
+		<dd>
+			<ol>
+			<li>De afstandsmatrix wordt:
+				<table>
+				<tr>
+				<td></td><th>$M_{1}$</th><th>$M_{2}$</th><th>toewijzing</th>
+				</tr>
+				<tr>
+				<th>$A_{1}$</th><td>2.24</td><td>3.16</td><td>$C_{1}$</td>
+				</tr>
+				<tr>
+				<th>$A_{2}$</th><td>1.41</td><td>1</td><td>$C_{2}$</td>
+				</tr>
+				<tr>
+				<th>$A_{3}$</th><td>1</td><td>2</td><td>$C_{1}$</td>
+				</tr>
+				<tr>
+				<th>$A_{4}$</th><td>2.24</td><td>4.24</td><td>$C_{1}$</td>
+				</tr>
+				<tr>
+				<th>$A_{5}$</th><td>2.24</td><td>1.41</td><td>$C_{2}$</td>
+				</tr>
+				</table>
+			</li>
+			<li>De nieuwe clusters zijn:
+				<table>
+			
+				<tr>
+				<th>$C_{1}$</th><th>$\{A_{1},A_{3},A_{4}\}$</th>
+				</tr>
+				<tr>
+				<th>$C_{2}$</th><th>$\{A_{2},A_{5}\}$</th>
+				</tr>
+				</table>
+			</li>
+			<li>De nieuwe centra zijn: 
+			$M_{1}'=(\frac{0+3+0}{3},\frac{1+2+3}{3})=(1,2)$ en 
+			$M_{2}'=(\frac{3+4}{2},\frac{1+1}{2})=(3.5,1)$
+			</li>
+			</ol>
+		</dd>
+		<dt>Iteratie 2:</dt>
+		<dd>
+			<ol>
+			<li>De afstandsmatrix wordt:
+				<table>
+				<tr>
+				<td></td><th>$M_{1}'$</th><th>$M_{2}'$</th><th>toewijzing</th>
+				</tr>
+				<tr>
+				<th>$A_{1}$</th><td>1.41</td><td>3.5</td><td>$C_{1}$</td>
+				</tr>
+				<tr>
+				<th>$A_{2}$</th><td>2.24</td><td>0.5</td><td>$C_{2}$</td>
+				</tr>
+				<tr>
+				<th>$A_{3}$</th><td>2</td><td>1.12</td><td>$C_{2}$</td>
+				</tr>
+				<tr>
+				<th>$A_{4}$</th><td>1.41</td><td>4.03</td><td>$C_{1}$</td>
+				</tr>
+				<tr>
+				<th>$A_{5}$</th><td>3.16</td><td>0.5</td><td>$C_{2}$</td>
+				</tr>
+				</table>
+			</li>
+			<li>De nieuwe clusters zijn:
+				<table>
+			
+				<tr>
+				<th>$C_{1}$</th><th>$\{A_{1},A_{4}\}$</th>
+				</tr>
+				<tr>
+				<th>$C_{2}$</th><th>$\{A_{2},A_{3},A_{5}\}$</th>
+				</tr>
+				</table>
+			</li>
+			<li>De nieuwe centra zijn: 
+			$M_{1}''=(\frac{0+0}{2},\frac{1+3}{2})=(0,2)$ en 
+			$M_{2}''=(\frac{3+3+4}{3},\frac{1+2+1}{3})=(3.33,1.33)$
+			</li>
+			</ol>
+		</dd>
+	</dl>
+	In het plaatje van iteratie 2 hiernaast zie je dat de
+	derde iteratie niet tot een verandering van clusters gaat leiden. Dus de juiste clustering is:
+					<table>
+				<tr>
+				<th>$C_{1}$</th><th>$\{A_{1},A_{4}\}$</th>
+				</tr>
+				<tr>
+				<th>$C_{2}$</th><th>$\{A_{2},A_{3},A_{5}\}$</th>
+				</tr>
+				</table>
+
+	</div>
+	</div>
+	</div>
+<p class="pagebreak"></p>
+<a id="vragen"></a><br/>
+<h2>Vragen</h2>
+	<div class ='hammer treeview' style="clear: both;">Bereken je eigen probleem
+		<div style="padding-left:25px;">
+			
+					<div class="caret doel">Start</div>
+					<div class="nested">
+							<h1>K-means</h1>
+							<table class="nnapp">
+							<tr>
+								<td>Geef aantal clusters
+								</td>
+								<td><input type="number" id="K" value="2">
+								</td>
+							</tr>
+							<tr>
+								<td>Geef objecten lijst in javascript format
+								</td>
+								<td>
+								<textarea name="message" rows="10" cols="80" id="O">
+								[ [0.0,0,1] , [7.8 ,2,1] , [4.8,2,1] , [3.0,0,1] ]
+								</textarea>
+
+								</td>
+							</tr>
+							<tr>
+								<td>Geef lijst begin centra
+								</td>
+								<td>
+								<textarea name="message" rows="10" cols="80"  id="M">
+								[[0.6,1,0],[7.2,1,0]]
+								</textarea>
+								</td>
+							</tr>
+							</table>
+							<button onclick="run('hier')">Voer uit</button>
+							<p id="hier"></p>	
+
+					</div>
+		</div>
+	</div>
+
+	<div id="vragen5.2" class ='hammer treeview' style="clear: both;">Vragen $K$-means
+		<div style="padding-left:25px;">
+			<ol start="4">
+				<li>Gegeven is een dataset met 6 datapunten.
+				<table>
+				<tr>
+				<td></td><th>$x_{1}$</th><th>$x_{2}$</th><th>$x_{3}$</th><th>$x_{4}$</th>
+				</tr>
+				<tr>
+				<th>$A_{1}$</th><td>6</td><td>3</td><td>4</td><td>5</td>
+				</tr>
+				<tr>
+				<th>$A_{2}$</th><td>2</td><td>3</td><td>5</td><td>4</td>
+				</tr>
+				<tr>
+				<th>$A_{3}$</th><td>5</td><td>4</td><td>6</td><td>3</td>
+				</tr>
+				<tr>
+				<th>$A_{4}$</th><td>9</td><td>1</td><td>1</td><td>8</td>
+				</tr>
+				<tr>
+				<th>$A_{5}$</th><td>8</td><td>2</td><td>0</td><td>9</td>
+				</tr>
+				<tr>
+				<th>$A_{6}$</th><td>8</td><td>0</td><td>1</td><td>8</td>
+				</tr>
+				
+				</table>
+				
+				Als afstandsmaat gebruiken we de normale (Euclidische) afstand. 
+					<ol style="list-style-type: lower-alpha;">
+						<li>Bereken de Euclidische afstand van $A_{1}$ en $A_{2}$
+							<div class="caret doel">antwoord</div>
+							<ul class="nested">
+							<li>$d(A_{1},A_{2})=\sqrt{(6-2)^{2}+(3-3)^{2}+(4-5)^{2}+(5-4)^{2}}=\sqrt{18}=3\sqrt{2}$
+							</li>
+						</ul>
+						</li>
+					</ol>
+					We clusteren deze gegevens in twee clusters:
+				$C_{1}=\{A_{1},A_{2},A_{3}\}$ en $C_{2}=\{A_{4},A_{5},A_{6}\}$<br/>
+					<ol style="list-style-type: lower-alpha;" start="2">
+					
+						<li>Vul de volgende afstandsmatrix in:
+							<table>
+							<tr>
+							<td></td><th>$A_{4}$</th><th>$A_{5}$</th><th>$A_{6}$</th>
+							</tr>
+							<tr>
+							<th>$A_{1}$</th><td></td><td></td><td></td>
+							</tr>
+							<tr>
+							<th>$A_{2}$</th><td></td><td></td><td></td>
+							</tr>
+							<tr>
+							<th>$A_{3}$</th><td></td><td></td><td></td>
+							</tr>
+							</table>
+							<div class="caret doel">antwoord</div>
+							<ul class="nested">
+						<table>
+						<tr>
+						<td></td><th>$A_{4}$</th><th>$A_{5}$</th><th>$A_{6}$</th>
+						</tr>
+						<tr>
+						<th>$A_{1}$</th><td>5.57</td><td>6.08</td><td>5.57</td>
+						</tr>
+						<tr>
+						<th>$A_{2}$</th><td>9.22</td><td>9.33</td><td>8.77</td>
+						</tr>
+						<tr>
+						<th>$A_{3}$</th><td>8.66</td><td>9.22</td><td>8.66</td>
+						</tr>
+						</table>
+						</li>
+						</ul>
+						</li>
+						<li>
+							Geef de afstand tussen de clusters $C_{1}$ en $C_{2}$.
+							<div class="caret doel">antwoord</div>
+							<ul class="nested">
+							<li>De afstand tussen $C_{1}$ en $C_{2}$ is de kleinste afstand in de tabel dus: $d(C_{1},C_{2})=5.57$
+							</li>
+							</ul>
+						</li>						
+						<li>Bereken de centra van clusters $C_{1}$ en $C_{2}$
+							<div class="caret doel">antwoord</div>
+							<ul class="nested">
+							<li>$C_{1}$: centrum $M_{1}=(4.33,3.33,5,4)$ <br/>
+								$C_{2}$: centrum $M_{2}=(8.33,1,0.67,8.33)$
+							</li>
+							</ul>
+						</li>
+					</ol>
+				</li>
+				<li>Gegeven de volgende vier objecten:
+					<table>
+					<tr>
+					<td></td><th>$x_{1}$</th><th>$x_{2}$</th>
+					</tr>
+					<tr>
+					<th>$O_{1}$</th><td>2</td><td>2</td>
+					</tr>
+					<tr>
+					<th>$O_{2}$</th><td>8</td><td>6</td>
+					</tr>
+					<tr>
+					<th>$O_{3}$</th><td>6</td><td>8</td>
+					</tr>
+					<tr>
+					<th>$O_{4}$</th><td>2</td><td>4</td>
+					</tr>
+				
+					</table>
+					Als afstandsmaat gebruiken we de normale (Euclidische) afstand.<br/>
+					We willen deze gegevens clusteren in twee clusters ($K$=2), met behulp van het $K$-means algoritme.<br/>
+					Initialiseer het algoritme met: objecten 1 en 3 in één cluster $C_{1}$ en objecten 2 en 4 in de andere cluster $C_{2}$.<br/>
+					Noteer $C_{1}=\{O_{1},O_{3}\}$ en  $C_{2}=\{O_{2},O_{4}\}$
+
+					<ol style="list-style-type: lower-alpha;">
+						<li>Bereken het centrum $M_{1}$ van $C_{1}$ en het centrum $M_{2}$ van $C_{2}$
+							<div class="caret doel">antwoord</div>
+							<ul class="nested">
+							<li>$C_{1}$: centrum $M_{1}=(4,5)$ <br/>
+								$C_{2}$: centrum $M_{2}=(5,5)$
+							</li>
+							</ul>
+						</li>
+						<li>Vul de volgende afstandsmatrix in en bereken daarmee
+							de afstand tussen clusters $C_{1}$ en $C_{2}$
+							<table>
+							<tr>
+							<td></td><th>$O_{2}$</th><th>$O_{4}$</th>
+							</tr>
+							<tr>
+							<th>$O_{1}$</th><td></td><td></td>
+							</tr>
+							<tr>
+							<th>$O_{3}$</th><td></td><td></td>
+							</tr>
+							</table>
+							<div class="caret doel">antwoord</div>
+							<ul class="nested">
+							<li><table>
+								<tr>
+								<td></td><th>$O_{2}$</th><th>$O_{4}$</th>
+								</tr>
+								<tr>
+								<th>$O_{1}$</th><td>7.21</td><td>2</td>
+								</tr>
+								<tr>
+								<th>$O_{3}$</th><td>2.83</td><td>5.7</td>
+								</tr>
+								</table>
+								Dus de afstand $d(C_{1},C_{2})=2$
+							</li>
+							</ul>
+						</li>
+						<li>Bereken de afstanden tot de centra $M_{1}$ en $M_{2}$ en vul de volgende tabel in:
+							<table>
+								<tr>
+								<td></td><th>$M_{1}$</th><th>$M_{2}$</th><th>toewijzing</th>
+								</tr>
+								<tr>
+								<th>$O_{1}$</th><td></td><td></td><td></td>
+								</tr>
+								<tr>
+								<th>$O_{2}$</th><td></td><td></td><td></td>
+								</tr>
+								<tr>
+								<th>$O_{3}$</th><td></td><td></td><td></td>
+								</tr>
+								<tr>
+								<th>$O_{4}$</th><td></td><td></td><td></td>
+								</tr>
+							</table>
+							<div class="caret doel">antwoord</div>
+							<ul class="nested">
+							<li><table>
+									<tr>
+									<td></td><th>$M_{1}$</th><th>$M_{2}$</th><th>toewijzing</th>
+									</tr>
+									<tr>
+									<th>$O_{1}$</th><td>3.6</td><td>4.2</td><td>$C_{1}$</td>
+									</tr>
+									<tr>
+									<th>$O_{2}$</th><td>3.6</td><td>3.2</td><td>$C_{2}$</td>
+									</tr>
+									<tr>
+									<th>$O_{3}$</th><td>4.1</td><td>3.2</td><td>$C_{2}$</td>
+									</tr>
+									<tr>
+									<th>$O_{4}$</th><td>2.2</td><td>3.2</td><td>$C_{1}$</td>
+									</tr>
+								</table>
+							</li>
+							</ul>
+						</li>
+						<li>Wat zijn uiteindelijk de clusters van het $K$-means algoritme.
+							<div class="caret doel">antwoord</div>
+							<ul class="nested">
+							<li>$C_{1}=\{O_{1},O_{4}\}$ en  $C_{2}=\{O_{2},O_{3}\}$
+								$C_{1}$: centrum $M_{1}'=\{2,3\}$ <br/>
+								$C_{2}$: centrum $M_{2}'=\{7,7\}$
+								<table>
+									<tr>
+									<td></td><th>$M_{1}'$</th><th>$M_{2}'$</th><th>toewijzing</th>
+									</tr>
+									<tr>
+									<th>$O_{1}$</th><td>1</td><td>7.1</td><td>$C_{1}$</td>
+									</tr>
+									<tr>
+									<th>$O_{2}$</th><td>6.7</td><td>1.4</td><td>$C_{2}$</td>
+									</tr>
+									<tr>
+									<th>$O_{3}$</th><td>6.4</td><td>1.4</td><td>$C_{2}$</td>
+									</tr>
+									<tr>
+									<th>$O_{4}$</th><td>1</td><td>5.8</td><td>$C_{1}$</td>
+									</tr>
+								</table>
+								Er is geen verandering in de clustering.<br/>
+								Dus:$C_{1}=\{O_{1},O_{4}\}$ en  $C_{2}=\{O_{2},O_{3}\}$		
+							</li>
+							</ul>
+						</li>
+					</ol>
+				</li>
+				<li>Gegeven de volgende zes datapunten:
+					<table>
+					<tr>
+					<td></td><th>$x_{1}$</th><th>$x_{2}$</th>
+					</tr>
+					<tr>
+					<th>$D_{1}$</th><td>6</td><td>3</td>
+					</tr>
+					<tr>
+					<th>$D_{2}$</th><td>2</td><td>3</td>
+					</tr>
+					<tr>
+					<th>$D_{3}$</th><td>5</td><td>4</td>
+					</tr>
+					<tr>
+					<th>$D_{4}$</th><td>9</td><td>1</td>
+					</tr>
+					<tr>
+					<th>$D_{5}$</th><td>8</td><td>2</td>
+					</tr>
+					<tr>
+					<th>$D_{6}$</th><td>8</td><td>0</td>
+					</tr>
+					</table>
+					Als afstandsmaat gebruiken we de normale (Euclidische) afstand.<br/>
+					We willen deze gegevens clusteren in drie clusters ($K$=3), met behulp van het $K$-means algoritme.<br/>
+					Initialiseer het algoritme met $C_{1}=\{D_{1},D_{2}\}$ , $C_{2}=\{D_{3},D_{4}\}$ en $C_{3}=\{D_{5},D_{6}\}$
+					<ol style="list-style-type: lower-alpha;">
+						<li>Bereken het centrum $M_{1}$ van $C_{1}$, 
+					het centrum $M_{2}$ van $C_{2}$
+					en het centrum $M_{3}$ van $C_{3}$
+							<div class="caret doel">antwoord</div>
+							<ul class="nested">
+							<li>$C_{1}$: centrum $M_{1}=(4,3)$ <br/>
+					$C_{2}$: centrum $M_{2}=(7,2.5)$ <br/>
+					$C_{3}$: centrum $M_{3}=(8,1)$
+					
+							</li>
+							</ul>
+						</li>
+							<li>Bereken de afstanden van de datapunten tot de centra $M_{1}$ en $M_{2}$ en vul de volgende tabel in en voer zo nodig een herclustering uit:
+						<table>
+							<tr>
+							<td></td><th>$M_{1}$</th><th>$M_{2}$</th><th>$M_{3}$</th><th>toewijzing</th>
+							</tr>
+							<tr>
+							<th>$D_{1}$</th><td></td><td></td><td></td><td></td>
+							</tr>
+							<tr>
+							<th>$D_{2}$</th><td></td><td></td><td></td><td></td>
+							</tr>
+							<tr>
+							<th>$D_{3}$</th><td></td><td></td><td></td><td></td>
+							</tr>
+							<tr>
+							<th>$D_{4}$</th><td></td><td></td><td></td><td></td>
+							</tr>
+							<tr>
+							<th>$D_{5}$</th><td></td><td></td><td></td><td></td>
+							</tr>
+							<tr>
+							<th>$D_{6}$</th><td></td><td></td><td></td><td></td>
+							</tr>
+						</table>
+							<div class="caret doel">antwoord</div>
+							<ul class="nested">
+							<li>
+							<table>
+								<tr>
+								<td></td><th>$M_{1}$</th><th>$M_{2}$</th><th>$M_{3}$</th><th>toewijzing</th>
+								</tr>
+								<tr>
+								<th>$D_{1}$</th><td>2</td><td>1.1</td><td>2.83</td><td>$C_{2}$</td>
+								</tr>
+								<tr>
+								<th>$D_{2}$</th><td>2</td><td>5.0</td><td>6.3</td><td>$C_{1}$</td>
+								</tr>
+								<tr>
+								<th>$D_{3}$</th><td>1.4</td><td>2.5</td><td>4.2</td><td>$C_{1}$</td>
+								</tr>
+								<tr>
+								<th>$D_{4}$</th><td>5.4</td><td>2.5</td><td>1</td><td>$C_{3}$</td>
+								</tr>
+								<tr>
+								<th>$D_{5}$</th><td>4.1</td><td>1.1</td><td>1</td><td>$C_{3}$</td>
+								</tr>
+								<tr>
+								<th>$D_{6}$</th><td>5</td><td>2.7</td><td>1</td><td>$C_{3}$</td>
+								</tr>
+							</table>
+							Er is de herclustering $C_{1}=\{D_{2},D_{3}\}$ , $C_{2}=\{D_{1}\}$ en $C_{3}=\{D_{4},D_{5},D_{6}\}$
+
+							</li>
+							</ul>
+						</li>
+						<li>Wat zijn de nieuwe centra en zijn we nu klaar?
+							<div class="caret doel">antwoord</div>
+							<ul class="nested">
+							<li>					$C_{1}=\{D_{2},D_{3}\}$ , $C_{2}=\{D_{1}\}$ en $C_{3}=\{D_{4},D_{5},D_{6}\}$<br/>
+					$C_{1}$: centrum $M_{1}'=(3.5,3.5)$ <br/>
+					$C_{2}$: centrum $M_{2}'=(6,3)$
+					$C_{3}$: centrum $M_{3}'=(8.3,1)$
+					<table>
+						<tr>
+						<td></td><th>$M_{1}'$</th><th>$M_{2}'$</th><th>$M_{3}'$</th><th>toewijzing</th>
+						</tr>
+						<tr>
+						<th>$D_{1}$</th><td>2.5</td><td>0</td><td>3</td><td>$C_{2}$</td>
+						</tr>
+						<tr>
+						<th>$D_{2}$</th><td>1.6</td><td>4</td><td>6.6</td><td>$C_{1}$</td>
+						</tr>
+						<tr>
+						<th>$D_{3}$</th><td>1.6</td><td>1.4</td><td>4.5</td><td>$C_{2}$</td>
+						</tr>
+						<tr>
+						<th>$D_{4}$</th><td>6</td><td>3.6</td><td>0.7</td><td>$C_{3}$</td>
+						</tr>
+						<tr>
+						<th>$D_{5}$</th><td>4.77</td><td>2.27</td><td>1.1</td><td>$C_{3}$</td>
+						</tr>
+						<tr>
+						<th>$D_{6}$</th><td>5.7</td><td>3.6</td><td>1.1</td><td>$C_{3}$</td>
+						</tr>
+					</table>
+					Er is weer verandering in de clustering.<br/>
+					Dus:$C_{1}=\{D_{2}\}$ , $C_{2}=\{D_{1},D_{3}\}$ en $C_{3}=\{D_{4},D_{5},D_{6}\}$<br/>
+					Er is dus minstens nog een iteratie nodig.
+
+							</li>
+							</ul>
+						</li>
+					</ol>
+				</li>
+				<li>				Gegeven de volgende vier objecten:
+				<table>
+				<tr>
+				<td></td><th>$x_{1}$</th><th>$x_{2}$</th>
+				</tr>
+				<tr>
+				<th>$A_{1}$</th><td>0</td><td>0</td>
+				</tr>
+				<tr>
+				<th>$A_{2}$</th><td>7</td><td>8</td>
+				</tr>
+				<tr>
+				<th>$A_{3}$</th><td>4</td><td>8</td>
+				</tr>
+				<tr>
+				<th>$A_{4}$</th><td>3</td><td>0</td>
+				</tr>
+			
+				</table>
+				Als afstandsmaat gebruiken we de normale (Euclidische) afstand.<br/>
+				
+
+				Cluster de gegevens volledig in twee clusters ($K$=2), met behulp van het $K$-means algoritme.<br/>
+						
+						Initialiseer het algoritme met de willekeurige centrum $M_{1}=(0,6)$ en
+						$M_{2}=(7,2)$. Vul je resultaten in onderstaande tabel in.
+						<table>
+							<tr>
+							<td></td><th>Clusters</th><th>Centra</th>
+							</tr>
+							<tr>
+							<th>Start</th><td></td><td>$M_{1}=(0,6)$<br/>$M_{2}=(7,2)$</td>
+								</tr>
+							<tr>
+							<th>Iteratie 1</th><td>$C_{1}=$<br/>$C_{2}=$</td><td>$M_{1}=$<br/>$M_{2}=$</td>
+							</tr>
+							<tr>
+							<th>Iteratie 2</th><td>$C_{1}=$<br/>$C_{2}=$</td><td>$M_{1}=$<br/>$M_{2}=$</td>
+							
+							<tr>
+							<th>...</th><td></td><td></td>
+							</tr>
+						</table>
+							<div class="caret doel">antwoord</div>
+							<ul class="nested">
+							<li>					Iteratie 1:
+					<table>
+						<tr>
+						<td></td><th>$M_{1}$</th><th>$M_{2}$</th><th>toewijzing</th>
+						</tr>
+						<tr>
+						<th>$A_{1}$</th><td>6.00</td><td>7.28</td><td>$C_{1}$</td>
+						</tr>
+						<tr>
+						<th>$A_{2}$</th><td>7.28</td><td>6.00</td><td>$C_{2}$</td>
+						</tr>
+						<tr>
+						<th>$A_{3}$</th><td>4.47</td><td>6.71</td><td>$C_{1}$</td>
+						</tr>
+						<tr>
+						<th>$A_{4}$</th><td>6.71</td><td>4.47</td><td>$C_{2}$</td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+						<td></td><th>Clusters</th><th>Centra</th>
+						</tr>
+						<tr>
+						<th>Start</th><td></td><td>$M_{1}=(0,6)$<br/>$M_{2}=(7,2)$</td>
+						</tr>
+						<tr>
+						<th>Iteratie 1</th><td>$C_{1}=\{A_{1},A_{3}\}$<br/>$C_{2}=\{A_{2},A_{4}\}$</td><td>$M_{1}=(2,4)$<br/>$M_{2}=(5,4)$</td>
+						</tr>
+						</tr>
+					</table>
+					Iteratie 2:
+					<table>
+						<tr>
+						<td></td><th>$M_{1}$</th><th>$M_{2}$</th><th>toewijzing</th>
+						</tr>
+						<tr>
+						<th>$A_{1}$</th><td>4.47</td><td>6.40</td><td>$C_{1}$</td>
+						</tr>
+						<tr>
+						<th>$A_{2}$</th><td>6.40</td><td>4.47</td><td>$C_{2}$</td>
+						</tr>
+						<tr>
+						<th>$A_{3}$</th><td>4.47</td><td>4.12</td><td>$C_{2}$</td>
+						</tr>
+						<tr>
+						<th>$A_{4}$</th><td>4.12</td><td>4.47</td><td>$C_{1}$</td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+						<td></td><th>Clusters</th><th>Centra</th>
+						</tr>
+						<tr>
+						<th>Start</th><td></td><td>$M_{1}=(0,6)$<br/>$M_{2}=(7,2)$</td>
+						</tr>
+						<tr>
+						<th>Iteratie 1</th><td>$C_{1}=\{A_{1},A_{3}\}$<br/>$C_{2}=\{A_{2},A_{4}\}$</td><td>$M_{1}=(2,4)$<br/>$M_{2}=(5,4)$</td>
+						</tr>
+						<tr>
+						<th>Iteratie 2</th><td>$C_{1}=\{A_{1},A_{4}\}$<br/>$C_{2}=\{A_{2},A_{3}\}$</td><td>$M_{1}=(1.5,0)$<br/>$M_{2}=(5.5,8)$</td>
+						</tr>
+						
+					</table>
+					Iteratie 3:
+					<table>
+						<tr>
+						<td></td><th>$M_{1}$</th><th>$M_{2}$</th><th>toewijzing</th>
+						</tr>
+						<tr>
+						<th>$A_{1}$</th><td>1.50</td><td>9.71</td><td>$C_{1}$</td>
+						</tr>
+						<tr>
+						<th>$A_{2}$</th><td>9.71</td><td>1.50</td><td>$C_{2}$</td>
+						</tr>
+						<tr>
+						<th>$A_{3}$</th><td>8.38</td><td>1.50</td><td>$C_{2}$</td>
+						</tr>
+						<tr>
+						<th>$A_{4}$</th><td>1.50</td><td>8.38</td><td>$C_{1}$</td>
+						</tr>
+						</table>
+					Geen verandering clustering dus klaar.
+
+							</li>
+							</ul>
+
+				</li>
+				<li>				Een reisagentschap wil zijn klanten opdelen in twee clusters ($K$=2), op basis van leeftijd en duur van geboekte vakanties. De informatie van het reisagentschap is gegeven in de onderstaande tabel. De leeftijd van klanten uitgedrukt in aantal jaren, de duur van de vakantie in het aantal dagen.<table>
+				<tr>
+				<td></td><th>Leeftijd</th><th>Duur vakantie</th>
+				</tr>
+				<tr>
+				<th>$TO_{1}$</th><td>19</td><td>3</td>
+				</tr>
+				<tr>
+				<th>$TO_{2}$</th><td>25</td><td>8</td>
+				</tr>
+				<tr>
+				<th>$TO_{3}$</th><td>43</td><td>14</td>
+				</tr>
+				<tr>
+				<th>$TO_{4}$</th><td>61</td><td>14</td>
+				</tr>
+				<tr>
+				<th>$TO_{5}$</th><td>30</td><td>7</td>
+				</tr>
+				<tr>
+				<th>$TO_{6}$</th><td>22</td><td>10</td>
+				</tr>
+			
+				</table>
+				Als afstandsmaat gebruiken we de normale (Euclidische) afstand.<br/>
+				Cluster de gegevens volledig in twee clusters ($K$=2), met behulp van het $K$-means algoritme.<br/>
+				Initialiseer het algoritme met de cetra $M_{1}=TO_{1}$ en
+				$M_{2}=TO_{2}$. Vul je resultaten in onderstaande tabel in.
+				<table>
+					<tr>
+					<td></td><th>Clusters</th><th>Centra</th>
+					</tr>
+					<tr>
+					<th>Start</th><td></td><td>$M_{1}=(19,3)$<br/>$M_{2}=(25,8)$</td>
+						</tr>
+					<tr>
+					<th>Iteratie 1</th><td>$C_{1}=$<br/>$C_{2}=$</td><td>$M_{1}=$<br/>$M_{2}=$</td>
+					</tr>
+					<tr>
+					<th>Iteratie 2</th><td>$C_{1}=$<br/>$C_{2}=$</td><td>$M_{1}=$<br/>$M_{2}=$</td>
+					
+					<tr>
+					<th>...</th><td></td><td></td>
+					</tr>
+				</table>
+				<div class="caret doel">antwoord</div>
+					<ul class="nested">
+					<li>					Iteratie 1:
+					<table>
+						<tr>
+						<th>$TO_{1}$</th><td>0.00</td><td>7.81</td>
+						<td>$C_{1}$</td></tr>
+						<tr>
+						<th>$TO_{2}$</th><td>7.81</td><td>0.00</td>
+						<td>$C_{2}$</td></tr>
+						<tr>
+						<th>$TO_{3}$</th><td>26.40</td><td>18.97</td>
+						<td>$C_{2}$</td></tr>
+						<tr>
+						<th>$TO_{4}$</th><td>43.42</td><td>36.50</td>
+						<td>$C_{2}$</td></tr>
+						<tr>
+						<th>$TO_{5}$</th><td>11.70</td><td>5.10</td>
+						<td>$C_{2}$</td></tr>
+						<tr>
+						<th>$TO_{6}$</th><td>7.62</td><td>3.61</td>
+						<td>$C_{2}$</td></tr>
+					</table>
+					<table>
+						<tr>
+						<td></td><th>Clusters</th><th>Centra</th>
+						</tr>
+						<tr>
+						<th>Start</th><td></td><td>$M_{1}=(19,3)$<br/>$M_{2}=(25,8)$</td>
+						</tr>
+						<tr>
+						<th>Iteratie 1</th><td>$C_{1}=\{TO_{1}\}$<br/>$C_{2}=\{TO_{2},TO_{3},TO_{4},TO_{5},TO_{6}\}$</td><td>$M_{1}=(19,3)$<br/>$M_{2}=(36.2,10.6)$</td>
+						</tr>
+						</tr>
+					</table>
+					Iteratie 2:
+					<table>
+						<tr>
+						<td></td><th>$M_{1}$</th><th>$M_{2}$</th><th>toewijzing</th>
+						</tr>
+						<tr>
+						<th>$TO_{1}$</th><td>0.00</td><td>18.80</td>
+						<td>$C_{1}$</td></tr>
+						<tr>
+						<th>$TO_{2}$</th><td>7.81</td><td>11.50</td>
+						<td>$C_{1}$</td></tr>
+						<tr>
+						<th>$TO_{3}$</th><td>26.40</td><td>7.60</td>
+						<td>$C_{2}$</td></tr>
+						<tr>
+						<th>$TO_{4}$</th><td>43.42</td><td>25.03</td>
+						<td>$C_{2}$</td></tr>
+						<tr>
+						<th>$TO_{5}$</th><td>11.70</td><td>7.17</td>
+						<td>$C_{2}$</td></tr>
+						<tr>
+						<th>$TO_{6}$</th><td>7.62</td><td>14.21</td>
+						<td>$C_{1}$</td></tr>
+					</table>
+					<table>
+						<tr>
+						<td></td><th>Clusters</th><th>Centra</th>
+						</tr>
+						<tr>
+						<th>Start</th><td></td><td>$M_{1}=(0,6)$<br/>$M_{2}=(7,2)$</td>
+						</tr>
+						<tr>
+						<th>Iteratie 1</th><td>$C_{1}=\{TO_{1}\}$<br/>$C_{2}=\{TO_{2},TO_{3},TO_{4},TO_{5},TO_{6}\}$</td><td>$M_{1}=(19,3)$<br/>$M_{2}=(36.2,10.6)$</td>
+						</tr>
+						<tr>
+						<th>Iteratie 2</th><td>$C_{1}=\{TO_{1},TO_{2},TO_{6}\}$<br/>$C_{2}=\{TO_{3},TO_{4},TO_{5}\}$</td><td>$M_{1}=(22,7)$<br/>$M_{2}=(44.7,11.7)$</td>
+						</tr>
+					</table>
+					Iteratie 3:
+					<table>
+						<tr>
+						<td></td><th>$M_{1}$</th><th>$M_{2}$</th><th>toewijzing</th>
+						</tr>
+						<tr>
+						<th>$TO_{1}$</th><td>5.00</td><td>27.09</td>
+						<td>$C_{1}$</td></tr>
+						<tr>
+						<th>$TO_{2}$</th><td>3.16</td><td>20.01</td>
+						<td>$C_{1}$</td></tr>
+						<tr>
+						<th>$TO_{3}$</th><td>22.14</td><td>2.87</td>
+						<td>$C_{2}$</td></tr>
+						<tr>
+						<th>$TO_{4}$</th><td>39.62</td><td>16.50</td>
+						<td>$C_{2}$</td></tr>
+						<tr>
+						<th>$TO_{5}$</th><td>8.00</td><td>15.39</td>
+						<td>$C_{1}$</td></tr>
+						<tr>
+						<th>$TO_{6}$</th><td>3.00</td><td>22.73</td>
+						<td>$C_{1}$</td></tr>
+						</table>
+						<table>
+						<tr>
+						<td></td><th>Clusters</th><th>Centra</th>
+						</tr>
+						<tr>
+						<th>Start</th><td></td><td>$M_{1}=(0,6)$<br/>$M_{2}=(7,2)$</td>
+						</tr>
+						<tr>
+						<th>Iteratie 1</th><td>$C_{1}=\{TO_{1}\}$<br/>$C_{2}=\{TO_{2},TO_{3},TO_{4},TO_{5},TO_{6}\}$</td><td>$M_{1}=(19,3)$<br/>$M_{2}=(36.2,10.6)$</td>
+						</tr>
+						<tr>
+						<th>Iteratie 2</th><td>$C_{1}=\{TO_{1},TO_{2},TO_{6}\}$<br/>$C_{2}=\{TO_{3},TO_{4},TO_{5}\}$</td><td>$M_{1}=(22,7)$<br/>$M_{2}=(44.7,11.7)$</td>
+						</tr>
+						<th>Iteratie 3</th><td>$C_{1}=\{TO_{1},TO_{2},TO_{5},TO_{6}\}$<br/>$C_{2}=\{TO_{3},TO_{4}\}$</td><td>$M_{1}=(24,7)$<br/>$M_{2}=(52,14)$</td>
+						</tr>
+					</table>
+					Iteratie 4:
+					<table>
+						<tr>
+						<td></td><th>$M_{1}$</th><th>$M_{2}$</th><th>toewijzing</th>
+						</tr>
+						<tr>
+						<th>$TO_{1}$</th><td>6.40</td><td>34.79</td>
+						<td>$C_{1}$</td></tr>
+						<tr>
+						<th>$TO_{2}$</th><td>1.41</td><td>27.66</td>
+						<td>$C_{1}$</td></tr>
+						<tr>
+						<th>$TO_{3}$</th><td>20.25</td><td>9.00</td>
+						<td>$C_{2}$</td></tr>
+						<tr>
+						<th>$TO_{4}$</th><td>37.66</td><td>9.00</td>
+						<td>$C_{2}$</td></tr>
+						<tr>
+						<th>$TO_{5}$</th><td>6.00</td><td>23.09</td>
+						<td>$C_{1}$</td></tr>
+						<tr>
+						<th>$TO_{6}$</th><td>3.61</td><td>30.27</td>
+						<td>$C_{1}$</td></tr>
+						</table>
+						Geen verandering in clusters dus klaar.
+					</li>
+					</ul>
+
+				</li>
+				<li>				Hieronder staan gegevens van 4 (fictieve) studenten van een data mining cursus. We noteren respectievelijk het aantal bijgewoonde lessen, het aantal dagen examenvoorbereiding, en of ze al dan niet voor het examen kwamen opdagen: 
+				$D=\{S_{1}(0.0,0,1),S_{2}(7.8 ,2,1),S_{3}(4.8,2,1),S_{4}(3.0,0,1)\}$<br/>
+				
+				We willen deze objecten clusteren, wat we kunnen doen door middel van de $K$-means methode.	Kies $K=2$, en als initiële willekeurige cluster centra: $M_{1}=(0.6,1,0)$ en $M_{2}=(7.2,1,0)$.
+				Pas de $K$-means methode toe op $D$ tot een maximum van 3 stappen. Noteer voor elke iteratie welke clusters gevormd worden en wat de centra zijn.<br/>Convergeert de methode? Zo ja, leg uit.<br/>
+				Vul de resultaten in de onderstaande tabel in:
+				
+				<table>
+					<tr>
+					<td></td><th>Clusters</th><th>Centra</th>
+					</tr>
+					<tr>
+					<th>Start</th><td></td><td>$M_{1}=(0.6,1,0)$<br/>$M_{2}=(7.2,1,0)$</td>
+						</tr>
+					<tr>
+					<th>Iteratie 1</th><td>$C_{1}=$<br/>$C_{2}=$</td><td>$M_{1}=$<br/>$M_{2}=$</td>
+					</tr>
+					<tr>
+					<th>Iteratie 2</th><td>$C_{1}=$<br/>$C_{2}=$</td><td>$M_{1}=$<br/>$M_{2}=$</td>
+					
+					<tr>
+					<th>...</th><td></td><td></td>
+					</tr>
+				</table>
+				<div class="caret doel">antwoord</div>
+				<ul class="nested">
+				<li>					Iteratie 1 :
+					<table class='lijncollapse'>
+						<tr>
+						<td></td><th>$M_{1}$</th><th>$M_{2}$</th><th>toewijzing</th>
+						</tr>
+						
+						<tr>
+						<th>$S_{1}$</th><td>1.54</td><td>7.34</td><td>$C_{1}$</td></tr>
+						<tr>
+						<th>$S_{2}$</th><td>7.34</td><td>1.54</td><td>$C_{2}$</td></tr>
+						<tr>
+						<th>$S_{3}$</th><td>4.43</td><td>2.79</td><td>$C_{2}$</td></tr>
+						<tr>
+						<th>$S_{4}$</th><td>2.79</td><td>4.43</td><td>$C_{1}$</td></tr>
+					</table>
+					<table>
+						<tr>
+						<td></td><th>Clusters</th><th>Centra</th>
+						</tr>
+						<tr>
+						<th>Start</th><td></td><td>$M_{1}=(0.6,1,0)$<br/>$M_{2}=(7.2,1,0)$</td>
+						</tr>
+						<tr>
+						<th>Iteratie 1</th><td>$C_{1}=\{S_{1},S{4}\}$<br/>$C_{2}=\{S_{2},S{3}\}$</td><td>$M_{1}=(1.5,0,1)$<br/>$M_{2}=((6.3,2,1)$</td>
+						</tr>
+						</tr>
+					</table>
+					Iteratie 2:
+					<table class='lijncollapse'>
+						<tr>
+						<td></td><th>$M_{1}$</th><th>$M_{2}$</th><th>toewijzing</th>
+						</tr>
+						
+						<tr>
+						<th>$S_{1}$</th><td>1.50</td><td>6.61</td><td>$C_{1}$</td></tr>
+						<tr>
+						<th>$S_{2}$</th><td>6.61</td><td>1.50</td><td>$C_{2}$</td></tr>
+						<tr>
+						<th>$S_{3}$</th><td>3.86</td><td>1.50</td><td>$C_{2}$</td></tr>
+						<tr>
+						<th>$S_{4}$</th><td>1.50</td><td>3.86</td><td>$C_{1}$</td></tr>
+					</table>
+					Geen verandering in clusters dus klaar.
+
+				</li>
+				</ul>
+							
+				</li>
+			</ol>
+		</div>
+	</div>	
+<a id="andere"></a><br/>
+<h2>Andere cluster methoden</h2>
+<p>Als het $K$-means algoritme zo eenvoudig en snel is, waarom zijn er dan, zoals eerder genoemd, andere clusteralgoritmen? Het antwoord hierop is dat er dataverzamelingen zijn die niet passen bij het $K$-means algoritme. Bekijk maar eens het volgende plaatje.
+</p>
+<center>
+<img class="theorie" src="images/clusterCompare.png" />
+<br/>
+Figuur 6: Verschillende verdelingen datapunten (<a href="https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68">bron</a>) en algoritmen.
+</center>
+<p>
+De eerste kolom hoort bij een $K$-means variant. Alleen de verdeling in de vijfde rij past daar echt goed bij. Welk algoritme denk jij dat bij de verschillende rijen het beste past? Er zijn een aantal algoritmen die bij meerdere verdelingen goed scoren, maar die hebben weer andere minpunten. Het is dus van belang om te controleren of je de juiste versie kiest. Heb je meer dan twee assen dan wordt een visuele inspectie zoals in de figuur al een stuk lastiger.
+</p>
+<p>
+De clusteralgoritmen kunnen worden onderverdeeld in <strong>partitiemethoden</strong> en <strong>hiërarchische methoden</strong>. In de partitiemethoden staat clustering met een centrum centraal. Het $K$-means valt in deze groep. In de hiërarchische methoden zijn naaste buren belangrijker. Deze buren vormen dan een stamboom vergelijkbaar met een indeling in het dierenrijk. Iedere splitsing vormt op dat niveau een cluster. In figuur 6 is Agglomerative Clustering daarvan een voorbeeld.
+</p>
+<p>
+Voor een eerste kennismaking met clustering is het voldoende te weten dat er verschillende methoden zijn en dat deze allen iteratief werken en op afstandsmaten zijn gebaseerd. Wil je je in deze cursus meer verdiepen in clustering dan zijn de verdiepingsopdrachten hieronder een startpunt.
+</p>
+<a id="vragen2"></a><br/>
+<h2>Vragen en opdrachten andere methoden</h2>
+	<div class ='hammer treeview' style="clear: both;">Vragen
+		<div style="padding-left:25px;">
+			<ol>
+				<li>Vraag: Wat is het verschil tussen hiërarchische methoden en partitiemethoden?
+					<div class="caret doel">antwoord</div>
+					<ul class="nested">
+						<li>In hiërarchische wordt een stamboom gevormd op basis van nabijheid tot omliggende punten, bij partitiemethoden
+		worden puntenverzamelingen gevormd op basis van afstand tot centra van de die puntenverzamelingen.
+						</li>
+					</ul>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<div class ='hammer treeview' style="clear: both;">Opdrachten
+		<div style="padding-left:25px;">
+			<ol>
+				<li>Ga naar de site <a href="https://educlust.dbvis.de/#" target="opdracht">educlust</a>. Er worden hier verschillende 
+					clustermethoden aangeboden en verschillende datasets vergelijkbaar met 
+					figuur 6. Van iedere methode wordt het algoritme getoond.
+						<ol style="list-style-type: lower-alpha">
+							<li>Kies methode "k-means" en kies de dataset "Three circles sparse" en zet k op 3. Druk op de het zwarte knopje. Hoeveel iteraties
+							zijn er gemaakt om tot het resultaat te komen? Ben je tevreden over het resultaat?
+							</li>
+							<li>Kies weer de methode "k-means" en kies de dataset "Three equal circles" en zet k op 3. Druk op de het zwarte knopje. Hoeveel iteraties
+							zijn er gemaakt om tot het resultaat te komen? Ben je tevreden over het resultaat?
+							</li>
+							<li>Kies de hiërarchische methode "Single linkage" en kies de dataset "Three circles sparse". Druk op de het zwarte knopje. Aan het eind van het proces
+							hebben alle punten een gelijke kleur. Onder de figuur vind
+							je een dendogram (boomstructuur). Als je in het dendogram
+							met je muis over de bolletjes bij de splitsingen gaat zie je punten oplichten die onder de betreffende splitsing vallen.<br/>
+							Hoeveel stappen	zijn er gemaakt om tot het resultaat te komen? Ben je tevreden over het resultaat?
+							</li>
+							<li>Kies weer de hiërarchische methode "Single linkage" en kies de dataset "Three equal circles". Druk op de het zwarte knopje en heb veel geduld.	Hoeveel stappen	zijn er gemaakt om tot het resultaat te komen? Ben je tevreden over het resultaat?
+							</li>
+							<li>Wat leer je uit de bovenstaande opdrachten?
+							</li>
+						</ol>
+
+				</li>
+				<li><span class="uitdaging">Verdiepende opdracht:</span> In de vorige opdracht heb je met een klein experiment twee methoden vergeleken. Ga naar de site towards datascience. Daar staat informatie over verschillende clustermethoden waaronder $K$-means clustering en Agglomerative Hierarchical Clustering (= Single linkage). Zoek in de tekst de voordelen en de problemen bij deze twee methoden. Ook op de site Analytixslab worden voor en nadelen van deze methoden beschouwd (Agglomerative Hierarchical Clustering heet hier AGNES). Wordt hier de zelfde informatie gegeven?
+				</li>
+				<li><span class="uitdaging">Verdiepende opdracht:</span>
+	Ga weer naar de site <a href="https://educlust.dbvis.de/#" target="opdracht">educlust</a>. Maak je eigen keuze van methoden die je wilt
+	vergelijken. Zoek vervolgens uit hoe de methoden precies werken en
+	wat de voor en nadelen van de methoden zijn. Verwerk je onderzoek 
+	in een verslag (website / tekstdocument / poster)
+				</li>
+			</ol>
+		</div>
+	</div>
+	<iframe src="https://educlust.dbvis.de/#"
+					style="border:none; width:95%; height:800px;"></iframe>
+</article>
+
+<!--
+https://educlust.dbvis.de/#
+https://datafloq.com/read/7-innovative-uses-of-clustering-algorithms/6224
+https://www.analytixlabs.co.in/blog/types-of-clustering-algorithms/
+https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68
+-->
+</body>
+</html>

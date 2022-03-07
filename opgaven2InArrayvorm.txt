@@ -1,0 +1,11 @@
+[["brood","melk"],
+["brood","luier","bier","eieren"],
+["melk","luier","bier","cola"],
+["brood","melk","luier","bier"],
+["brood","melk","luier","cola"]]
+
+[["a","b","c"],
+["b","c","d","e"],
+["c","d"],
+["a","b","d"],
+["a","b","c"]]

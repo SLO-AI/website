@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <script src="treeview.js"></script>
+	<title>Kunstmatige Intelligentie</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+		tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+	  });
+	</script>
+  </head>
+  <body  id="neuralenetwerken" onload="addPathLead();initTreeview();" >
+    <a name="Inleiding" style="counter-reset: subsection 3;"></a>
+    <header class="paragraaf titel">Chatbot</header>
+    <section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/<a href="inleiding_neurale_netwerken.html" target="_parent">Neurale netwerken</a>/Chatbot</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+				4.0
+			<br />International License</a>.
+		</div>
+			</div>
+	</section>
+	<div class="navbar">
+		<a href="#Inleiding">Inleiding</a>
+		<a href="#Opdracht">Opdracht</a>
+		<a href="#Opsporen">Opsporen fouten</a>
+		<a href="#Verdieping">Verdieping</a>
+	</div>
+	<article>
+	Deze praktische opdracht, die 2 a 3 lesuren van 50 minuten in beslag neemt, is bedoeld om de je nog meer gevoel te laten krijgen voor de mogelijkheden van een neuraal netwerk. In de opdrachten <a href="https://www.notion.so/N-3-Tensorflow-app-085694ffa1724f4483470810a36d9c9a" target="nn">Tensorflow</a> en <a href="https://www.notion.so/3-6-Eigen-Quickdraw-29e9cf9de43f4341b1a4dab313d149b3" target="nn">Eigen Quickdraw</a> hebben we een neurale netwerken gebruikt om afbeeldingen te kunnen classificeren. In deze opdracht ga je een chatbot toepassing bekijken. In een chatbot is meer interactie tussen de gebruiker en de agent. De gebruiker en de agent voeren samen een gesprek. Een chatbot kan heel specifiek zijn, b.v. een chatbot voor een klantenservice, of heel algemeen, b.v. een chatbot die het beste presteert in een Turing test die we in we in de sectie <a href="https://www.notion.so/1-3-Wanneer-is-iets-intelligent-88be580115b24abda40734aaecdb5db3" target="nn">Wanneer is iets intelligent</a> hebben behandeld. De top <a href="https://research.aimultiple.com/top-chatbot-success/" target="nn">30 lijst van chatbots in 2022</a> beschrijft niet alleen waarom sommige chatbots beter zijn dan anderen, maar geeft ook verwijzingen naar de vele mislukkingen. Voorbeelden uit deze lijst zijn:
+	<ul>
+		<li><a href="http://Bol.com" target="nn">Bol.com</a> voor een chatbot specifiek gericht op klantenservice <a href="https://www.bol.com/nl/nl/klantenservice/index.html" target="nn">Klantenservice</a><br/>
+		<img src="images/bolcom.jpg" width="400">
+		</li>
+		<li>Een meer algemenere chatbot die in 2022 in de turingtest hoog scoorde is Kuki:
+		   <a href="https://chat.kuki.ai/chat" target="nn">Kuki - Chat with me!</a><br/>
+		   <img src="images/Kuki+AI+Headshot.png" width="400">
+		</li>
+	</ul>
+	<div class="speciaal treeview hammer">
+		<div>
+		<span class="caret">Opdracht</span>
+		<div class="nested">
+		Bezoek de bovenstaande websites en probeer in beide chatbots zowel een gezellige en een aankoop gerelateerde conversatie op te zetten. Welke chat geeft jouw de meeste voldoening? Voor welk publiek zou jij Kuki zinvol vinden?
+		</div>
+		</div>
+	</div>
+	<embed type="text/html" class="rechts" src="SLO-apps/ChatBot/index.html" style="width: 400px; height: 800px;"/>
+	<p>In het vervolg van deze opdracht probeer je voor een eigen onderwerp (bedrijf, organisatie of iets anders), zo volledig mogelijk een verzameling vraag/antwoord of meer algemeen uiting/antwoord combinaties te maken. De opdracht maakt gebruik van de Natural Language Processing library <strong><a href="https://github.com/axa-group/nlp.js" target="nn">nlp.js</a></strong> (<a href="https://github.com/axa-group/nlp.js" target="nn">https://github.com/axa-group/nlp.js</a>) die is verwerkt in <a href="SLO-apps/ChatBot/index.html" target="nn">de chatbot hiernaast</a>. Deze chatbot gaan jullie gebruiken voor jullie vraag antwoord applicatie. We hopen dat je plezier aan deze opdracht gaat beleven.
+	</p>
+	<div class="speciaal treeview hammer">
+		<div>
+		<span class="caret">Opdracht</span>
+		<div class="nested">
+		Vul in de chatbot in het grijze van naast “Enter” de volgende uitingen in en druk dan op Enter:
+		<ol>
+			<li>Waar is mijn pakje?
+			</li>
+			<li>Hoe laat komt mijn pakket?
+			</li>
+			<li>Kan ik jullie opbellen?
+			</li>
+			<li>Ik wl iets trug sturen
+			</li>
+			<li>Ik wil een baan
+			</li>
+			<li>Is mijn pakje te klein
+			</li>
+		</ol>
+		 Tevreden over de antwoorden? Waarschijnlijk bij 3 van de zes vragen niet, maar bij vraag 4 zie je dat er bij taalfouten toch nog een zinvol antwoord terugkomt.
+		</div>
+		</div>
+	</div>
+	<p>De chatbot is getraind met maar een heel beperkt aantal uiting/antwoord combinaties. Klap het onderstaande blok open om te zien hoe beperkt deze lijst is. We vertellen je in dit blok ook wat de verschillende onderdelen betekenen en hoe je je eigen vragen kunt invoeren in de chatbot.
+	</p>
+	<div class="speciaal treeview hammer">
+		<div>
+		<span class="caret">De trainingsdata en uitleg:</span>
+		<div class="nested">
+		De trainingsdata voor de chatbot is geplaatst in een JSON object. Het JSON object dat standaard wordt ingeladen is:
+		<pre>
+    {
+      "name": "Bol.com",
+      "locale": "nl",
+      "data": [
+        {
+          "intent": "agent.waarispakketje",
+          "utterances": [
+            "Waar is mijn pakketje?",
+            "Waar is mijn pakketje",
+            "Komt mijn pakketje nog?",
+            "Wacht op mijn pakketje"
+          ],
+          "answers": [
+            "Als je inlogt, kan ik zien welke bestelling je bedoelt. Wil je inloggen op je bol.com account?",
+            "Zou je willen inloggen, dan kan ik zien welk pakketje je bedoelt"
+          ]
+        },
+        {
+          "intent": "agent.retourneren",
+          "utterances": [
+            "Ik wil iets retourneren",
+            "Ik wil iets terugsturen",
+            "Ik wil iets terug sturen"
+          ],
+          "answers": [
+            "Artikelen terugsturen is bijna altijd mogelijk. Als je inlogt, kijk ik graag met je mee. Wil je inloggen op je bol.com account?",
+            "Zou je willen inloggen, dan kunnen we samen verder kijken hoe je je pakketje terug kunt sturen"
+          ]
+        }
+      ]
+    }
+		</pre>
+			<div class="speciaal treeview hammer">
+				<div>
+				<span class="caret">Als je nog niets van JSON objecten weet kun je dit blok uitklappen voor een heel korte introductie.</span>
+				<div class="nested">
+				JSON is de afkorting van “JavaScript Object Notation”. Een JSON object bestaat uit een set accolades met daarin definities van eigenschappen met hun waarde gescheiden door een komma:
+				<pre>
+        {
+        	"eigenschap1": <waarde1>,
+        	"eigenschap2": <waarde2>,
+        	"eigenschap3": <waarde3>
+        }
+				</pre>
+        De waarde van een eigenschap kan een “tekst” zijn, een getal of een genest JSON object:
+				<pre>
+        {
+        	"Naam": "Jayson",
+        	"Lengte": 178,
+        	"adres": {
+        			"straat": "Vrijheidslaan",
+        			"huisnummer": "2022z",
+        			"plaats": "Vredeburg",
+        			"land": "Utopia"
+        		}
+        }
+				</pre>
+        Maar dat niet alleen, een waarde kan ook een rij (array) zijn. Een array bevat elementen tussen twee vierkante haken [,,,] In een array kunnen dan weer bovenstaande waarden zitten of ook weer andere rijen:
+				<pre>
+        {
+        	"Naam": "Jayson",
+        	"hobbies": [ "voetbal", "breien", "drummen" ],
+        	"cijfers": [
+        				{	"wiskunde": [6.4, 7.8, 5.9, 7.6] },
+        				{	"informatica": [8.3, 8.7, 9.1, 5.4, 6.6, 8.1] },
+        				{ "frans": [9.4, 9.8, 7.9, 8.6 ] }
+        			]		
+        }
+				</pre>
+ 				</div>
+				</div>
+			</div>
+    In het JSON object voor de chatbot zijn er de volgende onderdelen:
+			<ul style="list-style-type: circle">
+				<li><strong>name</strong>: De naam van de organisatie
+				</li>
+				<li><strong>locale</strong>: De taal waarin de conversatie plaat vindt.
+				</li>
+				<li><strong>data</strong>: Een lijst (array) van JSON objecten voor uiting/antwoord combinaties voor een bepaald doel. Hierin staat <strong>intent</strong> voor doel en heeft altijd de vorm “agent.beschrijvingdoel”,  <strong>utterances</strong> voor een lijst van uitingen van de gebruiker die bij dit doel passen en <strong>answers</strong> voor een lijst met antwoorden die bij de uitingen kunnen worden getoond?
+				</li>
+				<li>
+				</li>
+			</ul>
+			<strong>Zelf aan de slag</strong>: Kopieer de code hierboven naar je favoriete code editor. Verander de naam van de organisatie en voeg enkele nieuwe doelen toe en sla het bestand op als een document met extensie .json. Volg in de bovenstaande chatbot app de instructie in het het veld met de tekst “Sleep hier je JSON ...”. Zodra het document is geladen wordt de chatbot opnieuw getraind.
+		</div>
+		</div>
+	</div>
+	<br/><a id="Opdracht"></a><br/>  
+	<div class="speciaal treeview hammer">
+		<div>
+		<span><strong>Eindopdracht</strong>
+Nu jullie in de uitleg hebben gezien hoe je uiting/antwoord combinaties kunt definiëren en deze in de chatbot app kunt invoeren, kunnen jullie de klas opsplitsen in groepjes en voor een bepaald doel (b.v.  klachten afhandeling van een winkel, communicatie over storingen openbaar vervoer, reserveren corona testen, ...) een chatbot maken. Een chatbot als Kuki is natuurlijk onmogelijk om samen te stellen, daar is verschrikkelijk veel data voor nodig. Geef elkaar een heel lesuur voor het opstellen van het JSON document. Vervolgens geven jullie elkaar de ontwikkelde JSON documenten en het doel van de chatbot en test je elkaars chatbot op de zinvolheid van de gegeven antwoorden voor het specifieke doel van de chatbot. Geef individueel iedere chatbot een cijfer van 1 t/m 10 en geef je lijst aan je docent. Die maakt dan aan het einde een ranglijst van jullie scores.
+		</div>
+	</div>
+<a id="Opsporen"></a><br/>    
+<h2>Opsporen fouten</h2>
+<p>In je browser kun je controleren of het laden van de training data goed is gegaan door op <strong>F12</strong> te drukken en <strong>Console</strong> te selecteren. Als het training bestand zonder problemen geladen is zie je een succesvolle melding van een training. Anders krijg je een foutmeldingen.
+</p>
+<a id="Verdieping"></a><br/>    
+<h2>Verdieping</h2>
+<p>Wil je je na de eerste kennismaking met het ontwikkelen van een chatbot meer verdiepen in de achterliggende techniek, dan kun je de code van de chatbot, aanwezig in het bestand <a href="SLO-apps/ChatBot.zip">ChatBot.zip</a>, doorgronden en eventueel aanpassen op de verschillende mogelijkheden die de Natural Language Processing library <strong><a href="https://github.com/axa-group/nlp.js" target="nn">nlp.js</a></strong> (<a href="https://github.com/axa-group/nlp.js" target="nn">https://github.com/axa-group/nlp.js</a>) te bieden heeft. Je kunt je ook verdiepen door de top <a href="https://research.aimultiple.com/top-chatbot-success/" target="nn">30 lijst van chatbots in 2022</a> te bestuderen met als doel het verschil tussen succes en mislukking te ontdekken.
+</p>
+Om de chatbot uit te breiden qua functionaliteiten kan je kijken naar de code in het bestand <span class="theoriespan" style="color:red">js/bot.js</span>. Dit is de code die verantwoordelijk is voor de reactie van de bot. De functie die wordt aangeroepen is <span class="theoriespan" style="color:red">this.getReply(message)</span> in de class <span class="theoriespan" style="color:red">const Bot</span>. Momenteel wordt de NLP aangeroepen om een antwoord te genereren, maar dit kan je natuurlijk ook iets anders laten doen. Of je kan ook extra analyse uitvoeren op het inkomende bericht <span class="theoriespan" style="color:red">message</span>.
+</p>
+<p>
+Let op: de functie <span class="theoriespan" style="color:red">getReply(message)</span> geeft een Promise terug. Dit is een belofte om later (wanneer de code klaar is) een antwoord te geven. De NLP geeft automatisch een Promise terug, maar als je de code verandert, dan kan het zijn dat je bijvoorbeeld een gewone string mee wilt geven. Indien je dit wilt doen, moet je het verpakken in een Promise. Dit doe je als volgt:
+
+</p>
+<div class="theorie">
+<pre>
+return await new Promise(function(resolve, reject) {
+            resolve({ answer: "Antwoord" });
+        });
+</pre>
+</div>
+<p>
+Bij het creëren van de class <span class="theoriespan" style="color:red">Bot</span> in het bestand <span class="theoriespan" style="color:red">client.js</span> wordt de functie <span class="theoriespan" style="color:red">init()</span> aangeroepen in Bot. In deze functie vindt initialisatie plaats.
+</p>
+	</article>
+  </body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <script src="treeview.js"></script>
+	<title>Introductie Kunstmatige Intelligentie</title>
+  </head>
+  <body id="introductie" onload="addPathLead();">
+    <a name="Inleiding"></a>
+    <header class="hoofdstuk titel">Introductie</header>
+	<section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/introductie</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+				4.0
+			<br />International License</a>.
+		</div>
+			</div>
+	</section>
+	<div class="navbar">
+		<a href="#Inleiding">Introductie</a>
+		<a href="#Quickdraw">Quickdraw</a>
+		<a href="#Succesverhaal">Succesverhaal</a>
+		<a href="#Gevaren">Gevaren</a>
+		<a href="#Module">De Module</a>
+		<a href="#Algemeen_deel">Algemeen deel</a>
+		<a href="#Verdieping">Verdiepende deel</a>
+		<a href="#Collega">Collega's an het werk</a>
+	</div>
+	<article>
+	<h2 id="introductie">Introductie</h2>
+	<p>
+In deze module willen we je graag verbazen met techniek, succes en ongemak rond <i>Kunstmatige Intelligentie</i>. We hopen natuurlijk dat je hierna niet kunt wachten om met de rest van de module te beginnen om meer te weten te komen over dit interessante en hoogst actuele onderwerp. We beginnen de verbazing met beeldherkenning voor de leuk, daarna geven we een voorbeeld van een serieuzere succesvolle toepassing en zadelen we je met ongemak op. Als laatste presenteren we het doel van de cursus.
+	</p>
+	<a id="Quickdraw"></a><br/>
+	<h2>Quickdraw</h2>
+	<div class="rechts theorie">
+		<a href="https://quickdraw.withgoogle.com/" target="app"><img src="images/Quickdraw.png"  style="width: 300px;"/></a><br/>
+		<caption>De <a href="https://quickdraw.withgoogle.com/" target="app">Quickdraw</a> probeert te raden wat jij tekent.
+		</caption>
+	</div>	
+	<p>
+Hoeveel heb je nodig om iets te herkennen? Misschien ken je het spel pictionary. In dit spel moet je een tekening maken bij een woord en je partner moet dit woord dan raden. Ga naar het spel door op de afbeelding te klikken en laat je verbazen hoe goed AI als partner in dit spel is.
+</p>
+<p>
+Geweldig toch? Misschien heb je nu dezelfde vragen als wij hadden.
+</p>
+<div class="hammer">Vragen:
+	<ul>
+		<li>Hoeveel figuurtjes zijn er gebruikt om jouw tekeningen mee te vergelijken?</li>
+		<li>Was de app goed in het herkennen? Lag dat aan jouw tekenkunsten of aan de slimheid van de app?</li>
+		<li>Denk je dat het ingewikkeld is om zo’n spel te bouwen? Leg uit waarom wel/niet.</li>
+	</ul>
+</div>
+<p>
+Quick draw is een open project. Iedereen kan met de code en de dataset aan de slag. Volg <a href="https://github.com/googlecreativelab/quickdraw-dataset" target="app">deze link</a> en geef het antwoord op de eerste vraag. Het antwoord op de tweede vraag is dat er een neuraal netwerk is ingezet om eerst van 50 miljoen tekeningen te leren en daardoor is de app in staat heel snel te bepalen tot welke groep jouw tekening behoort, zoals bijvoorbeeld een bal of een fiets. Het indelen van een object bij een groep (categorie, klasse) op basis van vergelijkbare eigenschappen noemt men classificeren. Maar hoe doet zo'n netwerk dat dan?
+</p>
+<p>In deze cursus kun je na een algemeen deel een pad kiezen waarin je je kunt verdiepen in de achterliggende technieken.
+</p>
+<a id="Succesverhaal"></a><br/>
+	<h2>Succesverhaal</h2>
+<p>Er zijn vele terreinen waar Kunstmatige Intelligentie een groot succes is, waaronder de gezondheidszorg. Het diagnosticeren van ziekten of aandoeningen aan de hand van beeldmateriaal is niet altijd even makkelijk, voor zowel mens als machine. Het bundelen van menselijke intelligentie en kunstmatige intelligentie leidt in veel gevallen tot succes. Het volgende filmpje is een voorbeeld hiervan (Je kunt via instellingen de ondertiteling laten vertalen naar het Nederlands.)
+</p>
+<div class="midden">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/Mur70YjInmI?&hl=nl&cc_lang_pref=nl&cc_load_policy=1" 
+			title="YouTube video player" frameborder="0" 
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+	</iframe>
+</div>
+<p>
+In het filmpje zie je dat de radiologen de trainingsdata moeten vormgeven. In het Quickdraw voorbeeld zijn er 50 miljoen tekeningen gebruikt met weinig tot geen overbodige informatie. In de video zag je beelden voorbij komen met veel meer informatie, maar slechts een klein deel van deze informatie was ook daadwerkelijk nuttig. Bij het zien van het filmpje, kwamen bij ons gelijk een paar vragen naar boven. Hopelijk bij jou ook.
+</p>
+<div class="hammer">Vragen:
+	<ul>
+		<li>Is dit een toepassing die voor de patiënt voordelig is?</li>
+		<li>Is dit een toepassing die de zorg duurder maakt?</li>
+		<li>Hoeveel voorbeelden heeft de AI in de video gezien?</li>
+		<li>Kan de AI bijleren? Er waren situaties dat de AI niets zag maar zes radiologen wel.</li>
+	</ul>
+</div>
+<p>
+De eerste vraag is natuurlijk positief te beantwoorden. Hoe beter de detectie, des te sneller een diagnose gesteld kan worden. Ook de laatste vraag is te beantwoorden met "ja". De niet goed geclassificeerde beelden kunnen aan de beschikbare dataset worden toegevoegd, waarna de applicatie opnieuw getraind kan worden. Dit hertrainen is trouwens niet een garantie dat daarna de diagnose juist gaat zijn. Het grote voordeel is dat alle radiologen die de applicatie gebruiken, tegelijk de nieuwe versie kunnen gebruiken. Er hoeven geen duizenden radiologen op cursus om de nieuwe diagnoses te leren begrijpen.
+</p><p>
+In deze cursus kun je na het algemene deel een pad kiezen waar je meer gaat nadenken over de toepassingen van kunstmatige intelligentie, dan over de techniek erachter.
+</p>
+<a id="Gevaren"></a><br/>
+	<h2>Gevaren</h2>
+<p>Bekijk de onderstaande video van "The Economist" over controle met behulp van AI.
+</p>
+<div class="midden">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lH2gMNrUuEY?&hl=nl&cc_lang_pref=nl&cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p>Hmm..., ook hier komen bij ons vragen naar boven.
+</p>
+<div class="hammer">Vragen:
+	<ul>
+		<li>Is de informatie in de video juist?</li>
+		<li>Als dat zo is, kunnen er naast de goede dingen van gezichtsherkenning ook de negatieve dingen, zoals de staatscontrole, naar onze samenleving komen?</li>
+		<li>Of erger: is er hier al staatscontrole met behulp van AI?</li>
+		<li>In welke andere landen gebeurt dit ook?</li>
+	</ul>
+</div>
+<p>
+Klakkeloos kunstmatige intelligentie inzetten is geen goed plan. Ook in Nederland komt geautomatiseerde verwerking van
+<a href="https://bewijs-in-strafzaken.nl/anpr-automatische-kentekenherkenning/" target="_blank" >beelden uit de publieke ruimte voor</a>. Over welke ethische voorwaarden moet AI voldoen? Daar moet iedereen iets over weten dus komt het in het
+<a href="inleiding_ethiek.html">algemene deel</a> van deze cursus aan bod. Ook is er de mogelijkheid in deze cursus om je verder te verdiepen in de sociale aspecten van AI.
+</p>
+<a id="Module"></a><br/>
+	<h2>De Module</h2>
+<p>
+</p>
+De cursus Kunstmatige Intelligentie, waar je nu bent aangeland, heeft als hoofddoel je bewust te maken van de veelheid van technieken die in dit deel van computertechnologie aanwezig zijn. Daarbij willen we je laten zien wat voor moois deze technieken te bieden hebben. De eerste twee voorbeelden hebben je hopelijk al warm doen lopen. Het zijn echter allemaal technieken ontsproten uit menselijke breinen en we moeten daarom goed nadenken over de gevolgen van het toepassen van deze technieken. Niet alleen is het menselijke brein niet onfeilbaar, zelfs met goede intenties kan er toch iets goed fout gaan. Er zijn ook menselijke breinen die iedere kans aangrijpen om het eigen gewin boven dat van een ander te plaatsen, bijvoorbeeld dictators en criminelen. Het derde voorbeeld geeft een beeld van een situatie waartegen we als samenleving echt iets moeten doen.
+<p><p>
+Sommigen van jullie willen misschien graag met de technieken aan de slag, anderen willen zich juist meer in de maatschappelijke kant verdiepen. Daarom hebben we ervoor gekozen om in deze cursus beide onderwerpen aan bod te laten komen. De cursus verlangt een inspanning van ongeveer 8 lesweken.
+</p><p>
+Het lesmateriaal voor de eerste vier weken moet een basis vormen waarmee iedereen ons hoofddoel bereikt. De laatste vier weken staat jouw eigen interesse centraal. Zoek je meer verdieping in de technieken, of wil je juist meer aandacht geven aan de ethische kant van de zaak?<p>
+</p>
+<a id="Algemeen_deel"></a><br/>
+	<h2>Algemeen deel</h2>
+<p>In het algemene deel bieden we een stukje geschiedenis en de huidige stand van zaken van kunstmatige intelligentie aan. Er is een overzicht van technieken en waar die in de wereld worden toegepast. Je leert nadenken over de betekenis van kunstmatige intelligentie voor personen en de samenleving. Kunstmatige intelligentie wordt door gegevens gestuurd en je leert een aantal simpele technieken die inzicht geven in de manier waarop kunstmatige intelligentie leert.
+</p>
+<div class="navbar centernavbar" style="counter-reset: hst_ctr 0;">
+	<div class="dropdown">
+	  <button class="dropbtn Ahoofdstuk book" >Achtergrond  &#9660;</button>
+	  <div class="dropdown-content">
+		<a class="Aparagraaf" href="inleiding_achtergrond.html" target="NtoonschermAI">Inleiding</a>
+		<a class="Aparagraaf" href="achtergrond_geschiedenis.html" target="NtoonschermAI">Geschiedenis en toekomst</a>
+		<a class="Aparagraaf" href="achtergrond_intelligentie.html" target="NtoonschermAI">Wanneer is iets intelligent</a>
+		<a class="Aparagraaf" href="achtergrond_praktijk.html" target="NtoonschermAI">In de praktijk</a>
+		<a class="Aparagraaf" href="terugkoppeling_achtergrond.html" target="NtoonschermAI">Terugkoppeling</a>
+	  </div>
+	</div>
+	<div class="dropdown">
+	  <button class="dropbtn Ahoofdstuk book">Ethiek  &#9660;</button>
+	  <div class="dropdown-content">
+		<a class="Aparagraaf" href="inleiding_ethiek.html" target="NtoonschermAI">Inleiding</a>
+		<a class="Aparagraaf" href="ethiek_gevarenAI.html" target="NtoonschermAI">Gevaren van AI</a>
+		<a class="Aparagraaf" href="ethiek_FAST.html" target="NtoonschermAI">De FAST principes</a>
+		<a class="Aparagraaf" href="ethiek_FAIR.html" target="NtoonschermAI">FAIR data</a>
+		<a class="Aparagraaf" href="terugkoppeling_ethiek.html" target="NtoonschermAI">Terugkoppeling</a>
+	  </div>
+	</div>	
+	<div class="dropdown">
+	  <button class="dropbtn Ahoofdstuk book">Technieken  &#9660;</button>
+	  <div class="dropdown-content">
+		<a class="Aparagraaf" href="inleiding_techniek.html" target="NtoonschermAI">Inleiding</a>
+		<a class="Aparagraaf" href="techniek_introductie.html" target="NtoonschermAI">Introductie</a>
+		<a class="Aparagraaf" href="techniek_machine_learning.html" target="NtoonschermAI">Machine learning</a>
+		<a class="Aparagraaf" href="techniek_associatie_analyse.html" target="NtoonschermAI">Associatie analyse</a>
+		<a class="Aparagraaf" href="techniek_cluster_analyse.html" target="NtoonschermAI">Cluster analyse</a>
+		<a class="Aparagraaf" href="techniek_neurale_netwerken.html" target="NtoonschermAI">Neurale netwerken</a>
+		<a class="Aparagraaf" href="techniek_eigen_quickdraw.html" target="NtoonschermAI">Eigen quickdraw</a>
+		<a class="Aparagraaf" href="techniek_multi_agent.html" target="NtoonschermAI">Multi-agentsystemen</a>
+		<a class="Aparagraaf" href="terugkoppeling_techniek.html" target="NtoonschermAI">Terugkoppeling</a>
+	  </div>
+	</div>	
+</div>
+<a id="Verdieping"></a><br/>
+	<h2>Verdiepend deel</h2>
+<p>Heb je de stof uit het algemene deel doorgewerkt dan ga je zelf op onderzoek uit. Je bent in het algemene deel vast een aantal onderwerpen tegengekomen waar je meer over zou willen weten. Er zijn voor jou al een aantal opdrachten verzonnen om de verdieping te starten, vul die aan met eigen vragen en beschrijf wat je geleerd hebt in een verslag.
+</p>
+<div class="navbar centernavbar">
+	<div class="dropdown">
+	  <button class="dropbtn Ahoofdstuk book">Ethiek en AI  &#9660;</button>
+	  <div class="dropdown-content">
+		<a class="Aparagraaf" href="inleiding_ethiekenai.html" target="NtoonschermAI">Inleiding</a>
+		<a class="Aparagraaf" href="ethiek_fast_fair.html" target="NtoonschermAI">FAST en FAIR</a>
+		<a class="Aparagraaf" href="ethiek_standaarden_richtlijnen.html" target="NtoonschermAI">AI-standaarden en -richtlijnen</a>
+		<a class="Aparagraaf" href="ethiek_engheidsmatrix.html" target="NtoonschermAI">De engheidsmatrix</a>
+		<a class="Aparagraaf" href="ethiek_opdracht_essay.html" target="NtoonschermAI">Opdracht: Essay ethiek en AI</a>
+		<a class="Aparagraaf" href="ethiek_opdracht_ontwerp.html" target="NtoonschermAI">Opdracht: ontwerp een AI toepassing</a>
+	  </div>
+	</div>
+	<div class="dropdown">
+	  <button class="dropbtn Ahoofdstuk book">Neurale netwerken  &#9660;</button>
+	  <div class="dropdown-content">
+		<a class="Aparagraaf" href="inleiding_neurale_netwerken.html" target="NtoonschermAI">Inleiding</a>
+		<a class="Aparagraaf" href="neurale_netwerken_leren.html" target="NtoonschermAI">Hoe een neuraal netwerk leert.</a>
+		<a class="Aparagraaf" href="neurale_netwerken_meer_lagen.html" target="NtoonschermAI">Op weg naar meer lagen</a>
+		<a class="Aparagraaf" href="neurale_netwerken_tensorflow.html" target="NtoonschermAI">Opdracht: Tensorflow app</a>
+		<a class="Aparagraaf" href="neurale_netwerken_tensorflow.html" target="NtoonschermAI">Opdracht: Chatbot</a>
+	  </div>
+	</div>
+</div>	
+<a id="Collega"></a><br/>
+	<h2>collega's aan het werk</h2>
+<p>Dat leerlingen geïnteresseerd zijn in AI is gebleken aan de veelheid van profielwerkstukken die wij hebben mogen ontvangen.
+Dat een profielwerkstuk met veel plezier uitgevoerd kan worden zie je in de onderstaande video.
+</p>
+	<div style="text-align: center;">
+		<iframe style="width:560px; height:315px;" src="https://www.youtube.com/embed/pzD1DjBFSIg" 
+				frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+				allowfullscreen></iframe>
+		<h3>Bovenstaande video is het profielwerkstuk van de havo leerlingen Olivier Binkhorst en Marc van der Velden.<br/><span style="font-size: x-small; ">Het gaat snel met de audio en visuele
+		synthese door AI. Bekijk eens <a href="https://www.npostart.nl/VPWON_1322213" target="uitleg">deze video</a> van VPRO Tegenlicht.</span></h3> 
+	</div>	
+	</article>
+  </body>
+</html>

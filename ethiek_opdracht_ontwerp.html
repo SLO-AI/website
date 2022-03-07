@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <script src="treeview.js"></script>
+	<title>Kunstmatige Intelligentie</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+		tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+	  });
+	</script>
+  </head>
+  <body  id="ethiekenai" onload="addPathLead();initTreeview();" >
+    <a name="Inleiding" style="counter-reset: subsection 4;"></a>
+    <header class="paragraaf titel">Opdracht: Bedenk zelf een AI-toepassing</header>
+    <section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/<a href="inleiding_ethiek.html" target="_parent">Ethiek en AI</a>/Opdracht: Bedenk zelf een AI-toepassing</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+				4.0
+			<br />International License</a>.
+		</div>
+			</div>
+	</section>
+	<div class="navbar">
+		<a href="#Inleiding">Leerdoelen</a>
+		<a href="#Systeemontwikkeling">Systeemontwikkeling</a>
+		<a href="#Voorbereiding">Voorbereiding</a>
+		<span class="dropdown">
+			<div class="dropbtn" onclick="window.location='#stap1'">Stappen  &#9660;</div>
+			<div class="dropdown-content">
+				<a class="submenuitem" href="#stap1">Ideation</a> 
+				<a class="submenuitem" href="#stap2">Idee naar engheidsmatrix</a> 
+				<a class="submenuitem" href="#stap3">Selecteer een idee</a> 
+				<a class="submenuitem" href="#stap4">Beschrijf je idee</a>
+				<a class="submenuitem" href="#stap5">Maak een overzicht</a>
+			</div>
+		</span>
+		<span class="dropdown">
+			<div class="dropbtn" onclick="window.location='#cases'">Voorbeeld cases  &#9660;</div>
+			<div class="dropdown-content">
+				<a class="submenuitem" href="#case1">Felyx</a> 
+				<a class="submenuitem" href="#case2">geldezel</a> 
+				<a class="submenuitem" href="#case3">job-interview robot</a> 
+				<a class="submenuitem" href="#case4">starterswoning</a>
+				<a class="submenuitem" href="#case5">zwerfafval</a>
+				<a class="submenuitem" href="#case6">uitstelgedrag</a>
+			</div>
+		</span>
+	</div>
+	<article>
+	<p>In deze opdracht gaan jullie, aan de hand van voorbeeldcases, eigen ideeën voor een AI-toepassing uitwerken. Deze voorbeeldcases vind je eind van deze paragraaf, maar misschien heb je nog een eigen idee.
+	</p>
+	<h2>Leerdoelen van deze lessenserie</h2>
+	</p>
+	<ol>
+		<li>Je weet welke stappen er zoal in systeem ontwikkeling zijn.
+		</li>
+		<li>Ideeën voor AI-toepassingen bedenken op basis van een voorbeeldcase.</li>
+		<li>AI-toepassingsideeën analyseren en rangschikken op basis van te verwachten toegevoegde waarde en mate van ethische verantwoording.</li>
+		<li>Een AI-toepassingsidee selecteren voor verdere uitwerking</li>
+		<li>Een AI-toepassingsidee kort beschrijven in de vorm van een epic, of anders gezegd een kort verhaaltje.</li>
+		<li>Een AI-toepassingsidee kort en bondig presenteren</li>
+		</ol>
+	</p>
+	<a id="Systeemontwikkeling"></a><br/>
+	<h2>Systeemontwikkeling</h2>
+	<p>Je gaat straks met je klasgenoten in groepjes aan de slag om applicaties, systemen, te bedenken voor een aantal maatschappelijke problemen. In het hele ontwikkel traject van systemen zijn er in grote lijnen de volgende belangrijke stappen; <strong>probleemstelling</strong>, <strong>ideevorming</strong>, <strong>systeembouw</strong> en <strong>testen</strong>. Deze stappen kunnen deels in tijd overlappen, maar na ieder stap kan besloten worden de gehele ontwikkeling te stoppen. Het is natuurlijk verspilling van geld als er aan de bouw van een systeem wordt begonnen als de ideevorming nog niet is afgelopen, maar soms is het nodig om bij een idee te kijken of een idee uit te voeren is door een kleine test te doen.
+	</p>
+	<dl>
+	<dt>Probleemstelling:</dt><dd>Voordat een systeem kan worden gemaakt moet eerst duidelijk worden welke problemen een systeem moet oplossen en hoe dit ongeveer moet gaan gebeuren. In deze fase moet duidelijk worden wat een organisatie met een systeem wil bereiken en wat de omvang is van de middelen om het systeem te ontwikkelen. Het resultaat na deze stap is een <strong>initiatief</strong>  om een system te ontwikkelen.</dd>
+	<dt>Ideevorming:</dt><dd>Het probleem is duidelijk, maar hoe nu verder? In deze stap worden verschillende voorstellen bedacht om tot een systeem te komen. In deze fase wordt niet alleen worden nagedacht vanuit de wens van de organisatie maar moet ook worden nagedacht over de haalbaarheid van het systeem, de ethische aspecten en, ook heel belangrijk, wat de wensen zijn van de gebruikers van het toekomstige systeem. Het resultaat na deze stap is een document met de eisen aan het systeem, maar nog zonder detailuitwerking. In het document komt een korte samenvatting (<strong>epic onepager</strong>) en een verzameling van wensen van de organisatie en de eindgebruikers (<strong>user stories</strong>).
+	</dd>
+	<dt>Systeembouw:</dt><dd>Is er een haalbaar idee gekomen dan kan het systeem worden gebouwd. Eerst wordt het systeemontwerp gemaakt en als dit lukt wordt het ontwerp uitgewerkt tot het werkelijke systeem.</dd>
+	<dt>Testen:</dt><dd>Tijdens en na de bouw van het systeem wordt getest of het systeem goed functioneert en wordt geaccepteerd door de organisatie en de eindgebruikers.
+	</dd>
+	</dl>
+	<p>In deze opdracht ga je aan de slag met de <strong>ideevorming</strong> in het ontwikkelen van AI systemen. Het zal je niet verbazen dat we de nadruk op de ethische aspecten van de systemen ligt. Ga maar eens lekker los met je klas, wie verzint de meest nuttige en ethisch verantwoorde toepassing..
+	</p>
+	<a id="Voorbereiding"></a><br/>
+	<h2>Voorbereiding van de opdracht</h2>
+	<p>Voor jullie aan de slag gaan printen jullie eerst voorbeeldcases, zorgen jullie voor stiften en sticky notes en tekenen jullie een "engheidsmatrix" op grote vellen papier op de muur van het lokaal:
+	</p>
+	<div class="theorie center" style="width: 800px"><img style="width:inherit" src="images/Engheidmatrix1.png"/></div>
+
+	<p>Verdeel jullie klas zo mogelijk in zes groepjes. Geef elke groep één van de voorbeeldcases aanwezig aan het einde van deze paragraaf. Zijn er te weinig leerlingen kiest dan uit de voorbeeldcases de meest aanprekende.
+	</p>
+	<a id="stap1"></a><br/>
+	<h3>Stap 1: Ideation (groepsopdracht)</h3>
+	<p><strong>Ideation (ideevorming):</strong> Bedenken van onderzoeksideeën. In deze groepsopdracht ga je met je groep ideeën bedenken voor AI-toepassingen op basis van de case die jouw groep heeft gekregen. Schrijf ieder idee voor een toepassingen met een korte kernzin op een sticky note.
+	</p>
+	<div class="theorie center" style="width: 800px"><img style="width:inherit" src="images/Engheidmatrix2.png"/></div>
+	<a id="stap2"></a><br/>
+	<h3>Stap 2: Plaats je idee in de engheidsmatrix (groepsopdracht)</h3>
+	<p><strong>Plaatsing</strong>: Na afloop van stap 1 plaatsen alle groepen al hun ideeën voor hun case in de engheidsmatrix. Bedenk nu eerst individueel of alle opgeplakte ideeën voor jou een juiste plaats in de engheidsmatrix hebben. Maak vervolgens met alle leerlingen samen een lijst met de ideeën waarover jullie over  de plaatsing  oneens zijn. Dit is een groepsopdracht, dus moedig elkaar aan tot discussiëren. Zijn jullie het min of meer eens met de plaatsing bespreek dan met elkaar hoe je ideeën die weinig toegevoegde waarde hebben wat waardevoller en nuttiger kunt maken, en hoe je ideeën die weinig ethisch verantwoord zijn kunt aanpassen zodat ze wél ethisch verantwoord worden.
+	</p>
+	<div class="theorie center" style="width: 800px"><img style="width:inherit" src="images/Engheidmatrix3.png"/></div>
+
+	<a id="stap3"></a><br/>
+	<h3>Stap 3: Selecteer een AI-toepassingsidee (individuele opdracht)</h3>
+	<p><strong>Selectie:</strong> Elke leerling kiest nu een onderzoeksidee uit de matrix en werkt dit idee uit tot een onderzoeksvoorstel. Je mag best eenzelfde idee kiezen als een medeleerling, maar het is wel de bedoeling dat je dit idee verder individueel uitwerkt. Het idee achter deze individuele manier van werken is dat je leert om eerst om zelf te brainstormen over AI-ideeën en dat daarna de verschillende ideeën it de groep worden getoetst op ethische aspecten en toegevoegde waarde om uiteindelijk tot het beste idee te komen. Een organisatie die op zoek is naar een systeem voor een probleem is in het ideale geval op zoek naar een idee dat ethisch verantwoord is en dat veel waarde toevoegt aan de maatschappij of aan de organisatie. Dit idee moet vervolgens tot het gewenste systeem leiden. Denk bij het vormen van jouw idee en de evaluatie van de ideeën van anderen dan ook al na over de haalbaarheid van een idee. Een idee dat erg ethisch verantwoord én nuttig is, maar waarvoor politieke besluitvorming nodig is (bijvoorbeeld wanneer wetgeving moet worden aangepast)  of waarvoor de dataverzameling om tot een succesvol systeem te komen te kostbaar of te ingewikkeld is, is niet een erg haalbaar idee om verder uit te werken.
+	</p>
+	<p><div class="theorie center" style="width: 800px"><img style="width:inherit" src="images/Engheidmatrix4.png"/></div>
+	</p>
+	<a id="stap4"></a><br/>
+	<h3>Stap 4: Beschrijf je AI-toepassingsidee (individuele opdracht)</h3>
+	<div class="theorie rechts" style="width: 400px"><img style="width:inherit" src="images/epic.png"/></div>
+	<p><strong>Inleiding van je beschrijving van een AI-toepassing:</strong> Beschrijf kort en bondig op1 A4-tje de AI-toepassing die je geselecteerd hebt. Beschrijf de aanleiding voor je idee en geef aan welk probleem er mee opgelost wordt. Maak de beschrijving in de vorm van een epic onepager. Je kunt de volgende punten daarvoor als handvat gebruiken (maar neem ze niet klakkeloos over):
+	</p>
+	<ol>
+		<li>Wat is het <strong>doel</strong> van je AI-toepassing?</li>
+		<li><strong>Waarom</strong> zou de maatschappij of de organisatie deze AI-toepassing moeten maken?</li>
+		<li><strong>Wat</strong> houdt de AI-toepassing in?</li>
+		<li>Wat is de <strong>doelgroep</strong> van je AI-toepassing?</li>
+		<li>Welke <strong>hulpmiddelen</strong> zijn ervoor nodig?</li>
+		<li>Wat is de <strong>grootte</strong> van het ontwikkelproces van AI-toepassing? In tijd? En in doorlooptijd?</li>
+		<li>Wat kun je zeggen over <strong>ethiek</strong>?</li>
+		<li>Welke <strong>waarde</strong> levert je AI-toepassing op?</li>
+	</ol>
+	<p>Probeer je inleiding zo <strong>SMART</strong> mogelijk te maken:
+	</p>
+	<ol>
+	<li><strong>Specifiek:</strong> Benoem details en maak duidelijk wat je voor ogen hebt. Maak je doel specifiek door te omschrijven wat je concreet wilt bereiken. Gebruik geen woorden die je op verschillende manieren kunt opvatten. Zo is bijvoorbeeld het woord ‘gezond’ in onderstaand doel niet concreet.
+		<ul>
+		<li>
+		Niet specifiek: Ik wil dat deze applicatie het aantal uren sport onder de jeugd bevordert.
+		</li>
+		<li>Wel specifiek: Ik wil dat deze applicatie het aantal uren sport onder de jeugd bevordert met minstens 10%.
+		</li>
+		</ul>
+	</li>
+	<li><strong>Meetbaar:</strong> Koppel cijfers aan je doelen. Denk aan de omzet, het aantal transacties, levertijd of hoe tevreden je klanten zijn. Druk deze cijfers uit in een percentage of in vaste cijfers. Zorg ook dat je deze cijfers kunt meten.
+		<ul>
+		<li>
+		Niet meetbaar: Ik wil dit onderdeel van de applicatie snel af hebben en weinig kosten maken.
+		</li>
+		<li>Wel meetbaar: Ik wil dit onderdeel van de applicatie binnen 7 weken hebben ontwikkeld binnen het budget van &euro;70.000 .</li>
+		</ul>
+
+	</li>
+	<li><strong>Acceptabel:</strong> Iedereen die bij de doelen betrokken is, moet ermee akkoord gaan. Zonder draagvlak komt er weinig van je doelen terecht. Betrek collega’s bij het opstellen en baseer je op ervaringen uit het verleden. Pas als jijzelf en anderen achter de doelen staan, zijn ze acceptabel.
+		<ul>
+		<li>
+		Niet acceptabel: Er is misbruik van de subsidie voor kinderopvang. Ik wil
+		alle verkeerd uitgegeven subsidie terugvorderen en evenals de subsidie die daarvoor is ontvangen, de subsidieaanvrager is 100% verantwoordelijk.
+		</li>
+		<li>Wel acceptabel: Er is misbruik van de subsidie voor kinderopvang. Ik wil
+		zoveel mogelijk misbruik voorkomen en moedwillig valse declaraties met toegevoegde boete terugvorderen. Het moet dan onomstotelijk vaststaan dat
+		subsidieaanvrager bedrog heeft gepleegd.</li>
+		</ul>
+	</li>
+	<li><strong>Realistisch:</strong> Maak je doelen haalbaar. De kunst is om ze niet te makkelijk, maar ook niet onbereikbaar te maken. Bij een te makkelijk doel is het niet nodig om je extra in te zetten. En weten dat je je doel toch niet haalt, kan demotiverend werken. Een realistisch doel is een ambitieuze uitdaging waar je graag je best voor doet.
+		<ul>
+		<li>
+		Niet realistisch: Ik wil al mijn vakken op school afsluiten met een 10.
+		</li>
+		<li>Wel realistisch: Ik wil al mijn vakken op school afsluiten met minstens een 7.</li>
+		</li>
+		</ul>
+	<li><strong>Tijdgebonden:</strong> Zet op papier wanneer de activiteiten beginnen en eindigen. Een deadline maakt plannen eenvoudiger. Als je SMART doel zijn eindpunt bereikt, is het tijd om te evalueren. Je analyseert dan wat er goed ging en wat beter kon. Op basis hiervan stel je nieuwe SMART doelen op.
+		<ul>
+		<li>
+		Niet tijdgebonden: Ik wil mijn applicatie uitbreiden met 5 nieuwe functies.
+		</li>
+		<li>Wel tijdgebonden: Ik wil mijn applicatie voor het eind van dit jaar uitbreiden met 5 nieuwe functies.</li>
+		</li>
+		</ul>
+	</li>
+	</ol>
+	<a id="stap5"></a><br/>
+	<h3>Stap 5: Hang nu alle uitgewerkte ideeën naast de engheidsmatrix.  Zo maak je in de klas een overzichtelijk beeld van alle initiatieven, ook wel een <a href="https://www.managementimpact.nl/artikel/obeya-brein-lean-organisatie/" target="ethiek">Obeya-room</a> genoemd, voor AI-toepassingen:
+	</p>
+	<p><div class="theorie center" style="width: 800px"><img style="width:inherit" src="images/Engheidmatrix4.png"/><br/>
+	<caption>Een Obeya-room</caption></div>
+	</p>
+	<p>Elke leerling presenteert in 2 minuten zijn AI-toepassingsidee aan de anderen in de groep.
+	</p>
+	<a id="cases"></a><br/>
+	<h2>Voorbeeldcases</h2>
+	
+	<a id="case1"></a><br/>
+	<h3>Case 'Felyx'</h3>
+	<div class="theorie rechts" style="width: 300px;">
+	<img src="images/Felyx.jpg" style="width: inherit;">
+	</div>	
+	<p>Felyx is een succesvolle onderneming die gedeelde elektrische scooters aanbiedt als een innovatieve mobiliteitsconcept. Felyx heeft ambitieuze plannen voor duurzaam en gedeeld stadsvervoer. Omdat steden voller worden en de luchtkwaliteit verslechtert is er een transitie nodig richting nieuwe vormen van mobiliteit. Felyx biedt gedeelde elektrische scooters op ritbasis aan, voor €0,30 per minuut. In 3 simpele stappen kun je al gebruik maken van Felyx. Gebruik de Felyx app om de dichtstbijzijnde scooter te lokaliseren, reserveren en activeren. Met Felyx reis je snel, comfortabel en duurzaam door de stad. Je profiteert van alle voordelen van een elektrische scooter zonder last te hebben van de nadelen die kleven aan het bezit van een eigen scooter.
+	</p>
+	<p>Quinten Selhorst, CEO van Felyx: "Omdat we met Felyx hét ideale transportmiddel kunnen aanbieden voor iedereen in de grote stad. Ik vind het belangrijk om snel en op een duurzame en betaalbare manier op mijn plaats van bestemming te komen, en met Felyx kan dat. Bovendien is het nog leuk ook, en waarborgen we de veiligheid zoveel als mogelijk door onze e-scooters te begrenzen en uit te rusten met all weather banden en een fietsbel. Kortom: Felyx biedt voor mij het beste van alle werelden."
+	</p>
+	<p>De organisatie groeit snel. In Amsterdam zijn er bijvoorbeeld 350 volledig elektrische scooters beschikbaar, in Rotterdam zo’n 800, in Den Haag zo’n 500 en in Groningen meer dan 100. Het concept werkt simpel: Met de Felyx app vind je automatisch alle Felyx e-scooters die bij jou in de buurt zijn. Wanneer je een geschikte e-scooter hebt gevonden reserveer je hem met één druk op de knop. Met de ingebouwde GPS, die je ook voorziet van een looproute, kan je de e-scooter vervolgens makkelijk vinden. Ontgrendel de e-scooter met de app en start de huur. Maar al die huurscooters leveren soms ook problemen op.
+	</p>
+	<p>Mensen die een deelscooter achterlaten op een plek waar anderen er last van hebben, bijvoorbeeld midden op de stoep, kunnen daar voortaan een boete voor krijgen. Dat heeft het bedrijf Felyx, een van de grootste aanbieders van deelscooters in Nederland, donderdag aangekondigd. Als de scooter verplaatst moet worden, moet de gebruiker 50 euro kosten betalen. En als mensen regelmatig in de fout gaan, mogen ze misschien helemaal geen deelscooter meer huren.
+	</p>
+	<div class="theorie rechts speciaal important" style="width: 400px;">
+	<div>WAT DOET EEN ANALYTICS TRANSLATOR?
+	<p>Een analytics translator kan helpen om AI oplossingen te ontwikkelen die waarde toevoegen aan je organisatie.</p>
+	<p>
+	Ten eerste kan de analytics translator een brug slaan tussen de werelden van ‘dataspecialisten’ en ‘business specialisten’.
+	</p>
+	<p>De data specialisten, zoals data engineers en data scientists zijn goed in bouwen van de platformen en het verkrijgen van inzichten uit data. Business specialisten kennen hun specifieke processen en hebben diepgaande kennis van de waardeketens.</p>
+	<p>De analytics translator heeft een basis in beide disciplines en bouwt met zijn- of haar brede kennis een brug tussen de twee werelden.
+	</p><p>Ten tweede zal de analytics translator op zoek gaan naar de juiste gebruiksmogelijkheden en toepassingen van AI oplossingen binnen de organisatie.
+	</p>
+	</div>
+	</div>
+	<p>Boetes geven is één oplossing. Maar Felyx wil graag van jou, de analytics translator, horen hoe data ook op een meer positieve manier gebruikt kan worden een oplossing te creëren voor al die scooters die verkeerd geparkeerd worden. Quinten Selhorst, de CEO van Felyx heeft jou – én een aantal collega analytics translators – gevraagd om een oplossing te bedenken en heeft gevraagd of je een onderzoeksvoorstel voor hem kunt maken. En de beste oplossingen mogen bij hem op kantoor komen pitchen.
+	</p>
+	<div class="speciaal important"><span>Voor deze voorbeeldcase is de volgende bron gebruikt: Felyx website: <a href="https://Felyx.com/nl/nl/rotterdam" target="ethiek">https://Felyx.com/nl/nl/rotterdam</a>.</span>
+	</div>
+	<a id="case2"></a><br/>
+	<h3>Case 'geldezel'</h3>
+	<div class="theorie rechts" style="width: 300px;">
+	<img src="images/geldezel.jpg" style="width: inherit;">
+	</div>
+	<p>Stel je voor: je werkt bij een grote, internationaal opererende bank als analytics translator voor de afdeling "operationeel risico" en je krijgt een email van de risicomanager van de bank die je om advies vraagt:
+	</p>
+	<p>“Een jonge vrouw van 23 jaar heeft twee maanden geleden bij ons een betaalrekening geopend. Ze is op de normale manier gescreend en kwam nergens in onze waarschuwingssystemen voor, ze studeert aan de Hogeschool Utrecht en is een prima klant voor ons omdat ze in de toekomst wellicht haar salaris via onze bank laat lopen en een hypotheek voor een woning gaat aanvragen. Maar nu is er wat vreemds gebeurd: er is onlangs al twee keer opeens een bedrag van ruim negenduizend euro cash op haar rekening gestort en dat heeft ze bijna direct weer overgemaakt naar een andere rekening in Rotterdam en daarvandaan is het ook weer direct overgemaakt naar een rekening waarop ik geen zicht meer heb. Kun jij me misschien helpen om meer zicht te krijgen op dit soort transacties? We willen dit in de toekomst eigenlijk voorkomen, omdat we denken dat ze misschien een geldezel is.”
+	</p>
+	<p>Er is wetgeving die ervoor moet zorgen dat dit soort witwaspraktijken niet meer voorkomen. Elke financiële instelling moet zijn klanten vooraf goed doorlichten en naderhand zorgvuldig monitoren. Door cliëntenonderzoek wordt de klant geïdentificeerd (ben je wel wie je zegt dat je bent?) en gescreend (kun je een risico vormen?). Eenmaal klant, dan worden jouw financiële handel en wandel permanent gemonitord. Dit is het Ken-uw-klant-principe. Vaak kom je de Engelse termen tegen voor het cliëntenonderzoek (CDD, Customer Due Diligence) en het Ken-uw-klant-principe (KYC, Know Your Customer).
+	</p>
+	<p>De risicomanager geeft verder ook nog aan dat ze in het CDD-proces graag AI willen gaan gebruiken voor het in kaart brengen van de achtergrond van nieuwe klanten. Op dit moment is er nog een hele grote afdeling in Roemenië waar meer dan duizend bankmedewerkers de achtergrond van potentiële nieuwe klanten uitzoeken. Dat doen ze veelal door op het Internet en in social media naar signalen te zoeken die aangeven dat ‘dit wel eens een slechte klant zou kunnen zijn’. Maar de risk manager denkt dat AI en data science hierbij kunnen helpen.
+	<br/>Kun jij, als analytics translator een onderzoeksvoorstel maken waarin je uitlegt hoe je de risicomanager gaat helpen? En oh ja, ze heeft je gevraagd of je je voorstel over drie weken aan haar MT wil komen pitchen.
+	</p>
+	<div class="speciaal important"><span>Voor deze voorbeeldcase is de volgende bron gebruikt:  <a href="https://www.betaalvereniging.nl/actueel/achtergrondinformatie/in-het-kort/ken-uw-klant-in-het-kort/" target="ethiek">ttps://www.betaalvereniging.nl/actueel/achtergrondinformatie/in-het-kort/ken-uw-klant-in-het-kort/</a>.</span>
+	</div>
+	<a id="case3"></a><br/>
+	<h3>Case 'job-interview robot'</h3>
+	<p>Bekijk het filmpje ‘Robots Could Be Conducting Job Interviews Next Year’ op YouTube:
+	<div class="theorie center" style="width:560px;">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/c8rfWRdvv00?hl=nl&pref=nl&cc_lang=nl&Cc_load_policy=1&rel=0&hd=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+	<p>Een 41 cm grote robot-recruiter met de naam Tengai kan de toekomst zijn van job interviews. Tengai is geprogrammeerd om elk interview op precies dezelfde manier uit te voeren. Het houdt zich niet bezig met kletspraatjes voorafgaand aan het interview en stelt elke vraag in dezelfde toon en volgorde. Tengai stuurt een transcript naar menselijke werkgevers met alleen de antwoorden van de geïnterviewde, waardoor eventuele vooroordelen of vooringenomenheid (bias) worden verminderd. De robot is gemaakt door Furhat, een bedrijf op het gebied van kunstmatige intelligentie en sociale robotica in Zweden. Ze hebben de afgelopen vier jaar een mensachtige computerinterface gemaakt die menselijke spraak en gezichtsuitdrukkingen nabootst. Naar verwachting zal Tengai al in mei 2019 in echte situaties worden ingezet. Het wordt sinds oktober 2018 getest in samenwerking met een van de grootste wervingsbureaus van Zweden, TNG. Sollicitatiegesprekken met echte kandidaten zullen naar verwachting in mei 2019 beginnen en een Engelse versie zou al in 2020 beschikbaar kunnen zijn.
+	</p>
+	<p>Ook in Nederland wordt robot-recruitment al ingezet. Zo levert Joboti, een startup die met een chatbot voor recruitment-toepassingen de wereld verovert, slimme wervingsautomatisering voor screening, selectie en planning via chatbots aan gerenommeerde retailers, accountants en uitzendbureaus.
+	</p>
+	<p>Joboti levert onder andere chatbots voor staffing bureaus die gericht op de werving & selectie, detacherings- of uitzendbranche zo snel mogelijk de juiste talenten koppelen aan opdrachtgevers. Zo’n chatbot kan organisaties ondersteunen om nog sneller in contact te komen met de juiste kandidaat. En daarnaast levert Joboti ook chatbots voor werkgevers, die helpen in de zoektocht naar naar nieuw talent voor een organisatie. Een chatbot ondersteunt op cruciale momenten in de candidate journey, door bijvoorbeeld de tien meest gestelde vragen te beantwoorden of door de kandidaat te informeren over de status van zijn sollicitatie. De <strong>candidate journey</strong> (ofwel de sollicitantenreis van een kandidaat) omvat alle contactmomenten die kandidaten hebben bij een organisatie.
+	</p>
+	<p>Stel je voor: je bent op een conferentie waar Luuk van Neerven, de founder van Joboti een geweldige presentatie geeft over zijn bedrijf. En aan het einde van de dag stap je toevallig op de tiende etage van het conferentiegebouw samen met hem in de lift. Welk onderzoeksvoorstel zou jij als analytics translator aan hem pitchen voordat hij tien etages lager weer uitstapt?
+	</p>
+	<div class="speciaal important"><span>Voor deze voorbeeldcase is de volgende bron gebruikt: <a href="https://www.joboti.com/" target="ethiek">https://www.joboti.com/</a></span></div>
+	<a id="case4"></a><br/>
+	<h3>Case 'starterswoning'</h3>
+	<div class="theorie rechts" style="width: 300px;">
+	<img src="images/starterswoning.jpg" style="width: inherit;"><br/>
+	<caption><a href="https://m.ijmuidercourant.nl/cnt/dmf20211119_59933704?utm_source=google&utm_medium=organic">IJmuider courant</a></caption>
+	</div>
+	<p>De gekte op de woningmarkt raakt starters hard. Net afgestudeerden die aan een nieuwe baan beginnen, kunnen met geen mogelijkheid doorschuiven naar een eigen woning. In je studentenkamertje blijven lijkt de meest voor de hand liggende optie. Maar hoe komt dat? En waar kunnen starters wél terecht?
+	</p><p>Op dit moment is er sprake van krapte op de woningmarkt. Er is weinig aanbod en dat wat wel te koop of te huur wordt aangeboden, is voor starters doorgaans onbetaalbaar. In 2013 waren woningen 42 procent goedkoper dan nu. Uit cijfers van het Centraal Bureau voor de Statistiek (CBS) blijkt dat de gemiddelde koopprijs in mei 2021 333.000 euro bedroeg. En als je niet kunt kopen, wil je huren. Maar voor een huurwoning in de vrije sector betaal je gemiddeld 1.076 euro per maand en voor een appartement zelfs 1.114 euro. Op sommige huursites, vooral in de randstad, worden studio’s van slechts 30m<sup>2</sup> verhuurd voor 900 euro per maand. Als je als alleenstaande een plek voor jezelf wilt, zijn de maandelijkse lasten vaak te hoog in je eentje op te hoesten.
+	</p><p>Daarnaast is het voor starters lastig om een fatsoenlijke hypotheek te krijgen. Hoewel de hypotheekrentes enorm laag zijn en het aantrekkelijk lijkt om er nu eentje af te sluiten, kom je met een modaal inkomen niet in de buurt van een koopwoning van rond de 300.000 euro. Dan moet je er nog veel geld bijleggen. Business Insider rekende uit dat je als huishouden 71.000 euro per jaar moet verdienen om een hypotheek te krijgen die de gemiddelde huizenprijs (in november 2019) precies kan financieren met een maximale hypotheek (Kassa, BNNVARA, 2020).
+	</p><p>Je mag met een aantal studenten op de koffie bij Wethouder Kees Diepeveen die in de gemeente Utrecht verantwoordelijk is voor wonen. Omdat jij hartstikke inspirerend vertelt over je studie Data Driven Business (Data gestuurde bedrijfsvoering) vraagt hij aan jou of je niet een voorstel zou willen maken voor een onderzoek naar manieren om het huren en kopen van woningen voor starters te verbeteren. Over twee weken mag je komen pitchen. Wat komt er in je onderzoeksvoorstel te staan?
+	</p>
+	<div class="speciaal important"><span>Voor deze voorbeeldcase is de volgende bron gebruikt: <a href="https://www.bnnvara.nl/kassa/artikelen/starters-maken-geen-kans-op-de-woningmarkt-ik-kan-geen-kant-op" target="ethiek">Kassa, BNNVARA, 2020</a>.
+	</span></div>
+	<a id="case5"></a><br/>
+	<h3>Case 'zwerfafval'</h3>
+	<div class="theorie rechts" style="width: 300px;">
+	<img src="images/zwerfafval.jpg" style="width: inherit;">
+	</div>
+	<p>Wie zijn plastic, blik en drinkpakken nog steeds netjes scheidt, kan daar komend najaar (2021) definitief mee ophouden. De gemeente Utrecht stopt in een groot deel van de stad met het apart ophalen van plastic.
+	</p>
+	<p>Sinds een aantal jaar komen er in de Utrechtse straten steeds meer ondergrondse containers voor restafval. In wijken die zulke containers hebben, komt de vuilniswagen niet meer langs voor het ‘gewone’ huisvuil. Dat moet je dan voortaan elke keer zelf naar die ondergrondse containers brengen. De gemeente hoopt dat meer inwoners hun afval gaan scheiden. Het komende half jaar gaan wijken als Ondiep, Oog in Al en Lombok over op dit nieuwe systeem. Als laatste stappen ook Oost (onder meer Oudwijk, Sterrenwijk en Rijnsweerd) over. Voor de binnenstad komt er een apart systeem. Daarover wordt dit najaar een besluit genomen.
+	</p>
+	<p>Maar bij die ondergrondse containers is het nu al vaak een bende. Dat zal dan in de toekomst vast niet minder worden. Vanwege de coronapandemie, de lockdown en het thuiswerken is er steeds meer afval. De gemeente leegt de containers dan ook vaker. Daarnaast hoopt Utrecht ook op een ‘mentaliteitsverandering’ van de inwoners. Rondom plekken waar veel overlast van zwerfafval is, gaat de gemeente bewoners actief aanspreken.
+	</p>
+	<p>Overlast van zwerfafval is een hardnekkig probleem in Utrecht, dat nu onder het mom van Actieplan Utrecht Schone Stad anders zal worden aangepakt. “Veel inwoners ergeren zich aan zwerfafval en zetten zich hier ook tegen in”, zegt verantwoordelijk wethouder Kees Diepeveen. “Zo ruimen inmiddels ruim 5000 vrijwilligers in Utrecht structureel zwerfafval op. Toch zijn er plekken die overlast blijven geven. Deze hotspots van zwerfafval pakken we met de nieuwe aanpak aan. Dit willen samen met onze inwoners, ondernemers en andere betrokkenen doen.”
+	</p>
+	<p>Je bent net begonnen met een nieuwe baan als analytics translator bij de gemeente Utrecht. In je eerste werkweek heb je een kennismakingsgesprek met Kees Diepeveen, de wethouder die verantwoordelijk is voor het ophalen van vuilnis in Utrecht. Hij vraagt je of jij niet een onderzoeksvoorstel voor hem wil maken om voor nu en altijd een einde aan al die troep op straat te maken. “Data kan ons daarbij helpen. En jij hebt verstand van data, dus ik verwacht veel van jouw ideeën. Praat me over twee weken nog eens bij, ik vraag mijn secretaresse om alvast een koffieafspraak in te plannen.”
+	</p>
+	<div class="speciaal important"><span>Voor deze voorbeeldcase is de volgende bron gebruikt: <a href="https://www.ad.nl/utrecht/vanaf-wanneer-komt-de-vuilnisauto-niet-meer-langs-in-utrecht-en-5-andere-dingen-die-je-moet-weten-over-afval~a552ab7c/" target="ethiek">https://www.ad.nl/utrecht/vanaf-wanneer-komt-de-vuilnisauto-niet-meer-langs-in-utrecht-en-5-andere-dingen-die-je-moet-weten-over-afval~a552ab7c/</a>
+	</span></div>
+	<a id="case6"></a><br/>
+	<h3>Case 'uitstelgedrag'</h3>
+	<div class="theorie rechts" style="width: 300px;">
+	<img src="images/uitstelgedrag.png" style="width: inherit;">
+	</div>
+	<p>Uitstelgedrag staat hoog in de lijst van problemen waar studenten mee kampen. “Straks ga ik er volledig voor. Of morgen. Of volgende week.” Er is altijd wel wat leukers te doen dan dat wat je moet doen. Helaas betaal je voor al dat uitstellen vaak een hoge prijs: torenhoge stress en onhaalbare deadlines. Tip: Maak een duidelijke planning en beloon jezelf voor behaalde doelstellingen. Ook samen studeren drijft de druk én de motivatie op!
+	</p>
+	<p>Uitstelgedrag is voor veel mensen een herkenbaar iets. Wie heeft er op bepaalde momenten nou geen last van uitstelgedrag? Dagelijkse voorbeelden waarbij uitstelgedrag kan voorkomen zijn het inruimen van de vaatwasser of het invullen van de belastingaangifte.
+	</p>
+	<p>En dat geldt ook voor studie-uitstelgedrag: Het vrijwillige uitstellen van een voorgenomen en noodzakelijke en/of belangrijke studie-activiteit, ondanks de te verwachten mogelijke negatieve gevolgen die zwaarder wegen dan de positieve gevolgen van het uitstellen. Ook onder studenten komt uitstelgedrag of studie-ontwijkend gedrag, zoals het ook wel weleens wordt genoemd, vaak voor. Uit wetenschappelijk onderzoek blijkt dat 70% van de studenten er regelmatig last van heeft. Wanneer studenten studie-activiteiten uitstellen, noemen we dat studie-uitstelgedrag (in het Engels Academic Procrastination).
+	</p>
+	<p>Zo laat een recente studie onder 483 college studenten naar het verband tussen smartphone verslaving en academic procrastination bijvoorbeeld zien dat smartphone verslaving positieve gecorreleerd is aan studie-uitstelgedrag, en negatief gecorreleerd is aan zelfwerkzaamheid in de studie. En tegelijkertijd bleek studie-uitstelgedrag weer negatief gecorreleerd te zijn met die zelfwerkzaamheid. Anders gezegd: smartphone verslaving bleek een prima voorspeller te zijn van uitstelgedrag.
+	</p>
+	<p>Kun jij AI-toepassingsideeen bedenken die gebruikt kunnen worden om studenten te helpen om van hun uitstelgedrag af te komen?
+	</p>
+	<div class="speciaal important"><span>Voor deze voorbeeldcase is de volgende bron gebruikt: <a href="https://www.parool.nl/nieuws/studenten-studie-lijdt-onder-verslaving-sociale-media~bf8fd501/" target="ethiek">https://www.parool.nl/nieuws/studenten-studie-lijdt-onder-verslaving-sociale-media~bf8fd501/</a></span></div>
+	</article>
+  </body>
+</html>

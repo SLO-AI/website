@@ -1,0 +1,49 @@
+/**
+ * DropArea handles file drops in the drop-area element.
+ *
+ * @param dropElement {HTMLInputElement} The element to listen to.
+ * @param onDrop {Function} A function that is called when files are dropped.
+ * @constructor
+ */
+const DropArea = function(dropElement, onDrop) {
+    const _dropArea = dropElement;
+    let _dropInput = null;
+
+    const preventDefaults = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    };
+
+    const addHighlight = (e) => {
+        _dropArea.classList.add("highlight")
+    };
+
+    const removeHighlight = (e) => {
+        _dropArea.classList.remove("highlight")
+    };
+
+    const handleDrop = (e) => {
+        const dataTransfer = e.dataTransfer;
+
+        onDrop(dataTransfer.files);
+    };
+
+    const init = function () {
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(
+            eventName => _dropArea.addEventListener(eventName, preventDefaults, false));
+
+        ['dragenter', 'dragover'].forEach(
+            eventName => _dropArea.addEventListener(eventName, addHighlight, false));
+
+        ['dragleave', 'drop'].forEach(
+            eventName => _dropArea.addEventListener(eventName, removeHighlight, false));
+
+        _dropArea.addEventListener("drop", handleDrop, false);
+
+        _dropInput = _dropArea.getElementsByClassName("drop-input").item(0);
+
+        _dropInput.addEventListener("change", (evt) => onDrop(evt.target.files));
+    };
+
+    init();
+};

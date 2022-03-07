@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <link href="css/index.css" rel="stylesheet">
+    <link href="css/normalize.css" rel="stylesheet">
+    <link href="css/droparea.css" rel="stylesheet">
+
+    <script src='js/bundle.js'></script>
+    <script src="js/bot.js" type="application/javascript"></script>
+    <script src="js/chatroom.js" type="application/javascript"></script>
+    <script src="js/client.js" type="application/javascript"></script>
+    <script src="js/droparea.js" type="application/javascript"></script>
+</head>
+<body>
+
+<header>
+    <h1>Chatbot</h1>
+</header>
+
+<div id="page">
+    <div id="settings">
+        <div id="file-drop" class="drop-area">
+            <input id="file" class="drop-input" type="file">
+            <div class="drop-text">
+                Sleep hier je JSON naartoe<br>Of klik om te selecteren.
+            </div>
+        </div>
+        <button id="download-button">
+            <img src="img/download-black.png" alt="download-button">
+            Download
+        </button>
+    </div>
+
+    <div id="content">
+        <div class="main-content">
+
+<!--            <p>Your Chat Room : <span class="name-lite" id="room"></span></p>-->
+<!--            <label for="name">Your name: </label><input type="text" id="name">-->
+
+            <div id="chat-window">
+                <div id="chat-header">
+
+                </div>
+                <div id="chat"></div>
+                <div id="chat-footer">
+                    <label for="chat-input"></label><input data-clear-btn="true" id="chat-input" type="text">
+                    <button id="chat-enter">Enter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    Deze website is gemaakt voor de module Cognitive Computing, ten behoeve van SLO.
+</footer>
+</body>
+</html>

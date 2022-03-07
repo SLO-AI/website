@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <script src="treeview.js"></script>
+	<title>Kunstmatige Intelligentie</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+		tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+	  });
+	</script>
+  </head>
+  <body  id="ethiek" onload="addPathLead();initTreeview();" >
+    <a name="Inleiding" style="counter-reset: subsection 1;"></a>
+    <header class="paragraaf titel">De FAST principes</header>
+    <section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/<a href="inleiding_ethiek.html" target="_parent">Ethiek</a>/De FAST principes</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+				4.0
+			<br />International License</a>.
+		</div>
+			</div>
+	</section>
+	<div class="navbar">
+		<div class="centreer">
+		<a class="submenuitem" href="#Inleiding">Inleiding</a> 
+				
+		<span class="dropdown">
+			<div class="dropbtn" onclick="window.location='#aspecten'">Ethische aspecten  &#9660;</div>
+			<div class="dropdown-content">
+				<a class="submenuitem" href="#bias">Vooringenomenheid (bias)</a> 
+				<a class="submenuitem" href="#doorzichtigheid">Doorzichtigheid</a> 
+				<a class="submenuitem" href="#discriminatie">Discriminatie</a> 
+			</div>
+		</span>		
+		<span class="dropdown">
+			<div class="dropbtn" onclick="window.location='#fast'">De FAST principes  &#9660;</div>
+			<div class="dropdown-content">
+				<a class="submenuitem" href="#fairness">Fairness</a> 
+				<a class="submenuitem" href="#accountability">Accountability</a> 
+				<a class="submenuitem" href="#safety">Safety</a> 
+				<a class="submenuitem" href="#transparency">Transparency</a> 
+			</div>
+		</span>		
+		</div>
+	</div>
+	<article>
+	<p>
+	Het gebruik van AI in bedrijven, publieke organisaties en binnen overheden brengt altijd risico's met zich mee. AI wordt soms op een manier gebruikt die niet voor iedereen even eerlijk is, of die ondoorzichtig is waardoor je niet kunt controleren wat er nu precies gebeurt in zo'n AI-systeem.  De term <strong>black box</strong>, komt je misschien wel bekent voor. In AI is er sprake van een black box systeem als het AI-systeem inzichten produceert op basis van data, maar waarvan de eindgebruiker en vaak ook de ontwikkelaar niet weet hoe de inzichten tot stand komen. Een bekend voorbeeld is onderzoek van het MIT Media Lab, waaruit bleek dat in veel AI voor gezichtsherkenning de gezichten van mannen veel beter worden herkend dan die van vrouwen en hoe donkerder je huid, hoe slechter de gezichtsherkenning scoort. Bekijk het filmpje 'Gender Shades' maar eens:
+	(De video is Engelstalig. Je kunt ondertiteling aanzetten en automatische vertaling instellen door in de video rechtsonder  <i>⚙️/Instellingen</i> aan te klikken en daar bij ondertiteling <i>automatisch vertalen</i> te selecteren en de juiste taal te kiezen.) 
+	</p>
+	<div class="theorie midden center" style="width: 560px">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/TWWsW1w-BVo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+	<br/>
+	<div class ='treeview hammer' style="overflow: hidden;">
+	<span class="caret">Vragen</span>
+	<div id="myUL" class="nested">
+		<ol>
+			<li>Kun je zelf nog wat andere voorbeelden noemen van een AI-systeem dat ondoorzichtig of niet eerlijk? Zoek op het Internet naar leuke en aansprekende voorbeelden en probeer minimaal drie verschillende 'foute' AI-toepassingen te noemen. Geef daarbij aan waarom ze 'fout' waren. En hoe zou zo'n systeem volgens jou dan verbeterd kunnen worden?
+				<span class="caret doel">antwoord</span>
+				<ul class="nested">
+					<li>Wat mogelijke voorbeelden van niet eerlijke of ondoorzichtige AI-toepassingen: 
+						<ul>
+							<li>In <a href="https://nos.nl/artikel/2378060-veel-onduidelijk-over-deepfake-gesprek-van-kamerleden-met-medewerker-navalny" target="ethiek">April 2021</a> voerden Nederlandse Kamerleden een gesprek met iemand die zich schijnbaar voordeed als Leonid Volkov, een hooggeplaatste medewerker van de Russische oppositieleider Navalny. Navalny zit in een Russisch strafkamp en was op dat moment in hongerstaking uit protest tegen zijn behandeling en gebrek aan medische hulp. Er werd aanvankelijk gedacht dat er gebruik gemaakt was van AI om zo een 'deepfake' gesprek te voeren, maar uiteindelijk bleek dat het niet om AI ging, maar om twee Russiche 'grappenmakers'. Kunstmatige intelligentie, de macht van techbedrijven, de datahonger van de overheid. De Tweede Kamer heeft er weinig grip op, zo oordeelde zij daarna zelf. Daarom komt er nu een<a href="https://nos.nl/nieuwsuur/video/2382323-een-speciale-commissie-is-volgens-adviseurs-hoog-nodig" target="ethiek">speciale commissie</a> die de macht beter moet controleren. En dat is hoognodig vinden verschillende adviseurs.
+							</li>
+							<li>In <a href="https://nos.nl/artikel/2369502-weer-iemand-ontslagen-bij-ethisch-onderzoeksteam-google" target="ethiek">Februari 2020</a> heeft Google het hoofd van een ethisch onderzoeksteam bij het bedrijf ontslagen. Onderzoeker Margaret Mitchell maakt dat zelf bekend op Twitter. Mitchell deed samen met andere wetenschappers onderzoek naar ethische kwesties rond kunstmatige intelligentie. Volgens haar en mede-onderzoeker Timnit Gebru waren diversiteit en inclusie ver onder de maat bij Google. Ze waren ook bang dat het bedrijf hun onderzoek zou censureren. Google beloofde de onderzoekers dat ze vrij te werk zouden kunnen gaan. Maar die belofte leek onder druk te staan toen de onderzoekers ook wilden gaan publiceren over de negatieve effecten van Googles technologie en producten. Een vorm van ondoorzichtige AI dus...
+							</li>
+							<li>In <a href="https://nos.nl/artikel/2362487-honderden-klachten-na-deepfake-kersttoespraak-met-dansende-koningin-elizabeth" target="ethiek">December 2020</a> klaagden meer dan 200 mensen bij de Britse mediawaakhond Ofcom over een satirische kersttoespraak van koningin Elizabeth, die tegelijk werd uitgezonden met de echte kerstboodschap van de Queen. In de 'deepfake'-video liet omroep Channel 4 de 94-jarige koningin onder meer voor de kerstboom op haar bureau dansen.
+							</li>
+							<li>
+							<p>In 2017 implementeerde Amazon een <a href="https://www.businessinsider.nl/amazon-built-ai-to-hire-people-discriminated-against-women-2018-10?international=true&r=US" target="ethiek">AI-tool</a> om personeel mee te werven maar stopte met het project nadat bleek dat de tool vrouwen discrimineerde. Software engineers vonden naar verluidt dat de AI ongunstig was voor vrouwelijke kandidaten omdat het door mannen gedomineerde cv's had gebruikt om gegevens te verzamelen.</p>
+							<p>AI-systemen zijn gebouwd op data. Veel van deze data komt uit het verleden, toen we wel data konden verzamelen maar het nog niet konden verwerken. Dat betekent dat veel historische vooroordelen in onze samenleving naar boven borrelen, wanneer we een systeem gebaseerd op historische data gebruiken om onze toekomst te voorspellen en vorm te geven. In dit geval bieden in het verleden behaalde resultaten wél een garantie voor de toekomst! Dit soort vooroordelen in zelf-beslissende netwerken hebben negatieve gevolgen voor de echte wereld, voor mensen die een baan niet krijgen of slechte cijfers halen die ze niet verdienen. En geen enkele manager wil dat het AI-systeem van zijn organisatie negatieve krantenkoppen haalt. Het is dus de moeite waard om vooruit te denken om mogelijke problemen te vermijden.
+					</li>
+				</ul>
+			</li>		
+		</ol>
+	</div>
+</div>	
+<br/>
+<div class ='hammer treeview' style="overflow: hidden;">
+	<span>Opdracht bij onderstaande video</span>
+	<div id="myUL">
+	<p>Bekijk de onderstaande videoles 'Afleiding in het verkeer', waarin Marius Kok van de Nationale Politie de Monocam bespreekt: een AI-toepassing die controleert of automobilisten tijdens het rijden een mobiele telefoon in hun hand hebben. In het vervolg van deze les komen we op in de video gepresenteerde Monocam terug.</p>
+	<p>(De video is Engelstalig, maar je kunt Nederlandse ondertiteling aanzetten.)
+	</p>		
+	</div>
+</div><br/>	
+	<div class="theorie midden center" style="width: 560px">
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/SB23SooOMmc?hl=nl&pref=nl&cc_lang=nl&Cc_load_policy=1&rel=0&hd=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+	<a id="aspecten"></a><br/>
+	<h2>Ethische aspecten</h2>
+	<p>Ethische bedreigingen die bij AI applicaties een grote rol spelen, zijn onder meer <strong>vooringenomenheid</strong> (of <strong>bias</strong>), het probleem van <strong>ondoorzichtigheid</strong>(of <strong>opacity</strong>) en de mogelijkheid van <strong>discriminatie</strong>.</p>
+	<dl><dt><strong>Vooringenomenheid</strong></dt><dd>Vooringenomenheid wil zeggen dat iemand al een oordeel klaar heeft voordat men de feiten onder ogen krijgt. De Toeslagenaffaire bijvoorbeeld, toont (onder meer) het grote belang aan van het voorkomen van vooringenomenheid. Het staat inmiddels vast dat de Belastingdienst een “institutioneel vooringenomen” werkwijze heeft gehanteerd: grote groepen burgers zijn op grond van afkomst gekwalificeerd en zijn als fraudeur weggezet.</dd>
+	<dt><strong>Ondoorzichtigheid</strong></dt><dd>Ondoorzichtigheid gaat er over dat iets niet goed te snappen is. Als voor een AI-systeem niet kan worden uitgelegd hoe dit systeem tot besluiten komt is deze besluitvorming ondoorzichtig ofwel een black box systeem. Ondoorzichtigheid is natuurlijk niet alleen een AI probleem, wanneer iemand bijvoorbeeld erg onduidelijk is over de besteding van zakgeld dan kun je zeggen dat “zijn uitgavenpatroon erg ondoorzichtig is”.</dd>
+	<dt><strong>Discriminatie</strong></dt><dd>Discriminatie is letterlijk “het maken van onderscheid”. Het gaat dan in AI applicaties over het niet onterecht onderscheid maken tussen mensen of groepen, oftewel het niet gelijk behandelen van gelijke gevallen. Bij sollicitaties blijft dit bijvoorbeeld en <a href="https://www.werf-en.nl/algoritmes-tijdens-de-sollicitatieprocedure-discrimineren-ze-nou-of-niet/" target="ethiek">belangrijk probleem</a>.
+	</dd>
+	</dl>
+	<p>Dit soort bedreigingen zijn met elkaar verbonden. Vooringenomenheid kan schuilen in complexe, ondoorzichtige modellen, met discriminatie tot gevolg. In plaats daarvan willen we dat onze AI-systemen eerlijk en verklaarbaar zijn en op een goede manier met gegevens omgaan.</p>
+	
+	<div class="rechts midden theorie ">
+	<img src="images/ethics.jpg"><br/>
+	<caption>Bron: <a href="https://sherpa.ai/blog/the-ethics-of-ai-in-europe/" target="ethiek">Het doolhof van de zoektocht naar verantwoorde AI</a>
+	</div>
+	<a id="bias"></a><br/>
+	<h3>Vooringenomenheid (bias)</h3>
+	<p>Vooringenomenheid of bias kan in het geval van een AI-toepassing ontstaan door bijvoorbeeld data waarin die vooringenomenheid al aanwezig is, zoals in het Gender-Shades voorbeeld. Maar het kan ook zijn dat de gebruikte algoritmen niet neutraal zijn. Soms zijn meningen direct in code ingebed.</p>
+	<p>Denk bijvoorbeeld maar eens aan koken. Een recept is eigenlijk een soort algoritme. Het doel is om een maaltijd samen te stellen. De ingrediënten en hoeveelheden van elk ingrediënt die je nodig hebt, zijn daarbij de parameters van een model. Een belangrijk aspect bij het schrijven van zo'n recept is het definiëren van succes: wanneer is een maaltijd geslaagd? Misschien geef je veel om een stevige smaak en moet je recept daarom juist veel vet, zout en suiker bevatten. Maar anderen vinden wellicht hun gezondheid belangrijk en stoppen vooral veel voedingsstoffen in hun recept, terwijl het weinig vet, zout en suiker bevat. Zo'n definitie van succes bevat daarom ook altijd meningen én vooroordelen.</p>
+	<p>En dat geldt ook voor een algoritme. Een model dat optimaliseert voor een bepaalde definitie van succes is niet per se neutraal. Het is belangrijk om hier rekening mee te houden: een rekruteringsalgoritme, een algoritme dat helpt bij het aannemen van nieuw personeel, kan worden geoptimaliseerd om werknemers te selecteren die het meeste geld voor een bedrijf verdienen, maar dit gaat ten koste van teamwerk of moreel gedrag. Een organisatie moet goed nadenken over deze afwegingen, en nadenken over waar zij voor optimaliseert. Onthoud daarom dat AI geen volledig neutrale beslissing kan garanderen. Maar besef ook dat een mens dat ook niet kan.</p>
+	<div class ='treeview hammer' style="overflow: hidden;">
+		<span class="caret">Vragen</span>
+		<div id="myUL" class="nested">
+			<ol start="2">
+				<li>Waarom kunnen gegevens uit het verleden leiden tot vooringenomenheid bij de besluitvorming door AI?
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>Gegevens uit het verleden komen uit een situatie die nu niet meer van toepassing kan zijn. Bijvoorbeeld op dit moment zijn mensen gemiddeld zwaarder dan vroeger. Train je dan een applicatie waarin het gewicht van een persoon een factor is dan kan het niet anders zijn dan dat de applicatie fouten maakt als de trainingsdata set gemiddeld lichtere personen bevat.
+						</li>
+					</ul>
+				</li>		
+				<li>Wat hebben de makers van de Monocam, zoals gepresenteerd in de bovenstaande videoles 'Afleiding in het verkeer' van de Nationale Politie, gedaan om vooringenomenheid of bias te voorkomen?
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>Er is goed nagegaan of in een beeld echt bij een mobiel te zien is. De data wordt voorzien van een oordeel van een professional en de uitvoer laat alleen de mobiel en het nummerbord zien. De uitvoer wordt achteraf ook nog beoordeeld door de agenten. Gezichten worden vervaagd om te voorkomen dat een agent daardoor een discriminerend oordeel velt.
+						</li>
+					</ul>
+				</li>		
+				<li>Zoek op het internet nog een tweetal voorbeelden van vooringenomenheid. Dit hoeft niet direct in een AI applicatie te zijn.
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>Zelf doen en met klasgenoten bediscussiëren.
+						</li>
+					</ul>
+				</li>		
+			</ol>
+		</div>
+	</div>	
+	<a id="doorzichtigheid"></a><br/>
+	<h3>Doorzichtigheid</h3>
+	
+	<p>Een tweede, en aanverwant probleem is ondoorzichtigheid. We staan hier nog even stil bij het begrip <strong>black box</strong> . Meestal verwijst dit begrip naar complexe modellen zoals neurale netwerken of deep learning algoritmen, die zichzelf versterken en moeilijk te controleren zijn omdat ze zoveel berekeningen bevatten. Maar ondoorzichtigheid, het probleem van niet begrijpen wat AI van plan is, kan ook van toepassing zijn op veel eenvoudigere algoritmen. Laten we eens kijken waarom.</p>
+	<p>Er kunnen verschillende bronnen van ondoorzichtigheid zijn als het gaat om AI, niet alleen complexiteit:</p>
+	<ol><li>Bewust vaag houden vanwege concurrentievoordeel:  bedrijven willen soms niet dat iemand hun algoritme begrijpt; een algoritme kan een belangrijke bron van concurrentievoordeel zijn. Geheim houden van hoe het werkt, kan ook <i>gamen</i> van een algoritme voorkomen. Als sollicitanten bijvoorbeeld weten naar welke trefwoorden een algoritme in een cv zoekt, kunnen ze deze woorden gewoon in het document plaatsen om geselecteerd te worden.
+	</li>
+	<li>De technische geletterdheid onder de algemene bevolking vrij laag: zelfs een eenvoudig algoritme kan voor veel mensen moeilijk te begrijpen zijn.</li>
+	<li>Mensen en machines redeneren anders: het is bijvoorbeeld moeilijk voor een AI-systeem om uit te leggen waarom het denkt dat het naar een kat kijkt, terwijl een mens dat moeiteloos kan uitleggen.</li>
+	<li>Leveranciershype: bedrijven verkopen soms nep-AI. Bijvoorbeeld door te beweren dat ze een nieuwe geavanceerde chatbot hebben, maar deze wordt feitelijk aangedreven door mensen. Soms wordt een media-rage strategisch gebruikt om te verbergen wat er echt achter de schermen gebeurt.
+	</li></ol>
+	<div class ='treeview hammer' style="overflow: hidden;">
+		<span class="caret">Vragen</span>
+		<div id="myUL" class="nested">
+			<ol start="5">
+				<li>Waarom worden sommige AI-toepassingen 'black box-algoritmen' genoemd? En wat zou daarvoor een oplossing kunnen zijn?
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>De grootte van de dataset en het leerproces op deze dataset zorgen voor een ondoorzichtig eindproduct. Het is niet mogelijk deze ondoorzichtigheid helemaal op te lossen. Er moet vooral goed over de dataset worden nagedacht. Een andere oplossing zou zijn om een AI vrije applicatie te maken, maar dan moeten de regels om van invoer naar  uitvoer wel bekend zijn. AI is er echter juist om deze onbekende regels te ontdekken.
+						</li>
+					</ul>
+				</li>		
+				<li>Waarom zou een bedrijf nep-AI willen verkopen? Kun je een voorbeeld noemen?
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li> AI is in de mode dus je kunt proberen daar gebruik van te maken om meer geld te verdienen.
+						</li>
+					</ul>
+				</li>		
+			</ol>
+		</div>
+	</div>	
+	<a id="discriminatie"></a><br/>
+	<h3>Discriminatie</h3>
+	<p>De meeste organisaties willen niemand discrimineren. Maar ze hebben soms niet door dat hun systemen discriminerende effecten hebben, zeggen onderzoekers die het effect van discriminatie op AI bestuderen. AI kan bijvoorbeeld mensenrechten en andere belangrijke waarden bedreigen, zoals het recht op non-discriminatie. Eén van de problemen is dat AI onbedoeld kan leiden tot ongeoorloofde en oneerlijke discriminatie. Dat kan onder meer gebeuren als een AI-systeem leert van menselijke beslissingen die discrimineren. </p>
+	<p>Om mensen tegen oneerlijke discriminatie door AI te beschermen hebben we aanvullende regelgeving nodig. Zo simpel is dat echter ook weer niet, want het gebruik van AI-systemen is te gevarieerd voor één set regels. In verschillende sectoren staan verschillende waarden op het spel. Daarom worden vaak sectorspecifieke regels overwogen. Later in deze les leer je meer over de regelgeving rondom AI.</p>
+	<div class ='treeview hammer' style="overflow: hidden;">
+		<span class="caret">Vragen</span>
+		<div id="myUL" class="nested">
+			<ol start="7">
+				<li>Heeft uitsluitend kwaadaardig gebruik van AI negatieve gevolgen voor de maatschappij? Of kan ook goedbedoeld gebruik van AI leiden tot negatieve gevolgen?
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>Dat ook goedbedoelde AI problemen kan geven kunnen we illustreren met een voorbeeld in criminaliteitsbestrijding. Als alle gegevens van misdadigers wordt gebruikt om potentiële misdadigers op te sporen dan is het een goed doel om misdaad te voorkomen, maar er zullen volledig onschuldige personen worden aangewezen als mogelijke misdadigers.
+						</li>
+					</ul>
+				</li>		
+				<li>Waarom hangen vooringenomenheid, ondoorzichtigheid en discriminatie samen?
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>Als we bewuste ondoorzichtigheid en discriminatie buiten beeld laten dan kan een onbedoelde vooringenomenheid van de dataset er door het ondoorzichtige leerproces ervoor zorgen dat er onbedoeld discriminatie optreedt.
+						</li>
+					</ul>
+				</li>		
+			</ol>
+		</div>
+	</div>	
+	<a id="fast"></a><br/>
+	<h2>De FAST principes</h2>
+	<p>Dus hoe open je die zwarte doos van AI, om ervoor te zorgen dat je alleen eerlijke, verklaarbare, veilige en transparante AI-systemen gebruikt? Het is natuurlijk allereerst belangrijk dat je ervoor zorgt dat je op de hoogte bent en blijft van de ontwikkelingen. Volg opleidingen om te snappen wat de techneuten bedoelen, en volg je instinct. Maar daarnaast wordt er door allerlei organisaties geïnvesteerd in protocollen en standaarden voor eerlijk, verantwoord en transparant gebruik van AI. Daarin staan vaak de zogenaamde FAST-principes centraal: FAST staat daarbij voor <strong>fairness</strong>, <strong>accountability</strong>, <strong>safety</strong> en <strong>transparency</strong>. </p>
+	<div class="theorie center" style="width: 600px"><img src="images/FAST.png" style="width: 600px"/></div>
+	<a id="fairness"></a><br/>
+	<h3>Fairness</h3>
+	<p>Het is belangrijk om je te realiseren dat AI-systemen zijn ontworpen door mensen, die zijn gebonden aan de beperkingen van hun context en vooroordelen. Zo zal iedere AI racistisch zijn ten gunste van zijn makers - een Japanse AI zal totaal anders redeneren dan een Amerikaanse of Duitse omdat de sociale waarden in deze landen verschillen. Als je als gebruiker weet dat een AI-systeem met vooringenomenheid gebouwd is, kun je er ook op anticiperen. </p>
+	<p>De beperkingen in de context kunnen dus in de systemen terecht komen. Er kan bijvoorbeeld bias (vooringenomenheid ) optreden bij het verzamelen en analyseren van gegevens. Het Gender Shades onderzoek uit de video is daar een goed voorbeeld van, de data bestond merendeels uit foto’s van blanke personen. Het is cruciaal om ervoor te zorgen dat trainings- en testdatasets die gebruikt worden om de applicatie te laten leren representatief genoeg zijn voor het doel dat de applicatie beoogt (inclusief data van verschillende bevolkingsgroepen en minderheden), dit om fouten en discriminatie in de applicatie te voorkomen. Het is dus al nodig om bias te analyseren tijdens het ontwerp van de AI applicatie. In de <a href="ethiek_FAIR.html" 
+	class="book">volgende paragraaf</a> gaan we dieper in op eisen aan data.</p>
+	<p>Behalve analyse van bias in de trainings- en testdatasets moet ook worden gekeken naar bias die optreedt tijdens het leerproces van het AI-systeem ofwel in de verwerking van de data naar het resultaat van een AI-systeem. Komen er in deze stap nog discriminerende effecten naar boven? Als laatste is het belangrijk dat de het AI-systeem alleen gebruikt wordt door deskundigen die zijn opgeleid om deze applicatie op een verantwoorde en onbevooroordeelde manier toe te passen. Bij de Monocam applicatie bijvoorbeeld krijgen alleen agenten de mogelijke overtreders te zien. Het eindoordeel ligt daar nog steeds bij de mens, al is die wel heel goed geholpen door het voorsorteren van vele opnames van voertuigen.</p>
+	<div class ='treeview hammer' style="overflow: hidden;">
+		<span class="caret">Vragen</span>
+		<div id="myUL" class="nested">
+			<ol start="9">
+				<li>Kun je aangeven hoe de makers van de Monocam, zoals gepresenteerd in de videoles van de Nationale Politie, ervoor hebben gezorgd dat hun AI-toepassing eerlijk is? Hebben zij hier bij de gebruikte trainingsdata al rekening mee gehouden?
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>De video over de Monocam laat zien dat er heel goed wordt nagedacht over het voorkomen van bias in de trainingsdata. Er worden criteria opgesteld over wat wel en geen mobiel is. Ook worden er mogelijke criteria uitgesloten omdat die vanwege de wet niet mogen. 
+						</li>
+					</ul>
+				</li>		
+				<li>Wat zouden de gezichtsherkenningsapplicaties uit het Gender Shades verhaal moeten doen om ook personen met een donkere huidtype beter te leren herkennen?
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>De trainingsdataset moet worden uitgebreid met personen met een meer donker huidtype en er moet dus opnieuw worden getraind.
+						</li>
+					</ul>
+				</li>		
+				<li>Waarom is het belangrijk om al tijdens het ontwerp van een AI-toepassing na te denken over fairness?
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>Voorkomen is beter dan genezen. Als voor een applicatie wordt aangetoond dat deze foute eigenschappen heeft, dan kan dit leiden tot het afdanken van de applicatie en dus voor financieel verlies. Ook kan het leiden tot ongerustheid in de samenleving waardoor AI in zijn algemeenheid weer in een slechter daglicht komt te staan.
+						</li>
+					</ul>
+				</li>		
+			</ol>
+		</div>
+	</div>		
+	<a id="accountability"></a><br/>
+	<h3>Accountability</h3>
+	<p>Het principe van accountability vereist dat de verantwoordelijkheid voor beslissingen gemaakt door AI-systemen ligt bij de menselijke ontwikkelaars van de systemen en de gebruikers die de systemen in de praktijk toepassen. Het gaat dan eigenlijk over twee aspecten. De verantwoordingsplicht, die iets zegt over wie verantwoordelijk is voor een uitkomst van zo'n systeem. En controleerbaarheid, dat inspeelt op hoe ontwikkelaars en gebruikers verantwoordelijk moeten worden gehouden: als bijvoorbeeld een AI systeem een antwoord geeft moet er door de verantwoordelijken uitgelegd kunnen worden hoe dit antwoord tot stand is gekomen. Het is belangrijk om de verantwoordelijkheid in alle stadia te bewaken, van systeemontwikkeling tot het moment waarop het systeem wordt toegepast in de praktijk en tot wanneer het uiteindelijk niet langer gebruikt wordt en verwijderd wordt.</p>
+	<div class ='treeview hammer' style="overflow: hidden;">
+		<span class="caret">Vragen</span>
+		<div id="myUL" class="nested">
+			<ol start="12">
+				<li>Op welke manier hebben de makers van de Monocam, de AI-toepassing van de Nationale Politie, ervoor gezorgd dat er is voldaan aan de eisen van verantwoordingsplicht en controleerbaarheid?
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>De makers van de MONOcam hebben ervoor gezorgd dat er altijd een politiemedewerker kijkt naar de geselecteerde foto’s en die controleert op juistheid voordat er een bekeuring wordt verstuurd.
+						</li>
+					</ul>
+				</li>		
+			</ol>
+		</div>
+	</div>		
+	<a id="safety"></a><br/>
+	<h3>Safety</h3>
+	<p>Het veiligheidsprincipe vereist dat, afhankelijk van de praktische setting, het systeem nauwkeurig is en binnen een verwacht foutenpercentage werkt. Een AI-systeem moet betrouwbaar zijn, om consistente resultaten te genereren. Het moet veilig zijn en daardoor de privacy en vertrouwelijkheid van gegevens die gebruikt worden waarborgen. En een AI-systeem moet robuust zijn, om zelfs bij onverwachte veranderingen en verstoringen de bediening te garanderen. Stel je bijvoorbeeld eens voor dat de Monocam, zoals gepresenteerd in de videoles van de Nationale Politie voortdurend foute beslissingen neemt wanneer het harder waait dan windkracht 4.</p>
+	<p>
+	<div class ='treeview hammer' style="overflow: hidden;">
+		<span class="caret">Vragen</span>
+		<div id="myUL" class="nested">
+			<ol start="13">
+				<li>Zelfrijdende auto’s hebben al ongelukken verzorgd. Welke veiligheidseisen zou jij willen stellen aan het rijdende AI-systeem? Bedenk ook hoe realistisch jouw eisen zijn. Het is namelijk niet waarschijnlijk dat er nooit meer een ongeluk in het verkeer zal plaatsvinden.
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>Je zou als eis kunnen stellen dat een zelfrijdende auto minder ongelukken maakt dan de mens in vergelijkbare situaties. Of dat een AI-systeem nooit een fatale fout kan maken die een mens ook nooit zou maken. Ook is het zeker niet gewenst als het systeem onderweg plotseling stopt met werken.
+						</li>
+					</ul>
+				</li>		
+				<li>Een van de systemen in het Gender Shades verhaal herkende wel een gezicht in een wit masker, maar niet het gezicht van de donkere dame. Is het veilig als deze AI-systemen maskers herkennen?
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>Of dit veilig is of niet houdt verband met het doel van de applicatie. Als het gebruikt wordt om iemand te herkennen dan is het heel slecht als iemand met een masker van jouw gezicht op ook wordt herkent als jou. Wanneer er met de applicatie slechts overzichten worden gegeven over drukte op straat verdeeld over mannen en vrouwen om eventuele onrust in te schatten dan kan dit een minder een probleem zijn.
+						</li>
+					</ul>
+				</li>		
+			</ol>
+		</div>
+	</div>
+	<a id="transparency"></a><br/>
+	<h3>Transparency</h3>
+	<p>Het laatste FAST-principe is transparantie. Beperkte transparantie kan de betrouwbaarheid van AI-systemen verminderen en de validatie van de resultaten en de identificatie van fouten en vooroordelen belemmeren. Daarom is het noodzakelijk om alle gevolgde processen tijdens het ontwerp en het gebruik van een AI-systeem te kunnen beoordelen. Het moet mogelijk zijn om de basisgedachte achter de beslissingen of het gedrag van een systeem te begrijpen. Er wordt in relatie tot transparantie ook wel gesproken over zogenaamde <strong>explainable AI</strong>.  Het doel van explainable AI is om AI-beslissingen transparanter en betrouwbaarder te maken.</p>
+	<p>Transparantie binnen AI omvat de volgende twee betekenissen:</p>
+	<ol><li>Verklaarbaarheid: De mogelijkheid om te achterhalen hoe en waarom een AI-systeem een acteert in een bepaalde situatie en men dus de logica van de beslissing of het gedrag kan begrijpen. Dit noemt men ook wel het openen van de ‘black box’ van AI.</li>
+	<li>Rechtvaardiging: Men moet kunnen aantonen dat zowel het ontwerp en de inzet van een AI-systeem een rechtvaardiging heeft met betrekking tot de punten, ethisch toelaatbaar, niet-discriminerend/eerlijk, publiek vertrouwenswaardig en het garanderen van veiligheid.
+	</li>
+	</ol>
+	<p>Om transparantie te bieden is het dus de taak om voor AI-systemen eerst het systeem te rechtvaardigen. Als daarna het systeem is ontwikkeld moet er voor leken een uitleg komen hoe en waarom een systeem werkt. Als laatste moet er dan weer een rechtvaardiging komen van het gedrag van het AI-systeem. Goede initiële intenties kunnen namelijk alsnog verkeerd uitpakken.</p>
+	<div class ='treeview hammer' style="overflow: hidden;">
+		<span class="caret">Vragen</span>
+		<div id="myUL" class="nested">
+			<ol start="13">
+				<li>Wat betekent de afkorting FAST? Geef in je uitleg Nederlandse begrippen.
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>De F in FAST staat voor fairness ofwel eerlijkheid. De A staat voor accountability  ofwel verantwoordelijkheid. De S staat voor security ofwel veiligheid. De T staat voor transparency ofwel transparantie/uitlegbaarheid.
+						</li>
+					</ul>
+				</li>		
+				<li>Transparantie staat niet los van de andere drie principes. Geef aan wat de koppelingen zijn.
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>Als een AI-systeem transparant is, dan is duidelijk hoe het systeem omgaat met veiligheid, is het duidelijk dat de applicatie op een eerlijke manier werkt. Het maakt het dan waarschijnlijk ook mogelijk om beter te oordelen over wie de verantwoordelijkheid van een AI-systeem draagt.
+						</li>
+					</ul>
+				</li>		
+				<li> Link de volgende beschrijvingen aan het bijbehorende FAST-principe van AI-ethiek:
+					<ol style="list-style-type: lower-alpha">
+						<li>De verantwoordelijkheid voor AI-beslissingen ligt bij de menselijke ontwikkelaars en de gebruikers die de systemen in de praktijk toepassen.
+						</li>
+						<li>Toevoegen van code aan een AI-systeem door onbekende en anonieme programmeurs.
+						</li>
+						<li> Beperken van bias in datasets door data van verschillende populaties en minderheden op te nemen.
+						</li>
+						<li>Ervoor zorgen dat een AI-systeem nauwkeurig, betrouwbaar en robuust is.
+						</li>
+					</ol>
+					<span class="caret doel">antwoord</span>
+					<ul class="nested">
+						<li>
+							<ol style="list-style-type: lower-alpha">
+								<li>Accountability
+								</li>
+								<li>Transparency,Fairness,Security
+								</li>
+								<li>Fairness
+								</li>
+								<li>Security
+								</li>
+							</ol>
+						</li>
+					</ul>
+				</li>		
+			</ol>
+		</div>
+	</div>	
+	<p>De FAST-principes gaan over het hele AI-systeem. In de volgende paragraaf concentreren we op problemen rond de data waarvan AI-systemen afhankelijk zijn. 
+	</p>
+	</article>
+  </body>
+</html>
