@@ -22,7 +22,7 @@
 </script>
 
 </head>
-<body id="neuralenetwerken" onload="initTreeview();">
+<body id="neuralenetwerken" onload="addPathLead();initTreeview();">
 	<a name="Inleiding" style="counter-reset: subsection 1;"></a>
     <header class="paragraaf titel">Op weg naar meer lagen</header>
 
@@ -31,11 +31,11 @@
 		<a href="inleiding_neurale_netwerken.html" target="_parent">Neurale Netwerken</a>/Op weg naar meer lagen</h4> 
 		<div style="height: 130px;">
 		<div style="float:right;">
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="license">
 			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 			<br />This work is licensed under a
 			<br />
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="license">Creative Commons Attribution-NonCommercial-ShareAlike
 				4.0
 			<br />International License</a>.
 		</div>
@@ -1004,7 +1004,7 @@ Kortom het is dus van heel groot belang om de kwaliteit van de trainingsdata voo
 <img src="images/boven2lijnen.png"><br/><img src="images/tussen2lijnen.png"><br/>
 <caption>Twee lijnen: De blauwe punten moeten worden gescheiden van de rode punten. De bovenste figuur is de situatie <strong>boven 2 lijnen</strong>, de onderste figuur de situatie <strong>tussen 2 lijnen</strong>. De groene lijnen zijn de werkelijke lijnen. De gestippelde blauwe de door training verkregen lijnen.</caption>
 </div>
-<p>In het hoofdstuk <a href="neurale_netwerken_leren.htm" class="book">Hoe een neural netwerk leert</a> hebben we één grens kunnen bepalen tussen een verzameling punten met behulp van één perceptron.
+<p>In het hoofdstuk <a href="neurale_netwerken_leren.html" class="book">Hoe een neural netwerk leert</a> hebben we één grens kunnen bepalen tussen een verzameling punten met behulp van één perceptron.
 Bij het <b>xor</b> (exclusieve-of) voorbeeld hierboven waren er twee lijnen nodig om deze logische schakeling te leren. In dit deel bekijken we puntenverzamelingen die op basis van twee lijnen zijn ingedeeld. We beschouwen twee situaties. Een situatie waarin we het netwerk willen leren een gebied te vinden waar punten zowel boven lijn 1 en boven lijn 2 ligt (<strong>boven 2 lijnen</strong>). Een tweede situatie waarin we het netwerk willen leren een gebied te vinden waar punten zowel boven lijn 1 en boven lijn 2 ligt of zowel onder lijn 1 en onder lijn 2 ligt (<strong>tussen 2 lijnen</strong>). De vraag waaraan we hier aandacht besteden is: Hoe ziet het meest minimale netwerk eruit om elk van de twee situaties op te lossen.
 <div class ='treeview hammer' style="overflow: hidden;">
 	<span class="caret">Opdrachten</span>

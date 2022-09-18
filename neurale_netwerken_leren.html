@@ -106,7 +106,7 @@
   
 </script>
 </head>
-<body  id="neuralenetwerken" onload="initTreeview();initG();init();"  >
+<body  id="neuralenetwerken" onload="addPathLead();initTreeview();initG();init();"  >
     <a name="Inleiding" style="counter-reset: subsection 0;"></a>
     <header class="paragraaf titel">Hoe een neuraal netwerk leert</header>
 
@@ -114,11 +114,11 @@
 	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/<a href="inleiding_neurale_netwerken.html" target="_parent">Neurale Netwerken</a>/Hoe een neuraal netwerk leert</h4> 
     <div style="height: 130px;">
 		<div style="float:right;">
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="license">
 			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 			<br />This work is licensed under a
 			<br />
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="license">Creative Commons Attribution-NonCommercial-ShareAlike
 				4.0
 			<br />International License</a>.
 		</div>
@@ -183,7 +183,7 @@
 
 </div>
 <p>
-In de <a href="techniek_neurale_netwerken.html" class="book">inleiding neurale netwerken</a> van de sectie <a href="inleiding_technieken.html" class="book">technieken</a> heb je kennis gemaakt met de structuur van een kunstmatig neuraal netwerk (figuur 1) die is opengewerkt in figuur 2. Een neuraal netwerk bestaat uit een invoerlaag, verborgen lagen en een uitvoerlaag. De verborgen lagen en de uitvoerlaag zijn opgebouwd uit knopen ofwel perceptrons (figuur 3), ook wel neuronen of knopen genoemd. Iedere percepton verwerkt de inkomende signalen tot een uitvoer door de inkomende signalen te wegen en het gewogen resultaat door te geven aan een ontvanger (volgende knoop of gebruiker). Tijdens het trainen van het netwerk wordt naar de meest passende wegingsfactoren gezocht. We gaan nu proberen het leerproces van een neuraal netwerk te verduidelijken en beginnen met het meest simpele netwerk waarmee we toch nog wat complexiteit kunnen duiden, een netwerk bestaande uit één perceptron met twee invoeren en één uitvoer. We gebruiken hier de trainingsvorm begeleid leren (=supervised learning). 
+In de <a href="techniek_neurale_netwerken.html" class="book">inleiding neurale netwerken</a> van de sectie <a href="inleiding_technieken.html" class="book">technieken</a> heb je kennis gemaakt met de structuur van een kunstmatig neuraal netwerk (figuur 1) die is opengewerkt in figuur 2. Een neuraal netwerk bestaat uit een invoerlaag, verborgen lagen en een uitvoerlaag. De verborgen lagen en de uitvoerlaag zijn opgebouwd uit perceptrons (figuur 3), ook wel neuronen of knopen genoemd. Iedere percepton verwerkt de inkomende signalen tot een uitvoer door de inkomende signalen te wegen en het gewogen resultaat door te geven aan een ontvanger (volgende knoop of gebruiker). Tijdens het trainen van het netwerk wordt naar de meest passende wegingsfactoren gezocht. We gaan nu proberen het leerproces van een neuraal netwerk te verduidelijken en beginnen met het meest simpele netwerk waarmee we toch nog wat complexiteit kunnen duiden, een netwerk bestaande uit één perceptron met twee invoeren en één uitvoer. We gebruiken hier de trainingsvorm begeleid leren (=supervised learning). 
 </p>
 <a id="Werking"></a><br/>
 <h2>De werking van een perceptron</h2>
@@ -239,7 +239,7 @@ De uitvoer (output) van een perceptron wordt gegenereerd door de som uit de vori
 </p>
 
 <p>
-Activeringsfuncties zijn er in verschillende vormen, simpele maar ook voor de leek moeilijker te begrijpen wiskundige functies. Voor ons eerste perceptron model houden we het zo simpel mogelijk. De activeringsfunctie die we hier kiezen is het <strong>teken van de waarde van de som</strong>. Met andere woorden, als de som een positief getal is, is de uitvoer 1, als het negatief is, is de uitvoer -1. In netwerken met meerdere lagen kan deze teken activeringsfunctie niet worden gebruikt om het netwerk te trainen (zie stap 4 in het <a href="#trainen" >trainingsproces</a>  dat verder op in dit hoofdstuk wordt behandeld). In de figuur hiernaast zie je behalve de teken functie nog de sigmoïde functie en de tangens hyperbolicus, deze activeringsfuncties gebruiken we in het <a href="neurale_netwerken_meer_lagen.htm" class="book" >volgende hoofdstuk</a>.
+Activeringsfuncties zijn er in verschillende vormen, simpele maar ook voor de leek moeilijker te begrijpen wiskundige functies. Voor ons eerste perceptron model houden we het zo simpel mogelijk. De activeringsfunctie die we hier kiezen is het <strong>teken van de waarde van de som</strong>. Met andere woorden, als de som een positief getal is, is de uitvoer 1, als het negatief is, is de uitvoer -1. In netwerken met meerdere lagen kan deze teken activeringsfunctie niet worden gebruikt om het netwerk te trainen (zie stap 4 in het <a href="#trainen" >trainingsproces</a>  dat verder op in dit hoofdstuk wordt behandeld). In de figuur hiernaast zie je behalve de teken functie nog de sigmoïde functie en de tangens hyperbolicus, deze activeringsfuncties gebruiken we in het <a href="neurale_netwerken_meer_lagen.html" class="book" >volgende hoofdstuk</a>.
 
 
 <div class="voldoet" style="overflow: hidden;">
@@ -446,7 +446,7 @@ Waarin $ a = \frac{w_{1}}{-w_{2}} $ en $ b = \frac{w_{0}}{-w_{2}} $
 </p>
 <p>
 De code voor de perceptron in de applet vindt je onder de knop hieronder. Echter zonder 
-de graphics. Wil je die ook bewaar dan <a href="SLO-apps/NNPlusmin1.htm" target="voorbeeld">dit document</a>.
+de graphics. Wil je die ook pak dan <a href="SLO-apps/perceptron.zip" target="voorbeeld">dit document</a> uit.
 In de code is het deel voor de perceptron gebundeld in een Javascript class <strong>Perceptron</strong>.
 Heb je nog nooit met Javascript classes gewerkt? In dat geval is onderstaand voorbeeld waarschijnlijk wel te volgen. Voor meer informatie over classes in Javascript kan je kijken op <a href="https://www.w3schools.com/js/js_classes.asp" target="uitleg">w3schools</a> of je kan <a href="https://youtu.be/2ZphE5HcQPQ" target="uitleg">deze video</a> bekijken.
 </p>
@@ -472,7 +472,7 @@ Heb je nog nooit met Javascript classes gewerkt? In dat geval is onderstaand voo
          * een Perceptron maken.
          * @param: n is het aantal inputs (inclusief de bias) die de perceptron krijgt
          * @param: f is de activeringsfunctie die de uitvoer bepaalt op basis van
-		 *         de som van invoer keer gewichten f(som)
+         *         de som van invoer keer gewichten f(som)
          */
         constructor(n,f) 
         {
@@ -536,7 +536,7 @@ Heb je nog nooit met Javascript classes gewerkt? In dat geval is onderstaand voo
         // Maak zo nodig de perceptron met de lengte van het punt en de teken functie
         if(myPerceptron==null)
         {
-          maakPerceptron(invoer.length, Math.sign );
+          maakPerceptron(punt.length, Math.sign );
         }
 		
         document.getElementById("uitvoer").innerHTML=

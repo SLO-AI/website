@@ -9,18 +9,18 @@
     <script src="treeview.js"></script>
 	<title>Kunstmatige Intelligentie</title>
   </head>
-  <body  id="neuralenetwerken" onload="initTreeview();" >
+  <body  id="neuralenetwerken" onload="addPathLead();initTreeview();" >
     <a name="Inleiding" style="counter-reset: subsection 2;"></a>
     <header class="paragraaf titel">Tensorflow</header>
     <section>
 	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/<a href="inleiding_neurale_netwerken.html" target="_parent">Neurale netwerken</a>/Tensorflow</h4> 
     <div style="height: 100px;">
 		<div style="float:right;">
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="license">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"  /></a>
 			<br />This work is licensed under a
 			<br />
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="license">Creative Commons Attribution-NonCommercial-ShareAlike
 				4.0
 			<br />International License</a>.
 		</div>
@@ -112,10 +112,10 @@
 			</p>
 			<a id="dhnodig"></a><br/>
 			<h3>Benodigdheden</h3>
-			<ul><li>Er wordt gebuikt gemaakt van Google Colab (<a href="https://colab.research.google.com/" target="ethiek">https://colab.research.google.com/</a>). Om van Google Colab gebruikt te maken moeten de leerlingen een Google Account hebben en zich aangemeld hebben voor Google Drive.
+			<ul><li>Er wordt gebuikt gemaakt van Google Colab (<a href="https://colab.research.google.com/" target="nn">https://colab.research.google.com/</a>). Om van Google Colab gebruikt te maken moeten de leerlingen een Google Account hebben en zich aangemeld hebben voor Google Drive.
 			<p>De reden dat er gebruik gemaakt wordt van Google Colab is dat een gemiddelde laptop niet de capaciteit heeft om tijdig voldoende foto's te verwerken en daarmee een neuraal netwerk te trainen waarmee beelden herkend kunnen worden.</p>
 			</li>
-			<li> De App wordt gemaakt met Android Studio (<a href="https://developer.android.com/studio" target="ethiek">https://developer.android.com/studio</a>). Deze omgeving moet dus door tenminste enige leerlingen te installeren zijn.
+			<li> De App wordt gemaakt met Android Studio (<a href="https://developer.android.com/studio" target="nn">https://developer.android.com/studio</a>). Deze omgeving moet dus door tenminste enige leerlingen te installeren zijn.
 			</li>
 			<li>De App runt op een Android telefoon. Er moeten dus enige leerlingen de beschikking hebben over een Android telefoon.
 			</li>
@@ -169,10 +169,10 @@
 	<ul style="list-style-type: circle;">
 		<li>Maak eerst een Google Account aan als je dit nog niet hebt en meld je aan voor Google Drive (<a href="https://drive.google.com/" target="nn">https://drive.google.com/</a>)</li>
 		<li>Volg <a href="https://github.com/SLO-AI/tensorflow/blob/main/model_maker_image_classification.ipynb" target="nn">deze link</a> naar de Google Colab tutorial voor het classificeren van beelden, die is aangepast door Daniël Haitink zodat het netwerk kan worden getoond.</li>
-		<li>Of download <a href="SL-apps/tensorflow/F:\website\school\informatica\SLO_Artificial_Intelligence\SLO-apps\tensorflow\model_maker_image_classification.ipynb" target="ethiek">model_maker_image_classification.ipynb</a>, ga naar <a href="https://www.tensorflow.org">tensorflow.org<a/>
-		en open vandaar uit het ipynb document.
+		<li>Of download <a href="SLO-apps/tensorflow/model_maker_image_classification.ipynb" target="nn">model_maker_image_classification.ipynb</a>, ga naar <a href="https://colab.research.google.com/" target="nn">google colab<a/>
+		en open (upload) van daaruit het ipynb document.
 		</li>
-		<li>Of volg <a href="https://www.tensorflow.org/lite/tutorials/model_maker_image_classification" target="ethiek">deze link</a> naar de Google Colab tutorial voor het classificeren van beelden.
+		<li>Of volg <a href="https://www.tensorflow.org/lite/tutorials/model_maker_image_classification" target="nn">deze link</a> naar de Google Colab tutorial voor het classificeren van beelden.
 		</li>
 		<li>Klik op: <strong>Run in Google Colab</strong></li>
 		<li>Er komt een tabblad in je browser bij "Model Maker Image Classification". Zorg dat dat tabblad geopend is.
@@ -232,7 +232,7 @@
 	<a id="f1mag"></a><br/>
 	<h3>Maak een agent (= app) die dit neurale netwerk gebruikt</h3>
 	<ul style="list-style-type: circle;">
-		<li>Installeer zo nodig Android Studio (<a href="https://developer.android.com/studio" target="ethiek">https://developer.android.com/studio</a>)</li>
+		<li>Installeer zo nodig Android Studio (<a href="https://developer.android.com/studio" target="nn">https://developer.android.com/studio</a>)</li>
 		<li>Download <a href="SLO-apps/tensorflow/TFLClassify.zip">TFLClassify.zip</a> en pak dit uit.</li>
 		<li>Kopieer <strong>model.tflite</strong> uit je Downloads map naar de map <strong>TFLClassify</strong> en verander van de kopie de naam in <strong>FlowerModel.tflite</strong>.</li>
 		<li>Start Android Studio.</li>
@@ -260,7 +260,7 @@
 	<a id="f1zap"></a><br/>
 	<h3>Zet de App op een Android telefoon</h3>
 	<ul style="list-style-type: circle;">
-		<li>Zet op je Android telefoon de Developer options en USB debugging aan volgens deze instructie: <a href="https://developer.android.com/studio/debug/dev-options.html#enable" target="ethiek">https://developer.android.com/studio/debug/dev-options.html#enable</a></li>
+		<li>Zet op je Android telefoon de Developer options en USB debugging aan volgens deze instructie: <a href="https://developer.android.com/studio/debug/dev-options.html#enable" target="nn">https://developer.android.com/studio/debug/dev-options.html#enable</a></li>
 		<li>(<strong>Let op:</strong> Je moet eerst de de Developer options en USB debugging  op je Android telefoon aanzetten en daarna pas de Android telefoon verbinden met he USB - mini USB kabeltje)</li>
 		<li>Verbind je Android telefoon met het USB - USB mini kabeltje met je PC of laptop.</li>
 		<li>Als dit goed gaat zie je het device verschijnen. Dit ziet er ongeveer zo uit:
@@ -367,7 +367,7 @@
 	</p>
 	<ul style="list-style-type: circle;">
 		<li>Deze plaatjes zitten in het gecomprimeerde bestand train.tar.gz. Download dit bestand.
-		<a href="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/89e570e6-df2c-4e17-b832-981d858d828a/train.tar.gz" target="nn">train.tar.gz</a>
+		<a href="SLO-apps/tensorflow/train.tar.gz" target="nn">train.tar.gz</a>
 		</li>
 		<li>Pak <strong>train.tar.gz</strong> uit (Met Windows 10 lukt het niet om een tar dan wel gz bestand uit te pakken. Gebruik <strong><a href="https://www.7-zip.org/download.html" target="nn">7-Zip</a></strong>). Je krijgt dan een bestand <strong>train.tar</strong>.</li>
 		<li>Pak <strong>train.tar</strong> uit. Je krijgt dan een map <strong>train</strong>.</li>
