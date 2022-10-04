@@ -15,22 +15,22 @@
 	  });
 	</script>
   </head>
-  <body  id="technieken" onload="initTreeview()"  >
+  <body  id="technieken" onload="addPathLead();initTreeview()"  >
     <a name="Inleiding" style="counter-reset: subsection 2;"></a>
     <header class="paragraaf titel">Associatie analyse</header>
 	<section>
 	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/	<a href="inleiding_technieken.html" target="_parent">Technieken</a>/Associatie analyse</h4> 
     <div style="height: 100px;">
 		<div style="float:right;">
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="license">
 			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 			<br />This work is licensed under a
 			<br />
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="license">Creative Commons Attribution-NonCommercial-ShareAlike
 				4.0
 			<br />International License</a>.
 		</div>
-		<a name="Inleiding"></a> bron:<a href="../Informatie/Big Data studenten OCE/Lesmodule Big Data.pdf">Lesmodule Big Data</a>
+		<a name="Inleiding"></a> bron:<a href="docs/Big Data studenten OCE/Lesmodule Big Data.pdf">Lesmodule Big Data</a>
 	</div>
 	</section>
 	<div class="navbar">
@@ -58,7 +58,7 @@
 In de <a href="techniek_introductie.html" class="book">introductie van de AI technieken</a> heb je gezien dat AI applicaties data gestuurd zijn. Hoe werkt dat sturen door die data? In deze sectie en volgende secties gaan we dat in een aantal technieken bekijken. De meeste toepassingen gebruiken artificiële intelligentie om b.v. patronen te herkennen of groeperingen te maken.
 </p>
 <p>
-De berekeningen in dit en de sectie <a href="techniek_intrtechniek_cluster_analyse.htmloductie" class="book">Cluster Analyse</a> zijn niet heel erg ingewikkeld en zouden voor iedere leerling op havo en vwo uit te voeren moeten zijn. Lukt het niet stel dan vragen aan je docent.
+De berekeningen in dit en de sectie <a href="techniek_cluster_analyse.html" class="book">Cluster Analyse</a> zijn niet heel erg ingewikkeld en zouden voor iedere leerling op havo en vwo uit te voeren moeten zijn. Lukt het niet stel dan vragen aan je docent.
 </p>
 <p>
 Na het bestuderen van deze sectie:
@@ -93,7 +93,7 @@ Na het bestuderen van deze sectie:
 	</div>
 	<p>Stel je wordt manager van een supermarkt in een wijk waar veel studenten wonen. Na een paar dagen krijg je onder andere de indruk dat er veel bananen en chocolade verkocht worden. Daarom overweeg je de bananen en de chocolade samen vlak bij de kassa's te leggen om zo de klanten die langs lopen tot meer impuls inkopen te verleiden.  Je wilt als verkoper ook niet impulsief te werk gaan, dus ga je een onderzoek doen met alle kassaregistraties van de klanten als gegevens voor je onderzoek. Eén kassaregistratie geeft dan natuurlijk aan wat de klant in het winkelmandje had.
 	</p>
-	<p>De methoden die je als onderzoeker tot je beschikking hebt om deze gegevens te onderzoeken vallen onder <strong>associatie analyse</strong>. Voor we algemeen aan de slag gaan en één van de methoden, het <strong>apriori algoritime</strong>, in detail uitwerken gaan we eerst intuïtief met bovenstaand voorbeeld aan de slag. Na een week heb je deze gegevens verzameld:
+	<p>De methoden die je als onderzoeker tot je beschikking hebt om deze gegevens te onderzoeken vallen onder <strong>associatie analyse</strong>. Voor we algemeen aan de slag gaan en één van de methoden, het <strong>apriori algoritme</strong>, in detail uitwerken gaan we eerst intuïtief met bovenstaand voorbeeld aan de slag. Na een week heb je deze gegevens verzameld:
 	</p>
 	<ul>
 		<li>er blijken 8051 klanten te zijn geweest;</li>
@@ -211,7 +211,7 @@ Na het bestuderen van deze sectie:
 	In een verzameling bevindt zich <strong>elementen</strong> (leerlingen, spelers, liedjes). We noteren een verzameling als volgt:
 
 	$$V=\{v_{1},v_{2},v_{3},\cdots ,v_{n}\}.$$<br/>
-	Verzameling $V$ bevat elementen $v$ die we kunnen nummeren. $v_{1}$ is dan het eerste element in de verzameling, $v_{2}$ het tweede, $v_{1}$ is dan het derde, enz.
+	Verzameling $V$ bevat elementen $v$ die we kunnen nummeren. $v_{1}$ is dan het eerste element in de verzameling, $v_{2}$ het tweede, $v_{3}$ is dan het derde, enz.
 	</p>
 <p>Een verzameling bestaat dus uit elementen, en als $v$ <strong>een element is van een verzameling</strong> $\small V$ noteren we dit wiskundig als <strong>$\small v \in V$</strong>. We gebruiken accolades om verzamelingen te noteren. 
 </p><p>
@@ -247,7 +247,7 @@ Als we schrijven $\small \textbf{melk} \in \textbf{winkelmandje}$, dan zeggen w
 	</div>
 	</div>
 	<p>
-	Zo geldt bijvoorbeeld voor $\small X=\{\text{melk},\text{kaas}\}$ en $\small Y=\{\text{melk},\text{brood},\text{kaas}\}$ dat $\small X ⊂ Y$, $\small X$ is een deelverzameling van $\small Y$ want melk en kaas, de elementen van $X$, zijn ook aanwezig in $Y$.
+	Zo geldt bijvoorbeeld voor $\small X=\{\text{melk},\text{kaas}\}$ en $\small Y=\{\text{melk},\text{brood},\text{kaas}\}$ dat $\small X \subset Y$, $\small X$ is een deelverzameling van $\small Y$ want melk en kaas, de elementen van $X$, zijn ook aanwezig in $Y$.
 	</p>
 </td>
 </tr>
@@ -314,7 +314,7 @@ $X \cup Y$<br/>
 Zo is bijvoorbeeld de vereniging van de verzamelingen  $\small X = \{\text{melk}, \text{brood}, \text{kaas}\}$  en de verzameling $\small Y = \{\text{melk}, \text{brood}, \text{pindakaas}\}$ verzameling met de elementen Kaas, Melk, Brood en Pindakaas, $\small \{\text{melk}, \text{brood}, \text{kaas}, \text{pindakaas}\}$ want alle elementen uit $X$ en $Y$ zijn aanwezig. Notatie:
 
 $$
-\small \{\text{melk}, \text{brood}, \text{kaas}\} \cap \{\text{melk}, \text{brood}, \text{pindakaas}\} = \{\text{melk}, \text{brood}, \text{kaas}, \text{pindakaas}\}
+\small \{\text{melk}, \text{brood}, \text{kaas}\} \cup \{\text{melk}, \text{brood}, \text{pindakaas}\} = \{\text{melk}, \text{brood}, \text{kaas}, \text{pindakaas}\}
 $$
 </p>
 </td>
@@ -919,7 +919,11 @@ Naast deze minimale support kun je ook instellen hoe betrouwbaar de implicaties 
 	<div style="padding-left: 25px;">
 	In de tabel hierboven zie je dat alleen $\{Boter\}$ uit $S1$ de grens van 40% niet haalt. De collectie F met itemsets met voldoende support breiden we dus uit met de 1-itemsets  
 	$\{Spaghetti\}$, $\{Tomatensaus\}$ en $\{Brood\}$ dus:<br/>
-	$F=\{\{Spaghetti\}, \{Tomatensaus\}, \{Brood\}\}$
+$\begin{array}{ll}
+  F= & \{\{Spaghetti\}, \\ 
+	&  \{Tomatensaus\}, \\
+	&  \{Brood\}\}
+\end{array}$
 	</div>
 </div>
 
@@ -975,11 +979,20 @@ Naast deze minimale support kun je ook instellen hoe betrouwbaar de implicaties 
 <div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: #ff99cc">
 	Voeg de 2-itemsets met voldoende support toe aan de collectie $F$
 </div>
-<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: #ff99cc">voorbeeld:
+<div class="voorbeeld theorie example" style="padding-right: 10px; background-color: #ff99cc">voorbeeld:
 	<div style="padding-left: 25px;">
 	In de tabel hierboven zie je dat alle 2-itemsets de grens van 40% halen. De collectie F met itemsets met voldoende support breiden we dus uit met de 2-itemsets 
-$\{Spaghetti,Tomatensaus\}, \{Spaghetti, Brood \}$ en $\{Tomatensaus, Brood \}$	dus
-$F=\{\{Spaghetti\}, \{Tomatensaus\}, \{Brood\},\{Spaghetti,Tomatensaus\}, \{Spaghetti, Brood \},\{Tomatensaus, Brood \}\}$
+$\{Spaghetti,Tomatensaus\}, \{Spaghetti, Brood \}$ en $\{Tomatensaus, Brood \}$	dus:<br/>
+$
+\begin{array}{ll}
+  F= & \{\{Spaghetti\}, \\ 
+	&  \{Tomatensaus\}, \\
+	&  \{Brood\}, \\
+	&  \{Spaghetti,Tomatensaus\}, \\
+	&  \{Spaghetti, Brood\}, \\
+	&  \{Tomatensaus, Brood\} \}
+\end{array}
+$
 	</div>
 </div>
 <p>We komen nu weer aan bij de test "Is er in deze ronde een $k$-itemset aan $F$ toegevoegd?". In het voorbeeld hebben we er weer 3 toegevoegd en is het antwoord dus ja, we  zijn dus nog steeds niet klaar. We verhogen $k$ naar 3 en gaan weer verder bij het oranje blok:
@@ -1024,15 +1037,32 @@ $F=\{\{Spaghetti\}, \{Tomatensaus\}, \{Brood\},\{Spaghetti,Tomatensaus\}, \{Spag
 <div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: #ff99cc">
 	Voeg de 3-itemsets met voldoende support toe aan de collectie $F$
 </div>
-<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: #ff99cc">voorbeeld:
+<div class="voorbeeld theorie example" style="padding-right: 10px; background-color: #ff99cc">voorbeeld:
 	<div style="padding-left: 25px;">
-	In de tabel hierboven zie je dat alle 3-itemsets de grens van 20% niet halen. Er kan niets aan $F$ worden toegevoegd. De collectie $F$ blijft dus:dus
-$F=\{\{Spaghetti\}, \{Tomatensaus\}, \{Brood\},\{Spaghetti,Tomatensaus\}, \{Spaghetti, Brood \},\{Tomatensaus, Brood \}\}$
+	In de tabel hierboven zie je dat alle 3-itemsets de grens van 20% niet halen. Er kan niets aan $F$ worden toegevoegd. De collectie $F$ blijft dus:<br/>
+$
+\begin{array}{ll}
+  F= & \{\{Spaghetti\}, \\ 
+	&  \{Tomatensaus\}, \\
+	&  \{Brood\}, \\
+	&  \{Spaghetti,Tomatensaus\}, \\
+	&  \{Spaghetti, Brood\}, \\
+	&  \{Tomatensaus, Brood\} \}
+\end{array}
+$
 	</div>
 </div>
-<p>We komen nu weer aan bij de test "Is er in deze ronde een $k$-itemset aan $F$ toegevoegd?". In het voorbeeld hebben we niets meer hebben toegevoegd dus nee, we  zijn klaar en eindigen dus met de verzameling
+<p>We komen nu weer aan bij de test "Is er in deze ronde een $k$-itemset aan $F$ toegevoegd?". In het voorbeeld hebben we niets meer hebben toegevoegd dus nee, we zijn klaar en eindigen met de verzameling:
 </p>
-$$F=\{\{Spaghetti\}, \{Tomatensaus\}, \{Brood\},\{Spaghetti,Tomatensaus\}, \{Spaghetti, Brood \},\{Tomatensaus, Brood \}\}
+$$
+\begin{array}{ll}
+  F= & \{\{Spaghetti\}, \\ 
+	&  \{Tomatensaus\}, \\
+	&  \{Brood\}, \\
+	&  \{Spaghetti,Tomatensaus\}, \\
+	&  \{Spaghetti, Brood\}, \\
+	&  \{Tomatensaus, Brood\} \}
+\end{array}
 $$
 <p>In het voorbeeld zijn in het algoritme dus 3 iteraties nodig geweest om het proces te stoppen. Andere samenstellingen van de winkelmandjes met vooral meer artikelen zal ervoor zorgen dat er veel meer iteraties nodig zijn. 
 </p>
@@ -1136,7 +1166,7 @@ In de eerste regel in de tabel hierboven geeft voor associatieregel $\{Spaghetti
 			<div class="nested">
 				<ol start="9">
 					<li>		Gegeven is de transactiedatabase gerepresenteerd door de 
-			collectie $W$
+			collectie $W$:
 				<table>
 					<tr>
 					<th colspan="2">Collectie $W$
@@ -1347,7 +1377,7 @@ In de eerste regel in de tabel hierboven geeft voor associatieregel $\{Spaghetti
 									<p>De uiteindelijke set van voldoende frequente verzamelingen is
 			<br/>
 				$F=\{\{a\}, \{b\}, \{c\}, \{d\}, \{a, b \}, \{b, c \}\}$.<br/>
-				De daaruit voortvloeiende associatieregels met voldoende confidence zijn
+				De daaruit voortvloeiende associatieregels met voldoende confidence zijn:
 				<table>
 			<tr>
 				<th>Associatieregels</th>
@@ -1384,7 +1414,7 @@ In de eerste regel in de tabel hierboven geeft voor associatieregel $\{Spaghetti
 						</ol>
 					</li>
 					<li>Gegeven is de transactiedatabase gerepresenteerd door de 
-			collectie $P$
+			collectie $P$:
 				<table>
 					<tr>
 					<th colspan="2">Collectie $P$
@@ -1428,12 +1458,11 @@ In de eerste regel in de tabel hierboven geeft voor associatieregel $\{Spaghetti
 				</tr>
 			</table>
 						<ol style="list-style-type: lower-alpha;">
-							<li>DPas het Apriori-algoritme toe op deze collectie met een support van minimaal 50%
+							<li>Pas het Apriori-algoritme toe op deze collectie met een support van minimaal 50%
 								<div class="caret doel">antwoord</div>
 								<ul class="nested">
 									<li>Iteratie met k=1
-
-			<ol style="list-style-type: upper-alpha;">
+				<ol style="list-style-type: upper-alpha;">
 				<li>Genereer alle deelverzamelingen (itemsets) kandidaten met lengte $1$.<br/>
 					$S_{1}=\{\{brood\}, \{bier\},\{ melk \}, \{luier \}, \{cola \}, \{eieren \}\}$
 				</li>
@@ -1618,7 +1647,7 @@ In de eerste regel in de tabel hierboven geeft voor associatieregel $\{Spaghetti
 			<br/>
 				$F=\{\{brood\}, \{bier\},\{ melk \}, \{luier \},\{brood,melk\}, \{brood,luier\},  \{bier,luier\}
 						, \{melk,luier\}\}$.<br/>
-						De daaruit voortvloeiende associatieregels met voldoende confidence zijn
+						De daaruit voortvloeiende associatieregels met voldoende confidence zijn:
 			</p>
 			<table>
 			<tr>

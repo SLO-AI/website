@@ -47,22 +47,22 @@ function run(id)
 }
 </script>
 </head>
-  <body  id="technieken" onload="initTreeview()"  >
+  <body  id="technieken" onload="addPathLead();initTreeview()"  >
     <a name="Inleiding" style="counter-reset: subsection 3;"></a>
     <header class="paragraaf titel">Clusteranalyse</header>
 	<section>
 	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/<a href="inleiding_technieken.html" target="_parent">Technieken</a>/Clusteranalyse</h4> 
     <div style="height: 100px;">
 		<div style="float:right;">
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="license">
 			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 			<br />This work is licensed under a
 			<br />
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="license">Creative Commons Attribution-NonCommercial-ShareAlike
 				4.0
 			<br />International License</a>.
 		</div>
-		<a name="Inleiding"></a> bron:<a href="../Informatie/Big Data studenten OCE/Lesmodule Big Data.pdf">Lesmodule Big Data</a>
+		<a></a> bron:<a href="docs/Big Data studenten OCE/Lesmodule Big Data.pdf">Lesmodule Big Data</a>
 	</div>
 	</section>
 <article>
@@ -81,7 +81,7 @@ function run(id)
 			<span class="dropdown">
 			<div class="dropbtn" onclick="window.location='#methoden'">Methoden  &#9660;</div>
 			<div class="dropdown-content">
-				<a class="submenuitem" href="#methode">k-means methode</a>
+				<a class="submenuitem" href="#methoden">k-means methode</a>
 				<a class="submenuitem" href="#andere">andere methoden</a>
 			</div>
 			</span>
@@ -239,6 +239,14 @@ In clustering speelt afstand tussen gegevens een grote rol. Een computer heeft d
 		De weergave voor studenten in een schema is niet handig om afstanden te meten. Het is beter deze te plaatsen in een assenstelsel zoals je dat in de wiskunde doet.	
 		<div class="theorie midden">
 		<img src="images/clust_analyse.svg" style="width: 300px;"/><br/>
+		Wat is de afstand tussen $s_{1}$ en $s_{4}$?
+		<div class="caret doel">antwoord</div>
+			<ul class="nested">
+				<li>De kortste afstand tussen  $s_{1}$ en $s_{4}$ is $\sqrt{13}$. Weet je hoe je die afstand berekent?<br/>
+				Als je alleen langs de roosterlijnen mag meten dan is de kortste afstand 5.</br/>
+				Het is dus van belang eerst een lengtemaat vast te leggen.
+				</li>
+			</ul>
 		</div>
 		</div>
 	</div>
@@ -536,13 +544,13 @@ Het oudste en meest bekende clusteralgoritme is de $K$-means methode. Later zijn
 	</ul>
 	<li style="background-color: #ff99cc">Alle datapunten zitten weer in een cluster. Er zijn datapunten 
 	die nu in een nadere cluster zitten. De centra zijn dan niet voor
-	alle clusters meer hetzelfde en moeten dus opnieuw worden berekend.Hiervoor gebruik je voor ieder 
+	alle clusters meer hetzelfde en moeten dus opnieuw worden berekend. Hiervoor gebruik je voor ieder 
 	cluster apart de volgende formule:<br/>
 	$M(m_{1},m_{2}, \dots, m_{n})= \left( \frac{\sum^{1}_{n} a_{1i}}{n},\frac{\sum^{1}_{n} a_{2i}}{n}, \dots, \frac{\sum^{1}_{n} a_{ni}}{n}\right)$.<br/>
 	$n$ is dan het aantal elementen in één cluster.
 	<hr/>
 	Met die nieuwe centra veranderen ook weer de afstanden van de datapunten
-	tot die centra en moet je dus het hele proces vanaf stap 1 weer herhalen, ofwel start de volgende iteratie.
+	tot die centra en moet je dus het hele proces vanaf stap 2 weer herhalen, ofwel start de volgende iteratie.
 	</li>
 </ol>
 Leuk zo'n verhaal maar voorbeelden maken het inzichtelijker.
@@ -551,7 +559,7 @@ Leuk zo'n verhaal maar voorbeelden maken het inzichtelijker.
 	<div class="theorie treeview example" style="overflow: hidden">
 		Voorbeeld E
 		<div style="padding-left:27px;">
-		Gegeven een cluster $C$ die de volgende objecten bevat:
+		Gegeven zijn de volgende vier objecten:
 		<table>
 		<tr>
 		<td></td><th>x</th><th>y</th>
@@ -679,7 +687,7 @@ Leuk zo'n verhaal maar voorbeelden maken het inzichtelijker.
 	<div class="theorie treeview example" style="overflow: hidden">
 		Voorbeeld F
 		<div style="padding-left:27px;">
-		Gegeven een cluster $C$ die de volgende objecten bevat:
+		Gegeven zijn de volgende vijf objecten:
 		<table>
 		<tr>
 		<td></td><th>x</th><th>y</th>
@@ -1126,7 +1134,7 @@ Leuk zo'n verhaal maar voorbeelden maken het inzichtelijker.
 							</li>
 							</ul>
 						</li>
-							<li>Bereken de afstanden van de datapunten tot de centra $M_{1}$ en $M_{2}$ en vul de volgende tabel in en voer zo nodig een herclustering uit:
+							<li>Bereken de afstanden van de datapunten tot de centra $M_{1}$, $M_{2}$ en $M_{3}$ en vul de volgende tabel in en voer zo nodig een herclustering uit:
 						<table>
 							<tr>
 							<td></td><th>$M_{1}$</th><th>$M_{2}$</th><th>$M_{3}$</th><th>toewijzing</th>
@@ -1623,7 +1631,7 @@ Leuk zo'n verhaal maar voorbeelden maken het inzichtelijker.
 <center>
 <img class="theorie" src="images/clusterCompare.png" />
 <br/>
-Figuur 6: Verschillende verdelingen datapunten (<a href="https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68">bron</a> ) en algoritmen.
+Figuur 6: Verschillende verdelingen datapunten (<a href="https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68" target="_blank">bron</a> ) en algoritmen.
 </center>
 <p>
 De eerste kolom hoort bij een $K$-means variant. Alleen de verdeling in de vijfde rij past daar echt goed bij. Welk algoritme denk jij dat bij de verschillende rijen het beste past? Er zijn een aantal algoritmen die bij meerdere verdelingen goed scoren, maar die hebben weer andere minpunten. Het is dus van belang om te controleren of je de juiste versie kiest. Heb je meer dan twee assen dan wordt een visuele inspectie zoals in de figuur al een stuk lastiger.
