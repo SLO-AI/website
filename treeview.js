@@ -22,8 +22,8 @@ function initTreeview()
 function addPathLead(elemid="path_lead")
 {
 	// change the path_lead variable to your needs
-	const path_lead='<a href="https://www.johnval.nl"  target="_parent">John Val</a>/<a href="../../informatica/index.htm" target="_parent">Informatica</a>/';
-	let obj = document.getElementById(elemid);
-	if(obj)	obj.innerHTML = path_lead+obj.innerHTML;
+	// const path_lead='<a href="https://www.johnval.nl"  target="_parent">John Val</a>/<a href="../../informatica/index.htm" target="_parent">Informatica</a>/';
+	// let obj = document.getElementById(elemid);
+	// if(obj)	obj.innerHTML = path_lead+obj.innerHTML;
 	
 }
