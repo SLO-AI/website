@@ -1,1688 +1,1791 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="css/normalize.css" rel="stylesheet">
-    <link href="css/ai.css" rel="stylesheet" type="text/css" />
-	<link href="css/menus.css" rel="stylesheet" type="text/css" />
-	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
-    <title>Kunstmatige Intelligentie</title>
-    <script src="treeview.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-	<script type="text/x-mathjax-config">
-	  MathJax.Hub.Config({
-		tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
-	  });
-	</script>
-  </head>
-  <body  id="technieken" onload="initTreeview()"  >
-    <a name="Inleiding" style="counter-reset: subsection 2;"></a>
-    <header class="paragraaf titel">Associatie analyse</header>
-	<section>
-	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/	<a href="inleiding_technieken.html" target="_parent">Technieken</a>/Associatie analyse</h4> 
-    <div style="height: 100px;">
-		<div style="float:right;">
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
-			<br />This work is licensed under a
-			<br />
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
-				4.0
-			<br />International License</a>.
-		</div>
-		<a name="Inleiding"></a> bron:<a href="../Informatie/Big Data studenten OCE/Lesmodule Big Data.pdf">Lesmodule Big Data</a>
-	</div>
-	</section>
-	<div class="navbar">
-		<div class="centreer">
-			<a href="#Inleiding">Associatie analyse</a> 
-			<a href="#Introductie">Introductie</a> 
-			<span class="dropdown">
-			<div class="dropbtn" onclick="window.location='#cogana'"><a href="#Theorie">Theorie</a>  &#9660;</div>
-			<div class="dropdown-content">
-			<a class="submenuitem"  href="#verzameling">Verzamelingenleer</a> 
-			<a class="submenuitem"  href="#Associatieregels">Associatieregels</a>
-			<a class="submenuitem"  href="#Apriori">Apriori algoritme</a>
-			</div>
-			</span>			<span class="dropdown">
-			<div class="dropbtn">Vragen  &#9660;</div>
-			<div class="dropdown-content">
-				<a class="submenuitem"  href="#Vragen1">Vragen 1</a>
-				<a class="submenuitem"  href="#Vragen2">Vragen 2</a>
-			</div>
-			</span>
-		</div>
-	</div>
-	<article>
-<p>
-In de <a href="techniek_introductie.html" class="book">introductie van de AI technieken</a> heb je gezien dat AI applicaties data gestuurd zijn. Hoe werkt dat sturen door die data? In deze sectie en volgende secties gaan we dat in een aantal technieken bekijken. De meeste toepassingen gebruiken artificiële intelligentie om b.v. patronen te herkennen of groeperingen te maken.
-</p>
-<p>
-De berekeningen in dit en de sectie <a href="techniek_intrtechniek_cluster_analyse.htmloductie" class="book">Cluster Analyse</a> zijn niet heel erg ingewikkeld en zouden voor iedere leerling op havo en vwo uit te voeren moeten zijn. Lukt het niet stel dan vragen aan je docent.
-</p>
-<p>
-Na het bestuderen van deze sectie:
-</p>
-<ul>
-	<li>Kun je in eigen woorden het doel en de taak van associatie analyse bij datamining toelichten.
-	</li>
-	<li>Kun je de begrippen verzamelingenleer, associatieanalyse en associatieregel uitleggen.
-	</li>
-	<li>Weet je de toepassingen van associatie analyse, bijvoorbeeld winkelmandjesanalyse (basket analysis).
-	</li>
-	<li>Ben je in staat praktische voorbeelden van associaties op te noemen.
-	</li>
-	<li>Kun je de berekeningen binnen het <strong>apriori</strong> algoritme uitvoeren, onder andere:
-    <ul>
-		<li>het bepalen van de doorsnede en de vereniging van twee of meer verzamelingen;
-		</li>
-		<li>het berekenen van de support van een deelverzameling;
-		</li>
-		<li>het vinden van de associatieregels in een eenvoudig probleem;
-		</li>
-		<li>het berekenen van de betrouwbaarheid (confidence) van een associatieregel van een deelverzameling;
-		</li>
-		<li>het uitvoeren van alle nodige iteraties in het apriori algoritme.
-	</ul>
-	</li>
-</ul>
-	<a id="Introductie"></a><br/>
-	<h2>Introductie</h2>	
-	<div class="rechts theorie">
-		<img src="images/RumChocoBanaan1.png"  style="width: 300px;"/><br/>
-	</div>
-	<p>Stel je wordt manager van een supermarkt in een wijk waar veel studenten wonen. Na een paar dagen krijg je onder andere de indruk dat er veel bananen en chocolade verkocht worden. Daarom overweeg je de bananen en de chocolade samen vlak bij de kassa's te leggen om zo de klanten die langs lopen tot meer impuls inkopen te verleiden.  Je wilt als verkoper ook niet impulsief te werk gaan, dus ga je een onderzoek doen met alle kassaregistraties van de klanten als gegevens voor je onderzoek. Eén kassaregistratie geeft dan natuurlijk aan wat de klant in het winkelmandje had.
-	</p>
-	<p>De methoden die je als onderzoeker tot je beschikking hebt om deze gegevens te onderzoeken vallen onder <strong>associatie analyse</strong>. Voor we algemeen aan de slag gaan en één van de methoden, het <strong>apriori algoritime</strong>, in detail uitwerken gaan we eerst intuïtief met bovenstaand voorbeeld aan de slag. Na een week heb je deze gegevens verzameld:
-	</p>
-	<ul>
-		<li>er blijken 8051 klanten te zijn geweest;</li>
-		<li>905 keer stond banaan op de rekening;</li>
-		<li>750 keer stond chocolade op de rekening;</li>
-		<li>samen kwamen bananen en chocolade 653 keer voor.</li>
-	</ul>
-	<p>Begrippen die centraal staan in de associatie analyse zijn <strong>support</strong>, <strong>associatieregel</strong> en <strong>betrouwbaarheid</strong>.
-	</p>
-	<p>Support van één of meerder artikelen is niets anders dan de experimentele kans dat een mandje deze artikelen bevat. Zo is $\mathrm{support}(\{\mathrm{banaan}\}) = 905/8051 \approx 0.112$ of wel ongeveer 11%. Verder is  $\mathrm{support}(\{\mathrm{chocolade}\}) = 750/8051 \approx 0.093$ en  $\mathrm{support}(\{\mathrm{chocolade}, \mathrm{banaan}\}) = 653/8051 \approx 0.081$. 
-	</p>
-	<p>Om nu te weten te komen of het vermoeden dat bananen vaker samen met chocolade wordt verkocht werkelijkheid is, ben je geïnteresseerd in de vraag: als een klant bananen koopt, hoe groot is dan de kans dat deze klant ook chocolade koopt? 
-	Ofwel hoe waar is de uitspraak: <strong>Als een klant bananen koopt, koopt de klant ook chocolade</strong>? Een dergelijke uitspraak noemt men een <strong>associatieregel.</strong>  Met de gegevens hierboven kunnen we de betrouwbaarheid (<strong>=confidence</strong>) van deze uitspraak uitrekenen in de vorm van een kans.</p>
-	<p>Confidence( <strong>Als een klant bananen koopt, koopt de klant ook chocolade </strong> ) =  
-   aantal winkelmandjes met bananen en chocolade / aantal winkelmandjes met alleen bananen=
-  653/905=0,72.</p>
-	<p>In ongeveer driekwart van de gevallen zal de klant die bananen in zijn mandje legt doorlopen naar de chocolade. Zullen we het die klant maar eens gemakkelijker maken door deze producten dichter bij elkaar te plaatsen?
-	</p>
-	<p>In het voorbeeld hierboven hebben we specifiek gekeken naar bananen en chocolade. Het is zinvoller als we uitgaan van alle aankopen en met een methode uitvissen wat de interessante combinaties zijn. De <strong>apriori methode</strong>, die we hier straks uitwerken, is zo'n methode. Eerst even een meer algemene introductie over associatie analyse.
-	</p>
-	<div class="rechts theorie">
-		<img src="images/WatAnderenKochten.jpg"  style="width: 300px;"/><br/>
-	</div>
-	<p>Bij <a href="https://en.wikipedia.org/wiki/Association_rule_learning" target="example">associatie analyse</a> is het de bedoeling dat een gegeven set kenmerken die een gebruiker in een toepassing aanlevert, bijvoorbeeld jouw leeftijd, geslacht, ingetypte zoekopdracht, beluisterde muziek, artikelen in je winkelmand, wordt vergeleken met dezelfde kenmerken van andere gebruikers. Gezocht wordt dan naar overeenkomsten tussen de gebruikers. Het resultaat van de associatie is dan bijvoorbeeld de uitvoer van de toepassing, bijvoorbeeld de reclame die in de zoekmachine verschijnt, muziek die jij ook wel leuk zou vinden, artikelen die jij ook zou willen kopen. Om zinvolle suggestie te doen moet een grote hoeveelheid gegevens worden geanalyseerd.
-	</p>
-	<p>De AI techniek associatie analyse die voor deze situaties wordt gebruikt heeft als belangrijkste AI-kenmerk: <strong>de invoer die het programma krijgt, is niet volledig te bepalen en is complex</strong> . Het leerproces dat in associatieanalyse wordt gebruikt is  <strong>unsupervised learning</strong>. 
-	Voor we de theorie van associatie analyse behandelen en leren toepassen geven we een aantal voorbeelden van gebieden waarin associatie analyse wordt gebruikt:
-	</p>
- <dl> 
-  <dt>Gezondheidszorg</dt> 
-  <dd>Artsen kunnen associatieregels gebruiken om een diagnose van patiënten te stellen. Omdat veel ziekten overeenkomstige symptomen hebben, zijn er veel variabelen waarmee rekening moet worden gehouden bij het stellen van een diagnose. Met behulp van associatie analyse, die getraind is met alle symptomen en de daarbij behorende ziekten, kan aan een arts, bij de symptomen die een patiënt heeft, die ziekten tonen die het meest waarschijnlijk zijn. Als er nieuwe symptomen bij een ziekte optreden of als er nieuwe ziekten bijkomen, kan het machine learning-model opnieuw getraind worden met de oude en bijgewerkte gegevens.
-  </dd>
-  <dt>Detailhandel</dt>   
-  <dd>
-  Ontwikkelaars kunnen gegevens verzamelen over hoe consumenten een door hen gemaakte website/app gebruiken. Ze kunnen vervolgens associaties in de gegevens gebruiken om de gebruikersinterface van de website te optimaliseren - door bijvoorbeeld te analyseren waar gebruikers op klikken en hoe ze de kans dat een bezoeker een gewenste handeling verricht kan vergroten.
-  </dd>
-  <dt>User experience (UX) design</dt>   
-  <dd>Ontwikkelaars kunnen gegevens verzamelen over hoe consumenten een door hen gemaakte website/app gebruiken. Ze kunnen vervolgens associaties in de gegevens gebruiken om de gebruikersinterface van de website te optimaliseren - door bijvoorbeeld te analyseren waar gebruikers op klikken en hoe ze de kans dat een bezoeker een gewenste handeling verricht kan vergroten.
-  </dd> 
-  <dt>Sociale media en entertainment</dt>   
-  <dd>Services zoals Facebook, Youtube, Netflix, Twitter, Spotify kunnen associatieregels gebruiken om hun engine voor contentaanbeveling van brandstof te voorzien. Machine learning-modellen analyseren gegevens over gebruikersgedrag uit het verleden op frequente patronen, ontwikkelen associatieregels en gebruiken die regels om gebruikers aanbevelingen te doen die hun ook zal interesseren, b.v. die leuke foto van een ooievaar, omdat je als vogelaar heel vaak foto's van vogels bekijkt.
-  </dd> 
- </dl>
-	<a id="Theorie"></a><br/>
-	<h2>Theorie</h2>	
-	<p>In de opwarmer aan het begin van dit hoofdstuk hebben we geprobeerd om op een intuïtieve manier het doel van associatie analyse, een AI algoritme, duidelijk te maken. We meldden daar ook al dat we op basis van alle kassaregistraties zinvolle verbanden willen vinden. Zoals typisch is voor AI bepalen de gegevens, door deze te in te voeren in een iteratief proces, de uitkomst van de analyse.
-	</p>
-	<p>De wiskundige techniek die wordt gebruikt in associatie analyse is gebaseerd op wiskunde op verzamelingen, de zogenaamde verzamelingenleer.  Het is dus nuttig eerst wat begrippen in de verzamelingen leer te introduceren. Een aantal van deze begrippen ben je waarschijnlijk al eens in de wiskundeles tegengekomen.  Daarna gebruiken we deze begrippen in de apriori methode, een veel gebruikte methode in de associatie analyse.
-	</p>
-
-<div class="rechts theorie" style="width: 200px; border: solid red 2px;margin-left: 10px; padding: 20px;">
-
-<table class="symbolen">
-    <tr>
-		<th colspan=2>Symbolen</th><!-- https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols#Set_and.2For_logic_notation -->
-	</tr>
-	<tr>
-		<th>Notatie
-		</th>
-		<th>Betekenis
-		</th>
-	</tr>
-	<tr>
-		<td>$\in$
-		</td>
-		<td>’is een element van’, ’behoort tot’
-		</td>
-	</tr>
-	<tr>
-		<td>$\subset$
-		</td>
-		<td>’is een deelverzameling van’
-		</td>
-	</tr>
-	<tr>
-		<td>{,}
-		</td>
-		<td>accolades worden gebruikt om een verzameling aan te duiden
-		</td>
-	</tr>
-	<tr>
-		<td>$\cap$
-		</td>
-		<td>’doorsnede’, het gemeenschappelijke deel van de twee verzamelingen
-		</td>
-	</tr>
-	<tr>
-		<td>$\cup$
-		</td>
-		<td>’vereniging’, de elementen van de eerste en tweede verzameling worden samengenomen
-		</td>
-	</tr>
-	<tr>
-		<td>$\#$
-		</td>
-		<td>’aantal’, $\# A$ is het aantal elementen in $A$.
-		</td>
-	</tr>
-	
-	<tr>
-		<td>$\Rightarrow$
-		</td>
-		<td>’implicatie’, al links waar is dan is ook rechts waar.
-		</td>
-	</tr>
-</table>
-</div>
-	<a id="verzameling"></a><br/>
-	<h2>Verzamelingenleer</h2>	
-	<p>Als leerling zit je in een klas, als voetballer zit je in een team, je ‘play list’ bevat een
-	aantal leuke liedjes, .... Zo kunnen we nog een tijd doorgaan met het geven van voorbeelden.
-	Voorbeelden die allemaal gaan over verzamelingen.
-
-	In plaats van een ‘klas’, ‘team’, ‘play list’ spreken we van een <strong>verzameling</strong>, in het Engels. 
-	In een verzameling bevindt zich <strong>elementen</strong> (leerlingen, spelers, liedjes). We noteren een verzameling als volgt:
-
-	$$V=\{v_{1},v_{2},v_{3},\cdots ,v_{n}\}.$$<br/>
-	Verzameling $V$ bevat elementen $v$ die we kunnen nummeren. $v_{1}$ is dan het eerste element in de verzameling, $v_{2}$ het tweede, $v_{1}$ is dan het derde, enz.
-	</p>
-<p>Een verzameling bestaat dus uit elementen, en als $v$ <strong>een element is van een verzameling</strong> $\small V$ noteren we dit wiskundig als <strong>$\small v \in V$</strong>. We gebruiken accolades om verzamelingen te noteren. 
-</p><p>
-Voorbeeld: De verzameling winkelmandje met de elementen melk, brood, en kaas noteren we als:
-$$
-\small \text{winkelmandje} = \{\text{melk}, \text{brood}, \text{kaas}\}
-$$
-</p>
-<p>
-Als we schrijven $\small \textbf{melk} \in \textbf{winkelmandje}$, dan zeggen we dus dat melk in het winkelmandje aanwezig is.
-</p>
-</p>
-<p class="pagebreak"></p>
-<table>
-<tr><td colspan="2"><h3>Relaties tussen verzamelingen</h3></td>
-<tr>
-<td style="vertical-align: top;">
-	<div style="background-color: orange;margin: 10px; border: outset yellow 3px;">
-	$X \subset Y$<br/>
-	<svg width="78" height="78" >
-	  <circle cx="39" cy="39" r="37" stroke="green" stroke-width="4" fill="yellow" />
-	  <circle cx="26" cy="35" r="20" stroke="green" stroke-width="4" fill="lightblue" />
-	  <text x="60" y="40" fill="blue">Y</text>
-	  <text x="20" y="40" fill="blue">X</text>
-	</svg>
-	</div>
-</td>
-<td>
-	<div class="theorie important">Deelverzameling
-	<div style="padding-left:25px;">
-	Als voor twee verzamelingen $X$ en $Y$ geldt dat elk element van $X$ ook een element is van $Y$, dan zeggen we dat $X$ een <strong>deelverzameling (subset)</strong> is van $Y$. 
-	<strong>Notatie: $X \subset Y$</strong>
-	</div>
-	</div>
-	<p>
-	Zo geldt bijvoorbeeld voor $\small X=\{\text{melk},\text{kaas}\}$ en $\small Y=\{\text{melk},\text{brood},\text{kaas}\}$ dat $\small X ⊂ Y$, $\small X$ is een deelverzameling van $\small Y$ want melk en kaas, de elementen van $X$, zijn ook aanwezig in $Y$.
-	</p>
-</td>
-</tr>
-<tr>
-<td style="vertical-align: top;">
-<div style="background-color: orange;margin: 10px; border: outset yellow 3px;">
-$X \cap Y$<br/>
-<svg width="100" height="78">
-    <defs>
-        <clipPath id="mask_left">
-            <circle id="circle_right" cx="63" cy="39" r="35"  stroke-width="1.5"  stroke="#000" fill="none"/>
-        </clipPath>
-    </defs>
-    <g>
-        <circle id="circle_left"  cx="37" cy="39" r="35" stroke-width="4" stroke="green" fill="lightblue" />
-        <circle id="circle_right" cx="63" cy="39" r="35" stroke-width="4"  stroke="green" fill="yellow"/>
-		<circle id="center" cx="37" cy="39" r="35" fill="lightgreen" opacity="0.7" clip-path="url(#mask_left)"/>
-        <text x="30" y="40" fill="blue">X&#8898;Y</text>
-		<text x="80" y="40" fill="blue">Y</text>
-		<text x="10" y="40" fill="blue">X</text>
-    </g>
-</svg>
-
-</div>
-</td>
-<td>
-<div class="theorie important">Doorsnede
-	<div style="padding-left:25px;">De <strong>doorsnede (intersection)</strong> $X \cap Y$ van twee verzamelingen $X$ en $Y$ bestaat uit de gemeenschappelijke elementen van $X$ en $Y$.
-<!--$X \cap Y = \{ x| x \in X \, \wedge \, x \in Y \}$.--> In de figuur links is de doorsnede het lichtgroene gebied. 
-	</div>
-</div>
-</p>
-<p>
-Zo is bijvoorbeeld de doorsnede van de verzameling $\small X = \{\text{melk}, \text{brood}, \text{kaas}\}$ en $\small Y = \{\text{melk}, \text{brood}, \text{pindakaas}\}$ de verzameling met melk en brood, $\small \{\text{melk}, \text{brood}\}$, want die zijn in beide verzameling aanwezig. In wiskundige notatie is dit:
-
-$$
-\small \{\text{melk}, \text{brood}, \text{kaas}\} \cap \{\text{melk}, \text{brood}, \text{pindakaas}\} = \{\text{melk}, \text{brood}\}
-$$
-</p>
-</td>
-</tr>
-<tr>
-<td style="vertical-align: top;">
-<div style="background-color: orange; margin: 10px; border: outset yellow 3px;">
-$X \cup Y$<br/>
-<svg width="100" height="78">
-  <circle cx="63" cy="39" r="35" stroke="green" stroke-width="4" fill="yellow" opacity="0.7" />
-  <circle cx="37" cy="39" r="35" stroke="green" stroke-width="4" fill="yellow" opacity="0.7" />
-  <text x="30" y="75" fill="blue">X&#8899;Y</text>
-  <text x="80" y="40" fill="blue">Y</text>
-  <text x="10" y="40" fill="blue">X</text>
-</svg>
-
-</div>
-</td>
-<td>
-<div class="theorie important">Vereniging
-	<div style="padding-left:25px;">
-	De <strong>vereniging (union)</strong> $X \cup Y$ van twee verzamelingen $X$ en $Y$ bestaat uit de elementen die tot $X$, tot $Y$ of tot beide horen.
-<!-- $X \cup Y = \{ x| x \in X \, \vee \, x \in Y \}$. --> In de figuur links bestaat de vereniging uit alle enigszins gele gebieden.
-	</div>
-</div>
-<p>
-Zo is bijvoorbeeld de vereniging van de verzamelingen  $\small X = \{\text{melk}, \text{brood}, \text{kaas}\}$  en de verzameling $\small Y = \{\text{melk}, \text{brood}, \text{pindakaas}\}$ verzameling met de elementen Kaas, Melk, Brood en Pindakaas, $\small \{\text{melk}, \text{brood}, \text{kaas}, \text{pindakaas}\}$ want alle elementen uit $X$ en $Y$ zijn aanwezig. Notatie:
-
-$$
-\small \{\text{melk}, \text{brood}, \text{kaas}\} \cap \{\text{melk}, \text{brood}, \text{pindakaas}\} = \{\text{melk}, \text{brood}, \text{kaas}, \text{pindakaas}\}
-$$
-</p>
-</td>
-</tr>
-</table>
-<p>
-<div class="theorie important">Kardinaliteit
-	<div style="padding-left:25px;">
-	Voor een eindige verzameling $\small X$ definiëren we $\small \#X$ als het aantal elementen in $\small X$. Dit wordt ook wel de kardinaliteit genoemd.
-	</div>
-</div>
-Zo is bijvoorbeeld
-$\#\{Chips,Zeep,Appels\}=3$.
-</p>
-<p>
-Een element van een verzameling kan zelf ook een verzameling zijn. Zo bestaat de verzameling 
-$$
-\small \begin{array}{rcl}C &=& \{\{\text{chips}, \text{zeep}, \text{appels}\}\\&&, \{\text{chips}, \text{zeep}, \text{appels}\}\\&&, \{\text{zeep}, \text{bananen}\}\\&&, \{\text{chips}, \text{zeep}, \text{bananen}\}\\&&\}\end{array}
-$$
-uit vier elementen, ieder element is een verzameling.
-</p>
-
-<p class="theorie important">Een verzameling waarin de elementen ook 
-weer verzamelingen zijn noemt men een <strong>collectie</strong>.
-</p>
-<p>
-Nog een voorbeeld van een collectie is de registratie van aankopen door acht klanten in een klein avondwinkeltje:
-
-$$
-\small \begin{array}{lcl}D&=&\{\{\text{banaan}\}\\ & & ,\{\text{chips}\}\\ & & ,\{\text{melk}\}\\ & & ,\{\text{pruim}\}\\ & & ,\{\text{banaan}, \text{rum}\}\\ & & ,\{\text{chips}, \text{rum}\}\\ & & ,\{\text{banaan}, \text{chips}, \text{melk}\}\\ & & ,\{\text{banaan}, \text{rum}, \text{melk}, \text{pruim}\}\\ & & \}\end{array}
-$$
-
-De collectie D bestaat nu uit de inhoud van de acht winkelmandjes, van iedere klant één. Ieder mandje is een verzameling van producten:
-
-$$
-\small\begin{array}{rcl}D_1&=& \{\text{banaan}\} \\D_2&=& \{\text{chips}\} \\D_3&=& \{\text{melk}\} \\D_4&=& \{\text{pruim}\} \\D_5&=& \{\text{banaan},\text{rum}\} \\D_6&=& \{\text{chips},\text{rum}\} \\D_7&=& \{\text{banaan},\text{chips},\text{melk}\} \\D_8&=& \{\text{banaan},\text{rum},\text{melk},\text{pruim}\}\end{array}
-$$
-
-</p>
-<p class="pagebreak"></p>
-<a id="Associatieregels"></a><br/>
-<h2>Associatieregels</h2>
-
-<p>
-Om uitspraken te kunnen doen over verbanden tussen verzamelingen en de 
-waarde van die verzamelingen zijn de volgende definities van belang:
-</p>
-<ul>
-<li>
-	<div class="theorie important">Associatieregel
-		<div style="padding-left:25px;">
-		De associatieregel $X \Rightarrow Y $ betekent: als de deelverzameling $X$
-	voorkomt dan komt ook de deelverzameling $Y$ voor.
-		</div>
-	</div>
-	<p>
-	Bijvoorbeeld $\small \{\text{melk}\} ⇒ \{\text{melk},\text{brood}\}$ betekent dat als melk in een winkelmand zit, dan zit er ook brood in. In een winkelmandjes analyse is dit natuurlijk niet altijd waar, maar in associatie analyse is het van belang om te kijken hoe groot de kans op deze associatieregel is, ofwel hoe <strong>betrouwbaar</strong> is deze regel. Om de betrouwbaarheid te bepalen hebben we nog wat gereedschap nodig.
-	</p>
-</li>
-<li>
-	<div class="theorie important">Support
-		<div style="padding-left:25px;">
-		<p>De <strong>support</strong>  van een deelverzameling $\small X$ is het aantal deelverzamelingen van een collectie $\small C$ waar de elementen van $\small X$ in voorkomen gedeeld door het aantal elementen van deze collectie.</p>
-		$$
-		  \small \mathrm{support}(X)=\frac{\mathrm{freq}(X)}{\#C}
-		$$
-		<p>
-		Hierin is $\mathbf{ \mathrm{freq}(X)}$ het aantal (<strong>frequentie</strong>) van de (deel)verzamelingen waarin de elementen van $\small X$ voorkomen. Support is dus vaktaal voor de experimentele kans (of relatieve frequentie) dat een mandje de (deel)verzameling $X$ bevat.
-		</div>
-	</div>	
-</li>
-</ul>
-<div class="voorbeeld">
-<p>
-Bekijk weer de bovenstaande collectie winkelmandjes $D$ dan vind je bijvoorbeeld:
-<ul>
-<li>$freq(\{banaan\})=4$, want er zijn 4 deelverzamelingen waartoe
-element banaan behoort, namelijk $T_{1},T_{5},T_{7},T_{8}$.
-</li>
-<li>
-$support(\{melk\})=\frac{3}{8}$, want er zijn $freq(\{melk\})=3$ van de $\#D=8$ deelverzamelingen
-van D waar het element $melk$ in voorkomt.
-</li>
-<li>$support(\{banaan,rum\})=\frac{2}{8}$, want er zijn 2 van de 8
-deelverzamelingen waarin de elementen banaan en rum samen voorkomen.
-</li>
-</ul>
-</div>
-<p>Nog een voorbeeld van een praktische toepassing. Bij marktonderzoek is de support van een stel artikelen (bijvoorbeeld $\small K=\{\text{televisie},\text{surroundset}\}$) het aantal klanten dat al die artikelen samen koopt, op het totaal aantal klanten, meestal weergegeven als percentage.</p>
-	<div class="theorie important">Frequent
-		<div style="padding-left:25px;">
-		Een stel artikelen $K$ met hoge support, boven een zekere drempel, heet <strong>frequent</strong>. Ofwel: ten opzichte van het totaal aantal klanten kopen veel klanten alle artikelen in $K$.
-		
-		</div>
-	</div>
-
-<p>In de winkelmandjesanalyse kan niet altijd alles worden meegenomen. Vaak is men alleen geïnteresseerd in artikelen en combinaties van artikelen die vaak voorkomen en dus frequent
-</p>
-	<div class="theorie important">Itemset
-		<div style="padding-left:25px;">
-		Een <strong>itemset</strong> is een deelverzameling van elementen uit de een collectie.
-Een <strong>$k$-itemset</strong> is een deelverzameling die $k$ elementen bevatten. 
-		</div>
-	</div>
-
-<p>
-In de associatieanalyse (b.v. winkelmandjesanalyse) is het van belang dat men wil handelen
-op basis van associatieregels. Deze associatieregels stelt men dan op voor frequente deelverzamelingen. Maar dat is niet voldoende, de associatieregel met ook nog interessant zijn,
-ofwel deze moet een hoge waarschijnlijkheid hebben om maatregelen die genomen woorden op basis van die associatieregels te kunnen onderbouwen.
-Er moet voldoende dus vertrouwen zijn in de associatieregel. In de vaktaal heet dat de <strong>confidence</strong> ofwel de <strong>betrouwbaarheid</strong> van de associatieregel.
-</p>
-	<div class="theorie important">Betrouwbaarheid
-		<div style="padding-left:25px;">
-		De <strong>betrouwbaarheid of confidence</strong> van de associatieregel $X \Rightarrow Y$ wordt berekend door de support van de
-vereniging van $X$ en $Y$ te delen door de support van $X$.<br/>
-In notatievorm: $confidence(X \Rightarrow Y) = \frac{support(X  \cap Y)}{support(X)}$<br/>
-
-Omdat $\frac{support(X  \cap Y)}{support(X)}=\frac{freq(X  \cap Y)}{freq(X)}$, geldt ook: 
-$confidence(X \Rightarrow Y) =\frac{freq(X  \cap Y)}{freq(X)}$ 
-		</div>
-	</div>
-<p>
-Bij de winkelmandjesanalyse is de betrouwbaarheid een maat voor de kans dat iemand $Y$ gaat kopen, als gegeven is dat hij $X$ al in zijn winkelmandje heeft. We gaan dit alles weer bekijken vanuit de collectie winkelmandjes $D$ voor de associatieregel $ \{\text{banaan}\}⇒\{\text{rum}\}$.
-</p>
-<div class="voorbeeld">
-$confidence(\{ banaan\} \Rightarrow  \{ rum \} )= \frac{support(\{ banaan,rum\})}{support(\{banaan\})}=\frac{\frac{2}{8}}{\frac{4}{8}}=\frac{1}{2}$ (=50%)<br/>
-</div>
-
-
-<p class="pagebreak"></p>
-<a name="Vragen1"></a>
-<br/>
-	<div class ='hammer treeview' style="clear: both;"><span class="caret">Vragen 1</span>
-	
-		<div style="padding-left:25px;" >
-			<div class="nested">
-				<ol>
-					<li>Welke vorm van leren vindt plaats in associatie analyse?
-						<div class="caret doel">antwoord</div>
-						<ul class="nested">
-							<li>Unsupervised learning.
-							</li>
-						</ul>
-					</li>
-					<li>Geef twee voorbeelden van werkgebieden waar van associatie analyse gebruik wordt gemaakt.
-						<div class="caret doel">antwoord</div>
-						<ul class="nested">
-							<li>Bijvoorbeeld twee van de gebieden uit deze paragraaf: gezondheid, detailhandel, sociale media, user experience.
-							</li>
-						</ul>
-					</li>
-					<li>Gegeven: $A=\{1,2,3,4,5\}$, $B=\{4,5,6,7\} $ en $C=\{5,8,11\}$
-						<ol style="list-style-type: lower-alpha">
-							<li>Schrijf de verzamelingen $A \cup B$, $A \cup C$ en $B \cup C$ op.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$A \cup B=\{1,2,3,4,5,6,7\}$,<br/>$A \cup C=\{1,2,3,4,5,8,11\}$ en <br/>$B \cup C=\{4,5,6,7,8,11\}$
-									</li>
-								</ul>
-							</li>
-							<li>Schrijf de verzamelingen $A \cap B$, $A \cap C$ en $B \cap C$ op.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$A \cap B=\{4,5\}$, <br/>$A \cap C=\{5\}$ en <br/>$B \cap C=\{5\}$
-									</li>
-								</ul>
-							</li>
-							<li>Schrijf de verzameling $A \cup B \cup C$ op.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$A \cup B \cup C = \{1,2,3,4,5,6,7,8,11\}$
-									</li>
-								</ul>
-							</li>
-						</ol>
-					</li>
-					<li>Gegeven zijn de volgende deelverzamelingen: 
-				$T_{1}=\{chips,zeep,appel\}$, $T_{2}=\{chips,zeep\}$, $T_{3}=\{zeep,bananen\}$ en $T_{4}=\{chips,zeep,bananen\}$
-				van de collectie $C=\{T_{1},T_{2},T_{3},T_{4}\}$
-						<ol style="list-style-type: lower-alpha">
-							<li>Schrijf de verzamelingen $T_{1} \cap T_{2}$, $T_{1} \cap T_{4}$ en $T_{3} \cap T_{4}$ op.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li> 
-									$T_{1} \cap T_{2} = \{chips,zeep\}$,<br/>$T_{1} \cap T_{4}= \{chips,zeep\}$ 
-									en <br/>$T_{3} \cap T_{4}= \{zeep,bananen\}$
-									</li>
-								</ul>
-							</li>
-							<li>Schrijf de verzamelingen $T_{1} \cup T_{2}$, $T_{1} \cup T_{4}$ en $T_{3} \cup T_{4}$ op.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$T_{1} \cup T_{2} = \{chips,zeep,appel\}$, 
-							$T_{1} \cup T_{4}= \{chips,zeep,appel,bananen\}$ 
-							en $T_{3} \cup T_{4}=\{chips,zeep,bananen\}$ 
-									</li>
-								</ul>
-							</li>
-							<li>Schrijf de verzameling $T_{1} \cup T_{2} \cup T_{3} \cup T_{4} $ op.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$T_{1} \cup T_{2} \cup T_{3} \cup T_{4} = \{chips,zeep,appel,bananen\}$
-									</li>
-								</ul>
-							</li>
-							<li>Schrijf de verzameling $T_{1} \cap T_{2} \cap T_{3} \cap T_{4} $ op.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$T_{1} \cap T_{2} \cap T_{3} \cap T_{4} = \{zeep\}$
-									</li>
-								</ul>
-							</li>
-							<li>Bereken de support van $\{chips,zeep\}$ en de confidence van de implicatie $\{chips\} \Rightarrow \{zeep\}$ in $C$.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$support(\{chips,zeep\}) = \frac{3}{4}$,
-						$support(\{chips\}) = \frac{3}{4}$,
-						$confidence(\{chips\} \Rightarrow \{zeep\}) = \frac{support(\{ chips,zeep\})}{support(\{chips\})}=\frac{\frac{3}{4}}{\frac{3}{4}}= 1$. Ofwel als er chips wordt gekocht
-						wordt er ook zeep gekocht.
-									</li>
-								</ul>
-							</li>
-						</ol>
-					</li>
-					<li>Gegeven is de collectie 
-				$A = \{ \{5,8 \},\{2,6,8\} ,\{5,6,8 \},\{5,4,7,10 \},\{2,5,8\}\}$.<br/>
-				Bereken
-						<ol style="list-style-type: lower-alpha">
-							<li>de support van  $\{1\}$ in $A$.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$\{1\}$ zit in geen van de deelverzamelingen
-						van $A$ dus $support(\{1\})=\frac{0}{5}=0$
-									</li>
-								</ul>
-							</li>
-							<li>de support van  $\{4,5\}$ in $A$.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$\{4,5\}$ zit in één van de deelverzamelingen
-								van $A$ dus $support(\{4,5\})=\frac{1}{5}$
-									</li>
-								</ul>
-							</li>
-							<li>de betrouwbaarheid van de implicatie $\{1\} \Rightarrow \{5\}$ in $A$.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$confidence(\{1\} \Rightarrow \{5\})
-								= \frac{support(\{1,5 \})}{support(\{1\})}=\frac{0}{0}=  $ ongedefiniëerd,
-								want delen door 0 kan niet.
-									</li>
-								</ul>
-							</li>
-							<li>de betrouwbaarheid van de implicatie $\{2\} \Rightarrow \{6\}$ in $A$.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$confidence(\{2\} \Rightarrow \{6\})
-								= \frac{freq(\{2,6 \})}{freq(\{2\})}=\frac{1}{2}$
-									</li>
-								</ul>
-					</li>
-						</ol>
-					</li>
-					
-					<li>Gegeven is de collectie $S = \{ \{P,K,T \},\{P,R\} ,\{P,T\},\{K,R\}\}$ waarin
-				P=Pasta, K=Kaas, T=Tomaat, R=Room.<br/>
-				Bereken
-						<ol style="list-style-type: lower-alpha">
-							<li>de support van  $\{R\}$ in $S$.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$\{R\}$ is een element van twee van de vier deelverzamelingen
-						van $S$ dus $support(\{R\})=\frac{2}{4}=\frac{1}{2}$
-									</li>
-								</ul>
-							</li>
-							<li>de support van  $\{P,T\}$ in $S$.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$\{P,T\}$ is een element van twee van de vier deelverzamelingen
-						van $S$ dus $support(\{P,T\})=\frac{2}{4}=\frac{1}{2}$ 
-									</li>
-								</ul>
-							</li>
-							<li>de confidence van de implicatie $\{P\} \Rightarrow \{T\}$ in $S$.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$confidence(\{P\} \Rightarrow \{T\})
-						= \frac{freq(\{P,T \})}{freq(\{P\})}=\frac{2}{3} $.
-									</li>
-								</ul>
-							</li>
-						</ol>
-					</li>
-					<li>
-
-					
-					Stel: <i>S=Spaghetti, T=tomatensaus, B=brood</i>.<br/>
-				$W_{1}$  is de 1-itemset ofwel de collectie van de deelverzamelingen met grootte 1 (met slechts één element S of T of B):<br/> 
-				$W_{1}=\{\{S\},\{T\},\{B\}\}$<br/>
-				Verder is $W_{2}$ de 2-itemset of de collectie van de deelverzamelingen met grootte 2 (met twee verschillende elementen S of T of B ) . 
-				Dus $W_{2}=\{\{S,T\},\{T,B\},\{S,B\}\}$.<br/>
-				Als laatste is $W_{3}=\{\{S,T,B\}\}$ de 3-itemset of de collectie van de deelverzamelingen met grootte 3 (S,T en B zijn alle aanwezig).<br/>
-				Bereken
-						<ol style="list-style-type: lower-alpha">
-							<li>de support van alle deelverzamelingen van  $W_{1}$ in $W_{2} \cup W_{3}$.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>Antwoord 
-						<span id="a515a" class="refer">
-						$W_{2} \cup W_{3} = \{\{S,T\},\{T,B\},\{S,B\},\{S,T,B\}\}$.<br/> 
-						$\{S\}$ is een element van drie van de vier deelverzamelingen
-						dus $support(\{S\})=\frac{3}{4}$ of 75%. <br/>$\{T\}$ is een element van drie van de vier deelverzamelingen
-						dus $support(\{T\})=\frac{3}{4}$ of 75%. <br/>$\{B\}$ is een element van drie van de vier deelverzamelingen
-						dus $support(\{B\})=\frac{3}{4}$ of 75%. 
-									</li>
-								</ul>
-							</li>
-							<li>de support van alle deelverzamelingen van  $W_{2}$ in $W_{2} \cup W_{3}$.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$W_{2} \cup W_{3} = \{\{S,T\},\{T,B\},\{S,B\},\{S,T,B\}\}$. 
-						<br/>$\{S,T\}$ is een element van twee van de vier deelverzamelingen
-						dus $support(\{S,T\})=\frac{2}{4}$ of 50%. <br/>$\{T,B\}$ is een element van twee van de vier deelverzamelingen
-						dus $support(\{T,B\})=\frac{2}{4}$ of 50%. <br/>$\{S,B\}$ is een element van twee van de vier deelverzamelingen
-						dus $support(\{S,B\})=\frac{2}{4}$ of 50%.
-									</li>
-								</ul>
-							</li>
-							<li>De vraag
-								<div class="caret doel">de support van alle deelverzamelingen van  $W_{3}$ in $W_{2} \cup W_{3}$.</div>
-								<ul class="nested">
-									<li>$W_{2} \cup W_{3} = \{\{S,T\},\{T,B\},\{S,B\},\{S,T,B\}\}$.<br/> 
-						$\{S,T,B\}$ is een element van één van de vier deelverzamelingen
-						dus $support(\{S,T,B\})=\frac{1}{4}$ of 25%.
-									</li>
-								</ul>
-							</li>
-						</ol>
-					</li>
-					<li>Gegeven is de collectie $I$ hieronder. Een kok experimenteert met gerechten met verschillende ingrediënten. 
-					<div class="theorie">
-					<table>
-						<tr>
-							<th colspan="2">Collectie $I$
-							</th>
-						</tr>
-						<tr>
-							<th>Id
-							</th>
-							<th>Items
-							</th>
-						</tr>
-						<tr>
-							<td>0
-							</td>
-							<td>$\{Pasta,Kaas,Tomaat\}$
-							</td>
-						</tr>
-						<tr>
-							<td>1
-							</td>
-							<td>$\{Pasta,Room\}$
-							</td>
-						</tr>
-						<tr>
-							<td>2
-							</td>
-							<td>$\{Pasta,Tomaat\}$
-							</td>
-						</tr>
-						<tr>
-							<td>3
-							</td>
-							<td>$\{Kaas,Room\}$
-							</td>
-						</tr>
-						<tr>
-							<td>4
-							</td>
-							<td>$\{Kaas,Tomaat\}$
-							</td>
-						</tr>
-						<tr>
-							<td>5
-							</td>
-							<td>$\{Pasta,Tomaat,Room\}$
-							</td>
-						</tr>
-						<tr>
-							<td>6
-							</td>
-							<td>$\{Tomaat,Room\}$
-							</td>
-						</tr>
-						<tr>
-							<td>7
-							</td>
-							<td>$\{Kaas,Tomaat\}$
-							</td>
-						</tr>
-						<tr>
-							<td>8
-							</td>
-							<td>$\{Pasta,Kaas,Tomaat,Room\}$
-							</td>
-						</tr>
-						<tr>
-							<td>9
-							</td>
-							<td>$\{Pasta\}$
-							</td>
-						</tr>
-					</table>
-				</div>
-				Bekijk de volgende deelverzameling: 
-				$\{Pasta, Kaas, Tomaat\}$.
-						<ol style="list-style-type: lower-alpha">
-							<li>Laat zien dat $confidence(\{Pasta,Kaas\}\Rightarrow\{Tomaat\})$ hoger is dan die van $\{Pasta\}\Rightarrow\{Kaas,Tomaat\}$.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$confidence(\{Pasta,Kaas\}\Rightarrow\{Tomaat\}) = \frac{freq(\{Pasta,Kaas,Tomaat \})}{freq(\{Pasta,Kaas\})}=\frac{2}{2} =1 $.<br/>
-						$confidence(\{Pasta\}\Rightarrow\{Kaas,Tomaat\}) = \frac{freq(\{Pasta,Kaas,Tomaat \})}{freq(\{Pasta\})}=\frac{2}{6} $.<br/>
-						De eerste is inderdaad hoger.
-									</li>
-								</ul>
-							</li>
-							<li>Bereken voor welke $X \in \{ \{Pasta,Room\},\{Room,Kaas\} ,\{Kaas\}\}$ 
-					de $confidence(\{X\}\Rightarrow\{Tomaat\})$ in $I$ het grootst is.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>$confidence(\{Pasta,Room\}\Rightarrow\{Tomaat\}) = \frac{freq(\{Pasta,Room,Tomaat \})}{freq(\{Pasta,Room\})}=\frac{2}{3} $.<br/>
-						$confidence(\{Room,Kaas\}\Rightarrow\{Tomaat\}) = \frac{freq(\{Room,Kaas,Tomaat \})}{freq(\{Room,Kaas\})}=\frac{1}{2} $.<br/>
-						$confidence(\{Kaas\}\Rightarrow\{Tomaat\}) = \frac{freq(\{Tomaat,Kaas\})}{freq(\{Kaas\})}=\frac{4}{5} $.
-									</li>
-								</ul>
-							</li>
-							<li>Laat $Y$ de vereniging zijn van alle items (deelverzamelingen) uit de collectie
-						$I$ en $Z$ een willekeurige item uit $I$.
-						Waarom is de $confidence(\{Y\}\Rightarrow\{Z\})$ altijd 1?
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>De vereniging van alle items bevat alle ingrediënten. Dus deze vereniging bevat iedere deelverzameling van $I$ en impliceert deze
-						deelverzameling dan ook. In formulevorm<br/>
-						$confidence(\{Y\}\Rightarrow\{Z\}) = 
-						\frac{freq(\{Y \cup Z \})}{freq(\{Y\})} = \frac{freq(\{Y \})}{freq(\{Y\})}=1$
-									</li>
-								</ul>
-							</li>
-						</ol>
-					</li>
-					
-				</ol>
-			</div>
-		</div>
-	</div>
-
-<p class="pagebreak"></p>
-<a id="Apriori"><br/>
-<h2 >Apriori algoritme</h2>
-
-
-<p>Er bestaan veel algoritmes om associatieregels te ontdekken. De oudste en meest bekende methode is het Apriori algoritme
-(a priori bekent: op basis van eerder onderzoek) ontwikkeld voor transacties (verkopen). Het is in de jaren negentig bedacht door <a href="https://en.wikipedia.org/wiki/Apriori_algorithm" target="example">Agrawal en anderen</a>. 
-Met het algoritme wordt je in staat gesteld om interessante voldoende voorkomende verbanden (implicaties) in een collectie te vinden (b.v. welke aankopen van anderen toon ik jou als jij net in de online winkel een slaapzak koopt?). Voldoende voorkomend (frequent) betekent in dit geval dat we niet alle
-verbanden even nuttig vinden. Als producten te weinig voorkomen, ofwel te
-weinig support hebben, dan nemen we die niet mee in het algoritme.
-We stellen dus een ondergrens aan het support, de <strong>minimale support</strong>.<br/>
-Naast deze minimale support kun je ook instellen hoe betrouwbaar de implicaties moeten zijn (hoe sterk zijn de aanwijzingen), ofwel je geeft een <strong>minimale confidence</strong> op.
-</p>
-<div class="theorie important" style="overflow: hidden; padding-right: 10px;">Apriori algoritme
-	<div style="padding-left: 25px;">
-	Het Apriori algoritme voor een collectie $C$ bestaat uit de volgende twee fasen:
-	<ol>
-		<li>Het maken van een collectie $F$ met verzamelingen die voldoende frequent (groter dan een minimale support) zijn in $C$,
-		</li>
-		<li>Het opstellen van associatieregels met verzamelingen uit $F$ met voldoende betrouwbaarheid (groter dan een minimale confidence) in $C$.
-		</li>
-	</ol>
-	</div>
-</div>
-<p>We gaan door deze twee fasen heen aan de hand van het volgende voorbeeld:
-</p>
-<div class="rechts theorie">
-<img src="images/AprioriAlgoritme.svg"/>
-</div>	
-<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px;">voorbeeld:
-	<div style="padding-left: 25px;">
-	<p>In dit voorbeeld gaan we aan de slag met een zeer kleine hoeveelheid winkelmandjes en producten. In een echte toepassing zijn dat er duizenden. Dus de laatste maand hebben we alle individuele aankopen in een drukbezochte winkel geplaatst in de volgende collectie C:
-	</p>
-	<table>
-		<tr>
-			<th colspan="2">Collectie $C$
-			</th>
-		</tr>
-		<tr>
-			<th>Id
-			</th>
-			<th>Items
-			</th>
-		</tr>
-		<tr>
-			<td>0
-			</td>
-			<td>$\{Spaghetti, Tomatensaus\}$
-			</td>
-		</tr>
-		<tr>
-			<td>1
-			</td>
-			<td>$\{Spaghetti, Brood\}$
-			</td>
-		</tr>
-		<tr>
-			<td>2
-			</td>
-			<td>$\{Spaghetti, Tomatensaus, Brood \}$
-			</td>
-		</tr>
-		<tr>
-			<td>3
-			</td>
-			<td>$\{Brood,Boter\}$
-			</td>
-		</tr>
-		<tr>
-			<td>4
-			</td>
-			<td>$\{Brood, Tomatensaus\}$
-			</td>
-		</tr>
-	</table>
-	<p>De centrale vraag is welke combinaties van producten zijn interessant? We vinden combinaties interessant als er een minimale support is van 40% en zijn alleen geïnteresseerd in associatie regels met een betrouwbaarheid van minimaal  60%.
-</p>
-	</div>
-</div>
-
-<h3>Fase 1: Het maken van een collectie $F$ met verzamelingen die voldoende frequent (groter dan een minimale support) zijn in $C$</h3>
-<p>In deze fase gebruikt het Apriori algoritme een iteratief proces met een "bottom up" aanpak op de collectie $C$. Van te voren kies je een minimale support (minimale aanwezigheid) en bouwen we een steeds groter wordende collectie $F$ met deelverzamelingen in C met voldoende support, totdat er geenvoldoende frequente verzamelingen zijn toe te voegen aan $F$. Het algoritme is in de figuur hiernaast weergegeven. We zullen je aan de hand van het voorbeeld door dit algoritme heen leiden.
-</p>
-<p>Na de start van het algoritme maken we eerst de lege collectie $F = \{\}$ en zetten het aantal elementen $k$ aanwezig in een itemset op 0. Gelijk daarna maken we $k$ gelijk aan 1 en gaan we naar het oranje blok:
-</p>
-<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: orange">
-	Genereer alle kandidaat itemsets met lengte 1
-	<div style="padding-left: 25px;">
-	We verzamelen de 1-itemset in de collectie $S_{1}$. De collectie  $S_{1}$ bestaat dan uit alle verzamelingen met slechts één item. (b.v. alle verschillende artikelen die je in al de winkelmandjes tegenkomt).
-	</div>
-</div>
-<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: orange">voorbeeld:
-	<div style="padding-left: 25px;">
-	$S_{1}=\{\{Spaghetti\}, \{Tomatensaus\},\{ Brood \}, \{Boter \}\}$
-	</div>
-</div>
-<p>Vervolgens gaan we naar de stap in het blauwe blok:
-</p>
-<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: #33cccc">
-	Bereken de support van elke 1- itemset uit $S_{1}$ in $C$
-</div>
-<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: #33cccc">voorbeeld:
-	<div style="padding-left: 25px;">
-		<table>
-		<tr>
-			<th>Itemset
-			</th>
-			<th>Support
-			</th>
-		</tr>
-		<tr class="voldoet">
-			<td>$\{Spaghetti\}$
-			</td>
-			<td>60%
-			</td>
-		</tr>
-		<tr class="voldoet">
-			<td>$\{Tomatensaus\}$
-			</td>
-			<td>60%
-			</td>
-		</tr>
-		<tr class="voldoet">
-			<td>$\{Brood \}$
-			</td>
-			<td>80%
-			</td>
-		</tr>
-		<tr class="voldoetNiet">
-			<td>$\{Boter\}$
-			</td>
-			<td>20%
-			</td>
-		</tr>
-	</table>
-	</div>
-</div>
-
-<p>Als laatste gaan we in de eerste iteratie naar het paarse blok:
-</p>
-<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: #ff99cc">
-	Voeg de 1-itemsets met voldoende support toe aan de collectie $F$
-</div>
-<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: #ff99cc">voorbeeld:
-	<div style="padding-left: 25px;">
-	In de tabel hierboven zie je dat alleen $\{Boter\}$ uit $S1$ de grens van 40% niet haalt. De collectie F met itemsets met voldoende support breiden we dus uit met de 1-itemsets  
-	$\{Spaghetti\}$, $\{Tomatensaus\}$ en $\{Brood\}$ dus:<br/>
-	$F=\{\{Spaghetti\}, \{Tomatensaus\}, \{Brood\}\}$
-	</div>
-</div>
-
-<p>We komen nu aan bij de test "Is er in deze ronde een $k$-itemset aan $F$ toegevoegd?". In het voorbeeld hebben we net drie verzamelingen met 1-item toegevoegd en is het antwoord dus ja, we  zijn dus nog niet klaar. We verhogen k naar 2 en gaan weer verder bij het oranje blok:
-</p>
-<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: orange">
-	Genereer alle kandidaat itemsets met lengte 2
-	<div style="padding-left: 25px;">
-	We verzamelen de 2-itemset in de collectie $S_{2}$. De collectie $S_{2}$ bestaat dan uit alle verzamelingen met twee items waarbij we alleen nog kijken naar de items die in $F$ aanwezig zijn. 
-	</div>
-</div>
-<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: orange">voorbeeld:
-	<div style="padding-left: 25px;">
-	$S_{2}=\{\{Spaghetti,Tomatensaus\}, \{Spaghetti, Brood \}, \{Tomatensaus, Brood \}\}$
-	</div>
-</div>
-<p>Op naar het blauwe blok om de support te berekenen:
-</p>
-<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: #33cccc">
-	Bereken de support van elke 2- itemset uit $S_{2}$ in $C$
-</div>
-<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: #33cccc">voorbeeld:
-	<div style="padding-left: 25px;">
-		<table>
-		<tr>
-			<th>Itemset
-			</th>
-			<th>Support
-			</th>
-		</tr>
-		<tr class="voldoet">
-			<td>$\{Spaghetti, Tomatensaus \}$
-			</td>
-			<td>40%
-			</td>
-		</tr>
-		<tr class="voldoet">
-			<td>$\{Spaghetti, Brood \}$
-			</td>
-			<td>40%
-			</td>
-		</tr>
-		<tr class="voldoet">
-			<td>$\{Tomatensaus, Brood \}$
-			</td>
-			<td>40%
-			</td>
-		</tr>
-	</table>
-	</div>
-</div>
-<p>Kunnen we weer itemsets toevoegen aan $F$?</p>
-<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: #ff99cc">
-	Voeg de 2-itemsets met voldoende support toe aan de collectie $F$
-</div>
-<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: #ff99cc">voorbeeld:
-	<div style="padding-left: 25px;">
-	In de tabel hierboven zie je dat alle 2-itemsets de grens van 40% halen. De collectie F met itemsets met voldoende support breiden we dus uit met de 2-itemsets 
-$\{Spaghetti,Tomatensaus\}, \{Spaghetti, Brood \}$ en $\{Tomatensaus, Brood \}$	dus
-$F=\{\{Spaghetti\}, \{Tomatensaus\}, \{Brood\},\{Spaghetti,Tomatensaus\}, \{Spaghetti, Brood \},\{Tomatensaus, Brood \}\}$
-	</div>
-</div>
-<p>We komen nu weer aan bij de test "Is er in deze ronde een $k$-itemset aan $F$ toegevoegd?". In het voorbeeld hebben we er weer 3 toegevoegd en is het antwoord dus ja, we  zijn dus nog steeds niet klaar. We verhogen $k$ naar 3 en gaan weer verder bij het oranje blok:
-</p>
-<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: orange">
-	Genereer alle kandidaat itemsets met lengte 3
-	<div style="padding-left: 25px;">
-	We verzamelen de 2-itemset in de collectie $S_{3}$. De collectie $S_{3}$ bestaat dan uit alle verzamelingen met twee items waarbij we alleen nog kijken naar de items die in $F$ aanwezig zijn. 
-	</div>
-</div>
-<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: orange">voorbeeld:
-	<div style="padding-left: 25px;">
-	$S_{3}=\{\{Spaghetti,Tomatensaus, Brood \}\}$
-	</div>
-</div>
-<p>Het blauwe blok levert nu de support:
-</p>
-</p>
-<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: #33cccc">
-	Bereken de support van elke 3- itemset uit $S_{3}$ in $C$
-</div>
-<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: #33cccc">voorbeeld:
-	<div style="padding-left: 25px;">
-		<table>
-		<tr>
-			<th>Itemset
-			</th>
-			<th>Support
-			</th>
-		</tr>
-		<tr class="voldoetNiet">
-			<td>$\{Spaghetti,Tomatensaus, Brood\}$
-			</td>
-			<td>20%
-			</td>
-		</tr>
-	</table>
-	</div>
-</div>
-<p>Kunnen we weer itemsets toevoegen aan F?
-</p>
-<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: #ff99cc">
-	Voeg de 3-itemsets met voldoende support toe aan de collectie $F$
-</div>
-<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: #ff99cc">voorbeeld:
-	<div style="padding-left: 25px;">
-	In de tabel hierboven zie je dat alle 3-itemsets de grens van 20% niet halen. Er kan niets aan $F$ worden toegevoegd. De collectie $F$ blijft dus:dus
-$F=\{\{Spaghetti\}, \{Tomatensaus\}, \{Brood\},\{Spaghetti,Tomatensaus\}, \{Spaghetti, Brood \},\{Tomatensaus, Brood \}\}$
-	</div>
-</div>
-<p>We komen nu weer aan bij de test "Is er in deze ronde een $k$-itemset aan $F$ toegevoegd?". In het voorbeeld hebben we niets meer hebben toegevoegd dus nee, we  zijn klaar en eindigen dus met de verzameling
-</p>
-$$F=\{\{Spaghetti\}, \{Tomatensaus\}, \{Brood\},\{Spaghetti,Tomatensaus\}, \{Spaghetti, Brood \},\{Tomatensaus, Brood \}\}
-$$
-<p>In het voorbeeld zijn in het algoritme dus 3 iteraties nodig geweest om het proces te stoppen. Andere samenstellingen van de winkelmandjes met vooral meer artikelen zal ervoor zorgen dat er veel meer iteraties nodig zijn. 
-</p>
-<p>
-We zijn nu aan het eind van fase 1 gekomen en gaan nu kijken welke associatieregels interessant zijn.
-</p>
-
-<h3>Fase 2: Het opstellen van associatieregels met verzamelingen uit $F$ met voldoende betrouwbaarheid (groter dan een minimale confidence) in $C$.</h3>
-<p>
-Als de collectie $F$ is gevonden kunnen we met de verzamelingen in $F$ associatieregels gaan maken. Voor elke associatieregel bepalen we de confidence. Alleen in die associatieregels met voldoende confidence zijn we geïnteresseerd. We gaan dit duidelijker maken met het voorbeeld. 
-<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px;">voorbeeld:
-	<div style="padding-left: 25px;">
-<p>In ons voorbeeld hadden we gesteld dat we associatieregels alleen interessant als de betrouwbaarheid (confidentie) groter is dan 60% (= minimale confidentie). Uit $F$ kunnen we de onderstaande associatieregels afleiden. 
-
-</p>
-<table>
-		<tr>
-			<th>Associatieregels</th>
-			<th>Confidence</th>
-		</tr>
-		<tr class="voldoet">
-			<td>$\{Spaghetti\} \Rightarrow \{Spaghetti,Tomatensaus\}$
-			</td>
-			<td>$\frac{40}{60}= 67 \% $
-			</td>
-		</tr>
-		<tr class="voldoet">
-			<td>$\{Spaghetti\} \Rightarrow \{Spaghetti,Brood\}$
-			</td>
-			<td>$\frac{40}{60}= 67\% $
-			</td>
-		</tr>
-		<tr class="voldoetNiet">
-			<td>$\{Brood\} \Rightarrow \{Spaghetti,Brood\}$
-			</td>
-			<td>$\frac{40}{80}= 50\% $
-			</td>
-		</tr>
-		<tr class="voldoetNiet">
-			<td>$\{Brood\} \Rightarrow \{Tomatensaus,Brood\}$
-			</td>
-			<td>$\frac{40}{80}= 50\% $
-			</td>
-		</tr>
-		<tr class="voldoet">
-			<td>$\{Tomatensaus\} \Rightarrow \{Tomatensaus,Brood\}$
-			</td>
-			<td>$\frac{40}{60}= 67\% $
-			</td>
-		</tr>
-		<tr class="voldoet">
-			<td>$\{Tomatensaus\} \Rightarrow \{Tomatensaus,Spaghetti\}$
-			</td>
-			<td>$\frac{40}{60}= 67\% $
-			</td>
-		</tr>
-	</table>
-<p>
-In de eerste regel in de tabel hierboven geeft voor associatieregel $\{Spaghetti\} \Rightarrow \{Spaghetti,Tomatensaus\}$ een betrouwbaarheid van 67%. Dit zegt dat in
-67% van de gevallen dat een klant spaghetti koopt, deze ook tomatensaus gaat kopen. 67% is groter dan 60%, voldoende betrouwbaar dus. De derde regel laat zien dat als iemand brood koopt, deze persoon in 50% van de gevallen spaghetti koopt, te weinig voorspellend om rekening mee te houden want kleiner dan 60%. Dus blijven over de associatieregels:
-</p>
-<table>
-		<tr>
-			<th>Associatieregels</th>
-			<th>Confidence</th>
-		</tr>
-		<tr class="voldoet">
-			<td>$\{Spaghetti\} \Rightarrow \{Spaghetti,Tomatensaus\}$
-			</td>
-			<td>$\frac{40}{60}= 67 \% $
-			</td>
-		</tr>
-		<tr class="voldoet">
-			<td>$\{Spaghetti\} \Rightarrow \{Spaghetti,Brood\}$
-			</td>
-			<td>$\frac{40}{60}= 67\% $
-			</td>
-		</tr>
-		<tr class="voldoet">
-			<td>$\{Tomatensaus\} \Rightarrow \{Tomatensaus,Brood\}$
-			</td>
-			<td>$\frac{40}{60}= 67\% $
-			</td>
-		</tr>
-		<tr class="voldoet">
-			<td>$\{Tomatensaus\} \Rightarrow \{Tomatensaus,Spaghetti\}$
-			</td>
-			<td>$\frac{40}{60}= 67\% $
-			</td>
-		</tr>
-	</table>
-</div>
-</div>
-<p>
-<a id="Vragen2"></a> Tijd om dit zelf toe te passen:
-</p>
-	<div class ='hammer treeview' style="clear: both;">Vragen 2
-		<button onclick="window.open('SLO-apps/aiAssocForm.htm','techniek')">Maak je eigen opgave</button>
-		<div style="padding-left: 25px;">
-			<span class="caret">Opdrachten</span>
-			<div class="nested">
-				<ol start="9">
-					<li>		Gegeven is de transactiedatabase gerepresenteerd door de 
-			collectie $W$
-				<table>
-					<tr>
-					<th colspan="2">Collectie $W$
-					</th>
-				</tr>
-				<tr>
-					<th>Id
-					</th>
-					<th>Items
-					</th>
-				</tr>
-				<tr>
-					<td>0
-					</td>
-					<td>$\{a,b,c\}$
-					</td>
-				</tr>
-				<tr>
-					<td>1
-					</td>
-					<td>$\{b,c,d,e\}$
-					</td>
-				</tr>
-				<tr>
-					<td>2
-					</td>
-					<td>$\{c,d \}$
-					</td>
-				</tr>
-				<tr>
-					<td>3
-					</td>
-					<td>$\{a,b,d\}$
-					</td>
-				</tr>
-				<tr>
-					<td>4
-					</td>
-					<td>$\{a,b,c\}$
-					</td>
-				</tr>
-			</table>
-			<ol style="list-style-type: lower-alpha;">
-							<li>Pas Fase 1 van het Apriori-algoritme toe op deze collectie met een support van minimaal 50%
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>			Iteratie met k=1
-
-			<ol style="list-style-type: upper-alpha;">
-				<li>Genereer alle deelverzamelingen (itemsets) kandidaten met lengte $1$.<br/>
-					$S_{1}=\{\{a\}, \{b\},\{ c \}, \{d \}, \{e \}\}$
-				</li>
-				<li>Bereken support van de kandidaat deelverzamelingen (1-itemsets) uit $S_{1}$ in $W$.<br./>
-					<table>
-					<tr>
-						<th>Itemset
-						</th>
-						<th>Support
-						</th>
-					</tr>
-					<tr class="voldoet">
-						<td>$\{a\}$
-						</td>
-						<td>60%
-						</td>
-					</tr>
-					<tr class="voldoet">
-						<td>$\{b\}$
-						</td>
-						<td>80%
-						</td>
-					</tr>
-					<tr class="voldoet">
-						<td>$\{c \}$
-						</td>
-						<td>80%
-						</td>
-					</tr>
-					<tr class="voldoet">
-						<td>$\{d\}$
-						</td>
-						<td>60%
-						</td>
-					</tr>
-					<tr class="voldoetNiet">
-						<td>$\{e\}$
-						</td>
-						<td>20%
-						</td>
-					</tr>
-				</table>
-			</li>
-			<li>
-					De support van kandidaat itemset $\{e\}$ is onder de 40% en voldoet dus niet.<br/>
-					De frequente 1-itemsets zijn dus: $F=\{\{a\}, \{b\}, \{c\}, \{d\}\}$
-				</li>
-				<li>
-					$F$ is niet leeg. We gaan op zoek naar grotere frequente itemsets namelijk die uit twee elementen
-					bestaan. k=2
-				</li>
-				</ol>
-				<p>
-				Iteratie met k=2
-				</p>
-
-				<ol style="list-style-type: upper-alpha;">
-					<li>Genereer alle deelverzamelingen (itemsets) kandidaten met lengte $2$ met elementen uit $F$.<br/>
-						$S_{2}=\{\{a,b\}, \{a, c \}, \{a, d \}, \{b, c \}, \{b, d \}
-						, \{c, d \}\}$
-					</li>
-					<li>Bereken support van de kandidaat deelverzamelingen (2-itemsets) uit $S_{2}$ in $W$.<br./>
-						<table>
-						<tr>
-							<th>Itemset
-							</th>
-							<th>Support
-							</th>
-						</tr>
-						<tr class="voldoet">
-							<td>$\{a,b\}$
-							</td>
-							<td>60%
-							</td>
-						</tr>
-						<tr class="voldoetNiet">
-							<td>$\{a,c\}$
-							</td>
-							<td>40%
-							</td>
-						</tr>
-						<tr class="voldoetNiet">
-							<td>$\{a,d\}$
-							</td>
-							<td>20%
-							</td>
-						</tr>
-						<tr class="voldoet">
-							<td>$\{b,c\}$
-							</td>
-							<td>60%
-							</td>
-						</tr>
-						<tr class="voldoetNiet">
-							<td>$\{b,d\}$
-							</td>
-							<td>40%
-							</td>
-						</tr>
-						<tr class="voldoetNiet">
-							<td>$\{c,d\}$
-							</td>
-							<td>40%
-							</td>
-						</tr>
-					</table>
-
-					</li>
-					<li>
-						De frequente 2-itemsets zijn:$\{\{a,b\}, \{b,c\}\}$ dus $F$ wordt
-						$F=\{\{a\}, \{b\}, \{c\}, \{d\},\{a,b\}, \{b,c\}\}$
-					</li>
-					<li>
-						 We hebben weer items toegevoegd aan $F$ en gaan dus op zoek naar grotere frequente itemsets namelijk die uit drie elementen
-						bestaan. k=3
-					</li>
-				</ol>
-				<p>
-				Iteratie met k=3
-				</p>
-
-				<ol style="list-style-type: upper-alpha;">
-					<li>Genereer alle deelverzamelingen (itemsets) kandidaten met lengte $3$ met elementen uit $F$.<br/>
-						$S_{3}=\{\{a,b,c \}\}$
-					</li>
-					<li>Bereken support van de kandidaat deelverzamelingen (3-itemsets) uit $S_{3}$ in $W$.<br./>
-						<table>
-						<tr>
-							<th>Itemset
-							</th>
-							<th>Support
-							</th>
-						</tr>
-						<tr class="voldoetNiet">
-							<td>$\{a,b,c\}$
-							</td>
-							<td>40%
-							</td>
-						</tr>
-
-					</table>
-
-					</li>
-					<li>Er zijn geen frequente 3-itemssets.</li>
-					<li>
-						We zijn bij het einde gekomen.
-					</li>
-			</ol>
-			<p>De uiteindelijke set van voldoende frequente verzamelingen is
-			<br/>
-				$F=\{\{a\}, \{b\}, \{c\}, \{d\}, \{a, b \}, \{b, c \}\}$.</p>
-									</li>
-								</ul>
-							</li>
-							<li>Geef in Fase 2 alle associatieregels met een confidence van minimaal 70%.
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>
-									<p>De uiteindelijke set van voldoende frequente verzamelingen is
-			<br/>
-				$F=\{\{a\}, \{b\}, \{c\}, \{d\}, \{a, b \}, \{b, c \}\}$.<br/>
-				De daaruit voortvloeiende associatieregels met voldoende confidence zijn
-				<table>
-			<tr>
-				<th>Associatieregels</th>
-				<th>Confidence</th>
-			</tr>
-			<tr class="voldoet">
-				<td>$\{a\} \Rightarrow \{a,b\}$
-				</td>
-				<td>$\frac{60}{60}= 100 \% $
-				</td>
-			</tr>
-			<tr class="voldoet">
-				<td>$\{b\} \Rightarrow \{a,b\}$
-				</td>
-				<td>$\frac{60}{80}= 75 \% $
-				</td>
-			</tr>
-			<tr class="voldoet">
-				<td>$\{b\} \Rightarrow \{b,c\}$
-				</td>
-				<td>$\frac{60}{80}= 75 \% $
-				</td>
-			</tr>
-			<tr class="voldoet">
-				<td>$\{c\} \Rightarrow \{b,c\}$
-				</td>
-				<td>$\frac{60}{80}= 75 \% $
-				</td>
-			</tr>
-		</table>
-									</li>
-								</ul>
-							</li>
-						</ol>
-					</li>
-					<li>Gegeven is de transactiedatabase gerepresenteerd door de 
-			collectie $P$
-				<table>
-					<tr>
-					<th colspan="2">Collectie $P$
-					</th>
-				</tr>
-				<tr>
-					<th>Id
-					</th>
-					<th>Items
-					</th>
-				</tr>
-				<tr>
-					<td>0
-					</td>
-					<td>$\{brood,melk\}$
-					</td>
-				</tr>
-				<tr>
-					<td>1
-					</td>
-					<td>$\{brood,luier,bier,eieren\}$
-					</td>
-				</tr>
-				<tr>
-					<td>2
-					</td>
-					<td>$\{melk,luier,bier,cola \}$
-					</td>
-				</tr>
-				<tr>
-					<td>3
-					</td>
-					<td>$\{brood,melk,luier,bier\}$
-					</td>
-				</tr>
-				<tr>
-					<td>4
-					</td>
-					<td>$\{brood,melk,luier,cola\}$
-					</td>
-				</tr>
-			</table>
-						<ol style="list-style-type: lower-alpha;">
-							<li>DPas het Apriori-algoritme toe op deze collectie met een support van minimaal 50%
-								<div class="caret doel">antwoord</div>
-								<ul class="nested">
-									<li>Iteratie met k=1
-
-			<ol style="list-style-type: upper-alpha;">
-				<li>Genereer alle deelverzamelingen (itemsets) kandidaten met lengte $1$.<br/>
-					$S_{1}=\{\{brood\}, \{bier\},\{ melk \}, \{luier \}, \{cola \}, \{eieren \}\}$
-				</li>
-				<li>Bereken support van de kandidaat deelverzamelingen (1-itemsets) uit $S_{1}$ in $P$.<br./>
-					<table>
-					<tr>
-						<th>Itemset
-						</th>
-						<th>Support
-						</th>
-					</tr>
-					<tr class="voldoet">
-						<td>$\{brood\}$
-						</td>
-						<td>80%
-						</td>
-					</tr>
-					<tr class="voldoet">
-						<td>$\{bier\}$
-						</td>
-						<td>60%
-						</td>
-					</tr>
-					<tr class="voldoet">
-						<td>$\{melk \}$
-						</td>
-						<td>60%
-						</td>
-					</tr>
-					<tr class="voldoet">
-						<td>$\{luier\}$
-						</td>
-						<td>80%
-						</td>
-					</tr>
-					<tr class="voldoetNiet">
-						<td>$\{cola\}$
-						</td>
-						<td>40%
-						</td>
-					</tr>
-					<tr class="voldoetNiet">
-						<td>$\{eieren\}$
-						</td>
-						<td>20%
-						</td>
-					</tr>
-				</table>
-			</li>
-			<li>
-					De support van kandidaat itemsets $\{cola\}$ en $\{eieren\}$ is onder 
-					de 40% en voldoen dus niet.<br/>
-					De frequente itemsets zijn dus: $F=\{\{brood\}, \{bier\},\{ melk \}, \{luier \}\}$
-				</li>
-				<li>
-					$F$ is niet leeg. We gaan op zoek naar grotere frequente itemsets namelijk die uit twee elementen
-					bestaan. k=2
-				</li>
-				</ol>
-				<p>
-				Iteratie met k=2
-				</p>
-
-				<ol style="list-style-type: upper-alpha;">
-					<li>Genereer alle deelverzamelingen (itemsets) kandidaten met lengte $2$ met elementen uit $F_{1}$.<br/>
-						$S_{2}=\{\{brood,bier\}, \{brood,melk\}, \{brood,luier\}, \{bier,melk\}, \{bier,luier\}
-						, \{melk,luier\}\}$
-					</li>
-					<li>Bereken support van de kandidaat deelverzamelingen (2-itemsets) uit $S_{2}$ in $P$.<br./>
-						<table>
-						<tr>
-							<th>Itemset
-							</th>
-							<th>Support
-							</th>
-						</tr>
-						<tr class="voldoetNiet">
-							<td>$\{brood,bier\}$
-							</td>
-							<td>40%
-							</td>
-						</tr>
-						<tr class="voldoet">
-							<td>$\{brood,melk\}$
-							</td>
-							<td>60%
-							</td>
-						</tr>
-						<tr class="voldoet">
-							<td>$\{brood,luier\}$
-							</td>
-							<td>60%
-							</td>
-						</tr>
-						<tr class="voldoetNiet">
-							<td>$\{bier,melk\}$
-							</td>
-							<td>40%
-							</td>
-						</tr>
-						<tr class="voldoet">
-							<td>$\{bier,luier\}$
-							</td>
-							<td>60%
-							</td>
-						</tr>
-						<tr class="voldoet">
-							<td>$\{melk,luier\}$
-							</td>
-							<td>60%
-							</td>
-						</tr>
-					</table>
-
-					</li>
-					<li>
-						De frequente 2-itemsets zijn:$\{\{brood,melk\}, \{brood,luier\},  \{bier,luier\}
-						, \{melk,luier\}\}$ dus 
-						$F=\{\{brood\}, \{bier\},\{ melk \}, \{luier \},\{brood,melk\}, \{brood,luier\},  \{bier,luier\}
-						, \{melk,luier\}\}$
-					</li>
-					<li>
-						Er zijn itemsets toegevoegd. We gaan dus op zoek naar grotere frequente itemsets namelijk die uit drie elementen
-						bestaan. k=3
-					</li>
-				</ol>
-				<p>
-				Iteratie met k=3
-				</p>
-
-				<ol style="list-style-type: upper-alpha;">
-					<li>Genereer alle deelverzamelingen (itemsets) kandidaten met lengte $3$ met elementen uit $F$.<br/>
-						$S_{3}=\{\{brood,melk,luier\}, \{brood,melk,bier\},  \{bier,melk,luier\}\}$
-					</li>
-					<li>Bereken support van de kandidaat deelverzamelingen (3-itemsets) uit $S_{3}$ in $P$.<br./>
-						<table>
-						<tr>
-							<th>Itemset
-							</th>
-							<th>Support
-							</th>
-						</tr>
-						<tr class="voldoetNiet">
-							<td>$\{brood,melk,luier\}$
-							</td>
-							<td>40%
-							</td>
-						</tr>
-						<tr class="voldoetNiet">
-							<td>$\{brood,melk,bier\}$
-							</td>
-							<td>20%
-							</td>
-						</tr>
-						<tr class="voldoetNiet">
-							<td>$\{bier,melk,luier\}$
-							</td>
-							<td>40%
-							</td>
-						</tr>
-					</table>
-
-					</li>
-					<li>
-						Er zijn geen voldoende frequente 3-itemsets.
-					</li>
-					<li>
-						We zijn bij het einde gekomen.
-					</li>
-			</ol>
-			<p>De uiteindelijke set van voldoende frequente verzamelingen is
-			<br/>
-				$F=\{\{brood\}, \{bier\},\{ melk \}, \{luier \},\{brood,melk\}, \{brood,luier\},  \{bier,luier\}
-						, \{melk,luier\}\}$.<br/></p>
-									</li>
-								</ul>
-							</li>
-							<li>Geef alle associatieregels met een confidence van minimaal 60%.
-								<div class="caret doel"></div>
-								<ul class="nested">
-									<li><p>De uiteindelijke set van voldoende frequente verzamelingen is
-			<br/>
-				$F=\{\{brood\}, \{bier\},\{ melk \}, \{luier \},\{brood,melk\}, \{brood,luier\},  \{bier,luier\}
-						, \{melk,luier\}\}$.<br/>
-						De daaruit voortvloeiende associatieregels met voldoende confidence zijn
-			</p>
-			<table>
-			<tr>
-				<th>Associatieregels</th>
-				<th>Confidence</th>
-			</tr>
-			<tr class="voldoet">
-				<td>$\{brood\} \Rightarrow \{brood,melk\}$
-				</td>
-				<td>$\frac{60}{80}= 75 \% $
-				</td>
-			</tr>
-			<tr class="voldoet">
-				<td>$\{brood\} \Rightarrow \{brood,luier\}$
-				</td>
-				<td>$\frac{60}{80}= 75 \% $
-				</td>
-			</tr>
-			<tr class="voldoet">
-				<td>$\{melk\} \Rightarrow \{brood,melk\}$
-				</td>
-				<td>$\frac{60}{80}= 75 \% $
-				</td>
-			</tr>
-			<tr class="voldoet">
-				<td>$\{melk\} \Rightarrow \{luier,melk\}$
-				</td>
-				<td>$\frac{60}{80}= 75 \% $
-				</td>
-			</tr>
-			<tr class="voldoet">
-				<td>$\{luier\} \Rightarrow \{luier,brood\}$
-				</td>
-				<td>$\frac{60}{80}= 75 \% $
-				</td>
-			</tr>
-			<tr class="voldoet">
-				<td>$\{luier\} \Rightarrow \{luier,bier\}$
-				</td>
-				<td>$\frac{60}{80}= 75 \% $
-				</td>
-			</tr>
-			<tr class="voldoet">
-				<td>$\{luier\} \Rightarrow \{luier,melk\}$
-				</td>
-				<td>$\frac{60}{80}= 75 \% $
-				</td>
-			</tr>
-			<tr class="voldoet">
-				<td>$\{bier\} \Rightarrow \{bier,luier\}$
-				</td>
-				<td>$\frac{60}{60}= 100 \% $
-				</td>
-			</tr>
-			</table>
-									</li>
-								</ul>
-							</li>
-						</ol>
-					</li>
-				</ol>
-			</div>
-		</div>
-	</div>
-	</article>
-</body>
-</html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <title>Kunstmatige Intelligentie</title>
+    <script src="treeview.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+		tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+	  });
+	</script>
+  </head>
+  <body  id="technieken" onload="addPathLead();initTreeview()"  >
+    <a name="Inleiding" style="counter-reset: subsection 2;"></a>
+    <header class="paragraaf titel">Associatie analyse</header>
+	<section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/	<a href="inleiding_technieken.html" target="_parent">Technieken</a>/Associatie analyse</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by/4.0/" target="license">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by/4.0/" target="license">Creative Commons Attribution
+				4.0
+			<br />International License</a>.
+		</div>
+		<a name="Inleiding"></a> bron:<a href="docs/Big Data studenten OCE/Lesmodule Big Data.pdf">Lesmodule Big Data</a>
+	</div>
+	</section>
+	<div class="navbar">
+		<div class="centreer">
+			<a href="#Inleiding">Associatie analyse</a> 
+			<a href="#Introductie">Introductie</a> 
+			<span class="dropdown">
+			<div class="dropbtn" onclick="window.location='#cogana'"><a href="#Theorie">Theorie</a>  &#9660;</div>
+			<div class="dropdown-content">
+			<a class="submenuitem"  href="#verzameling">Verzamelingenleer</a> 
+			<a class="submenuitem"  href="#Associatieregels">Associatieregels</a>
+			<a class="submenuitem"  href="#Apriori">Apriori algoritme</a>
+			</div>
+			</span>			<span class="dropdown">
+			<div class="dropbtn">Vragen  &#9660;</div>
+			<div class="dropdown-content">
+				<a class="submenuitem"  href="#Vragen1">Vragen 1</a>
+				<a class="submenuitem"  href="#Vragen2">Vragen 2</a>
+			</div>
+			</span>
+		</div>
+	</div>
+	<article>
+<p>
+In de <a href="techniek_introductie.html" class="book">introductie van de AI technieken</a> heb je gezien dat AI applicaties data gestuurd zijn. Hoe werkt dat sturen door die data? In deze sectie en volgende secties gaan we dat in een aantal technieken bekijken. De meeste toepassingen gebruiken artificiële intelligentie om b.v. patronen te herkennen of groeperingen te maken.
+</p>
+<p>
+De berekeningen in dit en de sectie <a href="techniek_cluster_analyse.html" class="book">Cluster Analyse</a> zijn niet heel erg ingewikkeld en zouden voor iedere leerling op havo en vwo uit te voeren moeten zijn. Lukt het niet stel dan vragen aan je docent.
+</p>
+<p>
+Na het bestuderen van deze sectie:
+</p>
+<ul>
+	<li>Kun je in eigen woorden het doel en de taak van associatie analyse bij datamining toelichten.
+	</li>
+	<li>Kun je de begrippen verzamelingenleer, associatieanalyse en associatieregel uitleggen.
+	</li>
+	<li>Weet je de toepassingen van associatie analyse, bijvoorbeeld winkelmandjesanalyse (basket analysis).
+	</li>
+	<li>Ben je in staat praktische voorbeelden van associaties op te noemen.
+	</li>
+	<li>Kun je de berekeningen binnen het <strong>apriori</strong> algoritme uitvoeren, onder andere:
+    <ul>
+		<li>het bepalen van de doorsnede en de vereniging van twee of meer verzamelingen;
+		</li>
+		<li>het berekenen van de support van een deelverzameling;
+		</li>
+		<li>het vinden van de associatieregels in een eenvoudig probleem;
+		</li>
+		<li>het berekenen van de betrouwbaarheid (confidence) van een associatieregel van een deelverzameling;
+		</li>
+		<li>het uitvoeren van alle nodige iteraties in het apriori algoritme.
+	</ul>
+	</li>
+</ul>
+	<a id="Introductie"></a><br/>
+	<h2>Introductie</h2>	
+	<div class="rechts theorie">
+		<img src="images/RumChocoBanaan1.png"  style="width: 300px;"/><br/>
+	</div>
+	<p>Stel je wordt manager van een supermarkt in een wijk waar veel studenten wonen. Na een paar dagen krijg je onder andere de indruk dat er veel bananen en chocolade verkocht worden. Daarom overweeg je de bananen en de chocolade samen vlak bij de kassa's te leggen om zo de klanten die langs lopen tot meer impuls inkopen te verleiden.  Je wilt als verkoper ook niet impulsief te werk gaan, dus ga je een onderzoek doen met alle kassaregistraties van de klanten als gegevens voor je onderzoek. Eén kassaregistratie geeft dan natuurlijk aan wat de klant in het winkelmandje had.
+	</p>
+	<p>De methoden die je als onderzoeker tot je beschikking hebt om deze gegevens te onderzoeken vallen onder <strong>associatie analyse</strong>. Voor we algemeen aan de slag gaan en één van de methoden, het <strong>apriori algoritme</strong>, in detail uitwerken gaan we eerst intuïtief met bovenstaand voorbeeld aan de slag. Na een week heb je deze gegevens verzameld:
+	</p>
+	<ul>
+		<li>er blijken 8051 klanten te zijn geweest;</li>
+		<li>905 keer stond banaan op de rekening;</li>
+		<li>750 keer stond chocolade op de rekening;</li>
+		<li>samen kwamen bananen en chocolade 653 keer voor.</li>
+	</ul>
+	<p>Begrippen die centraal staan in de associatie analyse zijn <strong>support</strong>, <strong>associatieregel</strong> en <strong>betrouwbaarheid</strong>.
+	</p>
+	<p>Support van één of meerdere artikelen is niets anders dan de experimentele kans dat een mandje deze artikelen bevat. Zo is $\mathrm{support}(\{\mathrm{banaan}\}) = 905/8051 \approx 0.112$ of wel ongeveer 11%. Verder is  $\mathrm{support}(\{\mathrm{chocolade}\}) = 750/8051 \approx 0.093$ en  $\mathrm{support}(\{\mathrm{chocolade}, \mathrm{banaan}\}) = 653/8051 \approx 0.081$. 
+	</p>
+	<p>Om nu te weten te komen of het vermoeden dat bananen vaker samen met chocolade worden verkocht werkelijkheid is, ben je geïnteresseerd in de vraag: als een klant bananen koopt, hoe groot is dan de kans dat deze klant ook chocolade koopt? 
+	Ofwel hoe waar is de uitspraak: <strong>Als een klant bananen koopt, koopt de klant ook chocolade</strong>? Een dergelijke uitspraak noemt men een <strong>associatieregel</strong>.  Met de gegevens hierboven kunnen we de betrouwbaarheid (<strong>=confidence</strong>) van deze uitspraak uitrekenen in de vorm van een kans.</p>
+	<p>Confidence( <strong>Als een klant bananen koopt, koopt de klant ook chocolade </strong> ) =  
+   aantal winkelmandjes met bananen en chocolade / aantal winkelmandjes met alleen bananen=
+  653/905=0,72.</p>
+	<p>In ongeveer driekwart van de gevallen zal de klant die bananen in zijn mandje legt doorlopen naar de chocolade. Zullen we het die klant maar eens gemakkelijker maken door deze producten dichter bij elkaar te plaatsen?
+	</p>
+	<p>In het voorbeeld hierboven hebben we specifiek gekeken naar bananen en chocolade. Het is zinvoller als we uitgaan van alle aankopen en met een methode uitvissen wat de interessante combinaties zijn. De <strong>apriori methode</strong>, die we hier straks uitwerken, is zo'n methode. Eerst even een meer algemene introductie over associatie analyse.
+	</p>
+	<div class="rechts theorie">
+		<img src="images/WatAnderenKochten.jpg"  style="width: 300px;"/><br/>
+	</div>
+	<p>Bij <a href="https://en.wikipedia.org/wiki/Association_rule_learning" target="example">associatie analyse</a> is het de bedoeling dat een gegeven set kenmerken die een gebruiker in een toepassing aanlevert, bijvoorbeeld jouw leeftijd, geslacht, ingetypte zoekopdracht, beluisterde muziek, artikelen in je winkelmand, wordt vergeleken met dezelfde kenmerken van andere gebruikers. Gezocht wordt dan naar overeenkomsten tussen de gebruikers. Het resultaat van de associatie is dan bijvoorbeeld de uitvoer van de toepassing, bijvoorbeeld de reclame die in de zoekmachine verschijnt, muziek die jij ook wel leuk zou vinden, artikelen die jij ook zou willen kopen. Om zinvolle suggestie te doen moet een grote hoeveelheid gegevens worden geanalyseerd.</p>
+	<p>
+	Bedrijven verkrijgen deze gegevens via de verkoopregistraties van de kassa's of via de registratie van het gebruik door personen van hun apps, bijvoorbeeld een webwinkel, sociaal medium, enzovoort. Gezocht wordt dan naar overeenkomsten tussen de personen die samengaan, zoals de gezamenlijke aankoop van bananen en chocola.
+	</p>
+	<p>De AI techniek associatie analyse die voor deze situaties wordt gebruikt heeft als belangrijkste AI-kenmerk: <strong>de invoer die het programma krijgt, is niet volledig te bepalen en is complex</strong> . Het leerproces dat in associatie analyse wordt gebruikt is  <strong>unsupervised learning</strong>. 
+	Voor we de theorie van associatie analyse behandelen en leren toepassen geven we een aantal voorbeelden van gebieden waarin associatie analyse wordt gebruikt:
+	</p>
+ <dl> 
+  <dt>Gezondheidszorg</dt> 
+  <dd>Artsen kunnen associatieregels gebruiken om een diagnose van patiënten te stellen. Omdat veel ziekten overeenkomstige symptomen hebben, zijn er veel variabelen waarmee rekening moet worden gehouden bij het stellen van een diagnose. 
+  Een AI applicatie met associatie analyse, die getraind is met alle symptomen en de daarbij behorende ziekten, kan een arts die ziekten tonen die het meest waarschijnlijk zijn. De arts moet daarvoor de symptomen die hij of zij ziet invoeren.
+  </p>
+  <p>Als er nieuwe symptomen bij een ziekte optreden of als er nieuwe ziekten bijkomen, kan het machine learning-model opnieuw getraind worden met de oude en bijgewerkte gegevens.
+  </dd>
+  <dt>Detailhandel</dt>   
+  <dd>
+  Detailhandelaren kunnen gegevens over aankooppatronen verzamelen en aankoopgegevens registreren en die verwerken met associatie analyse. Daarna kan dan worden gekeken welke producten het meest waarschijnlijk samen worden gekocht. De winkelier kan vervolgens de marketing- en verkoopstrategie aanpassen om van deze informatie te profiteren.
+  </dd>
+  <dt>User experience (UX) design</dt>   
+  <dd>Ontwikkelaars kunnen gegevens verzamelen over hoe consumenten een door hen gemaakte website/app gebruiken. Ze kunnen vervolgens associaties in de gegevens gebruiken om de gebruikersinterface van de website te optimaliseren - door bijvoorbeeld te analyseren waar gebruikers op klikken en hoe ze de kans dat een bezoeker een gewenste handeling verricht kan vergroten.
+  </dd> 
+  <dt>Sociale media en entertainment</dt>   
+  <dd>Services zoals Facebook, Youtube, Netflix, Twitter, Spotify kunnen associatieregels gebruiken om hun engine voor contentaanbeveling van brandstof te voorzien. Machine learning-modellen analyseren gegevens over gebruikersgedrag uit het verleden op frequente patronen, ontwikkelen associatieregels en gebruiken die regels om gebruikers aanbevelingen te doen die hun ook zal interesseren, b.v. die leuke foto van een ooievaar, omdat je als vogelaar heel vaak foto's van vogels bekijkt.
+  </dd> 
+ </dl>
+	<a id="Theorie"></a><br/>
+	<h2>Theorie</h2>	
+	<p>In de opwarmer aan het begin van dit hoofdstuk hebben we geprobeerd om op een intuïtieve manier het doel van associatie analyse, een AI algoritme, duidelijk te maken. We meldden daar ook al dat we op basis van alle kassaregistraties zinvolle verbanden willen vinden. Zoals typisch is voor AI bepalen de gegevens de uitkomst van de analyse.
+	</p>
+	<p>De wiskundige techniek die wordt gebruikt in associatie analyse is gebaseerd op verzamelingen, de zogenaamde verzamelingenleer.  Het is dus nuttig eerst wat begrippen in de verzamelingen leer te introduceren. Een aantal van deze begrippen ben je waarschijnlijk al eens in de wiskundeles tegengekomen.  Daarna gebruiken we deze begrippen in de <b>apriori methode</b>, een veel gebruikte methode in de associatie analyse.
+	</p>
+
+<div class="rechts theorie" style="width: 200px; border: solid red 2px;margin-left: 10px; padding: 20px;">
+
+<table class="symbolen">
+    <tr>
+		<th colspan=2>Symbolen</th><!-- https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols#Set_and.2For_logic_notation -->
+	</tr>
+	<tr>
+		<th>Notatie
+		</th>
+		<th>Betekenis
+		</th>
+	</tr>
+	<tr>
+		<td>$\in$
+		</td>
+		<td>’is een element van’, ’behoort tot’
+		</td>
+	</tr>
+	<tr>
+		<td>$\subset$
+		</td>
+		<td>’is een deelverzameling van’
+		</td>
+	</tr>
+	<tr>
+		<td>{,}
+		</td>
+		<td>accolades worden gebruikt om een verzameling aan te duiden
+		</td>
+	</tr>
+	<tr>
+		<td>$\cap$
+		</td>
+		<td>’doorsnede’, het gemeenschappelijke deel van de twee verzamelingen
+		</td>
+	</tr>
+	<tr>
+		<td>$\cup$
+		</td>
+		<td>’vereniging’, de elementen van de eerste en tweede verzameling worden samengenomen
+		</td>
+	</tr>
+	<tr>
+		<td>$\#$
+		</td>
+		<td>’aantal’, $\# A$ is het aantal elementen in $A$.
+		</td>
+	</tr>
+	
+	<tr>
+		<td>$\Rightarrow$
+		</td>
+		<td>’implicatie’, al links waar is dan is ook rechts waar.
+		</td>
+	</tr>
+</table>
+</div>
+	<a id="verzameling"></a><br/>
+	<h2>Verzamelingenleer</h2>	
+	<p>Als leerling zit je in een klas, als voetballer zit je in een team, je ‘play list’ bevat een
+	aantal leuke liedjes, .... Zo kunnen we nog een tijd doorgaan met het geven van voorbeelden.
+	Voorbeelden die allemaal gaan over verzamelingen.
+
+	In plaats van een ‘klas’, ‘team’, ‘play list’ spreken we van een <strong>verzameling</strong>, in het Engels <strong>set</strong>. 
+	In een verzameling bevinden zich <strong>elementen</strong> (leerlingen, spelers, liedjes). We noteren een verzameling als volgt:
+
+	$$V=\{v_{1},v_{2},v_{3},\cdots ,v_{n}\}.$$<br/>
+	Verzameling $V$ bevat elementen $v$ die we kunnen nummeren. $v_{1}$ is dan het eerste element in de verzameling, $v_{2}$ het tweede, $v_{3}$ is dan het derde, enz. De complete verzameling noteer je door accolades $\{$..$\}$ om de lijst van elementen te zetten.
+	</p>
+<p>Een verzameling bestaat dus uit elementen, en als $v$ <strong>een element is van een verzameling</strong> $\small V$ noteren we dit wiskundig als <strong>$\small v \in V$</strong>.
+</p><p>
+Voorbeeld: De verzameling winkelmandje met de elementen melk, brood, en kaas noteren we als:
+$$
+\small \text{winkelmandje} = \{\text{melk}, \text{brood}, \text{kaas}\}
+$$
+</p>
+<p>
+Als we schrijven $\small \textbf{melk} \in \textbf{winkelmandje}$, dan zeggen we dus dat melk in het winkelmandje aanwezig is.
+</p>
+</p>
+<p class="pagebreak"></p>
+<table>
+<tr><td colspan="2"><h3>Relaties tussen verzamelingen</h3></td>
+<tr>
+<td style="vertical-align: top;">
+	<div style="background-color: orange;margin: 10px; border: outset yellow 3px;">
+	$X \subset Y$<br/>
+	<svg width="78" height="78" >
+	  <circle cx="39" cy="39" r="37" stroke="green" stroke-width="4" fill="yellow" />
+	  <circle cx="26" cy="35" r="20" stroke="green" stroke-width="4" fill="lightblue" />
+	  <text x="60" y="40" fill="blue">Y</text>
+	  <text x="20" y="40" fill="blue">X</text>
+	</svg>
+	</div>
+</td>
+<td>
+	<div class="theorie important">Deelverzameling
+	<div style="padding-left:25px;">
+	Als voor twee verzamelingen $X$ en $Y$ geldt dat elk element van $X$ ook een element is van $Y$, dan zeggen we dat $X$ een <strong>deelverzameling (subset)</strong> is van $Y$. 
+	<strong>Notatie: $X \subset Y$</strong>
+	</div>
+	</div>
+	<p>
+	Zo geldt bijvoorbeeld voor $\small X=\{\text{melk},\text{kaas}\}$ en $\small Y=\{\text{melk},\text{brood},\text{kaas}\}$ dat $\small X \subset Y$, $\small X$ is een deelverzameling van $\small Y$ want melk en kaas, de elementen van $X$, zijn ook aanwezig in $Y$.
+	</p>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">
+<div style="background-color: orange;margin: 10px; border: outset yellow 3px;">
+$X \cap Y$<br/>
+<svg width="100" height="78">
+    <defs>
+        <clipPath id="mask_left">
+            <circle id="circle_right" cx="63" cy="39" r="35"  stroke-width="1.5"  stroke="#000" fill="none"/>
+        </clipPath>
+    </defs>
+    <g>
+        <circle id="circle_left"  cx="37" cy="39" r="35" stroke-width="4" stroke="green" fill="lightblue" />
+        <circle id="circle_right" cx="63" cy="39" r="35" stroke-width="4"  stroke="green" fill="yellow"/>
+		<circle id="center" cx="37" cy="39" r="35" fill="lightgreen" opacity="0.7" clip-path="url(#mask_left)"/>
+        <text x="30" y="40" fill="blue">X&#8898;Y</text>
+		<text x="80" y="40" fill="blue">Y</text>
+		<text x="10" y="40" fill="blue">X</text>
+    </g>
+</svg>
+
+</div>
+</td>
+<td>
+<div class="theorie important">Doorsnede
+	<div style="padding-left:25px;">De <strong>doorsnede (intersection)</strong> $X \cap Y$ van twee verzamelingen $X$ en $Y$ bestaat uit de gemeenschappelijke elementen van $X$ en $Y$.
+<!--$X \cap Y = \{ x| x \in X \, \wedge \, x \in Y \}$.--> In de figuur links is de doorsnede het lichtgroene gebied. 
+	</div>
+</div>
+</p>
+<p>
+Zo is bijvoorbeeld de doorsnede van de verzameling $\small X = \{\text{melk}, \text{brood}, \text{kaas}\}$ en $\small Y = \{\text{melk}, \text{brood}, \text{pindakaas}\}$ de verzameling met melk en brood, $\small \{\text{melk}, \text{brood}\}$, want die zijn in beide verzameling aanwezig. In wiskundige notatie is dit:
+
+$$
+\small \{\text{melk}, \text{brood}, \text{kaas}\} \cap \{\text{melk}, \text{brood}, \text{pindakaas}\} = \{\text{melk}, \text{brood}\}
+$$
+</p>
+</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">
+<div style="background-color: orange; margin: 10px; border: outset yellow 3px;">
+$X \cup Y$<br/>
+<svg width="100" height="78">
+  <circle cx="63" cy="39" r="35" stroke="green" stroke-width="4" fill="yellow" opacity="0.7" />
+  <circle cx="37" cy="39" r="35" stroke="green" stroke-width="4" fill="yellow" opacity="0.7" />
+  <text x="30" y="75" fill="blue">X&#8899;Y</text>
+  <text x="80" y="40" fill="blue">Y</text>
+  <text x="10" y="40" fill="blue">X</text>
+</svg>
+
+</div>
+</td>
+<td>
+<div class="theorie important">Vereniging
+	<div style="padding-left:25px;">
+	De <strong>vereniging (union)</strong> $X \cup Y$ van twee verzamelingen $X$ en $Y$ bestaat uit de elementen die tot $X$, tot $Y$ of tot beide horen.
+<!-- $X \cup Y = \{ x| x \in X \, \vee \, x \in Y \}$. --> In de figuur links bestaat de vereniging uit alle enigszins gele gebieden.
+	</div>
+</div>
+<p>
+Zo is bijvoorbeeld de vereniging van de verzamelingen  $\small X = \{\text{melk}, \text{brood}, \text{kaas}\}$  en de verzameling $\small Y = \{\text{melk}, \text{brood}, \text{pindakaas}\}$ verzameling met de elementen Kaas, Melk, Brood en Pindakaas, $\small \{\text{melk}, \text{brood}, \text{kaas}, \text{pindakaas}\}$ want alle elementen uit $X$ en $Y$ zijn aanwezig. Notatie:
+
+$$
+\small \{\text{melk}, \text{brood}, \text{kaas}\} \cup \{\text{melk}, \text{brood}, \text{pindakaas}\} = \{\text{melk}, \text{brood}, \text{kaas}, \text{pindakaas}\}
+$$
+</p>
+</td>
+</tr>
+</table>
+<p>
+<div class="theorie important">Kardinaliteit
+	<div style="padding-left:25px;">
+	Voor een eindige verzameling $\small X$ definiëren we $\small \#X$ als het aantal elementen in $\small X$. Dit wordt ook wel de kardinaliteit genoemd.
+	</div>
+</div>
+Zo is bijvoorbeeld
+$\#\{Chips,Zeep,Appels\}=3$.
+</p>
+<p>
+Een element van een verzameling kan zelf ook een verzameling zijn. Zo bestaat de verzameling 
+$$
+\small \begin{array}{rcl}C &=& \{\{\text{chips}, \text{zeep}, \text{appels}\}\\&&, \{\text{chips}, \text{zeep}, \text{appels}\}\\&&, \{\text{zeep}, \text{bananen}\}\\&&, \{\text{chips}, \text{zeep}, \text{bananen}\}\\&&\}\end{array}
+$$
+uit vier elementen, ieder element is een verzameling.
+</p>
+
+<p class="theorie important">Een verzameling waarin de elementen ook 
+weer verzamelingen zijn noemt men een <strong>collectie</strong>.
+</p>
+<p class="pagebreak"></p>
+<a id="Associatieregels"></a><br/>
+<h2>Associatieregels</h2>
+<p>
+We hadden het al over associaties tussen dataverzamelingen, tijd om dat precies te maken.
+Daarbij maken we gebruik van het voorbeeld hieronder. Het is een collectie van tien winkelmandjes uit een supermarkt, natuurlijk versimpeld. De meest supermarkten hebben wel vijftig soorten chocola.
+
+
+$$
+\small \begin{array}{lcl}C&=&\{
+\{\text{ melk, brood, kaas }\}\\ & & ,
+\{\text{ yoghurt, rozijnen, appel }\}\\ & & ,
+\{\text{ pindakaas, brood, melk, komkommer }\}\\ & & ,
+\{\text{ brood, banaan }\}\\ & & ,
+\{\text{ banaan, appel, chocolade }\}\\ & & ,
+\{\text{ brood }\}\\ & & ,
+\{\text{ chocolade, brood, banaan }\}\\ & & ,
+\{\text{ rozijnen, chocolade, pindakaas }\}\\ & & ,
+\{\text{ melk, brood, banaan, kaas, chocolade}\}\\ & & ,
+\{\text{ melk, chocolade }\}\\ & & \}
+\end{array}
+$$
+
+Ce collectie C bestaat nu uit de inhoud van de acht winkelmandjes, van iedere klant één. Ieder mandje is een verzameling van producten:
+
+$$
+\small\begin{array}{rcl}
+C_1&=& \{\text{ melk, brood, kaas }\} \\
+C_2&=& \{\text{ yoghurt, rozijnen, appel }\} \\
+C_3&=& \{\text{ pindakaas, brood, melk, komkommer }\} \\
+C_4&=& \{\text{ brood, banaan }\} \\
+C_5&=& \{\text{ banaan, appel, chocolade }\} \\
+C_6&=& \{\text{ brood }\} \\
+C_7&=& \{\text{ chocolade, brood, banaan }\} \\
+C_8&=& \{\text{ rozijnen, chocolade, pindakaas }\} \\ 
+C_9&=& \{\text{ melk, brood, banaan, kaas, chocolade}\} \\
+C_{10}&=& \{\text{ melk, chocolade }\}
+\end{array}
+$$
+
+</p>
+
+Om uitspraken te kunnen doen over verbanden tussen verzamelingen en de 
+waarde van die verzamelingen zijn de volgende definities van belang:
+</p>
+<ul>
+<li>
+	<div class="theorie important">Associatieregel
+		<div style="padding-left:25px;">
+		De associatieregel $X \Rightarrow Y $ betekent: als de deelverzameling $X$
+	voorkomt dan komt ook de deelverzameling $Y$ voor.
+		</div>
+	</div>
+	<p>
+	Bijvoorbeeld $\small \{\text{melk}\} ⇒ \{\text{melk},\text{brood}\}$ betekent dat als melk in een winkelmand zit, dan zit er ook brood in. In een winkelmandjes analyse is dit natuurlijk niet altijd waar, maar in associatie analyse is het van belang om te kijken hoe groot de kans op deze associatieregel is, ofwel hoe <strong>betrouwbaar</strong> is deze regel. Om de betrouwbaarheid te bepalen hebben we nog wat gereedschap nodig.
+	</p>
+</li>
+<li>
+	<p>De deelverzamelingen waar we het hier over hebben zijn niet de kassabonnen zelf, maar setjes van artikelen - $\small \{\text{melk}\} ⇒ \{\text{melk},\text{brood}\}$  - waarvan we onderzoeken of ze samen gekocht worden. Daarvoor gebruiken we de term <strong>itemset</strong>.
+	</p>
+	<div class="theorie important">Itemset
+		<div style="padding-left:25px;">
+		Een <strong>itemset</strong> is een deelverzameling van elementen uit de een collectie.
+Een <strong>$k$-itemset</strong> is een deelverzameling die $k$ elementen bevatten. 
+		</div>
+	</div>
+	<p>
+	Zo algemeen geformuleerd klinkt het behoorlijk moeilijk. Bedenk dat het in ons voorbeeld gewoon gaat om setjes van artikelen die we in winkelmandjes vinden. Dat is dus een setje artikelen uit de verzameling artikelen die voorkomen: $\small \{ \text{ melk, brood, kaas, yoghurt, rozijnen, appel, pindakaas, komkommer, banaan, appel, chocolade } \}$.
+	</p>
+	<div class="midden">
+		<img src="images/ai4a25_food.png"  style="width: 300px;"/><br/>
+		<i>Een itemset van voedingsmiddelen</i>
+	</div>
+</li>
+<li>
+	<div class="theorie important">Support
+		<div style="padding-left:25px;">
+		<p>De <strong>support</strong>  van een itemset $\small X$ is het aantal deelverzamelingen van een collectie $\small C$ waar de elementen van $\small X$ in voorkomen gedeeld door het aantal elementen van deze collectie.</p>
+		$$
+		  \small \mathrm{support}(X)=\frac{\mathrm{freq}(X)}{\#C}
+		$$
+		<p>
+		Hierin is $\mathbf{ \mathrm{freq}(X)}$ het aantal (<strong>frequentie</strong>) van de (deel)verzamelingen waarin de elementen van $\small X$ voorkomen. Support is dus vaktaal voor de experimentele kans (of relatieve frequentie) dat een mandje de (deel)verzameling $X$ bevat.
+		</div>
+	</div>	
+</li>
+</ul>
+<div class="voorbeeld">
+<p>
+Bekijk weer de bovenstaande collectie winkelmandjes $C$ dan vind je bijvoorbeeld:
+<ul>
+<li>$freq(\{banaan\})=4$, want er zijn 4 elementen in $C$ waartoe
+element banaan behoort, namelijk $C_{4},C_{5},C_{7},C_{9}$.
+</li>
+<li>
+$support(\{melk\})=\frac{4}{8}$, want er zijn $freq(\{melk\})=4$ van de $\#C=10$ elementen van $C$ waar het element $melk$ in voorkomt.
+</li>
+<li>$support(\{banaan,chocolade\})=\frac{3}{10}$, want er zijn 3 van de 10
+deelverzamelingen waarin de elementen banaan en chocolade samen voorkomen.
+</li>
+</ul>
+</div>
+<p>Nog een voorbeeld van een praktische toepassing. Bij marktonderzoek is de support van een stel artikelen (bijvoorbeeld $\small K=\{\text{televisie},\text{surroundset}\}$) het aantal klanten dat al die artikelen samen koopt, op het totaal aantal klanten, meestal weergegeven als percentage.</p>
+<ul>
+<li>
+<p>In de associatieanalyse kan niet altijd alles worden meegenomen. Vaak is men alleen geïnteresseerd in artikelen en combinaties van artikelen die vaak voorkomen en dus frequent zijn.
+</p>
+	<div class="theorie important">Frequent
+		<div style="padding-left:25px;">
+		Een stel artikelen $K$ met hoge support, boven een zekere drempel, heet <strong>frequent</strong>. Ofwel: ten opzichte van het totaal aantal klanten kopen veel klanten alle artikelen in $K$.
+		
+		</div>
+	</div>
+<p>
+</li>
+</ul>
+<p>
+In de associatieanalyse, bijvoorbeeld bij de winkelmandjes, wil men handelen op basis van associatieregels. Deze associatieregels stelt men dan op voor frequente itemsets. Maar dat is niet voldoende, de associatieregel moet ook nog interessant zijn. De kans op de associatie moet vrij groot zijn. Het heeft niet veel zin om te gaan adverteren voor Y bij mensen die X kopen, als uit de data helemaal niet blijkt dat X-kopers vaak Y kopen. We willen weten of de associatie vaak voorkomt. In de vaktaal heet dat de <strong>confidence</strong> ofwel de <strong>betrouwbaarheid</strong> van de associatieregel.
+</p>
+<p>Laten we terugkeren naar het voorbeeld van de bananen en de chocolade. We hebben tien winkelmandjes. Banaan zit in vier van die winkelmandjes en drie van de vier bevatten weer chocolade. Dat is 75%, een kans van driekwart dat de associatie optreedt. Nu is een collectie van tien winkelmandjes niet echt groot genoeg om die kans echt te bepalen, maar wanneer je zo een miljoen winkelmandjes onderzoekt, is de kans behoorlijk zeker.
+De betrouwbaarheid van een associatieregel bepalen we dus zo.
+</p>
+<ul>
+<li>
+	<div class="theorie important">Betrouwbaarheid
+		<div style="padding-left:25px;">
+		De <strong>betrouwbaarheid</strong> (Engels:<strong>confidence</strong>) van de associatieregel $X \Rightarrow Y$ wordt berekend door de support van de
+vereniging van $X$ en $Y$ te delen door de support van $X$.<br/>
+$$confidence(X \Rightarrow Y) = \frac{support(X  \cup Y)}{support(X)}$$
+Je kunt dit ook simpeler uitrekenen door de frequenties op elkaar te delen, dit geeft dezelfde uitkomst.
+ $$confidence(X \Rightarrow Y) = \frac{freq(X  \cup Y)}{freq(X)}$$ 
+		</div>
+	</div>
+</li>
+</ul>
+<p>
+In ons voorbeeld kunnen we de betrouwbaarheid van de associatieregel 
+$\{\small \text{ banaan } \} \Rightarrow \{\small \text{ banaan, chocolade } \}$
+dus uitrekenen door de support te delen: 3/10 gedeeld door 4/10. Of simpeler, door de frequenties op elkaar te delen: 3/4.
+</p>
+<p class="pagebreak"></p>
+<a name="Vragen1"></a>
+<br/>
+	<div class ='hammer treeview' style="clear: both;"><span class="caret">Vragen 1</span>
+	
+		<div style="padding-left:25px;" >
+			<div class="nested">
+				<ol>
+					<li>Welke vorm van leren vindt plaats in associatie analyse?
+						<div class="caret doel">antwoord</div>
+						<ul class="nested">
+							<li>Unsupervised learning.
+							</li>
+						</ul>
+					</li>
+					<li>Geef twee voorbeelden van werkgebieden waar van associatie analyse gebruik wordt gemaakt.
+						<div class="caret doel">antwoord</div>
+						<ul class="nested">
+							<li>Bijvoorbeeld twee van de gebieden uit deze paragraaf: gezondheid, detailhandel, sociale media, user experience.
+							</li>
+						</ul>
+					</li>
+					<li>Gegeven: $A=\{1,2,3,4,5\}$, $B=\{4,5,6,7\} $ en $C=\{5,8,11\}$
+						<ol style="list-style-type: lower-alpha">
+							<li>Schrijf de verzamelingen $A \cup B$, $A \cup C$ en $B \cup C$ op.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$A \cup B=\{1,2,3,4,5,6,7\}$,<br/>$A \cup C=\{1,2,3,4,5,8,11\}$ en <br/>$B \cup C=\{4,5,6,7,8,11\}$
+									</li>
+								</ul>
+							</li>
+							<li>Schrijf de verzamelingen $A \cap B$, $A \cap C$ en $B \cap C$ op.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$A \cap B=\{4,5\}$, <br/>$A \cap C=\{5\}$ en <br/>$B \cap C=\{5\}$
+									</li>
+								</ul>
+							</li>
+							<li>Schrijf de verzameling $A \cup B \cup C$ op.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$A \cup B \cup C = \{1,2,3,4,5,6,7,8,11\}$
+									</li>
+								</ul>
+							</li>
+						</ol>
+					</li>
+					<li>Gegeven zijn de volgende deelverzamelingen: 
+				$C_{1}=\{chips,zeep,appel\}$, $C_{2}=\{chips,zeep\}$, $C_{3}=\{zeep,bananen\}$ en $C_{4}=\{chips,zeep,bananen\}$
+				van de collectie $C=\{C_{1},C_{2},C_{3},C_{4}\}$
+						<ol style="list-style-type: lower-alpha">
+							<li>Schrijf de verzamelingen $C_{1} \cap C_{2}$, $C_{1} \cap C_{4}$ en $C_{3} \cap C_{4}$ op.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li> 
+									$C_{1} \cap C_{2} = \{chips,zeep\}$,<br/>$C_{1} \cap C_{4}= \{chips,zeep\}$ 
+									en <br/>$C_{3} \cap C_{4}= \{zeep,bananen\}$
+									</li>
+								</ul>
+							</li>
+							<li>Schrijf de verzamelingen $C_{1} \cup C_{2}$, $C_{1} \cup C_{4}$ en $C_{3} \cup C_{4}$ op.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$C_{1} \cup C_{2} = \{chips,zeep,appel\}$, 
+							$C_{1} \cup C_{4}= \{chips,zeep,appel,bananen\}$ 
+							en $C_{3} \cup C_{4}=\{chips,zeep,bananen\}$ 
+									</li>
+								</ul>
+							</li>
+							<li>Schrijf de verzameling $C_{1} \cup C_{2} \cup C_{3} \cup C_{4} $ op.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$C_{1} \cup C_{2} \cup C_{3} \cup C_{4} = \{chips,zeep,appel,bananen\}$
+									</li>
+								</ul>
+							</li>
+							<li>Schrijf de verzameling $C_{1} \cap C_{2} \cap C_{3} \cap C_{4} $ op.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$C_{1} \cap C_{2} \cap C_{3} \cap C_{4} = \{zeep\}$
+									</li>
+								</ul>
+							</li>
+							<li>Bereken de support van $\{chips,zeep\}$ en de confidence van de implicatie $\{chips\} \Rightarrow \{zeep\}$ in $C$.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$support(\{chips,zeep\}) = \frac{3}{4}$,
+						$support(\{chips\}) = \frac{3}{4}$,
+						$confidence(\{chips\} \Rightarrow \{zeep\}) = \frac{support(\{ chips,zeep\})}{support(\{chips\})}=\frac{\frac{3}{4}}{\frac{3}{4}}= 1$. Ofwel als er chips wordt gekocht
+						wordt er ook zeep gekocht.
+									</li>
+								</ul>
+							</li>
+						</ol>
+					</li>
+					<li>Gegeven is de collectie 
+				$A = \{ \{5,8 \},\{2,6,8\} ,\{5,6,8 \},\{5,4,7,10 \},\{2,5,8\}\}$.<br/>
+				Bereken
+						<ol style="list-style-type: lower-alpha">
+							<li>de support van  $\{1\}$ in $A$.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$\{1\}$ zit in geen van de deelverzamelingen
+						van $A$ dus $support(\{1\})=\frac{0}{5}=0$
+									</li>
+								</ul>
+							</li>
+							<li>de support van  $\{4,5\}$ in $A$.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$\{4,5\}$ zit in één van de deelverzamelingen
+								van $A$ dus $support(\{4,5\})=\frac{1}{5}$
+									</li>
+								</ul>
+							</li>
+							<li>de betrouwbaarheid van de implicatie $\{1\} \Rightarrow \{5\}$ in $A$.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$confidence(\{1\} \Rightarrow \{5\})
+								= \frac{support(\{1,5 \})}{support(\{1\})}=\frac{0}{0}=  $ ongedefiniëerd,
+								want delen door 0 kan niet.
+									</li>
+								</ul>
+							</li>
+							<li>de betrouwbaarheid van de implicatie $\{2\} \Rightarrow \{6\}$ in $A$.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$confidence(\{2\} \Rightarrow \{6\})
+								= \frac{freq(\{2,6 \})}{freq(\{2\})}=\frac{1}{2}$
+									</li>
+								</ul>
+					</li>
+						</ol>
+					</li>
+					
+					<li>Gegeven is de collectie $S = \{ \{P,K,T \},\{P,R\} ,\{P,T\},\{K,R\}\}$ waarin
+				P=Pasta, K=Kaas, T=Tomaat, R=Room.<br/>
+				Bereken
+						<ol style="list-style-type: lower-alpha">
+							<li>de support van  $\{R\}$ in $S$.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$\{R\}$ is een element van twee van de vier deelverzamelingen
+						van $S$ dus $support(\{R\})=\frac{2}{4}=\frac{1}{2}$
+									</li>
+								</ul>
+							</li>
+							<li>de support van  $\{P,T\}$ in $S$.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$\{P,T\}$ is een element van twee van de vier deelverzamelingen
+						van $S$ dus $support(\{P,T\})=\frac{2}{4}=\frac{1}{2}$ 
+									</li>
+								</ul>
+							</li>
+							<li>de confidence van de implicatie $\{P\} \Rightarrow \{T\}$ in $S$.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$confidence(\{P\} \Rightarrow \{T\})
+						= \frac{freq(\{P,T \})}{freq(\{P\})}=\frac{2}{3} $.
+									</li>
+								</ul>
+							</li>
+						</ol>
+					</li>
+					<li>
+
+					
+					Stel: <i>S=Spaghetti, T=tomatensaus, B=brood</i>.<br/>
+				$W_{1}$  is de 1-itemset ofwel de collectie van de deelverzamelingen met grootte 1 (met slechts één element S of T of B):<br/> 
+				$W_{1}=\{\{S\},\{T\},\{B\}\}$<br/>
+				Verder is $W_{2}$ de 2-itemset of de collectie van de deelverzamelingen met grootte 2 (met twee verschillende elementen S of T of B ) . 
+				Dus $W_{2}=\{\{S,T\},\{T,B\},\{S,B\}\}$.<br/>
+				Als laatste is $W_{3}=\{\{S,T,B\}\}$ de 3-itemset of de collectie van de deelverzamelingen met grootte 3 (S,T en B zijn alle aanwezig).<br/>
+				Bereken
+						<ol style="list-style-type: lower-alpha">
+							<li>de support van alle deelverzamelingen van  $W_{1}$ in $W_{2} \cup W_{3}$.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>Antwoord 
+						<span id="a515a" class="refer">
+						$W_{2} \cup W_{3} = \{\{S,T\},\{T,B\},\{S,B\},\{S,T,B\}\}$.<br/> 
+						$\{S\}$ is een element van drie van de vier deelverzamelingen
+						dus $support(\{S\})=\frac{3}{4}$ of 75%. <br/>$\{T\}$ is een element van drie van de vier deelverzamelingen
+						dus $support(\{T\})=\frac{3}{4}$ of 75%. <br/>$\{B\}$ is een element van drie van de vier deelverzamelingen
+						dus $support(\{B\})=\frac{3}{4}$ of 75%. 
+									</li>
+								</ul>
+							</li>
+							<li>de support van alle deelverzamelingen van  $W_{2}$ in $W_{2} \cup W_{3}$.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$W_{2} \cup W_{3} = \{\{S,T\},\{T,B\},\{S,B\},\{S,T,B\}\}$. 
+						<br/>$\{S,T\}$ is een element van twee van de vier deelverzamelingen
+						dus $support(\{S,T\})=\frac{2}{4}$ of 50%. <br/>$\{T,B\}$ is een element van twee van de vier deelverzamelingen
+						dus $support(\{T,B\})=\frac{2}{4}$ of 50%. <br/>$\{S,B\}$ is een element van twee van de vier deelverzamelingen
+						dus $support(\{S,B\})=\frac{2}{4}$ of 50%.
+									</li>
+								</ul>
+							</li>
+							<li>De vraag
+								<div class="caret doel">de support van alle deelverzamelingen van  $W_{3}$ in $W_{2} \cup W_{3}$.</div>
+								<ul class="nested">
+									<li>$W_{2} \cup W_{3} = \{\{S,T\},\{T,B\},\{S,B\},\{S,T,B\}\}$.<br/> 
+						$\{S,T,B\}$ is een element van één van de vier deelverzamelingen
+						dus $support(\{S,T,B\})=\frac{1}{4}$ of 25%.
+									</li>
+								</ul>
+							</li>
+						</ol>
+					</li>
+					<li>Gegeven is de collectie $I$ hieronder. Een kok experimenteert met gerechten met verschillende ingrediënten. 
+					<div class="theorie">
+					<table>
+						<tr>
+							<th colspan="2">Collectie $I$
+							</th>
+						</tr>
+						<tr>
+							<th>Id
+							</th>
+							<th>Items
+							</th>
+						</tr>
+						<tr>
+							<td>0
+							</td>
+							<td>$\{Pasta,Kaas,Tomaat\}$
+							</td>
+						</tr>
+						<tr>
+							<td>1
+							</td>
+							<td>$\{Pasta,Room\}$
+							</td>
+						</tr>
+						<tr>
+							<td>2
+							</td>
+							<td>$\{Pasta,Tomaat\}$
+							</td>
+						</tr>
+						<tr>
+							<td>3
+							</td>
+							<td>$\{Kaas,Room\}$
+							</td>
+						</tr>
+						<tr>
+							<td>4
+							</td>
+							<td>$\{Kaas,Tomaat\}$
+							</td>
+						</tr>
+						<tr>
+							<td>5
+							</td>
+							<td>$\{Pasta,Tomaat,Room\}$
+							</td>
+						</tr>
+						<tr>
+							<td>6
+							</td>
+							<td>$\{Tomaat,Room\}$
+							</td>
+						</tr>
+						<tr>
+							<td>7
+							</td>
+							<td>$\{Kaas,Tomaat\}$
+							</td>
+						</tr>
+						<tr>
+							<td>8
+							</td>
+							<td>$\{Pasta,Kaas,Tomaat,Room\}$
+							</td>
+						</tr>
+						<tr>
+							<td>9
+							</td>
+							<td>$\{Pasta\}$
+							</td>
+						</tr>
+					</table>
+				</div>
+				Bekijk de volgende deelverzameling: 
+				$\{Pasta, Kaas, Tomaat\}$.
+						<ol style="list-style-type: lower-alpha">
+							<li>Laat zien dat $confidence(\{Pasta,Kaas\}\Rightarrow\{Tomaat\})$ hoger is dan die van $\{Pasta\}\Rightarrow\{Kaas,Tomaat\}$.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$confidence(\{Pasta,Kaas\}\Rightarrow\{Tomaat\}) = \frac{freq(\{Pasta,Kaas,Tomaat \})}{freq(\{Pasta,Kaas\})}=\frac{2}{2} =1 $.<br/>
+						$confidence(\{Pasta\}\Rightarrow\{Kaas,Tomaat\}) = \frac{freq(\{Pasta,Kaas,Tomaat \})}{freq(\{Pasta\})}=\frac{2}{6} $.<br/>
+						De eerste is inderdaad hoger.
+									</li>
+								</ul>
+							</li>
+							<li>Bereken voor welke $X \in \{ \{Pasta,Room\},\{Room,Kaas\} ,\{Kaas\}\}$ 
+					de $confidence(\{X\}\Rightarrow\{Tomaat\})$ in $I$ het grootst is.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>$confidence(\{Pasta,Room\}\Rightarrow\{Tomaat\}) = \frac{freq(\{Pasta,Room,Tomaat \})}{freq(\{Pasta,Room\})}=\frac{2}{3} $.<br/>
+						$confidence(\{Room,Kaas\}\Rightarrow\{Tomaat\}) = \frac{freq(\{Room,Kaas,Tomaat \})}{freq(\{Room,Kaas\})}=\frac{1}{2} $.<br/>
+						$confidence(\{Kaas\}\Rightarrow\{Tomaat\}) = \frac{freq(\{Tomaat,Kaas\})}{freq(\{Kaas\})}=\frac{4}{5} $.
+									</li>
+								</ul>
+							</li>
+							<li>Laat $Y$ de vereniging zijn van alle items (deelverzamelingen) uit de collectie
+						$I$ en $Z$ een willekeurige item uit $I$.
+						Waarom is de $confidence(\{Y\}\Rightarrow\{Z\})$ altijd 1?
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>De vereniging van alle items bevat alle ingrediënten. Dus deze vereniging bevat iedere deelverzameling van $I$ en impliceert deze
+						deelverzameling dan ook. In formulevorm<br/>
+						$confidence(\{Y\}\Rightarrow\{Z\}) = 
+						\frac{freq(\{Y \cup Z \})}{freq(\{Y\})} = \frac{freq(\{Y \})}{freq(\{Y\})}=1$
+									</li>
+								</ul>
+							</li>
+						</ol>
+					</li>
+					
+				</ol>
+			</div>
+		</div>
+	</div>
+
+<p class="pagebreak"></p>
+<a id="Apriori"><br/>
+<h2 >Apriori algoritme</h2>
+
+<p>
+Er bestaan veel algoritmes om associatieregels te ontdekken. De oudste en meest bekende methode is het Apriori algoritme
+(a priori bekent: op basis van eerder onderzoek) ontwikkeld voor transacties (verkopen). Het is in de jaren negentig bedacht door <a href="https://en.wikipedia.org/wiki/Apriori_algorithm" target="example">Agrawal en collega's</a>.<br/>
+Met het algoritme vind je interessante associatieregels voor producten die voldoende frequent gekocht worden. Voldoende voorkomend (frequent) betekent in dit geval dat we niet alle
+verbanden even nuttig vinden. Als producten te weinig voorkomen, ofwel te
+weinig support hebben, dan nemen we die niet mee in het algoritme.
+<br/>Je geeft een ondergrens aan de support op, de <strong>minimale support</strong>.<br/>
+Naast deze minimale support kun je ook instellen hoe betrouwbaar de associatieregels moeten zijn (hoe sterk zijn de aanwijzingen), ofwel je geeft een <strong>minimale confidence</strong> op.
+</p>
+
+<div class="theorie important" style="overflow: hidden; padding-right: 10px;">Apriori algoritme
+	<div style="padding-left: 25px;">
+	Het Apriori algoritme voor een collectie $C$ bestaat uit de volgende twee fasen:
+	<ol>
+		<li>Het maken van een collectie $F$ met verzamelingen die voldoende frequent (groter dan een minimale support) zijn in $C$,
+		</li>
+		<li>Het opstellen van associatieregels met verzamelingen uit $F$ met voldoende betrouwbaarheid (groter dan een minimale confidence) in $C$.
+		</li>
+	</ol>
+	</div>
+</div>
+<p>We gaan door deze twee fasen heen aan de hand van de collectie winkelmandjes die we al eerder gebruikten. Die is klein, in echte toepassing zijn dat er duizenden, of miljoenen.
+</p>
+<div class="rechts theorie">
+<img src="images/AprioriAlgoritme.svg"/>
+</div>	
+<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px;">voorbeeld:
+	<div style="padding-left: 25px;">
+$$
+\small \begin{array}{lcl}C&=&\{
+\{\text{ melk, brood, kaas }\}\\ & & ,
+\{\text{ yoghurt, rozijnen, appel }\}\\ & & ,
+\{\text{ pindakaas, brood, melk, komkommer }\}\\ & & ,
+\{\text{ brood, banaan }\}\\ & & ,
+\{\text{ banaan, appel, chocolade }\}\\ & & ,
+\{\text{ brood }\}\\ & & ,
+\{\text{ chocolade, brood, banaan }\}\\ & & ,
+\{\text{ rozijnen, chocolade, pindakaas }\}\\ & & ,
+\{\text{ melk, brood, banaan, kaas, chocolade}\}\\ & & ,
+\{\text{ melk, chocolade }\}\\ & & \}
+\end{array}
+$$
+	</div>
+</div>
+	<p>De centrale vraag is: welke combinaties van producten zijn interessant? We vinden combinaties interessant als er een minimale support is van 0.3 (of 30%) en we zijn alleen geïnteresseerd in associatieregels met een betrouwbaarheid van minimaal 70%.
+</p>
+<h3>Fase 1: Het maken van een collectie $F$ met itemsets die voldoende frequent (groter dan een minimale support) zijn in $C$</h3>
+<p>
+Het algoritme bouwt een verzameling van frequente itemsets op. Dat gaat van onderop ("bottom up"): eerst itemsets van 1 item, dan van 2, enzovoort. Probleem is dat het aantal itemsets erg groot wordt, als de winkel veel artikelen heeft. Bij duizend artikelen heb je al meer dan 100 miljoen setjes van drie artikelen! Het algoritme gebruikt een truc om niet zoveel itemsets te hoeven bekijken. Zometeen meer daarover.</p>
+
+<p>Na de start van het algoritme maken we eerst de lege collectie $F = \{\}$ en zetten het aantal elementen $k$ aanwezig in een itemset op 0. Gelijk daarna maken we $k$ gelijk aan 1 en gaan we naar het oranje blok:
+</p>
+<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: orange">
+	Genereer alle kandidaat itemsets met lengte 1
+	<div style="padding-left: 25px;">
+	We maken de 1-itemset in de collectie $S_{1}$. De collectie $S_{1}$ bestaat dan uit alle verzamelingen met slechts één item (i.e. alle verschillende artikelen die je in al de winkelmandjes tegenkomt).
+	</div>
+</div>
+<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: orange">voorbeeld:
+	<div style="padding-left: 25px;">
+	
+	$S_{1}=\{\text{ melk, brood, kaas, yoghurt, rozijnen, appel, pindakaas, komkommer, banaan, chocolade} \}$
+	</div>
+</div>
+<p>Vervolgens gaan we naar de stap in het blauwe blok:
+</p>
+<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: #33cccc">
+	Bereken de support van elke 1- itemset uit $S_{1}$ in $C$
+</div>
+<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: #33cccc">voorbeeld:
+	<div style="padding-left: 25px;">
+		<table>
+		<tr>
+			<th>Itemset
+			</th>
+			<th>Support
+			</th>
+		</tr>
+		<tr class="voldoet">
+			<td>$\{melk\}$
+			</td>
+			<td>40%
+			</td>
+		</tr>
+		<tr class="voldoet">
+			<td>$\{brood \}$
+			</td>
+			<td>60%
+			</td>
+		</tr>
+		<tr class="voldoetNiet">
+			<td>$\{kaas\}$
+			</td>
+			<td>20%
+			</td>
+		</tr>
+		<tr class="voldoetNiet">
+			<td>$\{yoghurt\}$
+			</td>
+			<td>10%
+			</td>
+		</tr>
+		<tr class="voldoetNiet">
+			<td>$\{rozijnen\}$
+			</td>
+			<td>20%
+			</td>
+		</tr>
+		<tr class="voldoetNiet">
+			<td>$\{appel\}$
+			</td>
+			<td>20%
+			</td>
+		</tr>
+		<tr class="voldoetNiet">
+			<td>$\{pindakaas\}$
+			</td>
+			<td>20%
+			</td>
+		</tr>
+		<tr class="voldoetNiet">
+			<td>$\{komkommer\}$
+			</td>
+			<td>10%
+			</td>
+		</tr>
+		<tr class="voldoet">
+			<td>$\{banaan\}$
+			</td>
+			<td>40%
+			</td>
+		</tr>
+		<tr class="voldoet">
+			<td>$\{chocolade\}$
+			</td>
+			<td>50%
+			</td>
+		</tr>
+		</table>
+	</div>
+</div>
+
+<p>Als laatste gaan we in de eerste iteratie naar het paarse blok:
+</p>
+<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: #ff99cc">
+	Voeg de 1-itemsets met voldoende support toe aan de collectie $F$
+</div>
+<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: #ff99cc">voorbeeld:
+	<div style="padding-left: 25px;">
+	In de tabel hierboven zie je dat alleen $\{melk\}$, $\{brood\}$, $\{banaan\}$ en $\{chocolade\}$ de grens van 30% halen. De collectie F met itemsets met voldoende support breiden we dus uit met deze vier 1-itemsets.<br/>
+$\begin{array}{ll}
+  F= & \{\{melk\}, \\ 
+	&  \{brood\}, \\
+	&  \{banaan\}, \\
+	&  \{chocolade\}\}
+\end{array}$
+	</div>
+</div>
+
+<p>We komen nu aan bij de test "Is er in deze ronde een $k$-itemset aan $F$ toegevoegd?". In het voorbeeld hebben we net vier verzamelingen met 1-item toegevoegd en is het antwoord dus ja, we  zijn dus nog niet klaar. We verhogen k naar 2 en gaan weer verder bij het oranje blok:
+</p>
+<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: orange">
+	Genereer alle kandidaat itemsets met lengte 2
+	<div style="padding-left: 25px;">
+	We verzamelen de 2-itemset in de collectie $S_{2}$. De collectie $S_{2}$ bestaat dan uit alle verzamelingen met twee items waarbij we alleen nog kijken naar de items die in $F$ aanwezig zijn. 
+	</div>
+</div>
+<p>
+De truc van het algoritme is dat we niet alle combinaties van twee artikelen bekijken, maar alleen de - nu vier - frequente artikelen gebruiken. Het heeft geen zin een combinatie met een niet-frequent artikel te bekijken. Apart komt dat al te weinig voor, laat staan in combinatie. We gaan dus door met de vier items uit ronde 1, die samen zes combinaties leveren
+</p>
+<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: orange">voorbeeld:
+	<div style="padding-left: 25px;">
+	$S_{2}=\{\{melk,brood\},\{melk,banaan\},\{melk,chocolade\}, 
+	\{brood, banaan \}, \{brood, chocolade \}, \{banaan, chocolade \}\}$
+	</div>
+</div>
+<p>Op naar het blauwe blok om de support te berekenen:
+</p>
+<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: #33cccc">
+	Bereken de support van elke 2- itemset uit $S_{2}$ in $C$
+</div>
+<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: #33cccc">voorbeeld:
+	<div style="padding-left: 25px;">
+		<table>
+		<tr>
+			<th>Itemset
+			</th>
+			<th>Support
+			</th>
+		</tr>
+		<tr class="voldoet">
+			<td>$\{melk,brood\}$
+			</td>
+			<td>30%
+			</td>
+		</tr>
+		<tr class="voldoetNiet">
+			<td>$\{melk,banaan\}$
+			</td>
+			<td>10%
+			</td>
+		</tr>
+		<tr class="voldoetNiet">
+			<td>$\{melk,chocolade\}$
+			</td>
+			<td>20%
+			</td>
+		</tr>
+		<tr class="voldoet">
+			<td>$\{brood, banaan \}$
+			</td>
+			<td>30%
+			</td>
+		</tr>
+		<tr class="voldoetNiet">
+			<td>$\{brood, chocolade \}$
+			</td>
+			<td>10%
+			</td>
+		</tr>
+		<tr class="voldoet">
+			<td>$\{banaan, chocolade \}$
+			</td>
+			<td>30%
+			</td>
+		</tr>
+	</table>
+	</div>
+</div>
+<p>Kunnen we weer itemsets toevoegen aan $F$?</p>
+<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: #ff99cc">
+	Voeg de 2-itemsets met voldoende support toe aan de collectie $F$
+</div>
+<div class="voorbeeld theorie example" style="padding-right: 10px; background-color: #ff99cc">voorbeeld:
+	<div style="padding-left: 25px;">
+	In de tabel hierboven zie je dat niet alle 2-itemsets de grens van 30% halen. De collectie $F$ met itemsets met voldoende support breiden we dus alleen uit met de 2-itemsets 
+$\{melk,brood\}, \{brood, banaan \}$ en $\{banaan, chocolade\}$.<br/>
+$$\begin{array}{ll}
+  F= & \{\{melk\}, \\ 
+	&  \{brood\}, \\
+	&  \{banaan\}, \\
+	&  \{chocolade\}, \\
+	&  \{melk,brood\}, \\
+	&  \{brood, banaan\}, \\
+	&  \{banaan, chocolade\} \}
+\end{array}
+$$
+	</div>
+</div>
+<p>We komen nu weer aan bij de test "Is er in deze ronde een $k$-itemset aan $F$ toegevoegd?". In het voorbeeld hebben we er weer drie toegevoegd en is het antwoord dus ja, we  zijn dus nog steeds niet klaar. We verhogen $k$ naar 3 en gaan weer verder bij het oranje blok:
+</p>
+<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: orange">
+	Genereer alle kandidaat itemsets met lengte 3
+	<div style="padding-left: 25px;">
+	We verzamelen de 2-itemset in de collectie $S_{3}$. De collectie $S_{3}$ bestaat dan uit alle verzamelingen met twee items waarbij we alleen nog kijken naar de items die in $F$ aanwezig zijn. 
+	</div>
+</div>
+<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: orange">voorbeeld:
+	<div style="padding-left: 25px;">
+	$S_{3}=\{\{melk, brood, banaan \}, \{melk, brood, chocolade \}, \{brood, banaan, chocolade \} \}$
+	</div>
+</div>
+<p>Het blauwe blok levert nu de support:
+</p>
+</p>
+<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: #33cccc">
+	Bereken de support van elke 3- itemset uit $S_{3}$ in $C$
+</div>
+<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: #33cccc">voorbeeld:
+	<div style="padding-left: 25px;">
+		<table>
+		<tr>
+			<th>Itemset
+			</th>
+			<th>Support
+			</th>
+		</tr>
+		<tr class="voldoetNiet">
+			<td>$\{melk, brood, banaan\}$
+			</td>
+			<td>10%
+			</td>
+		</tr>
+		<tr class="voldoetNiet">
+			<td>$\{melk, brood, chocolade\}$
+			</td>
+			<td>10%
+			</td>
+		</tr>
+		<tr class="voldoetNiet">
+			<td>$\{brood, banaan, chocolade\}$
+			</td>
+			<td>10%
+			</td>
+		</tr>
+	</table>
+	</div>
+</div>
+<p>Kunnen we weer itemsets toevoegen aan F?
+</p>
+<div class="voorbeeld theorie important" style="overflow: hidden; padding-right: 10px; background-color: #ff99cc">
+	Voeg de 3-itemsets met voldoende support toe aan de collectie $F$
+</div>
+<div class="voorbeeld theorie example" style="padding-right: 10px; background-color: #ff99cc">voorbeeld:
+	<div style="padding-left: 25px;">
+	In de tabel hierboven zie je dat alle 3-itemsets de grens van 30% niet halen. Er kan niets aan $F$ worden toegevoegd. De collectie $F$ blijft dus:<br/>
+$$\begin{array}{ll}
+  F= & \{\{melk\}, \\ 
+	&  \{brood\}, \\
+	&  \{banaan\}, \\
+	&  \{chocolade\}, \\
+	&  \{melk,brood\}, \\
+	&  \{brood, banaan\}, \\
+	&  \{banaan, chocolade\} \}
+\end{array}
+$$
+	</div>
+</div>
+<p>We komen nu weer aan bij de test "Is er in deze ronde een $k$-itemset aan $F$ toegevoegd?". In het voorbeeld hebben we niets meer hebben toegevoegd dus nee, we zijn klaar en eindigen met de bovenstaande collectie $F$.
+</p>
+
+<p>In het voorbeeld zijn in het algoritme dus 3 iteraties nodig geweest om het proces te stoppen. Andere samenstellingen van de winkelmandjes met vooral meer artikelen zal ervoor zorgen dat er veel meer iteraties nodig zijn. 
+</p>
+<p>
+We zijn nu aan het eind van fase 1 gekomen en gaan nu kijken welke associatieregels interessant zijn.
+</p>
+
+<h3>Fase 2: Het opstellen van associatieregels met verzamelingen uit $F$ met voldoende betrouwbaarheid (groter dan een minimale confidence) in $C$.</h3>
+<p>
+Als de collectie $F$ is gevonden kunnen we met de verzamelingen in $F$ associatieregels gaan maken. Voor elke associatieregel bepalen we de confidence. Alleen in die associatieregels met voldoende confidence zijn we geïnteresseerd.</p>
+<p>
+Nu is een associatieregel van de vorm: "Als een klant artikel(set) X koopt, koopt de klant dan ook artikel Y". In formule - voor het voorbeeld waarmee we dit onderwerp begonnen: $\{banaan\} \Rightarrow \{banaan, chocolade\}$.
+</p>
+<p>
+In zo'n regel staan dus rechts meer items dan links. We kunnen rechts dus de drie 2-itemsets uit F zetten. Bij elk kunnen we twee associatieregels onderzoeken. Naast $\{banaan\} \Rightarrow \{banaan, chocolade\}$ is dat ook $\{chocolade\} \Rightarrow \{banaan, chocolade\}$. Zo krijgen we de zes mogelijke associatieregels in de tabel hieronder. Voor elke regel delen we de support van de betrokken itemsets.
+</p>
+<div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px;">voorbeeld:
+	<div style="padding-left: 25px;">
+<p>Associatieregels uit $F$ met betrouwbaarheid (confidentie) 
+
+</p>
+<table>
+		<tr>
+			<th>Associatieregels</th>
+			<th>Confidence</th>
+		</tr>
+		<tr class="voldoet">
+			<td>$\{banaan\} \Rightarrow \{banaan, chocolade\}$
+			</td>
+			<td>$\frac{30}{40}= 75 \% $
+			</td>
+		</tr>
+		<tr class="voldoetNiet">
+			<td>$\{chocolade\} \Rightarrow \{banaan, chocolade\}$
+			</td>
+			<td>$\frac{30}{50}= 60\% $
+			</td>
+		</tr>
+		<tr class="voldoetNiet">
+			<td>$\{brood\} \Rightarrow \{brood, banaan\}$
+			</td>
+			<td>$\frac{30}{60}= 50\% $
+			</td>
+		</tr>
+		<tr class="voldoet">
+			<td>$\{banaan\} \Rightarrow \{brood, banaan\}$
+			</td>
+			<td>$\frac{30}{40}= 75\% $
+			</td>
+		</tr>
+		<tr class="voldoet">
+			<td>$\{melk\} \Rightarrow \{melk,brood\}$
+			</td>
+			<td>$\frac{30}{40}= 75\% $
+			</td>
+		</tr>
+		<tr class="voldoetNiet">
+			<td>$\{brood\} \Rightarrow \{melk,brood\}$
+			</td>
+			<td>$\frac{30}{60}= 50\% $
+			</td>
+		</tr>
+	</table>
+<p>
+Van tevoren haden we aangegeven dat we een betrouwbaarheid van 70% nodig vinden om de regel aan te nemen. Dat is bij drie regels het geval.
+In de eerste regel in de tabel hierboven geeft voor associatieregel $\{banaan\} \Rightarrow \{banaan, chocolade\}$ een betrouwbaarheid van 75%. Dit zegt dat in75% van de gevallen dat een klant banaan koopt, deze ook chocolade gaat kopen. 75% is groter dan 70%, voldoende betrouwbaar dus. De derde regel laat zien dat als iemand brood koopt, deze persoon in 50% van de gevallen banaan koopt, te weinig voorspellend om rekening mee te houden want kleiner dan 70%. Dus blijven over de associatieregels:
+</p>
+<table>
+		<tr>
+			<th>Associatieregels</th>
+			<th>Confidence</th>
+		</tr>
+		<tr class="voldoet">
+			<td>$\{banaan\} \Rightarrow \{banaan, chocolade\}$
+			</td>
+			<td>$\frac{3}{4}= 75 \% $
+			</td>
+		</tr>
+		<tr class="voldoet">
+			<td>$\{banaan\} \Rightarrow \{brood, banaan\}$
+			</td>
+			<td>$\frac{3}{4}= 75\% $
+			</td>
+		</tr>
+		<tr class="voldoet">
+			<td>$\{melk\} \Rightarrow \{melk,brood\}$
+			</td>
+			<td>$\frac{3}{4}= 75\% $
+			</td>
+		</tr>
+	</table>
+</div>
+</div>
+<p>
+<a id="Vragen2"></a> Tijd om dit zelf toe te passen:
+</p>
+	<div class ='hammer treeview' style="clear: both;">Vragen 2
+		<button onclick="window.open('SLO-apps/aiAssocForm.htm','techniek')">Maak je eigen opgave</button>
+		<div style="padding-left: 25px;">
+			<span class="caret">Opdrachten</span>
+			<div class="nested">
+				<ol start="9">
+					<li>		Gegeven is de transactiedatabase gerepresenteerd door de 
+			collectie $W$:
+				<table>
+					<tr>
+					<th colspan="2">Collectie $W$
+					</th>
+				</tr>
+				<tr>
+					<th>Id
+					</th>
+					<th>Items
+					</th>
+				</tr>
+				<tr>
+					<td>0
+					</td>
+					<td>$\{a,b,c\}$
+					</td>
+				</tr>
+				<tr>
+					<td>1
+					</td>
+					<td>$\{b,c,d,e\}$
+					</td>
+				</tr>
+				<tr>
+					<td>2
+					</td>
+					<td>$\{c,d \}$
+					</td>
+				</tr>
+				<tr>
+					<td>3
+					</td>
+					<td>$\{a,b,d\}$
+					</td>
+				</tr>
+				<tr>
+					<td>4
+					</td>
+					<td>$\{a,b,c\}$
+					</td>
+				</tr>
+			</table>
+			<ol style="list-style-type: lower-alpha;">
+							<li>Pas Fase 1 van het Apriori-algoritme toe op deze collectie met een support van minimaal 50%
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>			Iteratie met k=1
+
+			<ol style="list-style-type: upper-alpha;">
+				<li>Genereer alle deelverzamelingen (itemsets) kandidaten met lengte $1$.<br/>
+					$S_{1}=\{\{a\}, \{b\},\{ c \}, \{d \}, \{e \}\}$
+				</li>
+				<li>Bereken support van de kandidaat deelverzamelingen (1-itemsets) uit $S_{1}$ in $W$.<br./>
+					<table>
+					<tr>
+						<th>Itemset
+						</th>
+						<th>Support
+						</th>
+					</tr>
+					<tr class="voldoet">
+						<td>$\{a\}$
+						</td>
+						<td>60%
+						</td>
+					</tr>
+					<tr class="voldoet">
+						<td>$\{b\}$
+						</td>
+						<td>80%
+						</td>
+					</tr>
+					<tr class="voldoet">
+						<td>$\{c \}$
+						</td>
+						<td>80%
+						</td>
+					</tr>
+					<tr class="voldoet">
+						<td>$\{d\}$
+						</td>
+						<td>60%
+						</td>
+					</tr>
+					<tr class="voldoetNiet">
+						<td>$\{e\}$
+						</td>
+						<td>20%
+						</td>
+					</tr>
+				</table>
+			</li>
+			<li>
+					De support van kandidaat itemset $\{e\}$ is onder de 40% en voldoet dus niet.<br/>
+					De frequente 1-itemsets zijn dus: $F=\{\{a\}, \{b\}, \{c\}, \{d\}\}$
+				</li>
+				<li>
+					$F$ is niet leeg. We gaan op zoek naar grotere frequente itemsets namelijk die uit twee elementen
+					bestaan. k=2
+				</li>
+				</ol>
+				<p>
+				Iteratie met k=2
+				</p>
+
+				<ol style="list-style-type: upper-alpha;">
+					<li>Genereer alle deelverzamelingen (itemsets) kandidaten met lengte $2$ met elementen uit $F$.<br/>
+						$S_{2}=\{\{a,b\}, \{a, c \}, \{a, d \}, \{b, c \}, \{b, d \}
+						, \{c, d \}\}$
+					</li>
+					<li>Bereken support van de kandidaat deelverzamelingen (2-itemsets) uit $S_{2}$ in $W$.<br./>
+						<table>
+						<tr>
+							<th>Itemset
+							</th>
+							<th>Support
+							</th>
+						</tr>
+						<tr class="voldoet">
+							<td>$\{a,b\}$
+							</td>
+							<td>60%
+							</td>
+						</tr>
+						<tr class="voldoetNiet">
+							<td>$\{a,c\}$
+							</td>
+							<td>40%
+							</td>
+						</tr>
+						<tr class="voldoetNiet">
+							<td>$\{a,d\}$
+							</td>
+							<td>20%
+							</td>
+						</tr>
+						<tr class="voldoet">
+							<td>$\{b,c\}$
+							</td>
+							<td>60%
+							</td>
+						</tr>
+						<tr class="voldoetNiet">
+							<td>$\{b,d\}$
+							</td>
+							<td>40%
+							</td>
+						</tr>
+						<tr class="voldoetNiet">
+							<td>$\{c,d\}$
+							</td>
+							<td>40%
+							</td>
+						</tr>
+					</table>
+
+					</li>
+					<li>
+						De frequente 2-itemsets zijn:$\{\{a,b\}, \{b,c\}\}$ dus $F$ wordt
+						$F=\{\{a\}, \{b\}, \{c\}, \{d\},\{a,b\}, \{b,c\}\}$
+					</li>
+					<li>
+						 We hebben weer items toegevoegd aan $F$ en gaan dus op zoek naar grotere frequente itemsets namelijk die uit drie elementen
+						bestaan. k=3
+					</li>
+				</ol>
+				<p>
+				Iteratie met k=3
+				</p>
+
+				<ol style="list-style-type: upper-alpha;">
+					<li>Genereer alle deelverzamelingen (itemsets) kandidaten met lengte $3$ met elementen uit $F$.<br/>
+						$S_{3}=\{\{a,b,c \}\}$
+					</li>
+					<li>Bereken support van de kandidaat deelverzamelingen (3-itemsets) uit $S_{3}$ in $W$.<br./>
+						<table>
+						<tr>
+							<th>Itemset
+							</th>
+							<th>Support
+							</th>
+						</tr>
+						<tr class="voldoetNiet">
+							<td>$\{a,b,c\}$
+							</td>
+							<td>40%
+							</td>
+						</tr>
+
+					</table>
+
+					</li>
+					<li>Er zijn geen frequente 3-itemssets.</li>
+					<li>
+						We zijn bij het einde gekomen.
+					</li>
+			</ol>
+			<p>De uiteindelijke set van voldoende frequente verzamelingen is
+			<br/>
+				$F=\{\{a\}, \{b\}, \{c\}, \{d\}, \{a, b \}, \{b, c \}\}$.</p>
+									</li>
+								</ul>
+							</li>
+							<li>Geef in Fase 2 alle associatieregels met een confidence van minimaal 70%.
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>
+									<p>De uiteindelijke set van voldoende frequente verzamelingen is
+			<br/>
+				$F=\{\{a\}, \{b\}, \{c\}, \{d\}, \{a, b \}, \{b, c \}\}$.<br/>
+				De daaruit voortvloeiende associatieregels met voldoende confidence zijn:
+				<table>
+			<tr>
+				<th>Associatieregels</th>
+				<th>Confidence</th>
+			</tr>
+			<tr class="voldoet">
+				<td>$\{a\} \Rightarrow \{a,b\}$
+				</td>
+				<td>$\frac{60}{60}= 100 \% $
+				</td>
+			</tr>
+			<tr class="voldoet">
+				<td>$\{b\} \Rightarrow \{a,b\}$
+				</td>
+				<td>$\frac{60}{80}= 75 \% $
+				</td>
+			</tr>
+			<tr class="voldoet">
+				<td>$\{b\} \Rightarrow \{b,c\}$
+				</td>
+				<td>$\frac{60}{80}= 75 \% $
+				</td>
+			</tr>
+			<tr class="voldoet">
+				<td>$\{c\} \Rightarrow \{b,c\}$
+				</td>
+				<td>$\frac{60}{80}= 75 \% $
+				</td>
+			</tr>
+		</table>
+									</li>
+								</ul>
+							</li>
+						</ol>
+					</li>
+					<li>Gegeven is de transactiedatabase gerepresenteerd door de 
+			collectie $P$:
+				<table>
+					<tr>
+					<th colspan="2">Collectie $P$
+					</th>
+				</tr>
+				<tr>
+					<th>Id
+					</th>
+					<th>Items
+					</th>
+				</tr>
+				<tr>
+					<td>0
+					</td>
+					<td>$\{brood,melk\}$
+					</td>
+				</tr>
+				<tr>
+					<td>1
+					</td>
+					<td>$\{brood,luier,bier,eieren\}$
+					</td>
+				</tr>
+				<tr>
+					<td>2
+					</td>
+					<td>$\{melk,luier,bier,cola \}$
+					</td>
+				</tr>
+				<tr>
+					<td>3
+					</td>
+					<td>$\{brood,melk,luier,bier\}$
+					</td>
+				</tr>
+				<tr>
+					<td>4
+					</td>
+					<td>$\{brood,melk,luier,cola\}$
+					</td>
+				</tr>
+			</table>
+						<ol style="list-style-type: lower-alpha;">
+							<li>Pas het Apriori-algoritme toe op deze collectie met een support van minimaal 50%
+								<div class="caret doel">antwoord</div>
+								<ul class="nested">
+									<li>Iteratie met k=1
+				<ol style="list-style-type: upper-alpha;">
+				<li>Genereer alle deelverzamelingen (itemsets) kandidaten met lengte $1$.<br/>
+					$S_{1}=\{\{brood\}, \{bier\},\{ melk \}, \{luier \}, \{cola \}, \{eieren \}\}$
+				</li>
+				<li>Bereken support van de kandidaat deelverzamelingen (1-itemsets) uit $S_{1}$ in $P$.<br./>
+					<table>
+					<tr>
+						<th>Itemset
+						</th>
+						<th>Support
+						</th>
+					</tr>
+					<tr class="voldoet">
+						<td>$\{brood\}$
+						</td>
+						<td>80%
+						</td>
+					</tr>
+					<tr class="voldoet">
+						<td>$\{bier\}$
+						</td>
+						<td>60%
+						</td>
+					</tr>
+					<tr class="voldoet">
+						<td>$\{melk \}$
+						</td>
+						<td>60%
+						</td>
+					</tr>
+					<tr class="voldoet">
+						<td>$\{luier\}$
+						</td>
+						<td>80%
+						</td>
+					</tr>
+					<tr class="voldoetNiet">
+						<td>$\{cola\}$
+						</td>
+						<td>40%
+						</td>
+					</tr>
+					<tr class="voldoetNiet">
+						<td>$\{eieren\}$
+						</td>
+						<td>20%
+						</td>
+					</tr>
+				</table>
+			</li>
+			<li>
+					De support van kandidaat itemsets $\{cola\}$ en $\{eieren\}$ is onder 
+					de 40% en voldoen dus niet.<br/>
+					De frequente itemsets zijn dus: $F=\{\{brood\}, \{bier\},\{ melk \}, \{luier \}\}$
+				</li>
+				<li>
+					$F$ is niet leeg. We gaan op zoek naar grotere frequente itemsets namelijk die uit twee elementen
+					bestaan. k=2
+				</li>
+				</ol>
+				<p>
+				Iteratie met k=2
+				</p>
+
+				<ol style="list-style-type: upper-alpha;">
+					<li>Genereer alle deelverzamelingen (itemsets) kandidaten met lengte $2$ met elementen uit $F_{1}$.<br/>
+						$S_{2}=\{\{brood,bier\}, \{brood,melk\}, \{brood,luier\}, \{bier,melk\}, \{bier,luier\}
+						, \{melk,luier\}\}$
+					</li>
+					<li>Bereken support van de kandidaat deelverzamelingen (2-itemsets) uit $S_{2}$ in $P$.<br./>
+						<table>
+						<tr>
+							<th>Itemset
+							</th>
+							<th>Support
+							</th>
+						</tr>
+						<tr class="voldoetNiet">
+							<td>$\{brood,bier\}$
+							</td>
+							<td>40%
+							</td>
+						</tr>
+						<tr class="voldoet">
+							<td>$\{brood,melk\}$
+							</td>
+							<td>60%
+							</td>
+						</tr>
+						<tr class="voldoet">
+							<td>$\{brood,luier\}$
+							</td>
+							<td>60%
+							</td>
+						</tr>
+						<tr class="voldoetNiet">
+							<td>$\{bier,melk\}$
+							</td>
+							<td>40%
+							</td>
+						</tr>
+						<tr class="voldoet">
+							<td>$\{bier,luier\}$
+							</td>
+							<td>60%
+							</td>
+						</tr>
+						<tr class="voldoet">
+							<td>$\{melk,luier\}$
+							</td>
+							<td>60%
+							</td>
+						</tr>
+					</table>
+
+					</li>
+					<li>
+						De frequente 2-itemsets zijn:$\{\{brood,melk\}, \{brood,luier\},  \{bier,luier\}
+						, \{melk,luier\}\}$ dus 
+						$F=\{\{brood\}, \{bier\},\{ melk \}, \{luier \},\{brood,melk\}, \{brood,luier\},  \{bier,luier\}
+						, \{melk,luier\}\}$
+					</li>
+					<li>
+						Er zijn itemsets toegevoegd. We gaan dus op zoek naar grotere frequente itemsets namelijk die uit drie elementen
+						bestaan. k=3
+					</li>
+				</ol>
+				<p>
+				Iteratie met k=3
+				</p>
+
+				<ol style="list-style-type: upper-alpha;">
+					<li>Genereer alle deelverzamelingen (itemsets) kandidaten met lengte $3$ met elementen uit $F$.<br/>
+						$S_{3}=\{\{brood,melk,luier\}, \{brood,melk,bier\},  \{bier,melk,luier\}\}$
+					</li>
+					<li>Bereken support van de kandidaat deelverzamelingen (3-itemsets) uit $S_{3}$ in $P$.<br./>
+						<table>
+						<tr>
+							<th>Itemset
+							</th>
+							<th>Support
+							</th>
+						</tr>
+						<tr class="voldoetNiet">
+							<td>$\{brood,melk,luier\}$
+							</td>
+							<td>40%
+							</td>
+						</tr>
+						<tr class="voldoetNiet">
+							<td>$\{brood,melk,bier\}$
+							</td>
+							<td>20%
+							</td>
+						</tr>
+						<tr class="voldoetNiet">
+							<td>$\{bier,melk,luier\}$
+							</td>
+							<td>40%
+							</td>
+						</tr>
+					</table>
+
+					</li>
+					<li>
+						Er zijn geen voldoende frequente 3-itemsets.
+					</li>
+					<li>
+						We zijn bij het einde gekomen.
+					</li>
+			</ol>
+			<p>De uiteindelijke set van voldoende frequente verzamelingen is
+			<br/>
+				$F=\{\{brood\}, \{bier\},\{ melk \}, \{luier \},\{brood,melk\}, \{brood,luier\},  \{bier,luier\}
+						, \{melk,luier\}\}$.<br/></p>
+									</li>
+								</ul>
+							</li>
+							<li>Geef alle associatieregels met een confidence van minimaal 60%.
+								<div class="caret doel"></div>
+								<ul class="nested">
+									<li><p>De uiteindelijke set van voldoende frequente verzamelingen is
+			<br/>
+				$F=\{\{brood\}, \{bier\},\{ melk \}, \{luier \},\{brood,melk\}, \{brood,luier\},  \{bier,luier\}
+						, \{melk,luier\}\}$.<br/>
+						De daaruit voortvloeiende associatieregels met voldoende confidence zijn:
+			</p>
+			<table>
+			<tr>
+				<th>Associatieregels</th>
+				<th>Confidence</th>
+			</tr>
+			<tr class="voldoet">
+				<td>$\{brood\} \Rightarrow \{brood,melk\}$
+				</td>
+				<td>$\frac{60}{80}= 75 \% $
+				</td>
+			</tr>
+			<tr class="voldoet">
+				<td>$\{brood\} \Rightarrow \{brood,luier\}$
+				</td>
+				<td>$\frac{60}{80}= 75 \% $
+				</td>
+			</tr>
+			<tr class="voldoet">
+				<td>$\{melk\} \Rightarrow \{brood,melk\}$
+				</td>
+				<td>$\frac{60}{80}= 75 \% $
+				</td>
+			</tr>
+			<tr class="voldoet">
+				<td>$\{melk\} \Rightarrow \{luier,melk\}$
+				</td>
+				<td>$\frac{60}{80}= 75 \% $
+				</td>
+			</tr>
+			<tr class="voldoet">
+				<td>$\{luier\} \Rightarrow \{luier,brood\}$
+				</td>
+				<td>$\frac{60}{80}= 75 \% $
+				</td>
+			</tr>
+			<tr class="voldoet">
+				<td>$\{luier\} \Rightarrow \{luier,bier\}$
+				</td>
+				<td>$\frac{60}{80}= 75 \% $
+				</td>
+			</tr>
+			<tr class="voldoet">
+				<td>$\{luier\} \Rightarrow \{luier,melk\}$
+				</td>
+				<td>$\frac{60}{80}= 75 \% $
+				</td>
+			</tr>
+			<tr class="voldoet">
+				<td>$\{bier\} \Rightarrow \{bier,luier\}$
+				</td>
+				<td>$\frac{60}{60}= 100 \% $
+				</td>
+			</tr>
+			</table>
+									</li>
+								</ul>
+							</li>
+						</ol>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	</article>
+</body>
+</html>

@@ -1,135 +1,135 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="css/normalize.css" rel="stylesheet">
-    <link href="css/ai.css" rel="stylesheet" type="text/css" />
-	<link href="css/menus.css" rel="stylesheet" type="text/css" />
-	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
-    <script src="treeview.js"></script>
-	<title>Kunstmatige Intelligentie</title>
-  </head>
-  <body  id="neuralenetwerken" onload="initTreeview();" >
-    <a name="Inleiding" style="counter-reset: subsection 2;"></a>
-    <header class="paragraaf titel">Tensorflow</header>
-    <section>
-	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/<a href="inleiding_neurale_netwerken.html" target="_parent">Neurale netwerken</a>/Tensorflow</h4> 
-    <div style="height: 100px;">
-		<div style="float:right;">
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
-			<br />This work is licensed under a
-			<br />
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
-				4.0
-			<br />International License</a>.
-		</div>
-	</div>
-	</section>
-	<div class="navbar">
-		<a href="#inleiding">Inleiding</a>
-		<span class="dropdown" style="padding: 0px;">
-			<div class="dropbtn" onclick="window.location='#Docentenhandleiding'">Docentenhandleiding  &#9660;</div>
-			<div class="dropdown-content">
-				<a class="submenuitem" href="#dhinleiding">Inleiding</a> 
-				<a class="submenuitem" href="#dhnodig">Benodigdheden</a> 
-				<a class="submenuitem" href="#dhoordeel">Beoordeling</a> 
-			</div>
-		</span>
-		<span class="dropdown">
-			<div class="dropbtn" onclick="window.location='#fase1'">Fase 1:<br/>Maak een eerste app  &#9660;</div>
-			<div class="dropdown-content">
-				<a class="submenuitem" href="#f1mnn">Maak een neuraal netwerk dat bepaalde bloemen herkent</a> 
-				<a class="submenuitem" href="#f1mag">Maak een agent (= app) die dit neurale netwerk gebruikt</a> 
-				<a class="submenuitem" href="#f1zap">Zet de App op een Android telefoon</a> 
-				<a class="submenuitem" href="#f1tap">Test de App</a> 
-			</div>
-		</span>
-		<span class="dropdown">
-			<div class="dropbtn" onclick="window.location='#fase2'">Fase 2:<br/>Optimaliseren netwerk  &#9660;</div>
-			<div class="dropdown-content">
-				<a class="submenuitem" href="#f2com">Competitie</a> 
-				<a class="submenuitem" href="#f2hoe">Hoe kun je een neural netwerk optimaliseren</a> 
-			</div>
-		</span>
-		<span class="dropdown">
-			<div class="dropbtn" onclick="window.location='#fase3'">Fase 3:<br/>Andere dataset  &#9660;</div>
-			<div class="dropdown-content">
-				<a class="submenuitem" href="#f3datd">Dataset downloaden</a> 
-				<a class="submenuitem" href="#f3datu">Dataset uploaden</a> 
-				<a class="submenuitem" href="#f3datup">Dataset uitpakken</a> 
-				<a class="submenuitem" href="#f3f1">Stappen uit Fase 1 herhalen</a> 
-				<a class="submenuitem" href="#f3tap">Testen nieuwe app</a> 
-			</div>
-		</span>
-		<span class="dropdown">
-			<div class="dropbtn" onclick="window.location='#fase4'">Fase 4:<br/>Eigen dataset  &#9660;</div>
-			<div class="dropdown-content">
-				<a class="submenuitem" href="#f4thema">Thema en klassen verzinnen</a> 
-				<a class="submenuitem" href="#f4verzamelen">Afbeeldingen verzamelen</a> 
-				<a class="submenuitem" href="#f4inpakken">Inpakken eigen dataset</a> 
-				<a class="submenuitem" href="#f4f3">Herhaal Fase 3</a> 
-			</div>
-		</span>
-	</div>
-	<article>
-	<div class="theorie rechts" style="width: 300px"><img style="width: inherit;" src="images/tensorflow/appbg.png"/></div>
-	<p>Dit hoofdstuk is een praktische opdracht waarin je in ongeveer 9 lessen een Android app gaat bouwen waarmee je als gebruiker van de app bepaalde beelden (van bijv. bloemen) die men via de camera ziet, kunt categoriseren (en dus bepaalde bloemen kunt herkennen). Je doorloopt het hele proces van het ontwikkelen van een dergelijke app. We hopen dat je daar veel plezier aan beleeft.
-	</p>
-	<p>Voor de herkenning van beelden gebruiken we de AI tools van Google: Google Colab (<a href="https://colab.research.google.com/" target="nn">https://colab.research.google.com/</a>). De app bouw je met Android Studio (<a href="https://developer.android.com/studio" target="nn">https://developer.android.com/studio</a>). 
-	</p>
-	<p>Voorwaarden om deze opdracht uit te kunnen voeren zijn:
-	</p>
-	<ul>
-		<li>Een Google account met Google Drive</li>
-		<li>Een Android telefoon</li>
-		<li>De mogelijkheid om Android studio op een computer te installeren.
-		</li>
-	</ul>
-	<p>De opdracht is in verschillende fasen opgebouwd:
-	<ol>
-		<li>Maak een eerste app: 
-			In deze fase train je een netwerk, exporteer je de agent van dit netwerk en bouw je een app op deze agent.</li>
-		<li>Optimaliseren neurale netwerk: Je herhaalt bovenstaande stap, maar je gaat proberen de app beter te laten voorspellen door
-		andere keuzes te maken in de vorm van het netwerk en/of de manier
-		van trainen.</li>
-		<li>Andere dataset gebruiken: Naast het leren herkennen van bloemen kan hetzelfde netwerk voor andere afbeeldingen worden gebruikt.</li>
-		<li>Eigen dataset gebruiken: Heb je tijd teveel dan kun je ook nog een eigen verzameling van afbeeldingen gaan aanleggen om het netwerk te trainen.</li>
-	</ol>
-	<a id="Docentenhandleiding"></a><br/>
-	<h2>Docentenhandleiding</h2>
-	<div class="speciaal treeview hammer">
-		<div>
-		<span class="caret">Open</span>
-		<div class="nested">
-			<a id="dhinleiding"></a>
-			<h3>Inleiding</h3><br/>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <script src="treeview.js"></script>
+	<title>Kunstmatige Intelligentie</title>
+  </head>
+  <body  id="neuralenetwerken" onload="addPathLead();initTreeview();" >
+    <a name="Inleiding" style="counter-reset: subsection 2;"></a>
+    <header class="paragraaf titel">Tensorflow</header>
+    <section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/<a href="inleiding_neurale_netwerken.html" target="_parent">Neurale netwerken</a>/Tensorflow</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by/4.0/" target="license">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png"  /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by/4.0/" target="license">Creative Commons Attribution
+				4.0
+			<br />International License</a>.
+		</div>
+	</div>
+	</section>
+	<div class="navbar">
+		<a href="#inleiding">Inleiding</a>
+		<span class="dropdown" style="padding: 0px;">
+			<div class="dropbtn" onclick="window.location='#Docentenhandleiding'">Docentenhandleiding  &#9660;</div>
+			<div class="dropdown-content">
+				<a class="submenuitem" href="#dhinleiding">Inleiding</a> 
+				<a class="submenuitem" href="#dhnodig">Benodigdheden</a> 
+				<a class="submenuitem" href="#dhoordeel">Beoordeling</a> 
+			</div>
+		</span>
+		<span class="dropdown">
+			<div class="dropbtn" onclick="window.location='#fase1'">Fase 1:<br/>Maak een eerste app  &#9660;</div>
+			<div class="dropdown-content">
+				<a class="submenuitem" href="#f1mnn">Maak een neuraal netwerk dat bepaalde bloemen herkent</a> 
+				<a class="submenuitem" href="#f1mag">Maak een agent (= app) die dit neurale netwerk gebruikt</a> 
+				<a class="submenuitem" href="#f1zap">Zet de App op een Android telefoon</a> 
+				<a class="submenuitem" href="#f1tap">Test de App</a> 
+			</div>
+		</span>
+		<span class="dropdown">
+			<div class="dropbtn" onclick="window.location='#fase2'">Fase 2:<br/>Optimaliseren netwerk  &#9660;</div>
+			<div class="dropdown-content">
+				<a class="submenuitem" href="#f2com">Competitie</a> 
+				<a class="submenuitem" href="#f2hoe">Hoe kun je een neural netwerk optimaliseren</a> 
+			</div>
+		</span>
+		<span class="dropdown">
+			<div class="dropbtn" onclick="window.location='#fase3'">Fase 3:<br/>Andere dataset  &#9660;</div>
+			<div class="dropdown-content">
+				<a class="submenuitem" href="#f3datd">Dataset downloaden</a> 
+				<a class="submenuitem" href="#f3datu">Dataset uploaden</a> 
+				<a class="submenuitem" href="#f3datup">Dataset uitpakken</a> 
+				<a class="submenuitem" href="#f3f1">Stappen uit Fase 1 herhalen</a> 
+				<a class="submenuitem" href="#f3tap">Testen nieuwe app</a> 
+			</div>
+		</span>
+		<span class="dropdown">
+			<div class="dropbtn" onclick="window.location='#fase4'">Fase 4:<br/>Eigen dataset  &#9660;</div>
+			<div class="dropdown-content">
+				<a class="submenuitem" href="#f4thema">Thema en klassen verzinnen</a> 
+				<a class="submenuitem" href="#f4verzamelen">Afbeeldingen verzamelen</a> 
+				<a class="submenuitem" href="#f4inpakken">Inpakken eigen dataset</a> 
+				<a class="submenuitem" href="#f4f3">Herhaal Fase 3</a> 
+			</div>
+		</span>
+	</div>
+	<article>
+	<div class="theorie rechts" style="width: 300px"><img style="width: inherit;" src="images/tensorflow/appbg.png"/></div>
+	<p>Dit hoofdstuk is een praktische opdracht waarin je in ongeveer 9 lessen een Android app gaat bouwen waarmee je als gebruiker van de app bepaalde beelden (van bijv. bloemen) die men via de camera ziet, kunt categoriseren (en dus bepaalde bloemen kunt herkennen). Je doorloopt het hele proces van het ontwikkelen van een dergelijke app. We hopen dat je daar veel plezier aan beleeft.
+	</p>
+	<p>Voor de herkenning van beelden gebruiken we de AI tools van Google: Google Colab (<a href="https://colab.research.google.com/" target="nn">https://colab.research.google.com/</a>). De app bouw je met Android Studio (<a href="https://developer.android.com/studio" target="nn">https://developer.android.com/studio</a>). 
+	</p>
+	<p>Voorwaarden om deze opdracht uit te kunnen voeren zijn:
+	</p>
+	<ul>
+		<li>Een Google account met Google Drive</li>
+		<li>Een Android telefoon</li>
+		<li>De mogelijkheid om Android studio op een computer te installeren.
+		</li>
+	</ul>
+	<p>De opdracht is in verschillende fasen opgebouwd:
+	<ol>
+		<li>Maak een eerste app: 
+			In deze fase train je een netwerk, exporteer je de agent van dit netwerk en bouw je een app op deze agent.</li>
+		<li>Optimaliseren neurale netwerk: Je herhaalt bovenstaande stap, maar je gaat proberen de app beter te laten voorspellen door
+		andere keuzes te maken in de vorm van het netwerk en/of de manier
+		van trainen.</li>
+		<li>Andere dataset gebruiken: Naast het leren herkennen van bloemen kan hetzelfde netwerk voor andere afbeeldingen worden gebruikt.</li>
+		<li>Eigen dataset gebruiken: Heb je tijd teveel dan kun je ook nog een eigen verzameling van afbeeldingen gaan aanleggen om het netwerk te trainen.</li>
+	</ol>
+	<a id="Docentenhandleiding"></a><br/>
+	<h2>Docentenhandleiding</h2>
+	<div class="speciaal treeview hammer">
+		<div>
+		<span class="caret">Open</span>
+		<div class="nested">
+			<a id="dhinleiding"></a>
+			<h3>Inleiding</h3><br/>
 			<p>Deze praktische opdracht is bedoeld om de leerlingen het totale productie proces te laten doorlopen om een App voor een mobieltje te maken waarmee je bepaalde beelden (van bijv. bloemen) die je via de camera ziet,  kunt categoriseren en dus bepaalde bloemen kunt herkennen. Verder is het uiteraard ook de bedoeling dat zij daar plezier aan beleven. Er zijn 4 fasen in deze opdracht. In Fase 1 wordt een standaard voorbeeld doorlopen. In Fase 2 wordt geprobeerd dit standaard voorbeeld te optimaliseren. In Fase 3 kan het proces worden oever gedaan met andere afbeeldingen die al voor de leerlingen zijn verzameld. In Fase 4 ten slotte zouden de leerlingen eerst zelf afbeeldingen kunnen verzamelen en dan met deze afbeeldingen een app te bouwen. Deze laatste Fase is erg arbeidsintensief omdat er een flinke verzameling afbeeldingen moet worden verzameld.
 			</p>
 			<p>Minimaal is dus Fase 1 nodig. Voor iets meer begrip is Fase 2 een nuttige uitbreiding. Fase 3 en 4 zijn niet echt nodig, maar kunnen voor meer eigenaarschap zorgen.
 			</p>
 			<p>De opdracht neemt 3 - 9 lesuren in beslag al naar gelang de diepgang. Fase 1: 3 lesuren. Fase 2: 2 lesuren. Fase 3: 1 lesuur. Fase 4 : →
 			</p>
-			<a id="dhnodig"></a><br/>
-			<h3>Benodigdheden</h3>
-			<ul><li>Er wordt gebuikt gemaakt van Google Colab (<a href="https://colab.research.google.com/" target="ethiek">https://colab.research.google.com/</a>). Om van Google Colab gebruikt te maken moeten de leerlingen een Google Account hebben en zich aangemeld hebben voor Google Drive.
+			<a id="dhnodig"></a><br/>
+			<h3>Benodigdheden</h3>
+			<ul><li>Er wordt gebuikt gemaakt van Google Colab (<a href="https://colab.research.google.com/" target="nn">https://colab.research.google.com/</a>). Om van Google Colab gebruikt te maken moeten de leerlingen een Google Account hebben en zich aangemeld hebben voor Google Drive.
 			<p>De reden dat er gebruik gemaakt wordt van Google Colab is dat een gemiddelde laptop niet de capaciteit heeft om tijdig voldoende foto's te verwerken en daarmee een neuraal netwerk te trainen waarmee beelden herkend kunnen worden.</p>
-			</li>
-			<li> De App wordt gemaakt met Android Studio (<a href="https://developer.android.com/studio" target="ethiek">https://developer.android.com/studio</a>). Deze omgeving moet dus door tenminste enige leerlingen te installeren zijn.
-			</li>
+			</li>
+			<li> De App wordt gemaakt met Android Studio (<a href="https://developer.android.com/studio" target="nn">https://developer.android.com/studio</a>). Deze omgeving moet dus door tenminste enige leerlingen te installeren zijn.
+			</li>
 			<li>De App runt op een Android telefoon. Er moeten dus enige leerlingen de beschikking hebben over een Android telefoon.
-			</li>
+			</li>
 			<li>Tenslotte is er een UBS - mini USB kabeltje nodig om de App vanaf de computer op de telefoon te installeren.
-			</li>
-			</ul>
+			</li>
+			</ul>
 			<p>NB:
 			</p>
-			<ul><li>Indien het niet mogelijk is Android Studio te gebruiken of gebruik te maken van Android telefoons door de leerlingen zou je je kunnen beperken tot het laten inleveren van de Tensorflow bestanden en het vervolgens zelf testen van de resultaten.</li>
+			<ul><li>Indien het niet mogelijk is Android Studio te gebruiken of gebruik te maken van Android telefoons door de leerlingen zou je je kunnen beperken tot het laten inleveren van de Tensorflow bestanden en het vervolgens zelf testen van de resultaten.</li>
 			<li>Indien het downloaden van bestanden bij <i>Fase2</i> en <i>Fase4</i> op de systemen van de leerlingen te veel tijd kost, kun je ook zelf een aantal bestanden om te testen selecteren.
-			</li>
-			</ul>
-			<a id="dhoordeel"></a><br/>
-			<h3>Beoordeling</h3>
+			</li>
+			</ul>
+			<a id="dhoordeel"></a><br/>
+			<h3>Beoordeling</h3>
 			<p>Je zou cijfers kunnen geven door de groepen volgens de resultaten van de Test bij <i>Fase2</i> en <i>Fase4</i> te ranken en vervolgens de ranking over een cijferschaal te verdelen.
 			</p>
 			<p>Bij de opdrachten <i>Fase2</i> en <i>Fase4</i> zou je de opdracht als volgt specifieker kunnen formuleren:
@@ -138,370 +138,370 @@
 			</p>
 			<p>Laat de leerlingen vervolgens dit document presenteren zodat je met gerichte vragen na kunt gaan of de leerlingen ook daadwerkelijk weten waar de zaken over gaan.
 			</p>
-			<p>Leerlingen krijgen dan alleen het groepscijfer als blijkt dat zij ook daadwerkelijk een bijdrage hebben geleverd.
-		</div>
-		</div>
-	</div>	
-	<a id="fase1"></a><br/>
-	<h2>Fase 1:Maak een eerste app</h2>
-	<div class="speciaal treeview hammer">
-		<div>
-		<span class="caret">open</span>
-		<div class="nested">
+			<p>Leerlingen krijgen dan alleen het groepscijfer als blijkt dat zij ook daadwerkelijk een bijdrage hebben geleverd.
+		</div>
+		</div>
+	</div>	
+	<a id="fase1"></a><br/>
+	<h2>Fase 1:Maak een eerste app</h2>
+	<div class="speciaal treeview hammer">
+		<div>
+		<span class="caret">open</span>
+		<div class="nested">
 		<p>We gaan een eerste App voor een Android telefoon maken waarmee je bepaalde bloemen kunt herkennen met je camera zoals je hiernaast ziet: Je richt je camera op een bloem en de app reageert door onder in het scherm te vertellen wat de meest passende bloemsoort is.
-	</p>
-	<div class="speciaal hammer">
+	</p>
+	<div class="speciaal hammer">
 	<div>We nemen daartoe de volgende stappen
-		<ul style="list-style-type: circle;">
-		<li>Maak een neuraal netwerk dat bepaalde bloemen herkent
-		</li>
-		<li>Maak een agent (= app) die dit neurale netwerk gebruikt
-		</li>
-		<li>Zet de App op een Android telefoon
-		</li>
-		<li>Test de App
-		</li>
-		</ul>
+		<ul style="list-style-type: circle;">
+		<li>Maak een neuraal netwerk dat bepaalde bloemen herkent
+		</li>
+		<li>Maak een agent (= app) die dit neurale netwerk gebruikt
+		</li>
+		<li>Zet de App op een Android telefoon
+		</li>
+		<li>Test de App
+		</li>
+		</ul>
+	</div>
 	</div>
-	</div>
-	<a id="f1mnn"></a><br/>
-	<h3>Maak een neuraal netwerk dat bepaalde bloemen herkent</h3>
-	<ul style="list-style-type: circle;">
-		<li>Maak eerst een Google Account aan als je dit nog niet hebt en meld je aan voor Google Drive (<a href="https://drive.google.com/" target="nn">https://drive.google.com/</a>)</li>
-		<li>Volg <a href="https://github.com/SLO-AI/tensorflow/blob/main/model_maker_image_classification.ipynb" target="nn">deze link</a> naar de Google Colab tutorial voor het classificeren van beelden, die is aangepast door Daniël Haitink zodat het netwerk kan worden getoond.</li>
-		<li>Of download <a href="SL-apps/tensorflow/F:\website\school\informatica\SLO_Artificial_Intelligence\SLO-apps\tensorflow\model_maker_image_classification.ipynb" target="ethiek">model_maker_image_classification.ipynb</a>, ga naar <a href="https://www.tensorflow.org">tensorflow.org<a/>
-		en open vandaar uit het ipynb document.
-		</li>
-		<li>Of volg <a href="https://www.tensorflow.org/lite/tutorials/model_maker_image_classification" target="ethiek">deze link</a> naar de Google Colab tutorial voor het classificeren van beelden.
-		</li>
-		<li>Klik op: <strong>Run in Google Colab</strong></li>
-		<li>Er komt een tabblad in je browser bij "Model Maker Image Classification". Zorg dat dat tabblad geopend is.
-		</li>
+	<a id="f1mnn"></a><br/>
+	<h3>Maak een neuraal netwerk dat bepaalde bloemen herkent</h3>
+	<ul style="list-style-type: circle;">
+		<li>Maak eerst een Google Account aan als je dit nog niet hebt en meld je aan voor Google Drive (<a href="https://drive.google.com/" target="nn">https://drive.google.com/</a>)</li>
+		<li>Volg <a href="https://github.com/SLO-AI/tensorflow/blob/main/model_maker_image_classification.ipynb" target="nn">deze link</a> naar de Google Colab tutorial voor het classificeren van beelden, die is aangepast door Daniël Haitink zodat het netwerk kan worden getoond.</li>
+		<li>Of download <a href="SLO-apps/tensorflow/model_maker_image_classification.ipynb" target="nn">model_maker_image_classification.ipynb</a>, ga naar <a href="https://colab.research.google.com/" target="nn">google colab<a/>
+		en open (upload) van daaruit het ipynb document.
+		</li>
+		<li>Of volg <a href="https://www.tensorflow.org/lite/tutorials/model_maker_image_classification" target="nn">deze link</a> naar de Google Colab tutorial voor het classificeren van beelden.
+		</li>
+		<li>Klik op: <strong>Run in Google Colab</strong></li>
+		<li>Er komt een tabblad in je browser bij "Model Maker Image Classification". Zorg dat dat tabblad geopend is.
+		</li>
 		</ul>
 		<p>Je bent nu in een notebook. In een notebook heb je bepaalde gedeeltes die je cellen noemt. In deze cellen staat code in de taal python die je op de je op de server kunt laten uitvoeren. Bij de cellen met code die je kunt laten uitvoeren staat links boven []. Als je hier boven gaat staan krijg je een pijltje en als je op het pijltje klikt wordt de code in de cel uitgevoerd. Meestal moet je alle cellen van een notebook van boven naar beneden uitvoeren om een totaal programma uit te voeren.
-	</p>
-	<ul style="list-style-type: circle;">
-		<li>
+	</p>
+	<ul style="list-style-type: circle;">
+		<li>
 		<p>Het huidige notebook kun je niet opslaan. Zorg eerst dat je met de knop een eigen kopie maakt en ga naar het nieuwe tabblad
-		</p>
-		<div class="center" style="width: 250px">
-		<img style="width: inherit;" src="images/tensorflow/Save_to_drive.jpg"/></div>
-				
-		</li>
-		<li>Voer de eerste cel die met <strong>!pip</strong> begint uit. Hiermee installeer je de <strong>tensorflow lite library waarin  door Google ontwikkelde AI gereedschappen aanwezig zijn</strong>.</li>
-		<li>Voer de tweede cel die met <strong>import os</strong> begint uit. Hiermee haal je onder andere een aantal onderdelen uit de tensor bibliotheken op, die later gebruikt worden. Vooral de regel "<strong>from tflite_model_maker import image_classifier</strong>" is belangrijk voor dit project. <strong>image_clasifier is een voorgebakken AI module om beelden te kunnen classificeren</strong>.</li>
-		<li>
-		Zorg dat je het driehoekje bij <strong>"Simple End-to_End Example"</strong> naar beneden laat wijzen zodat <strong>"Get the data path"</strong> zichtbaar wordt.
-		<div class="center" style="width: 250px">
-		<img style="width: inherit;" src="images/tensorflow/expand_input_3.jpg"/></div>
-		</li>
-		<li><p>
-		Voer de derde cel die met <strong>image_path</strong> begint uit. <strong>Hiermee geef je aan op basis van welke gegevens het neurale netwerk getraind moet worden</strong>. Scroll in het notebook even naar beneden naar Step1 (flower_photos) om te zien wat de structuur is van de gegevens.</p>
-		<div class="center" style="width: 400px">
-		<img style="width: inherit;" src="images/tensorflow/view_step_1.jpg"/></div>
-		
-		<p>Je hebt dus een aantal mappen met de naam van een bloem en in elke map een aantal plaatjes van deze bloem. Er zijn per bloem best veel plaatjes, wel zo'n 5000 per bloem. Scroll weer naar boven zodat je de derde cel weer ziet.</p>
-		</li>
-		<li>
-		Ga terug naar <strong>"Run the example"</strong> en voer de cel onder "<strong>Step 1"</strong>  die met <strong>data</strong> begint uit. Hier geef je aan dat de gegevens in twee groepen moeten worden gesplitst. Een groep met de naam <strong>train_data</strong> om te trainen en een groep met de naam <strong>test_data</strong> om te testen. 90% van de gegevens wordt voor testen gebruikte en 10% voor trainen.</li>
-		<li>
-		Voer de cel onder <strong>"Step 2. Customize the TensorFlow model"</strong> uit die met <strong>model</strong> begint uit. In deze stap wordt het model gemaakt en tegelijkertijd getraind, dit duurt een tijdje. Na afloop zie je hoeveel parameters het neurale netwerk heeft en hoeveel daarvan te trainen waren. Hoeveel zijn dit er?</li>
-		<li>
-		Hoe ziet het netwerk er dan uit?<br/>
-		Als er geen cel is die de volgende code bevat:
-		<pre>	tf.keras.utils.plot_model(model.model,to_file='pic.png',show_shapes=True)
-		</pre>
-		Druk dan op "+ Code" en voer in de nieuwe cel de bovenstaande code in en voer de cel uit. Je krijgt dan een plaatje met de verschillende lagen te zien.
-		</li>
-		<li>Voer de cel onder <strong>"Step 3. Evaluate the model"</strong> die met <strong>loss</strong> begint uit. In deze stap wordt gekeken hoe accuraat het model is.
-		</li>
+		</p>
+		<div class="center" style="width: 250px">
+		<img style="width: inherit;" src="images/tensorflow/Save_to_drive.jpg"/></div>
+				
+		</li>
+		<li>Voer de eerste cel die met <strong>!pip</strong> begint uit. Hiermee installeer je de <strong>tensorflow lite library waarin  door Google ontwikkelde AI gereedschappen aanwezig zijn</strong>.</li>
+		<li>Voer de tweede cel die met <strong>import os</strong> begint uit. Hiermee haal je onder andere een aantal onderdelen uit de tensor bibliotheken op, die later gebruikt worden. Vooral de regel "<strong>from tflite_model_maker import image_classifier</strong>" is belangrijk voor dit project. <strong>image_clasifier is een voorgebakken AI module om beelden te kunnen classificeren</strong>.</li>
+		<li>
+		Zorg dat je het driehoekje bij <strong>"Simple End-to_End Example"</strong> naar beneden laat wijzen zodat <strong>"Get the data path"</strong> zichtbaar wordt.
+		<div class="center" style="width: 250px">
+		<img style="width: inherit;" src="images/tensorflow/expand_input_3.jpg"/></div>
+		</li>
+		<li><p>
+		Voer de derde cel die met <strong>image_path</strong> begint uit. <strong>Hiermee geef je aan op basis van welke gegevens het neurale netwerk getraind moet worden</strong>. Scroll in het notebook even naar beneden naar Step1 (flower_photos) om te zien wat de structuur is van de gegevens.</p>
+		<div class="center" style="width: 400px">
+		<img style="width: inherit;" src="images/tensorflow/view_step_1.jpg"/></div>
+		
+		<p>Je hebt dus een aantal mappen met de naam van een bloem en in elke map een aantal plaatjes van deze bloem. Er zijn per bloem best veel plaatjes, wel zo'n 5000 per bloem. Scroll weer naar boven zodat je de derde cel weer ziet.</p>
+		</li>
+		<li>
+		Ga terug naar <strong>"Run the example"</strong> en voer de cel onder "<strong>Step 1"</strong>  die met <strong>data</strong> begint uit. Hier geef je aan dat de gegevens in twee groepen moeten worden gesplitst. Een groep met de naam <strong>train_data</strong> om te trainen en een groep met de naam <strong>test_data</strong> om te testen. 90% van de gegevens wordt voor testen gebruikte en 10% voor trainen.</li>
+		<li>
+		Voer de cel onder <strong>"Step 2. Customize the TensorFlow model"</strong> uit die met <strong>model</strong> begint uit. In deze stap wordt het model gemaakt en tegelijkertijd getraind, dit duurt een tijdje. Na afloop zie je hoeveel parameters het neurale netwerk heeft en hoeveel daarvan te trainen waren. Hoeveel zijn dit er?</li>
+		<li>
+		Hoe ziet het netwerk er dan uit?<br/>
+		Als er geen cel is die de volgende code bevat:
+		<pre>	tf.keras.utils.plot_model(model.model,to_file='pic.png',show_shapes=True)
+		</pre>
+		Druk dan op "+ Code" en voer in de nieuwe cel de bovenstaande code in en voer de cel uit. Je krijgt dan een plaatje met de verschillende lagen te zien.
+		</li>
+		<li>Voer de cel onder <strong>"Step 3. Evaluate the model"</strong> die met <strong>loss</strong> begint uit. In deze stap wordt gekeken hoe accuraat het model is.
+		</li>
 	</ul>
 	<p>Nu heb je een neuraal netwerk getraind en wordt het tijd een agent (ofwel een app)  rond dit netwerk te bouwen.
-	<ul style="list-style-type: circle;">
-		<li>Voer de cel onder <strong>"Step 4. Export to TensorFlow Lite model" uit</strong> cel die met <strong>model.export</strong> begint. Hiermee exporteer je het model, dat we straks in onze app kunnen inlezen. Dit duurt weer een tijdje.</li>
-		<li>Je ziet onderstaand scherm  (zonder rode omcirkeling) met aan de linkerkant van de uitgevoerde cel een aantal knopjes. Klik op het rood omcirkelde <strong>mapje.</strong>
-		<div class="center" style="width: 400px">
-		<img style="width: inherit;" src="images/tensorflow/After_model_export.jpg"/></div>
-		Je krijgt dan links het volgende te zien als je met  je rechter muis knop op <strong>model.tflite</strong> klikt.
-		<div class="center" style="width: 400px">
-		<img style="width: inherit;" src="images/tensorflow/Download_tflite.jpg"/></div>
-		</li>
-		<li>Selecteer vervolgens <strong>Downloaden</strong>. Het model <strong>model.tflite</strong> staat daarna in de <strong>Download map</strong> van je PC of laptop.
-		</li>
+	<ul style="list-style-type: circle;">
+		<li>Voer de cel onder <strong>"Step 4. Export to TensorFlow Lite model" uit</strong> cel die met <strong>model.export</strong> begint. Hiermee exporteer je het model, dat we straks in onze app kunnen inlezen. Dit duurt weer een tijdje.</li>
+		<li>Je ziet onderstaand scherm  (zonder rode omcirkeling) met aan de linkerkant van de uitgevoerde cel een aantal knopjes. Klik op het rood omcirkelde <strong>mapje.</strong>
+		<div class="center" style="width: 400px">
+		<img style="width: inherit;" src="images/tensorflow/After_model_export.jpg"/></div>
+		Je krijgt dan links het volgende te zien als je met  je rechter muis knop op <strong>model.tflite</strong> klikt.
+		<div class="center" style="width: 400px">
+		<img style="width: inherit;" src="images/tensorflow/Download_tflite.jpg"/></div>
+		</li>
+		<li>Selecteer vervolgens <strong>Downloaden</strong>. Het model <strong>model.tflite</strong> staat daarna in de <strong>Download map</strong> van je PC of laptop.
+		</li>
 	</ul>
-	<a id="f1mag"></a><br/>
-	<h3>Maak een agent (= app) die dit neurale netwerk gebruikt</h3>
-	<ul style="list-style-type: circle;">
-		<li>Installeer zo nodig Android Studio (<a href="https://developer.android.com/studio" target="ethiek">https://developer.android.com/studio</a>)</li>
-		<li>Download <a href="SLO-apps/tensorflow/TFLClassify.zip">TFLClassify.zip</a> en pak dit uit.</li>
-		<li>Kopieer <strong>model.tflite</strong> uit je Downloads map naar de map <strong>TFLClassify</strong> en verander van de kopie de naam in <strong>FlowerModel.tflite</strong>.</li>
-		<li>Start Android Studio.</li>
-		<li>Selecteer  Open.</li>
-		<li>Ga naar de map <strong>TFLClassify</strong> en selecteer deze.</li>
-		<li>Laat alle Updates uitvoeren (Duurt een tijdje)</li>
-		<li>Selecteer <strong>finish</strong> links boven in het linker venster.</li>
-		<li>Selecteer met je rechter muisknop <strong>New &gt; Other &gt; TensorFlow Lite Model</strong>.</li>
-		<li>Selecteer het mapje aan de rechterkant van Model location en ga naar de map <strong>TFLClassify</strong>.</li>
-		<li>Selecteer <strong>FlowerModel.tflite</strong> en daarna OK en Finish.
-		</li>
+	<a id="f1mag"></a><br/>
+	<h3>Maak een agent (= app) die dit neurale netwerk gebruikt</h3>
+	<ul style="list-style-type: circle;">
+		<li>Installeer zo nodig Android Studio (<a href="https://developer.android.com/studio" target="nn">https://developer.android.com/studio</a>)</li>
+		<li>Download <a href="SLO-apps/tensorflow/TFLClassify.zip">TFLClassify.zip</a> en pak dit uit.</li>
+		<li>Kopieer <strong>model.tflite</strong> uit je Downloads map naar de map <strong>TFLClassify</strong> en verander van de kopie de naam in <strong>FlowerModel.tflite</strong>.</li>
+		<li>Start Android Studio.</li>
+		<li>Selecteer  Open.</li>
+		<li>Ga naar de map <strong>TFLClassify</strong> en selecteer deze.</li>
+		<li>Laat alle Updates uitvoeren (Duurt een tijdje)</li>
+		<li>Selecteer <strong>finish</strong> links boven in het linker venster.</li>
+		<li>Selecteer met je rechter muisknop <strong>New &gt; Other &gt; TensorFlow Lite Model</strong>.</li>
+		<li>Selecteer het mapje aan de rechterkant van Model location en ga naar de map <strong>TFLClassify</strong>.</li>
+		<li>Selecteer <strong>FlowerModel.tflite</strong> en daarna OK en Finish.
+		</li>
 	</ul>
 	<p>Als het goed gegaan is zie je een tab voor dit bestand met de volgende informatie:
 	</p>
-	<p><div class="center" style="width: 800px">
-		<img style="width: inherit;" src="images/tensorflow/app1.png"/></div>
-	<ul style="list-style-type: circle;">
+	<p><div class="center" style="width: 800px">
+		<img style="width: inherit;" src="images/tensorflow/app1.png"/></div>
+	<ul style="list-style-type: circle;">
 		<li>Zorg dat er naast het hamertje aan de bovenkant finish geselecteerd is. Dit ziet er zo uit:
-		<div class="center" style="width: 600px">
+		<div class="center" style="width: 600px">
 		<img style="width: inherit;" src="images/tensorflow/apphammer.png"/></div>
-		</li>
-		<li>Druk op het hamertje om de App te maken. Onderin het scherm zie je <strong>"Gradle build running"</strong>. Je kunt op Event log rechts onder klikken als je wilt zien wat er tijdens het maken gebeurt. Duurt een paar minuten.
-		</li>
+		</li>
+		<li>Druk op het hamertje om de App te maken. Onderin het scherm zie je <strong>"Gradle build running"</strong>. Je kunt op Event log rechts onder klikken als je wilt zien wat er tijdens het maken gebeurt. Duurt een paar minuten.
+		</li>
 	</ul>
-	<a id="f1zap"></a><br/>
-	<h3>Zet de App op een Android telefoon</h3>
-	<ul style="list-style-type: circle;">
-		<li>Zet op je Android telefoon de Developer options en USB debugging aan volgens deze instructie: <a href="https://developer.android.com/studio/debug/dev-options.html#enable" target="ethiek">https://developer.android.com/studio/debug/dev-options.html#enable</a></li>
-		<li>(<strong>Let op:</strong> Je moet eerst de de Developer options en USB debugging  op je Android telefoon aanzetten en daarna pas de Android telefoon verbinden met he USB - mini USB kabeltje)</li>
-		<li>Verbind je Android telefoon met het USB - USB mini kabeltje met je PC of laptop.</li>
+	<a id="f1zap"></a><br/>
+	<h3>Zet de App op een Android telefoon</h3>
+	<ul style="list-style-type: circle;">
+		<li>Zet op je Android telefoon de Developer options en USB debugging aan volgens deze instructie: <a href="https://developer.android.com/studio/debug/dev-options.html#enable" target="nn">https://developer.android.com/studio/debug/dev-options.html#enable</a></li>
+		<li>(<strong>Let op:</strong> Je moet eerst de de Developer options en USB debugging  op je Android telefoon aanzetten en daarna pas de Android telefoon verbinden met he USB - mini USB kabeltje)</li>
+		<li>Verbind je Android telefoon met het USB - USB mini kabeltje met je PC of laptop.</li>
 		<li>Als dit goed gaat zie je het device verschijnen. Dit ziet er ongeveer zo uit:
-		<div class="center" style="width: 600px">
-		<img style="width: inherit;" src="images/tensorflow/appphone.png"/></div>
-		</li>
-		<li>Druk op het pijltje rechts om de App op je Android telefoon te installen. Geef op je Android telefoon toestemming.
-		</li>
+		<div class="center" style="width: 600px">
+		<img style="width: inherit;" src="images/tensorflow/appphone.png"/></div>
+		</li>
+		<li>Druk op het pijltje rechts om de App op je Android telefoon te installen. Geef op je Android telefoon toestemming.
+		</li>
 		</ul>
 	<p>Daarna moet je een tijd wachten.  Tenslotte zie je op je Android telefoon een App als de volgende:
 	</p>
-		<div class="center" style="width: 250px">
-		<img style="width: inherit;" src="images/tensorflow/appbg.png"/></div>
-	<a id="f1tap"></a><br/>
+		<div class="center" style="width: 250px">
+		<img style="width: inherit;" src="images/tensorflow/appbg.png"/></div>
+	<a id="f1tap"></a><br/>
 	<h3>Test de App</h3>
-	<p>Je kunt de App testen door plaatjes van bijv. zonnebloemen op het internet te zoeken en kijken of deze als zonnebloemen herkend worden als je met de camera van je Android telefoon naar het plaatje kijkt. Doe dit ook voor wat andere bloemen waarvoor het neurale netwerk getraind is.
-	</p>
-		</div>
-		</div>
-	</div>
-	<a id="fase2"></a><br/>
-	<h2>Fase 2:Optimaliseren neurale netwerk</h2>
-	<div class="speciaal treeview hammer">
-		<div>
-		<span class="caret">Open</span>
-		<div class="nested">
+	<p>Je kunt de App testen door plaatjes van bijv. zonnebloemen op het internet te zoeken en kijken of deze als zonnebloemen herkend worden als je met de camera van je Android telefoon naar het plaatje kijkt. Doe dit ook voor wat andere bloemen waarvoor het neurale netwerk getraind is.
+	</p>
+		</div>
+		</div>
+	</div>
+	<a id="fase2"></a><br/>
+	<h2>Fase 2:Optimaliseren neurale netwerk</h2>
+	<div class="speciaal treeview hammer">
+		<div>
+		<span class="caret">Open</span>
+		<div class="nested">
 		<p>In <i>Fase1</i> hebben we een neuraal netwerk gemaakt om bloemen te herkennen. In deze <i>Fase</i> bestudeer je hoe je een dergelijk neuraal netwerk kunt optimaliseren zodat het zo goed mogelijk werkt.
-		</p>
-		<a id="f2com"></a><br/>
-		<h3>Competitie</h3>
+		</p>
+		<a id="f2com"></a><br/>
+		<h3>Competitie</h3>
 		<p>We gaan werken in groepjes van drie leerlingen. Maak daarom eerst groepjes en ga daarna verder. Aan het eind van <i>Fase2</i> doen we een competitie met de in Fase 1 gemaakte verschillende apps en die op de verschillende telefoons staan. Als alle apps met slechts één export zijn gebouwd is iedere app gelijk en is de competitie zinloos. Heeft ieder groepje zelf het netwerk getraind dan gaan we in de competitie als volgt te werk. 
-		</p>
-		<ul style="list-style-type: circle;">
-		<li>Download op één computer de foto's waarmee de netwerken zijn getraind:
-		<a href="https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz" target="nn">https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz</a>
-		</li>
-		<li>Pak dit bestand uit zodat we mappen met foto's van bloemen krijgen.</li>
-		<li>Elk groepje mag uit elke map een zelfde aantal foto's kiezen. De gekozen foto's worden in een testmap gezet. Open de fotobestanden op de computer en scan met de apps op de mobiele telefoons de foto's.</li>
-		<li>Alternatief: Elke groep zoekt een plaatjes op het internet van daisies (madeliefjes), dandelions (paardebloemen), roses (rozen), sunflowers (zonnebloemen) en tulips (tulpen) en plaats die in een testmap</li>
+		</p>
+		<ul style="list-style-type: circle;">
+		<li>Download op één computer de foto's waarmee de netwerken zijn getraind:
+		<a href="https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz" target="nn">https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz</a>
+		</li>
+		<li>Pak dit bestand uit zodat we mappen met foto's van bloemen krijgen.</li>
+		<li>Elk groepje mag uit elke map een zelfde aantal foto's kiezen. De gekozen foto's worden in een testmap gezet. Open de fotobestanden op de computer en scan met de apps op de mobiele telefoons de foto's.</li>
+		<li>Alternatief: Elke groep zoekt een plaatjes op het internet van daisies (madeliefjes), dandelions (paardebloemen), roses (rozen), sunflowers (zonnebloemen) en tulips (tulpen) en plaats die in een testmap</li>
 		</ul>
 		<p>Elk groepje test de App met alle foto's uit de test map of alle op het internet gekozen afbeeldingen en telt de percentages op waarmee de App de bloemen goed herkent. Als de App een bloem fout herkent is het percentage 0. De groep met de hoogste score wint.
 		</p>
-		<a id="f2hoe"></a><br/>
-		<h3>Hoe kun je een neural netwerk optimaliseren</h3>
+		<a id="f2hoe"></a><br/>
+		<h3>Hoe kun je een neural netwerk optimaliseren</h3>
 	<p>Je kunt het neurale netwerk optimaliseren door een ander pad in het notebook van de vorige keer te kiezen.
 	</p>
-	<ul style="list-style-type: circle;">
-		<li>Ga weer met <a href="https://www.tensorflow.org/lite/tutorials/model_maker_image_classification" target="nn">deze link</a>  naar de Google Colab tutorial voor het classificeren van beelden.</li>
-		<li>Klik weer op <strong>Run in Google Colab</strong> en ga naar het nieuw geopende tabblad.</li>
-		<li>Voer all cellen in de sectie <strong>Prerequisites</strong> uit (2 cellen) om de juiste libraries te importeren.</li>
-		<li>Ga nu naar de sectie "<strong>Detailed Process</strong>" en voer de cellen uit in <strong>Step 1: Load Input Data Specific to an On-device ML App</strong>
-		</li>
+	<ul style="list-style-type: circle;">
+		<li>Ga weer met <a href="https://www.tensorflow.org/lite/tutorials/model_maker_image_classification" target="nn">deze link</a>  naar de Google Colab tutorial voor het classificeren van beelden.</li>
+		<li>Klik weer op <strong>Run in Google Colab</strong> en ga naar het nieuw geopende tabblad.</li>
+		<li>Voer all cellen in de sectie <strong>Prerequisites</strong> uit (2 cellen) om de juiste libraries te importeren.</li>
+		<li>Ga nu naar de sectie "<strong>Detailed Process</strong>" en voer de cellen uit in <strong>Step 1: Load Input Data Specific to an On-device ML App</strong>
+		</li>
 	</ul>
 	<p>In <strong>Step 2: Customize the TensorFlow Model</strong> wordt eerst met het zelfde model als je hebt gebruikt in Fase 1 getraind met training data en validatie data. In <strong>Step 3: Evaluate the Customized Model</strong> wordt vervolgens gekeken hoe goed de test data wordt geclassificeerd. We gaan nu eerst een aantal keer trainen met hetzelfde model en slaan het resultaat op in verschillende mappen, zodat je straks de beste kan gebruiken in je app.
-	<ul style="list-style-type: circle;">
+	<ul style="list-style-type: circle;">
 		<li>Maak eerst een aantal nieuwe mappen aan waar je straks het model naar kunt exporteren. Een nieuwe map maak je door in het bestanden gedeelte met je rechter muisknop te klikken en vervolgens op "nieuwe map te klikken". In de figuur hieronder is de map <strong>run1</strong> aangemaakt.
 		<div class="theorie center" style="width: 600px"><img style="width: inherit;" src="images/tensorflow/Extramap.jpg"/></div>
-		</li>
-		<li>Voer "<strong>Step 2</strong>" en "<strong>Step 3</strong>" uit.   Noteer de resultaten <strong>loss</strong> en <strong>accuracy</strong> van zowel de laatste training stap van de uitvoer van de eerste cel in "<strong>Step 2</strong>" en van de uitvoer van de eerste cel in "<strong>Step 3</strong>" Hoe kleiner de loss en hoe hoger de accuracy hoe beter het resultaat. Na iedere herhaling exporteer je het model naar een nieuwe map door de eerste cel in "<strong>Step 4</strong>" aan te passen. (b.v. naar <strong>model.export(export_dir='./run1')</strong>  als je de map <strong>run1</strong> hebt aangemaakt) Herhaal de stappen "<strong>Step 2</strong>" , "<strong>Step 3</strong>" en "<strong>Step 4</strong>" een aantal keer (b.v 3 keer).</li>
-		<li>Zijn er veel verschillen?
-		</li>
+		</li>
+		<li>Voer "<strong>Step 2</strong>" en "<strong>Step 3</strong>" uit.   Noteer de resultaten <strong>loss</strong> en <strong>accuracy</strong> van zowel de laatste training stap van de uitvoer van de eerste cel in "<strong>Step 2</strong>" en van de uitvoer van de eerste cel in "<strong>Step 3</strong>" Hoe kleiner de loss en hoe hoger de accuracy hoe beter het resultaat. Na iedere herhaling exporteer je het model naar een nieuwe map door de eerste cel in "<strong>Step 4</strong>" aan te passen. (b.v. naar <strong>model.export(export_dir='./run1')</strong>  als je de map <strong>run1</strong> hebt aangemaakt) Herhaal de stappen "<strong>Step 2</strong>" , "<strong>Step 3</strong>" en "<strong>Step 4</strong>" een aantal keer (b.v 3 keer).</li>
+		<li>Zijn er veel verschillen?
+		</li>
 	</ul>
 	<p>In de sectie "<strong>Change the model</strong>" zijn er een aantal suggesties ter verbetering.
 	</p>
-	<ul style="list-style-type: circle;">
-		<li>Probeer een aantal van deze suggesties uit en exporteer de modellen weer naar nieuwe mappen. Gebruik wel steeds de zelfde training , validatie en test data. Vergeet niet iedere keer te exporteren.</li>
-		<li>B.v. in de sectie "<strong>Change to the model that's supported in this library</strong>" kun je eens kijken wat het effect op loss en accuracy is van de modellen:<br/>
-'efficientnet_lite0', 'efficientnet_lite1', 'efficientnet_lite2', 'efficientnet_lite3', 'efficientnet_lite4', 'mobilenet_v2', 'resnet_50'. Hoeveel parameters zitten in jouw gebruikte modellen?</li>
-		<li>En in de sectie "<strong>Change to the model in TensorFlow Hub</strong>" kun je ook nog een geheel ander model inladen namelijk <a href="https://tfhub.dev/google/imagenet/inception_v3/feature_vector/1" target="nn"><strong>Inception V3</a>.</strong>  Voer de stappen uit en kijk of het model beter voorspeld. Hoeveel parameters zitten in dit model?</li>
-		<li>Als laatste, behalve het herhalen van de training kun je ook proberen het model te verbeteren. Je ziet dat er nu 5 trainingsronden worden uitgevoerd. Je kunt deze verhogen door de epochs waarde in te stellen (b.v. epochs=7).</li>
-		<li>Maak een app met het model met de beste <strong>loss</strong> en <strong>accuracy.</strong>
-		</li>
+	<ul style="list-style-type: circle;">
+		<li>Probeer een aantal van deze suggesties uit en exporteer de modellen weer naar nieuwe mappen. Gebruik wel steeds de zelfde training , validatie en test data. Vergeet niet iedere keer te exporteren.</li>
+		<li>B.v. in de sectie "<strong>Change to the model that's supported in this library</strong>" kun je eens kijken wat het effect op loss en accuracy is van de modellen:<br/>
+'efficientnet_lite0', 'efficientnet_lite1', 'efficientnet_lite2', 'efficientnet_lite3', 'efficientnet_lite4', 'mobilenet_v2', 'resnet_50'. Hoeveel parameters zitten in jouw gebruikte modellen?</li>
+		<li>En in de sectie "<strong>Change to the model in TensorFlow Hub</strong>" kun je ook nog een geheel ander model inladen namelijk <a href="https://tfhub.dev/google/imagenet/inception_v3/feature_vector/1" target="nn"><strong>Inception V3</a>.</strong>  Voer de stappen uit en kijk of het model beter voorspeld. Hoeveel parameters zitten in dit model?</li>
+		<li>Als laatste, behalve het herhalen van de training kun je ook proberen het model te verbeteren. Je ziet dat er nu 5 trainingsronden worden uitgevoerd. Je kunt deze verhogen door de epochs waarde in te stellen (b.v. epochs=7).</li>
+		<li>Maak een app met het model met de beste <strong>loss</strong> en <strong>accuracy.</strong>
+		</li>
 	</ul>
-	<p>Haalt de nieuwe app een hogere score met de afbeeldingen uit de competitie?
-		</div>
-		</div>
-	</div>
-	<a id="fase3"></a><br/>
-	<h2>Fase 3:Andere dataset gebruiken</h2>
-	<div class="speciaal treeview hammer">
-		<div>
-		<span class="caret">Open</span>
-		<div class="nested">
+	<p>Haalt de nieuwe app een hogere score met de afbeeldingen uit de competitie?
+		</div>
+		</div>
+	</div>
+	<a id="fase3"></a><br/>
+	<h2>Fase 3:Andere dataset gebruiken</h2>
+	<div class="speciaal treeview hammer">
+		<div>
+		<span class="caret">Open</span>
+		<div class="nested">
 		<p>In de vorige twee fasen hebben we het bloemen voorbeeld van het voorbeeld in <a href="https://www.tensorflow.org/lite/tutorials/model_maker_image_classification" target="nn">Image classification with Tensorflow</a> gebruikt. In deze fase gaan we hetzelfde model gebruiken op een andere dataset. Een dataset met verschillende beroepen.
-		</p>
-		<div class="speciaal hammer">
-			<div>
-				<ol>
-					<li>Dataset downloaden</li>
-					<li>Dataset uploaden</li>
-					<li>Dataset uitpakken</li>
-					<li>De stappen uit Fase 1 herhalen</li>
-					<li>Testen nieuwe app</li>
-				</ol>
-			</div>
+		</p>
+		<div class="speciaal hammer">
+			<div>
+				<ol>
+					<li>Dataset downloaden</li>
+					<li>Dataset uploaden</li>
+					<li>Dataset uitpakken</li>
+					<li>De stappen uit Fase 1 herhalen</li>
+					<li>Testen nieuwe app</li>
+				</ol>
+			</div>
 		</div>		
-		<a id="f3datd"></a><br/>
-		<h3>Dataset downloaden</h3>
-		<div class="center" style="width: 900px">
-		<img style="width: 200px;" src="images/farmer-26.jpg"/>
-		<img style="width: 200px;" src="images/waiter-33.jpg"/>
-		<img style="width: 200px;" src="images/mechanic-82.jpg"/>
+		<a id="f3datd"></a><br/>
+		<h3>Dataset downloaden</h3>
+		<div class="center" style="width: 900px">
+		<img style="width: 200px;" src="images/farmer-26.jpg"/>
+		<img style="width: 200px;" src="images/waiter-33.jpg"/>
+		<img style="width: 200px;" src="images/mechanic-82.jpg"/>
 		<img style="width: 200px;" src="images/doctor-101.jpg"/></div>
 	</p>
-	<ul style="list-style-type: circle;">
-		<li>Deze plaatjes zitten in het gecomprimeerde bestand train.tar.gz. Download dit bestand.
-		<a href="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/89e570e6-df2c-4e17-b832-981d858d828a/train.tar.gz" target="nn">train.tar.gz</a>
-		</li>
-		<li>Pak <strong>train.tar.gz</strong> uit (Met Windows 10 lukt het niet om een tar dan wel gz bestand uit te pakken. Gebruik <strong><a href="https://www.7-zip.org/download.html" target="nn">7-Zip</a></strong>). Je krijgt dan een bestand <strong>train.tar</strong>.</li>
-		<li>Pak <strong>train.tar</strong> uit. Je krijgt dan een map <strong>train</strong>.</li>
+	<ul style="list-style-type: circle;">
+		<li>Deze plaatjes zitten in het gecomprimeerde bestand train.tar.gz. Download dit bestand.
+		<a href="SLO-apps/tensorflow/train.tar.gz" target="nn">train.tar.gz</a>
+		</li>
+		<li>Pak <strong>train.tar.gz</strong> uit (Met Windows 10 lukt het niet om een tar dan wel gz bestand uit te pakken. Gebruik <strong><a href="https://www.7-zip.org/download.html" target="nn">7-Zip</a></strong>). Je krijgt dan een bestand <strong>train.tar</strong>.</li>
+		<li>Pak <strong>train.tar</strong> uit. Je krijgt dan een map <strong>train</strong>.</li>
 		</ul>
 		<p>In de map train vind je een aantal mappen met namen van beroepen. In deze mappen met namen van beroepen vind je plaatjes (224x224 pixels) van deze beroepen.
 		</p>
-		<a id="f3datu"></a><br/>
-		<h3>Dataset uploaden</h3>
+		<a id="f3datu"></a><br/>
+		<h3>Dataset uploaden</h3>
 		<p>We gaan de dataset <strong>train.tar.gz</strong> gebruiken om een model te trainen die de beroepen moet gaan herkennen. Dit doen we weer met  <a href="https://www.tensorflow.org/lite/tutorials/model_maker_image_classification" target="nn">Image classification with Tensorflow</a>.
 	</p>
-	<ul style="list-style-type: circle;">
-		<li>Open het <a href="https://www.tensorflow.org/lite/tutorials/model_maker_image_classification" target="nn">tensorflow notebook</a></li>
-		<li>Klik op: <strong>Run in Google Colab</strong> en ga weer naar de nieuw geopende tab.</li>
-		<li>Klik op het mapje icon aan de linker kant en het pijtje naar boven. Je ziet nu welke mappen er op de server voor jou beschikbaar zijn. Open <strong>..</strong>  , zoek vervolgens naar de <strong>/tmp</strong> map en ga hier op staan.
-		<div class="theorie center" style="width: 400px"><img style="width: inherit;" src="images/tensorflow/colab1.png"/></div>
-		</li>
-		<li>Klik de rechter muis knop en selecteer <strong>Upload</strong>. Upload vervolgens van je laptop of PC het bestand <strong>train.tar.gz</strong>. Je kunt nu gerust even pauze nemen want dit duur mogelijk een tijdje.
-		</li>
+	<ul style="list-style-type: circle;">
+		<li>Open het <a href="https://www.tensorflow.org/lite/tutorials/model_maker_image_classification" target="nn">tensorflow notebook</a></li>
+		<li>Klik op: <strong>Run in Google Colab</strong> en ga weer naar de nieuw geopende tab.</li>
+		<li>Klik op het mapje icon aan de linker kant en het pijtje naar boven. Je ziet nu welke mappen er op de server voor jou beschikbaar zijn. Open <strong>..</strong>  , zoek vervolgens naar de <strong>/tmp</strong> map en ga hier op staan.
+		<div class="theorie center" style="width: 400px"><img style="width: inherit;" src="images/tensorflow/colab1.png"/></div>
+		</li>
+		<li>Klik de rechter muis knop en selecteer <strong>Upload</strong>. Upload vervolgens van je laptop of PC het bestand <strong>train.tar.gz</strong>. Je kunt nu gerust even pauze nemen want dit duur mogelijk een tijdje.
+		</li>
 	</ul>
 	</p>
 	<p>Je ziet nu het bestand <strong>train.tar.gz</strong> in de <strong>/tmp</strong> map verschijnen. 
 	</p>
-	<ul style="list-style-type: circle;">
-		<li>Maak vervolgens in de map <strong>/tmp</strong> een map <strong>train</strong> aan om de data van de dataset in te zetten door op de rechter muis knop te klikken en  <strong>New Folder</strong> te selecteren.</li>
+	<ul style="list-style-type: circle;">
+		<li>Maak vervolgens in de map <strong>/tmp</strong> een map <strong>train</strong> aan om de data van de dataset in te zetten door op de rechter muis knop te klikken en  <strong>New Folder</strong> te selecteren.</li>
 	</ul>
 	<p>Als alles correct gegaan is zie je het volgende:
 	</p>
 	<div class="theorie center" style="width: 400px"><img style="width: inherit;" src="images/tensorflow/colab2.png"/></div>
-		<a id="f3datup"></a><br/>
+		<a id="f3datup"></a><br/>
 		<h3>Dataset uitpakken</h3>
-	<ul style="list-style-type: circle;">
-		<li>Ga nu in het notebook staan in de eerste cel in de sectie "<strong>Prerequisites</strong>" die begint met: <strong>!pip</strong> en selecteer in het menu bovenaan: "<strong>+ Code</strong>".</li>
+	<ul style="list-style-type: circle;">
+		<li>Ga nu in het notebook staan in de eerste cel in de sectie "<strong>Prerequisites</strong>" die begint met: <strong>!pip</strong> en selecteer in het menu bovenaan: "<strong>+ Code</strong>".</li>
 	</ul>
 	<p>Je krijgt nu een nieuwe cel.
 	</p>
-	<ul style="list-style-type: circle;">
-		<li>Zet in de nieuwe cel de volgende commando's
-		<pre>
-		bash
-		!tar xvf /tmp/train.tar.gz -C /tmp/train
-		!rm /tmp/train/*/Thumbs.db
-		</pre>
-		<p>Het eerste commando pakt de dataset uit in de map <strong>/tmp/train</strong>.
-		</p>
-		<p>Het tweede commando zorgt ervoor dat bepaalde ongewenste bestanden verwijderd worden.</li>
-		<li>Voer de code cel vervolgens uit door op het pijltje te gaan staan en de linker muis knop te klikken. Je ziet nu dat de dataset wordt uitgepakt in de map <strong>/tmp/train</strong>.</li>
+	<ul style="list-style-type: circle;">
+		<li>Zet in de nieuwe cel de volgende commando's
+		<pre>
+		bash
+		!tar xvf /tmp/train.tar.gz -C /tmp/train
+		!rm /tmp/train/*/Thumbs.db
+		</pre>
+		<p>Het eerste commando pakt de dataset uit in de map <strong>/tmp/train</strong>.
+		</p>
+		<p>Het tweede commando zorgt ervoor dat bepaalde ongewenste bestanden verwijderd worden.</li>
+		<li>Voer de code cel vervolgens uit door op het pijltje te gaan staan en de linker muis knop te klikken. Je ziet nu dat de dataset wordt uitgepakt in de map <strong>/tmp/train</strong>.</li>
 		</ul>
 	
-		<a id="f3f1"></a><br/>
-		<h3>Stappen uit Fase 1 herhalen</h3>
-	<ul style="list-style-type: circle;">
-		<li>Voer alle andere cellen in de sectie "<strong>Prerequisites</strong>" uit.
-		</li>
-		<li>Scroll naar beneden naar de code cel in de sectie "<strong>Get the data path</strong>" die begint met: <strong>image_path</strong> en pas deze code cel aan zodat deze er als volgt uitziet:<pre>
-		python
-		image_path = tf.keras.utils.get_file('/tmp/train','/tmp/train')
-		image_path = os.path.join(os.path.dirname(image_path),'train')
-		</pre></li>
-		<li>Voer vervolgens deze cel uit.</li>
-		<li>Voer nu weer net als in Fase 1 de cellen uit in de sectie <strong>"Run the example</strong>".</li>
+		<a id="f3f1"></a><br/>
+		<h3>Stappen uit Fase 1 herhalen</h3>
+	<ul style="list-style-type: circle;">
+		<li>Voer alle andere cellen in de sectie "<strong>Prerequisites</strong>" uit.
+		</li>
+		<li>Scroll naar beneden naar de code cel in de sectie "<strong>Get the data path</strong>" die begint met: <strong>image_path</strong> en pas deze code cel aan zodat deze er als volgt uitziet:<pre>
+		python
+		image_path = tf.keras.utils.get_file('/tmp/train','/tmp/train')
+		image_path = os.path.join(os.path.dirname(image_path),'train')
+		</pre></li>
+		<li>Voer vervolgens deze cel uit.</li>
+		<li>Voer nu weer net als in Fase 1 de cellen uit in de sectie <strong>"Run the example</strong>".</li>
 		</ul>
 	<p>De cel model.export(export_dir='.') heeft het model  <strong>model.tflite</strong> geplaatst in de map <strong>/content</strong>.
 	</p>
 		<div class="theorie center" style="width: 400px"><img style="width: inherit;" src="images/tensorflow/colab3.png"/></div>
-		<a id="f3map"></a><br/>
+		<a id="f3map"></a><br/>
 		<h3>Maken App met het nieuwe model</h3>
 	<p>Nu we weer een getraind model hebben kunnen we deze op dezelfde manier in een app verwerken zoals in Fase 1 is uitgelegd.
 	</p>
-	<ul style="list-style-type: circle;">
-		<li>Download <strong>model.tflite</strong> en hernoem die naar <strong>beroepen.tflite</strong> en bouw hiermee een nieuwe app.
-		</li>
+	<ul style="list-style-type: circle;">
+		<li>Download <strong>model.tflite</strong> en hernoem die naar <strong>beroepen.tflite</strong> en bouw hiermee een nieuwe app.
+		</li>
 		</ul>
-		<a id="f3tap"></a><br/>
-		<h3>Testen nieuwe app</h3>
-		<p>Je kunt je App testen door de plaatjes van de dataset <strong>train.tar.gz</strong> die je op je laptop of PC gedownload hebt op het scherm te openen en je telefoon erbij te houden om te testen hoe goed de App plaatjes van bepaalde beroepen herkent. Je kunt natuurlijk ook op het internet naar plaatjes zoeken die bij deze beroepen horen en kijken of die worden herkend.
-		</div>
-		</div>
-
-	</div>
-	<a id="fase4"></a><br/>
-	<h2>Fase 4:Eigen dataset gebruiken</h2>
-	<div class="speciaal treeview hammer">
-		<div>
-		<span class="caret">open</span>
-		<div class="nested">
+		<a id="f3tap"></a><br/>
+		<h3>Testen nieuwe app</h3>
+		<p>Je kunt je App testen door de plaatjes van de dataset <strong>train.tar.gz</strong> die je op je laptop of PC gedownload hebt op het scherm te openen en je telefoon erbij te houden om te testen hoe goed de App plaatjes van bepaalde beroepen herkent. Je kunt natuurlijk ook op het internet naar plaatjes zoeken die bij deze beroepen horen en kijken of die worden herkend.
+		</div>
+		</div>
+
+	</div>
+	<a id="fase4"></a><br/>
+	<h2>Fase 4:Eigen dataset gebruiken</h2>
+	<div class="speciaal treeview hammer">
+		<div>
+		<span class="caret">open</span>
+		<div class="nested">
 		<p>Nog leuker kan het worden als jullie een eigen dataset gebruiken. In Fase 3 heb je gezien dat er heel veel afbeeldingen per categorie aanwezig zijn. Het zal een hele klus worden om een behoorlijk aantal afbeeldingen bij elkaar te verzamelen en deze ook nog naar een juiste formaat te transformeren. Dat doe je natuurlijk niet alleen.
-		</p>
-		<div class="speciaal hammer">
-			<div>
-				<ol>
-					<li>Thema en klassen verzinnen</li>
-					<li>Afbeeldingen verzamelen</li>
-					<li>Dataset inpakken</li>
-					<li>De stappen uit Fase 3 herhalen</li>
-				</ol>
-			</div>
+		</p>
+		<div class="speciaal hammer">
+			<div>
+				<ol>
+					<li>Thema en klassen verzinnen</li>
+					<li>Afbeeldingen verzamelen</li>
+					<li>Dataset inpakken</li>
+					<li>De stappen uit Fase 3 herhalen</li>
+				</ol>
+			</div>
 		</div>
-		<a id="f4thema"></a><br/>
+		<a id="f4thema"></a><br/>
 		<h3>Thema en klassen verzinnen</h3>
-	<ul style="list-style-type: circle;">
-		<li>Verzin gezamenlijk een thema met daarin een aantal klassen.
-b.v. het thema <strong>muziek</strong> met daarin de klassen blues, house, punk, reggae en soul.</li>
+	<ul style="list-style-type: circle;">
+		<li>Verzin gezamenlijk een thema met daarin een aantal klassen.
+b.v. het thema <strong>muziek</strong> met daarin de klassen blues, house, punk, reggae en soul.</li>
 		</ul>
 	</p>
-		<a id="f4verzamelen"></a><br/>
+		<a id="f4verzamelen"></a><br/>
 		<h3>Afbeeldingen verzamelen</h3>
-	<ul style="list-style-type: circle;">
-		<li>Verdeel de leerlingen over de klassen en verzamel per leerling afbeeldingen voor de jouw aangewezen klasse op b.v. een usb-stick of in een eigen map op je computer.</li>
-		<li>Als het mogelijk is om een voor iedereen toegankelijke map <strong>muziek</strong> aan maken met daarin de sub mappen blues, house, punk, reggae en soul. Dan kan iedere leerling zijn verzameling in die map plaatsen. Lukt dat niet laat dan een usb-stick rondgaan met de zelfde structuur en laat iedereen zijn verzameling op die stick plaatsen. De map ziet er dan bijv. als volgt uit:
-    
-		<div class="center" style="width: 600px"><img style="width: inherit;" src="images/tensorflow/fase4map.png"/></div>
-	</li>
-		</ul>
-    	<a id="f4inpakken"></a><br/>
+	<ul style="list-style-type: circle;">
+		<li>Verdeel de leerlingen over de klassen en verzamel per leerling afbeeldingen voor de jouw aangewezen klasse op b.v. een usb-stick of in een eigen map op je computer.</li>
+		<li>Als het mogelijk is om een voor iedereen toegankelijke map <strong>muziek</strong> aan maken met daarin de sub mappen blues, house, punk, reggae en soul. Dan kan iedere leerling zijn verzameling in die map plaatsen. Lukt dat niet laat dan een usb-stick rondgaan met de zelfde structuur en laat iedereen zijn verzameling op die stick plaatsen. De map ziet er dan bijv. als volgt uit:
+    
+		<div class="center" style="width: 600px"><img style="width: inherit;" src="images/tensorflow/fase4map.png"/></div>
+	</li>
+		</ul>
+    	<a id="f4inpakken"></a><br/>
 		<h3>Inpakken eigen dataset</h3>
 		<p>Als er voldoende plaatjes in de sub mappen staan kun je het geheel inpakken als een data set. Het is belangrijk dat je eerst een <strong>tar</strong> bestand maakt zodat je bijv. een bestand <strong>muziek.tar</strong> krijgt en daarna de het <strong>tar</strong> bestand inpakt in een <strong>gzip</strong> zodat je bijv. een bestand <strong>muziek.tar.gz</strong> krijgt. In het volgende voorbeeld doen we dit met <strong>7-Zip</strong>.
 	</p>
-	<ul style="list-style-type: circle;">
-		<li><a href="https://www.7-zip.org/download.html" target="nn">7-zip</a> als dat programma nog niet beschikbaar is.</li>
-		<li>Ga in de gezamenlijke map zoals bijv. <strong>muziek</strong> staan en selecteer alle sub mappen met <strong>Ctrl-A</strong>. Klik op de rechter muis knop en selecteer <strong>7-Zip &gt; Toevoegen aan archief</strong>.</li>
-		<li>Selecteer als <strong>Archief formaat: tar</strong> en druk op <strong>OK</strong>.</li>
-		<li>Selecteer alleen het aangemaakte <strong>tar</strong> bestand (Soms zie je er geen <strong>.tar</strong> achter staan). Klik op de rechter muis knop en selecteer <strong>7-Zip &gt; Toevoegen aan archief</strong>.</li>
-		<li>Selecteer als <strong>Archief formaat: gzip</strong> en druk op <strong>OK</strong></li>
+	<ul style="list-style-type: circle;">
+		<li><a href="https://www.7-zip.org/download.html" target="nn">7-zip</a> als dat programma nog niet beschikbaar is.</li>
+		<li>Ga in de gezamenlijke map zoals bijv. <strong>muziek</strong> staan en selecteer alle sub mappen met <strong>Ctrl-A</strong>. Klik op de rechter muis knop en selecteer <strong>7-Zip &gt; Toevoegen aan archief</strong>.</li>
+		<li>Selecteer als <strong>Archief formaat: tar</strong> en druk op <strong>OK</strong>.</li>
+		<li>Selecteer alleen het aangemaakte <strong>tar</strong> bestand (Soms zie je er geen <strong>.tar</strong> achter staan). Klik op de rechter muis knop en selecteer <strong>7-Zip &gt; Toevoegen aan archief</strong>.</li>
+		<li>Selecteer als <strong>Archief formaat: gzip</strong> en druk op <strong>OK</strong></li>
 	</ul>
 	</p>
 	<p>Je kunt nu het aangemaakte bestand zoals <strong>muziek.tar.gz</strong> (Soms zie je er geen <strong>.gz</strong> achter staan) als data set gebruiken om een App aan te maken zoals in <i>Fase3</i>.
 	</p>
-    	<a id="f4f3"></a><br/>
-		<h3>Herhaal Fase 3</h3>
-		<p>Gebruik de eigen dataset om een App aan te maken volgens de instructies in <i>Fase 3</i>. Dit kan iedere leerling weer afzonderlijk doen om eventueel weer een app competitie te houden net als in <i>Fase 2</i>
-		</div>
-		</div>
-	</div>
-	
-	</article>
-  </body>
-</html>
+    	<a id="f4f3"></a><br/>
+		<h3>Herhaal Fase 3</h3>
+		<p>Gebruik de eigen dataset om een App aan te maken volgens de instructies in <i>Fase 3</i>. Dit kan iedere leerling weer afzonderlijk doen om eventueel weer een app competitie te houden net als in <i>Fase 2</i>
+		</div>
+		</div>
+	</div>
+	
+	</article>
+  </body>
+</html>

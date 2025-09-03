@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <title>Kunstmatige Intelligentie</title>
+    <script src="utils.js"></script>
+	<script src="treeview.js"></script>  
+  </head>
+  <body  id="achtergrond" onload="addPathLead();initTreeview()"  >
+    <a name="Inleiding" style="counter-reset: subsection 3;"></a>
+    <header class="paragraaf titel">In de praktijk</header>
+	<section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/
+	<a href="inleiding_achtergrond.htm" target="_parent">Achtergrond</a>
+	/In de praktijk</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by/4.0/" target="license">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by/4.0/" target="license">Creative Commons Attribution
+				4.0
+			<br />International License</a>.
+		</div>
+			</div>
+	</section>
+	<div class="navbar">
+		<a href="#Inleiding">In de praktijk</a>
+		<a href="#AlphaGo">AlphaGo</a>
+		<a href="#Tay">Tay de Twitter bot</a>
+		<a href="#GAN">GAN</a>
+	</div>	
+	<article>
+	<p>Tegenwoordig zie je op steeds meer plekken kunstmatige intelligentie terug komen. Er zijn tal van fantastische voorbeelden die je misschien wel eens tegen bent gekomen, en elk jaar komen er tientallen nieuwe plekken bij! We zullen gaan kijken naar een klein aantal bekende en recente implementaties van AI.
+	</p>		
+	<a id="AlphaGo"></a><br/>
+	<h2>AlphaGo</h2>	
+	<div class="rechts theorie">
+		<img src="images/AlphaGo.jpg"  style="width: 300px;"/><br/>
+		<caption>AlphaGo die een spel speelt tegen Lee Sedol.
+		</caption>
+	</div>
+	<p>In de sectie
+	<a href="achtergrond_geschiedenis.html" class="book">Geschiedenis en toekomst</a> hebben we gelezen over de doorbraak van DeepMind's AlphaGo, een AI die gespecialiseerd is in het spelen van het gelijknamige spel Go. AlphaGo wist in 2015 voor het eerst de beste speler ter wereld te verslaan in een spelletje.
+	</p>	
+	<p>Het spel heeft enorm veel mogelijke zetten, waardoor het niet mogelijk is voor simpelere algoritmes om dit probleem op te lossen.
+	</p>
+	<h3>Technieken</h3>
+	<p>AlphaGo maakt gebruik van een combinatie tussen <a href="https://en.wikipedia.org/wiki/Monte_Carlo_tree_search" target="achtergrond">"Monte Carlo Tree Search</a> (MCTS) en "deep learning" <a href="inleiding_neurale_netwerken.html">neurale netwerken</a>. Monte Carlo Tree search is een techniek die gebruik wordt om zo optimaal mogelijk te zoeken naar een oplossing. Het maakt hiervoor gebruik van heuristieken, zoals bijvoorbeeld ook gedaan wordt bij het <a href="https://www.educative.io/edpresso/what-is-the-a-star-algorithm" target="achtergrond">zoekalgoritme A*</a>.
+	</p>	
+	<p><i>Deep learning</i> betekent dat er meerdere "lagen" aan neuronen in het neurale netwerk aanwezig zijn. Over het algemeen zijn veel toepasbare vormen van <i>deep neural networks.</i>
+	</p>	
+	<h3>Toepassingen</h3>
+	<p>MCTS wordt toegepast om computers bord en videospellen te laten spelen. Zo is er door middel van MCTS een bot gemaakt voor bijvoorbeeld schaken, kolonisten van Catan, Ms. Pac-Man, Poker, Fable Legends, etc. Het wordt ook daadwerkelijk gebruikt in het spel TOTAL WAR: ROME II om de speler het zo moeilijk mogelijk te maken.
+	</p>	
+	<p>Daarnaast wordt het ook gebruikt door de <a href="https://youtu.be/j0z4FweCy4M?t=4929" target="achtergrond">autopiloot in Tesla auto's  </a> om beslissingen te maken.
+	</p>	
+	<p>Deep learning is enorm breed en wordt in veel velden toegepast. Zoals Financial fraud detection, Medical image analysis, Drug discovery and toxicology, Natural language processing, Image recognition en nog veel andere velden.
+	</p>	
+	
+	<a id="Tay"></a><br/>
+	<h2>Tay de Twitter bot</h2>	
+
+	<p>Microsoft heeft in 2016 een twitterbot gemaakt met AI technieken. De bot leerde door middel van de tweets van andere twitter gebruikers. Hoewel het idee erg leuk was, ging dit compleet fout. Binnen de kortste keren begon de bot onder andere racistische en seksistische opmerkingen te maken. Nadat Microsoft hierachter kwam, hebben ze snel de bot offline gehaald. Volgens Microsoft was het probleem dat "internet trollen" massaal misbruik maakte van de AI, waardoor deze de door hen gestuurde opmerkingen ging herhalen.
+	</p>	
+	<div class="theorie midden">
+		<img src="images/Tay.jpg"  style="width: 100%;"/><br/>
+		<caption>Hier kan je zien hoe de tweets van Tay binnen een dag veranderden: van vriendelijk, naar hatelijk.
+		</caption>
+	</div>
+	<h3>Technieken</h3>
+	<p>Om teksten te kunnen genereren en lezen, moet een systeem taal begrijpen. Hoewel dit voor een mens over het algemeen niet heel lastig is, is het voor een computer nog aardig moeilijk om taal écht te snappen. De overkoepelende term voor het verwerken en schrijven van taal in informatica is  <a href="https://en.wikipedia.org/wiki/Natural_language_processing" target="achtergrond">"Natural Language Processing"</a> (NLP), of in het Nederlands Natuurlijke Taalverwerking. NLP wordt tegenwoordig veel gedaan door middel van neurale netwerken. Vroeger werden statistische modellen gebruikt om deze taak uit te voeren, deze zijn bijna compleet overbodig geworden.
+	</p>	
+	<p>Microsoft zal een vorm van "Reinforcement Learning" gebruikt hebben, om te kunnen leren van de communicatie met gebruikers. Bij reinforcement learning moet de AI zelf beredeneren of een actie goed of slecht was. Dat kan bijvoorbeeld door positieve of negatieve feedback op een actie. Als de AI iets doet wat de gebruiker waardeert, zal de AI leren om dit vaker te doen. Indien de gebruiker het niet waardeert, zal het minder vaak zo reageren.
+	</p>	
+	<h3>Toepassingen</h3>
+	<p>NLP wordt enorm veel gebruikt, elke keer als je met een chatbot praat (bij een online webshop of ergens anders) dan wordt er gebruik gemaakt van NLP.
+	</p>	
+	<p>Hele bekende voorbeelden die enorm veel gebruik moeten maken van NLP zijn Google Now, Siri en Alexa, de spraakassistenten van Google, Apple en Amazon. Deze systemen moeten onder andere gebruik maken van NLP om spraak naar tekst om te zetten, tekst te begrijpen en een tekst weer uit te kunnen spreken.
+	</p>	
+	<a id="GAN"></a><br/>
+	<h2>GAN</h2>	
+	<p>Heel veel bekende vormen van AI maken gebruik van GANs, generative adversarial networks. Netwerken die hier gebruik van maken zijn enorm goed in het creëren van data, die lijkt op de getrainde data. Je kan het zien alsof je een vriend een incomplete puzzel geeft, waar 10 puzzelstukjes van missen. Maar wonder boven wonder kan je vriend de missende puzzelstukjes zelf bedenken en tekenen!
+	</p>	
+	<p>Deze slimme systemen bestaan uit twee onderdelen, een generator en een discriminator. De generator moet zorgen dat het data weet te maken wat de discriminator niet kan onderscheiden van echte data. De discriminator moet op haar beurt leren om zo goed mogelijk de neppe van de echte data te onderscheiden.
+	</p>	
+	<p>Je kan het vergelijken met illegale gelddrukkers (generator) en de politie (discriminator). De Europese bank stopt allemaal verschillende beveiligingskenmerken in de Euro, zodat de politie het echte geld kan onderscheiden van het neppe geld. De illegale drukkers proberen al die verschillende kenmerken te imiteren, zodat het heel lastig wordt om het echte geld te onderscheiden van nep geld. De politie moet steeds beter gaan kijken of het geld echt of nep is, waarna de gelddrukkers nóg beter illegaal geld gaan drukken. Dit is een wedloop die voort blijft gaan.
+	</p>
+	<h3>Toepassingen</h3>
+	<p>Deze netwerken zijn helemaal "hot and happening" in 2021, maar waar kunnen ze voor gebruikt worden in de echte wereld?
+	</p>	
+	<h4>Medisch</h4>
+	<p>In de medische wereld worden sinds kort ook dergelijke systemen gebruikt voor de bestrijding van ziektes als kanker. Het netwerk wordt gebruikt om moleculaire structuren te genereren, die gebruikt kunnen worden in medicijnen tegen ziektes. 
+	</p>	
+	<h4>Beeldmateriaal</h4>
+	<p>GANs kunnen ook gebruikt worden om oude foto's of films te "restaureren". De AI wordt gevoerd met een verouderde zwart-wit foto of video en het genereert een HD foto of video. Op deze manier kunnen we een ongekende blik in het verleden krijgen. 
+	</p>	
+	<p>Het kan ook gebruikt worden om bijvoorbeeld games op een hoge resolutie te spelen. Tegenwoordig heb je 4K en zelfs 8K schermen, een 8K scherm heeft meer dan 33 miljoen pixels! Om deze allemaal aan te kunnen sturen is veel rekenkracht nodig, soms te veel. Om het mogelijk te maken om toch al die pixels aan te sturen terwijl je een spelletje speelt, kan een AI de resolutie verhogen. Jouw computer maakt dus een plaatje van bijvoorbeeld 2 miljoen pixels waarna de AI er 31 miljoen bij bedenkt!
+	</p>	
+	<p>In de toekomst zullen we veel meer toepassingen gaan zien van GANs. Omdat het een relatief nieuwe AI is, zijn er nog veel velden onderbelicht en onontdekt.
+	</p>	
+	<h4>Deepfakes </h4>
+	<p>Deepfakes zijn sinds de laatste jaren steeds populairder en makkelijker om te maken. Zo maken veel apps gebruik van "filters" gebaseerd op de techniek. Deepfakes kunnen erg grappig zijn, maar ze kunnen ook veel schade aanrichten. Zo kunnen kwaadwillenden interviews of statements van bekende personen of politici namaken. Deze filmpjes zijn door het blote oog niet makkelijk te onderscheiden van echte interviews. 
+	</p>	
+	<div class="midden">
+		<div class="midden" style="display: inline-block;">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/gNYkspmq5e0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br/>
+		</div>
+		<div class="midden" style="display: inline-block;">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/IvY-Abd2FfM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br/>
+		</div>
+	</div>
+	<p>
+	De 47 minuten durende, maar zeer interessante, documentaire  “<a href="https://www.npostart.nl/VPWON_1322213" target="uitleg">Zien is geloven</a>” van VPRO tegenlicht geeft goed inzicht in de problemen rond Deep Fakes maar laat ook zien dat er goede dingen mee kunnen worden gedaan.</p>
+	<div class='treeview hammer' style="clear: both;">Opdracht
+		<div style="padding-left:20px;">
+		Zoek zelf nog een aansprekend Deepfake videofragment.
+		</div>
+	</div>
+	<h4>Muzikale AI </h4>
+	<div class="theorie rechts" style="width: 300px">
+		<div class="midden">
+		<a href="https://soundcloud.com/openai_audio/jukebox-914891098" target="achtergrond"><img src="images/RickAstley.jpg" style="width: 300px"></a><br/>
+		<caption><a href="https://soundcloud.com/openai_audio/jukebox-914891098" target="achtergrond">Pop, in the style of Rick Astley - Jukebox</a></caption>
+		</div>
+		<div class="midden">
+		<a href="https://www.youtube.com/watch?v=8sFXsP71wfA" target="achtergrond"><img src="images/smashmouth.jpg" style="width: 300px;"></a><br/>
+		<caption><a href="https://www.youtube.com/watch?v=8sFXsP71wfA" target="achtergrond">All Star, but an AI continues the song [OpenAI Jukebox]</a></caption>
+		</div>
+	</div>	<p>De onderzoekers van OpenAI hebben  <a href="https://openai.com/blog/jukebox/" target="achtergrond">GANs</a> gebruikt om een <a href="https://openai.com/blog/jukebox/" target="achtergrond">kunstmatige intelligentie muziek</a> te laten maken. Of beter gezegd, de KI moet bekende liedjes afmaken. Het systeem krijgt het begin van een liedje te <i>horen</i>, waarna het zelf moet bedenken hoe het liedje verder zal gaan. De uitkomsten zijn vaak erg bizar en klinken totaal anders dan je zou verwachten.
+	</p>
+	<div class ='hammer treeview' style="overflow: hidden;">Opdracht
+		<ul>
+			<li>Bekijk de video's. Zijn de teksten die worden gegenereerd enigszins realistisch?
+			</li>
+		</ul>
+	</div>	
+	<h4>Foto's maken</h4>
+	<p>Een GAN kan ook foto's generen aan de hand van simplistische tekeningen. Deze technieken laten de gebruiker een simpel plaatje tekenen van bijvoorbeeld een kat, waarna deze gegenereerd wordt op een zo realistisch mogelijke manier.
+	</p>
+	<div class="midden">
+		<iframe style="width: 95%; height: 500px; border: none" src="SLO-apps/pix2pix/index.html"></iframe>
+	</div>
+	<div class ='hammer treeview' style="overflow: hidden;">Opdracht
+		<ul>
+			<li>Probeer zelf een in bovenstaande applet een aantal eigen tekeningen (minimaal 5 voor één categorie) naar een foto om te zetten. Maak screenshots van je pogingen  en geef ze een cijfer van 1 tot 10 voor de mate van realisme.
+			</li>
+		</ul>
+	</div>
+	<p><a href="http://gaugan.org/gaugan2/" target="achtergrond">NVIDIA</a> heeft deze techniek ook toegepast op landschappen. Het systeem genereert een realistisch ogend landschap van een gekleurde tekening. De kleuren op het plaatje betekenen allemaal iets anders, elke kleur staat voor een bepaald materiaal. Zo wordt grijs vertaald naar wolken, lichtblauw naar zee, bordeaux rood naar bloemen, etc.
+	</p>
+	<div class="theorie midden">
+	<img src="images/gaugan_input.png" style="width:95%">
+	</div>
+	<h4>Deze persoon bestaat niet(!)</h4>
+	<div class="theorie rechts" style="width:300px">
+	<img src="images/persondoesnotexist.jpg" style="width:300px">
+	</div>	<p>Onderzoekers hebben in december 2019 een paper uitgebracht over *StyleGAN2*, een netwerk dat mensen en objecten kan genereren die nooit bestaan hebben. Om te laten zien hoe goed hun netwerk is, hebben ze een website gemaakt:<a href="https://thispersondoesnotexist.com/" target="achtergrond">This person does not exist</a>.
+	</p>
+	<p>Op de website wordt groot een foto van een persoon getoond, maar de grap is dat deze persoon niet bestaat en compleet is gegenereerd door de GAN.
+	</p>
+	<div class ='treeview hammer' style="overflow: hidden;">Opdracht
+		<ol>
+			<li>Ga naar de website en bekijk de personen. De website laat een nieuwe foto zien als je de pagina herlaad (F5). Kan jij de foto's van echt onderscheiden? Zo ja, hoe? Zo niet, waarom niet?
+				<div class="caret doel">antwoord</div>
+						<ul class="nested">
+							<li>
+							<img src="images/5_example.png" width="200"><br/>
+							<img src="images/3_example.png" width="200"><br/>
+							<img src="images/7_example.png" width="200"><br/>
+							
+							<p>Misschien vond je het erg lastig, of had je het snel door als je goed keek naar het plaatje. Vaak kan je bij overgangen van personen naar objecten/achtergrond nog wel eens een "artifact" vinden. Haar, ogen en kleding kunnen ook nog wel eens fout gaan. Als je heel ver in de plaatjes inzoomt kan je ook soms wel zien dat het een beetje raar oogt.
+							</p>
+							<p>Ook kan het gebeuren dat het netwerk een object een beetje half heeft gegenereerd. Hierdoor is het voor een deel zichtbaar of doorzichtig. Een beetje een geest-achtig effect geeft dit.
+							</p>
+							</li>
+						</ul>
+			</li>
+			<li class="verdieping">Als je op <a href="https://thispersondoesnotexist.com/" target="achtergrond">This person does not exist</a>
+			een tijdje wacht komt een pop-up je verwijzingen naar <i>code for training your own</i>.
+			Misschien een idee voor de verdiepende opdracht bij het hoofdstuk <a href="inleiding_neurale_netwerken.html" class="book">neurale netwerken</a>.
+			</li>
+		</ol>
+	</div>
+
+	<div class ='hammer treeview' style="overflow: hidden;">
+		<div id="myUL">
+			<span class="caret">Vragen</span>
+			<div class="nested">
+				<ol>
+					<li>Wat is Monte Carlo Tree search?
+						<div class="caret doel">antwoord</div>
+						<ul class="nested">
+							<li>Monte Carlo Tree search is een techniek die gebruik wordt om zo optimaal mogelijk te zoeken naar een oplossing.
+							</li>
+						</ul>
+					</li>
+					<li>Wat is de overkoepelende term voor het verwerken en schrijven van taal in informatica?
+						<div class="caret doel">antwoord</div>
+						<ul class="nested">
+							<li>Natural language processing / Natuurlijke taalverwerking
+							</li>
+						</ul>
+					</li>
+					<li>Leg uit wat een GAN is en noem 2 serieuze toepassingen waarin GAN's worden gebruikt.
+						<div class="caret doel">antwoord</div>
+						<ul class="nested">
+							<li>Een GAN is een neuraal netwerk dat nieuwe data genereert op basis van trainingsdata van de zelfde vorm. Serieuze voorbeelden: Restauratie van oud beeldmateriaal, Zoeken naar nieuwe chemische verbindingen voor werkende medicijnen, ...
+							</li>
+						</ul>
+					</li>
+					</ol>
+			</div>
+		</div>
+	</div>
+	</article>
+  </body>
+</html>

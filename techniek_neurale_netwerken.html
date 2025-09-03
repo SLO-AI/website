@@ -1,247 +1,355 @@
-<!DOCTYPE html >
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
-<link href="css/normalize.css" rel="stylesheet">
-<link href="css/ai.css" rel="stylesheet" type="text/css" />
-<link href="css/menus.css" rel="stylesheet" type="text/css" />
-<title>Neurale netwerken</title>
-<link href="css/treeview.css" rel="stylesheet">
-<script src="treeview.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script type="text/javascript" charset="UTF-8"
-		 src="https://cdn.jsdelivr.net/npm/jsxgraph@1.1.0/distrib/jsxgraphcore.js"></script>
-<link rel="stylesheet" type="text/css" 
-		 href="https://cdn.jsdelivr.net/npm/jsxgraph@1.1.0/distrib/jsxgraph.css" />
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
-  });
-</script>
-
-</head>
-<body  id="technieken" onload="initTreeview();"  >
-    <a name="Inleiding" style="counter-reset: subsection 4;"></a>
-    <header class="paragraaf titel">Neurale netwerken</header>
-
-	<section>
-	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/
-	<a href="inleiding_technieken.html" target="_parent">Technieken</a>/
-	Neurale netwerken</h4> 
-    <div style="height: 100px;">
-		<div style="float:right;">
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
-			<br />This work is licensed under a
-			<br />
-			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike
-				4.0
-			<br />International License</a>.
-		</div>
-			</div>
-	</section>
-	<div class="navbar">
-		<div class="centreer">
-		<a href="#Inleiding">Inleiding</a>
-		<a href="#Toepassingen">Toepassingen</a>
-		<a href="#Ontwerp">Ontwerp</a>
-		<a href="#lagen">Verschillende lagen</a>
-		<a href="#Perceptron">Perceptron</a>
-		<a href="#voetafdruk">Ecologische voetafdruk</a>
-		<a href="#Overzicht">Overzicht</a>
-		</div>
-	</div>
-	<article>
-
-	<h2>Inleiding</h2>
-	<p>Dit hoofdstuk bevat algemene informatie over neurale netwerken en is ook de inleiding bij de verdieping <a href="inleiding_neurale_netwerken.html" class="book">neurale netwerken</a>.
-	</p>
-	<p>In het hoofdstuk <a href="technieken_machine_learning.html" class="book">machine learning</a> hebben we drie categorieën leerstrategiën besproken, supervised, unsupervised en reinforcement learning. Artificiële of kunstmatige neurale netwerken (ANN) leren vooral via supervised en reinforcement learning. De reden hiervoor is dat neurale netwerken worden ingezet als de relatie tussen de gegevens en de bij een gegeven horende uitkomst, die door de AI applicatie moet worden voorspeld, niet bekend is of te ingewikkeld. Aan de hand van input-output voorbeelden moet het netwerk leren wat de relatie is. Beeldherkenning in de Quickdraw applicatie is al eerder als voorbeeld voor supervised learning aangehaald. <a href="https://deepmind.com/blog/article/alphazero-shedding-new-light-grand-games-chess-shogi-and-go" target="technieken">AlphaZero</a> (zie afbeelding) is een AI applicatie van het onderzoeksbedrijf <a href="https://deepmind.com/" target="technieken">DeepMind</a> dat de bordspelen go, shogi en schaken onverslaanbaar kan leren. Bij al deze spellen zijn de regels van het spel precies bekend, alleen zijn het aantal mogelijke patronen zo enorm groot dat de snelste computer niet alle zetten door kan rekenen. Om toch onverslaanbaar te worden is het netwerk getraind door de computer miljoenen keren tegen zichzelf te laten spelen (reinforcement learning).
-	</p>
-	<div class="theorie center" style="width: 600px;">
-		<img src="images/alphazero.gif"  style="width: 600px;"/></br/>
-		<caption>Figuur 1: Bij  schaken deed AlphaZero het al na vier uur beter dan Stockfish; bij shogi deed AlphaZero het na twee uur beter dan Elmo; en bij go had AlphaZero 30 uur nodig om beter te worden dan zijn voorganger AlphaGo die de legendarische speler Lee Sedol in 2016 versloeg. N.B.: elke trainingstap representeert 4,096 bord posities. Bron: <a href="https://deepmind.com/" target="technieken">DeepMind</a>
-		</caption>
-	</div>
-
-	<br/>
-	<a id="Toepassingen"></a><br/>
-	<h2>Toepassingen</h2>
-	<p>Hieronder zijn enkele standaardtoepassingen van neurale netwerken weergegeven die aanwezig zijn in verschillende computer programma's . Dit is geenszins een uitgebreide lijst van toepassingen van neurale netwerken, maar hopelijk geeft het je een algemeen beeld van de functies en mogelijkheden.
-	</p>
-	<ul>
-		<li><strong>Patroonherkenning</strong> - We hebben dit al verschillende keren genoemd en het is waarschijnlijk de meest voorkomende toepassing. Voorbeelden zijn gezichtsherkenning, optische tekenherkenning, etc.</li>
-		<li><strong>Tijdreeksvoorspelling</strong> - Neurale netwerken kunnen worden gebruikt om voorspellingen te doen. Zal de voorraad morgen stijgen of dalen? Zal het regenen of zonnig zijn?</li>
-		<li><strong>Signaalverwerking</strong> — Cochleaire implantaten (een cochleair implantaat is een apparaat dat aan dove kinderen en volwassenen de mogelijkheid biedt weer iets te horen) en gehoorapparaten moeten onnodig geluid wegfilteren en de belangrijke geluiden versterken. Neurale netwerken kunnen worden getraind om een audiosignaal te verwerken en op de juiste manier te filteren.</li>
-		<li><strong>Controle</strong> - Misschien heb je gelezen over recente vorderingen op het gebied van onderzoek naar zelfrijdende auto's. Neurale netwerken worden vaak gebruikt om de sturing van fysieke voertuigen (of gesimuleerde voertuigen) te beheren.</li>
-		<li><strong>Soft sensors</strong> - Een soft sensor verwijst naar het proces van het softwarematig analyseren van een verzameling van vele metingen. Een thermometer kan je de temperatuur van de lucht vertellen, maar wat als je ook de luchtvochtigheid, barometrische druk, dauwpunt, luchtkwaliteit, luchtdichtheid enz. zou weten wat kunnen we dan voorspellen? Neurale netwerken kunnen worden gebruikt om de invoergegevens van veel individuele sensoren te verwerken en als geheel te evalueren.</li>
-		<li><strong>Anomaliedetectie</strong> - Omdat neurale netwerken zo goed zijn in het herkennen van patronen, kunnen ze ook worden getraind om een output te genereren wanneer er iets gebeurt dat niet in het patroon past. Denk aan een neuraal netwerk dat jouw dagelijkse routine gedurende een lange periode bewaakt. Nadat het netwerk de patronen van jouw gedrag heeft geleerd, kan het je waarschuwen wanneer er iets mis is. (De sensoren in de autostoelen in deze 
-		<a href="https://www.ted.com/talks/kenneth_cukier_big_data_is_better_data?utm_campaign=tedspread&utm_medium=referral&utm_source=tedcomshare" target="technieken">Big Data TED-talk</a> )
-		</li>
-	</ul>
-
-	
-	<a id="Ontwerp"></a><br/>
-	<h2>Ontwerp</h2>
-	<p>Kenmerkend voor een neuraal netwerk is dat het ontwerp gebaseerd is op het menselijk brein. De hersenen zijn eigenlijk een soort netwerk van verbindingen tussen neuronen (zenuwcellen). Neuronen zijn met elkaar verbonden door middel van synapsen (de verbindingen) en geven hierover onderling signalen door. De synapsen bij de dendrieten van een neuron vangen signalen op die door het neuron wordt verwerkt tot een signaal dat de synapsen bij de axonen afgeven. Bij het creëren van een nieuwe herinnering of het leren van nieuwe vaardigheden worden verbindingen tussen neuronen opgezet en elke keer als je gelijke of vergelijkbare situaties tegen, wordt deze verbinding sterker gemaakt. Dit is een beknopte en versimpelde uitleg over de werking van het brein, de werkelijkheid is complexer. Daarnaast is ook nog lang niet alles bekend over dit prachtige instrument dat we allemaal bezitten. Binnen de kunstmatige neurale netwerken wordt een neuron een <strong>perceptron</strong> genoemd en is in 1958 door <a href="https://nl.wikipedia.org/wiki/Perceptron" target="technieken">Rosenblatt</a> ontworpen. 
-	</p>
-	<div class="theorie center" style="width: 800px;">
-		<img src="images/h2_4_nieuw.jpg"  style="width: 800px;"/><br/>
-		<caption>Figuur 2: Grafische representatie van een biologische neuron (links) en een kunstmatige neuron ofwel perceptron (rechts)
-		</caption>
-	</div>	
-	<p>
-	</p>
-	<p>Als mens zie je wat en gebruik je je hersens om je waarneming tot een reactie om te zetten. Jouw ogen zien de bal en je handen vangen die bal. Dat je die bal kunt vangen is een vaardigheid die je eerst hebt moeten leren. In de hersenen zijn in het vang proces vele neuronen betrokken. In deep learning wil men iets vergelijkbaars voor elkaar krijgen met een kunstmatig neuraal netwerk. Een input wordt door een verzameling perceptons (ook knopen genoemd) omgezet in een output:
-	</p>
-	<div class="theorie center" style="width: 600px;">
-		<img src="images/ann1.svg"  style="width: 600px;"/><br/>
-		<caption>Figuur 3: De verborgen lagen bevatten perceptrons die samen het neurale netwerk vormen.
-		</caption>
-	</div>
-	<p>Het netwerk moet net als de hersenen voldoende worden getraind om een juiste output te kunnen geven.
-	</p>
-	<a id="lagen"></a><br/>
-	<h2>Verschillende lagen</h2>
-	<p>Als we meer inzoomen krijgen we het de volgende schematische weergave van een AI applicatie:
-	</p>
-	<div class="theorie center" style="width: 600px;">
-		<img src="images/ann2.svg"  style="width: 600px;"/><br/>
-		<caption>Figuur 4: Schematische weergave van een verbonden ANN. De invoer in dit netwerk bestaat uit twee elementen. Er zijn twee verborgen lagen, de eerste met drie knopen en de tweede met twee knopen (perceptrons). Er is in dit voorbeeld slechts één output. 
-		</caption>
-	</div>
-	<p>Je ziet in de figuur drie verschillende secties typisch voor de opbouw van een neuraal netwerk:
-	</p>
-	<ol>
-		<li><p>De <strong>input layer</strong> (<strong>invoerlaag</strong>):
-		</p><p>
-		De eerste sectie is wat men de <strong>input layer</strong> noemt. Deze laag kun je beschouwen als de sensoren (b.v. ogen) van het netwerk. De knopen in deze laag (neuronen, perceptrons) vormen de invoer van het netwerk . De knopen uit deze laag krijgen een waarde toebedeeld. Deze waarden kunnen van de gebruiker van de applicatie komen of van de trainer tijdens de training van het netwerk.
-		</p>
-		</li>
-		<li><p>De <strong>hidden layer</strong> (<strong>verborgen laag</strong>):<p>
-		</p><p>
-		
-		De tweede sectie wordt de <strong>hidden layer</strong> genoemd en dit de laag is waar ‘the magic happens’.
-		In tegenstelling tot het menselijk brein kunnen geen nieuwe knopen en verbindingen worden aangemaakt in het leerproces. De vorm van de verborgen laag moet voor het trainen door de ontwikkelaar worden bepaald. Wat wel gebeurd is het aanpassen van de sterkte van de verbindingen. Iedere pijl in het schema is een gerichte verbinding  tussen knopen. Informatie uit één knoop wordt in de richting van de pijlen doorgegeven aan de volgende knopen. Iedere bij een knoop binnenkomende informatie wordt voorzien van een <strong>gewicht.</strong> In tegenstelling tot de input layer en de output layer, kunnen er meerdere hidden layers zijn. Wanneer het netwerk complexere taken moet uitvoeren, zoals beeldherkenning, zijn meerdere hidden layers nodig. Het bepalen van de juiste vorm van dit deel van het neurale netwerk is een lastige opgave. Zijn er te weinig knopen of te weinig lagen voor een probleem dan kan het netwerk het niet leren. Maar teveel is ook weer niet goed, het probleem overfitting kan dan makkelijk optreden.  <strong>Overfitting</strong> is het verschijnsel dat er te specifiek  voor de trainingsdata wordt geleerd. Een net iets ander datapunt dat wel tot de te leren groep zou moeten horen wordt dan door het netwerk buitengesloten.</p>
-		</li>
-		<li><p>De <strong>output layer</strong> (<strong>uitvoerlaag</strong>):
-		</p><p>
-		
-		Neuronen die zich in de output layer bevinden, zijn bedoeld om de ‘bevindingen’ van het netwerk op te vangen en het terug te geven aan de gebruiker, vandaar de naam ‘output’.</p>
-		</li>
-	</ol>
-	<a id="Perceptron"></a><br/>
-	<h2>Perceptron: input → output</h2>
-	<p>De bouwstenen van het netwerk zijn dus de perceptrons ofwel de neuronen ofwel de knopen. 
-	</p>
-	<div class="theorie center" style="width: 600px;">
-		<img src="images/ann5.svg"  style="width: 600px;"/><br/>
-		<caption>Figuur 5: De gewichten in de perceptron.
-		</caption>
-	</div>
-	<p>De perceptron in het schema hierboven heeft $n$ verschillende inputs $x_{1},\cdots,x_{n}$. $x_{0}$ is een extra input, de <strong>bias</strong>,  die altijd gelijk aan 1 is. De $n+1$ gewichten $w_{0},\cdots,w_{n}$ moeten worden geleerd. Dit aan de hand van de uitvoer die deze perceptron levert.
-	</p>
-	<p>De output wordt als volgt berekend. Eerst wordt input van de perceptron wordt met behulp van de gewichten via een gewogen optelling omgezet in een som:
-	</p>
-	<p>
-$$
-\text{Som}=w_{0}+w_{1}\cdot x_{1}+w_{2}\cdot x_{2}+\cdots+w_{n}\cdot x_{n}
-$$
-	</p>
-	<p>Vervolgens wordt deze som aangeboden aan een <strong>activeringsfunctie</strong> . Deze activeringsfunctie bepaalt de uitvoer. Er worden verschillende activeringsfuncties gebruikt, afhankelijk van het probleem wat met de AI applicatie moet worden opgelost.
-	</p>
-$$
-\text{uitvoer}=\text{activeringsfunctie}(\text{Som})
-$$
-<p>
-Als het netwerk wordt getraind met trainingsdata  dan worden de gewichten van alle perceptrons in het netwerk zodanig aangepast dat het netwerk na training de trainingsdata voldoende voorspelt. Wat voldoende is, is afhankelijk van de kwaliteit van de trainingsdata en de gewenste nauwkeurigheid van de voorspellingen door het netwerk. De trainingsdata bestaat uit invoer-uitvoer paren, bij een bepaalde invoer hoort een bepaalde uitvoer (b.v. deze tekening hoort bij een kat, de volgende tekening is een huis, ...). In het algemeen moeten de zelfde trainingsdata herhaaldelijk aan het netwerk worden aangeboden. Na iedere herhaling wordt bepaald of de training voldoende is. Zo niet dan worden in de nieuwe ronde eerste de gewichten op een slimme manier aangepast en wordt opnieuw de uitvoer bepaald. Zo'n reeks herhalingen noemt men, net als bij het trainen bij associatie- en clusteranalyse,  recursie.
-	</p>
-	<p>Hoeveel gewichten moeten er in de training van een neuraal netwerk worden bepaald? We kijken in figuur 6 naar het eerdere voorbeeld. Perceptron h11 ontvangt 2 inputs en bevat dan 3 gewichten evenals de knopen h12 en  h2. Knoop h21 ontvangt van de vorige laag 3 inputs en bevat dan 4 gewichten evenals knoop h22. De enige uitvoer perceptron ontvangt 2 inputs en bevat dan 3 gewichten. In totaal $3 \times 3 + 2 \times 4 + 1 \times 3 =20$ gewichten. Je ziet, het aantal te bepalen gewichten is al snel groot.
-	</p>
-	<div class="theorie center" style="width: 600px;">
-		<img src="images/ann2.svg"  style="width: 600px;"/><br/>
-		<caption>Figuur 6: perceptron h11 ontvangt 2 inputs en bevat dan 3 gewichten, perceptron h21 ontvangt van de vorige laag 3 inputs en bevat dan 4 gewichten. De uitvoer perceptron ontvangt 2 inputs en bevat dan 3 gewichten. In totaal 3&times;3 + 2&times;4 + 1&times;3 = 20 gewichten. 
-		</caption>
-	</div>
-	<br/>
-	<div class ='hammer treeview' style="overflow: hidden;">Vragen
-		<div style="padding-left:25px;">
-			<ol>
-				<li>Noem drie toepassingsgebieden van neurale netwerken.
-					<div class="caret doel">antwoord</div>
-					<div class="nested">
-						Zie <a href="#Toepassingen">Toepassingen</a> boven in deze paragraaf.
-					</div>
-				</li>
-				<li>Beschrijf hoe een perceptron tot een output komt.
-					<div class="caret doel">antwoord</div>
-					<div class="nested">
-						Een perceptron ontvangt invoersignalen. Ieder invoersignaal en de bias invoer 1 wordt vermenigvuldigd met de gewichten en opgeteld tot een som. De activeringsfunctie berekent met deze som de uitvoer.
-					</div>
-				</li>
-				<li>Een plaatje heeft 600x800 beeldpunten. Ieder beeldpunt is een input in een neuraal netwerk. Dit netwerk bevat slechts 1 verborgen laag met 4 knopen en heeft 2 output knopen in de output layer. Hoeveel gewichten bevat dit netwerk?
-					<div class="caret doel">antwoord</div>
-					<div class="nested">
-						Input laag: 600x800 = 48000<br/>
-						Dus 4 x 480001 = 1930004 gewichten in de verborgen laag<br/>
-						Iedere output knoop krijgt input van de 4 knopen uit de verborgen laag dus 2 x 5 = 10. <br/>
-						Dus in totaal 1930014 gewichten.
-					</div>
-				</li>
-				<li>Teken een netwerk met 3 inputs 2 verborgen lagen met in de eerste verborgen laag 4 knopen in de tweede 3 en twee uitvoer knopen.
-					<div class="caret doel">antwoord</div>
-					<div class="nested">
-						<div class="theorie center" style="width: 600px;">
-							<img src="images/ann6.svg"  style="width: 600px;"/><br/>
-						</div>
-					</div>
-				</li>
-				<li>Welke lagen worden getraind?
-					<div class="caret doel">antwoord</div>
-					<div class="nested">
-						De verborgen lagen en de output laag.
-					</div>
-				</li>
-			</ol>
-		</div>
-	</div>
-	<p>
-	</p>
-	<p>
-	</p>
-	<p>
-	</p>
-	<a id="voetafdruk"></a><br/>
-	<h2>Ecologische voetafdruk</h2>
-	<p>In vraag 3 hierboven heb je gezien dat er al snel veel parameters geschat moeten worden. Het recursief bepalen van de beste waarden voor parameters is rekenkracht nodig op computers. In de verdieping [Neurale netwerken](https://www.notion.so/N-Neurale-netwerken-a0cfa2a90fc244f98f28bf75a7dd10d9) gaan we op het leren van neurale netwerken in en kun je ervaren dat die rekenkracht al merkbaar is bij kleine projecten. Een computer verbruikt energie en hoe meer een computer moet rekenen hoe hoger het energieverbruik wordt. Er zijn een flink aantal artikelen te vinden op het internet die laten zien dat dat verbruik behoorlijk groot kan zijn. Hoe complexer het neurale netwerk hoe groter het aantal parameters en hoe groter het aantal gegevens moet zijn om die parameters te schatten.  Hieronder staan twee artikelen, waarvan wij de informatie niet hebben gecontroleerd, die zorgen over het energieverbruik van AI uitspreken.
-	</p>
-	<p>In het artikel"<a href="https://theconversation.com/it-takes-a-lot-of-energy-for-machines-to-learn-heres-why-ai-is-so-power-hungry-151825" target="technieken">It takes a lot of energy for machines to learn – here’s why AI is so power-hungry</a>" wordt verteld wat de oorzaken zijn van het enorme verbruik van energie in AI gebruikt in tekstanalyse. Als voorbeeld wordt het model "Bidirectional Encoder Representations from Transformers (BERT)" gegeven. Om Bert te trainen werden 3,3 miljard woorden uit Engelstalige boeken en Wikipedia artikelen. In een training van BERT moet deze verzameling niet één keer maar wel liefst 40 keer worden gelezen. In vergelijking een kind dat leert praten hoort ongeveer 45 miljoen woorden in de eerste 5 levensjaren, 3,000 keer minder dan BERT. BERT één keer trainen kost net zoveel energie als één persoon verbruikt voor een retourvlucht New York - San Fransisco. En voor dat het juiste model is gevonden zijn vele trainingen nodig. Een zeer accurate opvolger van BERT, genaamd <a href="https://nl.wikipedia.org/wiki/Gpt-3" target="technieken">GPT-3</a> heeft een onderliggend neuraal netwerk met maar liefst 175 miljard parameters en verbruikt nog veel meer energie. 
-	</p>
-	<p>Ook het artikel "<a href="https://www.wired.com/story/ai-great-things-burn-planet/" target="technieken">AI Can Do Great Things—if It Doesn't Burn the Planet</a>" gaat in op het grote energieverbruik van het trainen van AI. Als eerste voorbeeld geven zij het trainen van een robothand om een Rubricscube op te lossen. Volgens de auteurs hebben hiervoor 1000 desktop computers en een flink aantal computers met veel grafische  processors voor het rekenwerk maanden gerekend om de training af te ronden. Een ruwe schatting is dat hier 2.8 gigawatt-uren elektriciteit voor is verbruikt, ongeveer gelijk aan de opwekking van elektriciteit gedurende 1 uur door drie kernenergiecentrales.
-	</p>
-	<p>Omdat steeds meer organisaties AI modellen maken voor toepassingen binnen deze bedrijven is dit energieverbruik een serieus probleem.
-	</p>
-	<div class ='hammer treeview' style="overflow: hidden;">Opdracht (verdiepend)
-		<div style="padding-left:25px;">
-			<ol>
-				<li>Hoe betrouwbaar vind jij de informatie die te vinden is in de artikelen. Zoek daarvoor de bronnen bij de beweringen die worden gedaan.
-				</li>
-				<li>
-				Zijn er artikelen te vinden die oplossingen voor dit probleem aandragen?
-				</li>
-				<li>
-				Verdieping: Onderzoek het probleem van het energieverbruik van AI diepgaander en schrijf er een essay over volgens de <a href="ethiek_opdracht_essay.html" class="book">richtlijnen bij de verdieping</a>.
-				</li>
-
-			</ol>
-		</div>
-	</div>
-	<a id="Overzicht"></a><br/>
-	<h2>Het grotendeels complete overzicht van neurale netwerken</h2>
-	<p>Om een indruk te geven van de complexiteit van de op dit moment bedachte neurale netwerken tonen we je onderstaande figuur. Het verschil in de netwerken zit in de verbindingen tussen de knopen en de wiskundige manier waarop het signaal wordt doorgegeven naar een volgende knoop.   In de verdieping concentreren we ons slechts op de typen perceptron (P), feed forward (FF) en deep feed forward (DFF).  Meer uitleg over deze figuur vindt je op de website <a href="https://towardsdatascience.com/the-mostly-complete-chart-of-neural-networks-explained-3fb6f2367464" target="technieken">towardsdatascience.com</a> ).
-	</p>
-<a href="https://towardsdatascience.com/the-mostly-complete-chart-of-neural-networks-explained-3fb6f2367464" target="verdieping">
-<img src="images/neuralnetworktypes.png" width="100%"></a>
-</article>
-</body>
-</html>
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+<link href="css/normalize.css" rel="stylesheet">
+<link href="css/ai.css" rel="stylesheet" type="text/css" />
+<link href="css/menus.css" rel="stylesheet" type="text/css" />
+<title>Neurale netwerken</title>
+<link href="css/treeview.css" rel="stylesheet">
+<script src="treeview.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/javascript" charset="UTF-8"
+		 src="https://cdn.jsdelivr.net/npm/jsxgraph@1.1.0/distrib/jsxgraphcore.js"></script>
+<link rel="stylesheet" type="text/css" 
+		 href="https://cdn.jsdelivr.net/npm/jsxgraph@1.1.0/distrib/jsxgraph.css" />
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+  });
+</script>
+
+</head>
+<body  id="technieken" onload="addPathLead();initTreeview();"  >
+    <a name="Inleiding" style="counter-reset: subsection 4;"></a>
+    <header class="paragraaf titel">Neurale netwerken</header>
+
+	<section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/
+	<a href="inleiding_technieken.html" target="_parent">Technieken</a>/
+	Neurale netwerken</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by/4.0/" target="license">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by/4.0/" target="license">Creative Commons Attribution
+				4.0
+			<br />International License</a>.
+		</div>
+			</div>
+	</section>
+	<div class="navbar">
+		<div class="centreer">
+		<a href="#Inleiding">Inleiding</a>
+		<a href="#Toepassingen">Toepassingen</a>
+		<a href="#cijfers">Cijferherkenning</a>
+		<a href="#Ontwerp">Ontwerp</a>
+		<a href="#lagen">Verschillende lagen</a>
+		<a href="#Perceptron">Perceptron</a>
+		<a href="#voetafdruk">Ecologische voetafdruk</a>
+		<a href="#Overzicht">Overzicht</a>
+		</div>
+	</div>
+	<article>
+
+	<h2>Inleiding</h2>
+	<p>Dit hoofdstuk bevat algemene informatie over neurale netwerken en is ook de inleiding bij de verdieping <a href="inleiding_neurale_netwerken.html" class="book">neurale netwerken</a>.
+	</p>
+	<div class="rechts theorie" style="width:300px; text-align:center;">
+		<a href="https://quickdraw.withgoogle.com/" target="app"><img src="images/Quickdraw.png"  style="width: 300px;"/></a>
+		
+	</div>		
+	<p>In het hoofdstuk <a href="techniek_machine_learning.html" class="book">machine learning</a> hebben we drie categorieën leerstrategiën besproken, <i>supervised</i>, <i>unsupervised</i> en <i>reinforcement learning</i>.
+	Zo leert een systeem voor het vinden van passende reclame met unsupervised learning: de <a href="techniek_associatie_analyse.html" class="book">associatie-analyse</a>. Artificiële of kunstmatige neurale netwerken (ANN) leren vooral via supervised learning en reinforcement learning. De reden hiervoor is dat neurale netwerken worden ingezet als de relatie tussen de gegevens en de bij een gegeven horende uitkomst, die door de AI-applicatie moet worden voorspeld, ingewikkeld of zelfs niet bekend is. Aan de hand van input-output voorbeelden moet het netwerk leren wat de relatie is. Denk aan Quickdraw: wanneer iemand een slordige schets maakt, is niet bekend wat het voorstelt. Je moet ernaar raden.
+	
+	Neurale netwerken moeten getraind worden. Je geeft Quickdraw een tekening en zegt wat het is. Daardoor leert het systeem (supervised learning). Training kan doorgaan als het systeem eenmaal in bedrijf is: Je geeft QuickDraw een tekening. QuickDraw zegt wat (het denkt dat) het is en je zegt of dat goed of fout is. Ook daarvan leert het systeem (reinforcement learning).
+
+	</p>
+	<p>
+	<a href="https://deepmind.com/blog/article/alphazero-shedding-new-light-grand-games-chess-shogi-and-go" target="technieken">AlphaZero</a> (zie afbeelding) is een AI applicatie van het onderzoeksbedrijf <a href="https://deepmind.com/" target="technieken">DeepMind</a> dat de bordspelen go, shogi en schaken onverslaanbaar kan leren. Bij al deze spellen zijn de regels van het spel precies bekend, alleen zijn het aantal mogelijke patronen zo enorm groot dat de snelste computer niet alle zetten door kan rekenen. Om toch onverslaanbaar te worden is het netwerk getraind door de computer miljoenen keren tegen zichzelf te laten spelen (reinforcement learning).
+	</p>
+	<div class="theorie center" style="width: 600px;">
+		<img src="images/alphazero.gif"  style="width: 600px;"/></br/>
+		<caption>Figuur 1: Bij  schaken deed AlphaZero het al na vier uur beter dan Stockfish; bij shogi deed AlphaZero het na twee uur beter dan Elmo; en bij go had AlphaZero 30 uur nodig om beter te worden dan zijn voorganger AlphaGo die de legendarische speler Lee Sedol in 2016 versloeg. N.B.: elke trainingstap representeert 4,096 bord posities. Bron: <a href="https://deepmind.com/" target="technieken">DeepMind</a>
+		</caption>
+	</div>
+
+	<br/>
+	<a id="Toepassingen"></a><br/>
+	<h2>Toepassingen</h2>
+	<p>Hieronder zijn enkele standaardtoepassingen van neurale netwerken weergegeven die aanwezig zijn in verschillende computer programma's . Dit is geenszins een uitgebreide lijst van toepassingen van neurale netwerken, maar hopelijk geeft het je een algemeen beeld van de functies en mogelijkheden.
+	</p>
+	<ul>
+		<li><strong>Patroonherkenning</strong> - We hebben dit al verschillende keren genoemd en het is waarschijnlijk de meest voorkomende toepassing. Voorbeelden zijn gezichtsherkenning, optische tekenherkenning, etc.</li>
+		<li><strong>Tijdreeksvoorspelling</strong> - Neurale netwerken kunnen worden gebruikt om voorspellingen te doen. Zal de voorraad morgen stijgen of dalen? Zal het regenen of zonnig zijn?</li>
+		<li><strong>Signaalverwerking</strong> — Cochleaire implantaten (een cochleair implantaat is een apparaat dat aan dove kinderen en volwassenen de mogelijkheid biedt weer iets te horen) en gehoorapparaten moeten onnodig geluid wegfilteren en de belangrijke geluiden versterken. Neurale netwerken kunnen worden getraind om een audiosignaal te verwerken en op de juiste manier te filteren.</li>
+		<li><strong>Controle</strong> - Misschien heb je gelezen over recente vorderingen op het gebied van onderzoek naar zelfrijdende auto's. Neurale netwerken worden vaak gebruikt om de sturing van fysieke voertuigen (of gesimuleerde voertuigen) te beheren.</li>
+		<li><strong>Soft sensors</strong> - Een soft sensor verwijst naar het proces van het softwarematig analyseren van een verzameling van vele metingen. Een thermometer kan je de temperatuur van de lucht vertellen, maar wat als je ook de luchtvochtigheid, barometrische druk, dauwpunt, luchtkwaliteit, luchtdichtheid enz. zou weten wat kunnen we dan voorspellen? Neurale netwerken kunnen worden gebruikt om de invoergegevens van veel individuele sensoren te verwerken en als geheel te evalueren.</li>
+		<li><strong>Anomaliedetectie</strong> - Omdat neurale netwerken zo goed zijn in het herkennen van patronen, kunnen ze ook worden getraind om een output te genereren wanneer er iets gebeurt dat niet in het patroon past. Denk aan een neuraal netwerk dat jouw dagelijkse routine gedurende een lange periode bewaakt. Nadat het netwerk de patronen van jouw gedrag heeft geleerd, kan het je waarschuwen wanneer er iets mis is. (De sensoren in de autostoelen in deze 
+		<a href="https://www.ted.com/talks/kenneth_cukier_big_data_is_better_data?utm_campaign=tedspread&utm_medium=referral&utm_source=tedcomshare" target="technieken">Big Data TED-talk</a> )
+		</li>
+	</ul>
+	<a id="cijfers"></a><br/>
+	<h2>Cijferherkenning</h2>
+<div style="float: right; text-align: center;padding-left:25px; " >
+<iframe style="border-style: none;" src="https://trinket.io/embed/python/c2d8e7cce8?outputOnly=true&amp;runOption=run&amp;start=result" width="495" height="530" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen=""></iframe>
+<br/><em>Trinket cijferherkenning door Michiel Smits</em>
+</div>
+    <p>We schreven eerder dat je een neuraal netwerk gebruikt wanneer de antwoorden op vragen ingewikkeld, onzeker of zelfs onbekend is. Je denkt dan misschien aan complexe wereldproblemen. maar dat geldt ook al voor schijnbaar heel simpele dingen. Neem bijvoorbeeld het herkennen van cijfers. Simpel, maar niet als het om handschrift gaat.</p>
+    <p>Hiernaast zie je een <a href="https://trinket.io/">trinket</a> (een klein python-programma dat kan draaien in een webpagina). Je kunt daar met je muis een cijfer tekenen. In de trinket zit een neuraal netwerk dat probeert het cijfer te herkennen. <strong>Je start de herkenning door op de spatiebalk te drukken.</strong>
+	Dit neurale netwerk is al eerder getraind.</p>
+    <p>Deze applet heeft vergelijkbare fuctionaliteit als Quickdraw, namelijk patroonherkenning.</p>
+	<div class ='hammer treeview' style="overflow: hidden;padding-right:25px;">Opdracht: Cijfers herkennen
+		<div style="overflow: hidden;">
+			<ol>
+				<li>Probeer de cijferherkenning een paar keer. Vergeet de spatiebalk niet!
+				</li>
+			</ol>
+		</div>
+	</div>
+	<p>Misschien herkende de trinket alle cijfers die je tekende, misschien kwam er ook wel eens een fout antwoord. Hieronder zie je de resultaten van een paar pogingen van de auteur.</p>
+    <p><img src="images/recogdigit1.png" alt="cijferherkenning: 4 resultaten" style="width: 500px;"><br></p>
+    <p>Het meest linkse plaatje is duidelijk, geen twijfel mogelijk. Het plaatje ernaast laat een twijfelgeval zien (1 of 7?), de trinket kiest voor de 7. De andere zijn veel onduidelijker. Het lijkt een handschrift dat voor geen mens te ontcijferen is, laat staan voor een computer.</p>
+    <p>Wat de trinket duidelijk maakt, is dat het heel anders werkt dan bij de algoritmen en programma's die je eerder maakte. Daar is alles heel precies. Inputs zijn precies omschreven, de stappen in een algoritme zijn dat ook en ten slotte ligt ook precies vast wat een algoritme oplevert. Al kan dat natuurlijk wel een foutmelding zijn.</p>
+    <p>Hier is alles niet zo duidelijk. De input kan geklieder zijn, de werking is onduidelijk (zometeen meer hierover). De uitkomst is niet zeker, maar heeft een waarschijnlijkheid. Twijfel is mogelijk, een fout antwoord ook.</p>
+	<div class ='hammer treeview' style="overflow: hidden;">Opdracht: Cijferherkenning testen
+		<div style="overflow: hidden;">
+			<ol start="2">
+				<li><p>In deze opdracht gaan we de cijferherkenning op de proef stellen.</p>
+               <ol style="list-style-type: lower-alpha">
+                    <li>
+                        <p>Maak een paar krabbels waarbij je juist probeert <em>niet</em> een herkenbaar cijfer te tekenen. Wat geeft het cijferherkenning-netwerk nu als antwoord?</p>
+                    </li>
+                    <li>
+                        <p>Het cijferherkenning-netwerk geeft eigenlijk altijd een antwoord. De resultaten van onderdeel a zijn mogelijk aanleiding om dit anders te doen. Hert netwerk zou dan 'weet niet' kunnen teruggeven.<br> Kun je criteria formuleren
+                            voor deze uitkomst? </p>
+                    </li>
+                    <li>
+                        <p>Probeer tekens te maken die voor jou duidelijk een cijfer zijn, maar door het netwerk <em>niet</em> herkend worden. Als het lukt, maak er dan een schermafbeelding van. <br> Kun je ook vermoedens formuleren voor het waarom: Waarom
+                            herkent het netwerk deze tekening niet?</p>
+                    </li>
+                </ol>
+				
+				</li>
+			</ol>
+		</div>
+	</div>
+    <p>Een neuraal netwerk kan dus foute antwoorden geven. Om dat te meten zijn twee begrippen belangrijk: <em>recall</em> en <em>precision</em>.</p>
+    <p>De <strong>recall</strong> van een mogelijk antwoord $x$ is gedefinieerd als het percentage van de antwoorden $x$ dat correct is. Bij de cijferherkenning is de recall van '1' het percentage van de plaatjes van een 1 die herkend          worden als 1. Hier kijk je dus naar het aantal missers.</p>
+    <p>De <strong>precision</strong> van een mogelijk antwoord $x$ is gedefinieerd als het percentage van de antwoorden $x$ die ook echt een $x$ zijn. Bij de cijferherkenning: hoeveel van de antwoorden '1' waren ook echt plaatjes van enen (en niet 0, 2, 3, ...). Hier gaat het dus om de fouten.</p>
+    <div class="voorbeeld theorie example" style="overflow: hidden; padding-right: 10px; background-color: orange">Een voorbeeld:
+	<p><strong>Een voorbeeld:</strong></p>
+                <p>We willen honden- en kattenfoto's kunnen herkennen en we maken daar een neuraal netwerk voor. We hebben 100 honden- en 100 kattenfoto's.</p>
+                <ul>
+                    <li>
+                        <p>Het netwerk classificeert 80 hondenfoto's als hond en 20 honden als kat.</p>
+                    </li>
+                    <li>
+                        <p>Het netwerk classificeert 40 kattenfoto's als kat en 60 katten als hond.</p>
+                    </li>
+                </ul>
+                <p>De <em>recall</em> van de katten is 40%, want 40% van de katten is gevonden.</p>
+                <p>De <em>precision</em> van de katten is (40/60) * 100% = 67%, want er worden 60 katten gevonden, waarvan er 40 correct zijn en 20 niet correct zijn.</p>
+	</div>
+	<div class ='hammer treeview' style="overflow: hidden;">Opdracht: Cijferherkenning testen
+		<div style="overflow: hidden;">
+			<ol start="3">
+			<li>Recall en precision:<br/>
+			</li>Bereken ook de recall en precision van de hondenfoto's.
+            <li>Statistieken:
+			<p>Normaal gesproken is het veel werk om recall en precision te bepalen. Je moet het netwerk heel veel vragen stellen en de antwoorden controleren. Met een hele groep testers wordt het haalbaar.</p>
+                <p>Met de hele klas verzamelen we data in een gedeelde spreadsheet, zoals in de afbeelding hieronder. Er zijn al een aantal kolommen ingevuld bij een eerder experiment. Je neemt een lege kolom en zet je naam erboven. Daarna maak je een schets
+                    van de cijfers 0 t/m 9 in de app met de cijferherkenning. De antwoorden van de app vul je in jouw kolom in.<br> De spreadsheet berekent automatisch de recall en precision.</p>
+                <p>NB: voorwaarde voor deze opdracht is dat iemand (docent of leerling) het spreadsheetbestand in zijn of haar online docs zet en deze toegankelijk maakt voor de klas.</p>
+                <ol style="list-style-type: lower-alpha">
+                    <li>
+                        <p>Open de spreadsheet en vul jouw kolom in.</p>
+                    </li>
+                    <li>
+                        <p>Bij welk cijfer is de recall het hoogst en bij welk het laagst? Doe hetzelfde voor de precision.</p>
+                    </li>
+                </ol>
+			</li>
+		</ol>
+	</div>
+	</div>
+	
+	<a id="Ontwerp"></a><br/>
+	<h2>Ontwerp</h2>
+	<p>Kenmerkend voor een neuraal netwerk is dat het ontwerp gebaseerd is op het menselijk brein. De hersenen zijn eigenlijk een soort netwerk van verbindingen tussen neuronen (zenuwcellen). Neuronen zijn met elkaar verbonden door middel van synapsen (de verbindingen) en geven hierover onderling signalen door. De synapsen bij de dendrieten van een neuron vangen signalen op die door het neuron wordt verwerkt tot een signaal dat de synapsen bij de axonen afgeven. Binnen de kunstmatige neurale netwerken wordt een neuron een <strong>perceptron</strong> genoemd en is in 1958 door <a href="https://nl.wikipedia.org/wiki/Perceptron" target="technieken">Rosenblatt</a> ontworpen. 
+	</p>
+	<div class="theorie center" style="width: 800px;">
+		<img src="images/h2_4_nieuw.jpg"  style="width: 800px;"/><br/>
+		<caption>Figuur 2: Grafische representatie van een biologische neuron (links) en een kunstmatige neuron ofwel perceptron (rechts)
+		</caption>
+	</div>		<p>
+	Het doorgeven van signalen heeft een begin een eind. Aan het begin staat een waarneming: je ziet, hoort, voelt, ruikt iets. Aan het eind staat een actie, vaak het aanspannen van spieren. Je ogen zien de bal en je handen vangen die bal. In de hersenen zijn bij het vangen vele neuronen betrokken.
+	Dat je die bal kunt vangen is een vaardigheid die je hebt moeten leren. Bij het creëren van een nieuwe herinnering of het leren van nieuwe vaardigheden worden verbindingen tussen neuronen opgezet en elke keer als je gelijke of vergelijkbare situaties tegen, wordt deze verbinding sterker gemaakt.
+	</p>
+	<p>Dit is een beknopte en versimpelde uitleg over de werking van het brein, de werkelijkheid is complexer. Daarnaast is ook nog lang niet alles bekend over dit prachtige instrument dat we allemaal bezitten. 
+	In deep learning wil men iets vergelijkbaars voor elkaar krijgen met een kunstmatig neuraal netwerk. Een input wordt door een verzameling perceptons (ook knopen genoemd) omgezet in een output:
+	</p>
+	<div class="theorie center" style="width: 600px;">
+		<img src="images/ann1.svg"  style="width: 600px;"/><br/>
+		<caption>Figuur 3: De verborgen lagen bevatten perceptrons die samen het neurale netwerk vormen.
+		</caption>
+	</div>
+	<p>Het netwerk moet net als de hersenen voldoende worden getraind om een juiste output te kunnen geven.
+	</p>
+	<a id="lagen"></a><br/>
+	<h2>Verschillende lagen</h2>
+	<p>Als we meer inzoomen krijgen we het de volgende schematische weergave van een AI applicatie:
+	</p>
+	<div class="theorie center" style="width: 600px;">
+		<img src="images/ann2.svg"  style="width: 600px;"/><br/>
+		<caption>Figuur 4: Schematische weergave van een verbonden ANN. De invoer in dit netwerk bestaat uit twee elementen. Er zijn twee verborgen lagen, de eerste met drie knopen en de tweede met twee knopen (perceptrons). Er is in dit voorbeeld slechts één output. 
+		</caption>
+	</div>
+	<p>Je ziet in de figuur drie verschillende secties typisch voor de opbouw van een neuraal netwerk:
+	</p>
+	<ol>
+		<li>
+		<div class="theorie rechts" style="width: 260px; text-align: center;">
+		<img src="images/ai5a11_input.png" alt="pixels (input)" width="257" class="img-responsive atto_image_button_text-bottom">
+		<caption>Geef acht</caption>
+		</div>
+		<p>De <strong>input layer</strong> (<strong>invoerlaag</strong>):
+		</p><p>
+		De eerste sectie (links in de figuur) is wat men de <strong>input layer</strong> noemt. Deze laag kun je beschouwen als de sensoren (b.v. ogen) van het netwerk. De knopen in deze laag (neuronen, perceptrons) vormen de invoer van het netwerk. De knopen uit deze laag krijgen een getalswaarde toebedeeld. Deze waarden kunnen van de gebruiker van de applicatie komen of van de trainer tijdens de training van het netwerk.
+		</p>
+		<p>Als het netwerk een tekening moet herkennen, kun je veel inputs hebben die elk de kleurwaarde van een pixel zijn, of het gemiddelde van een groepje pixels.Bij trinket voor de cijferherkenning zijn de inputs de grijswaarden van de pixels. Om het aantal inputs te beperken is de resolutie kleiner gemaakt.</p>
+		</li>
+		<li><p>De <strong>hidden layer</strong> (<strong>verborgen laag</strong>):<p>
+		</p><p>
+		
+		De tweede sectie wordt de <strong>hidden layer</strong> genoemd en dit de laag is waar ‘the magic happens’.
+		In tegenstelling tot het menselijk brein kunnen geen nieuwe knopen en verbindingen worden aangemaakt in het leerproces. De vorm van de verborgen laag moet voor het trainen door de ontwikkelaar worden bepaald. Wat wel gebeurd is het aanpassen van de sterkte van de verbindingen. Iedere pijl in het schema is een gerichte verbinding  tussen knopen. Informatie uit één knoop wordt in de richting van de pijlen doorgegeven aan de volgende knopen. Iedere bij een knoop binnenkomende informatie wordt voorzien van een <strong>gewicht.</strong> In tegenstelling tot de input layer en de output layer, kunnen er meerdere hidden layers zijn. Wanneer het netwerk complexere taken moet uitvoeren, zoals beeldherkenning, zijn meerdere hidden layers nodig. Het bepalen van de juiste vorm van dit deel van het neurale netwerk is een lastige opgave. Zijn er te weinig knopen of te weinig lagen voor een probleem dan kan het netwerk het niet leren. Maar teveel is ook weer niet goed, het probleem overfitting kan dan makkelijk optreden.  <strong>Overfitting</strong> is het verschijnsel dat er te specifiek  voor de trainingsdata wordt geleerd. Een net iets ander datapunt dat wel tot de te leren groep zou moeten horen wordt dan door het netwerk buitengesloten.</p>
+		</li>
+		<li>
+		<div class="theorie rechts" style="width: 260px; text-align: center;">
+		<img src="images/ai5a12_output.png" alt="output" width="250" >
+		</div>
+		<p>De <strong>output layer</strong> (<strong>uitvoerlaag</strong>):
+		
+		</p><p>
+		Neuronen die zich in de output layer bevinden, zijn bedoeld om de ‘bevindingen’ van het netwerk op te vangen en het terug te geven aan de gebruiker, vandaar de naam ‘output’.</p>
+		<p>Bij trinket met de cijferherkenning zijn de outputs de scores van de verschillende cijfers. Hoe hoger de waarde, deste waarschijnlijker dat de schets dat cijfer voorstelt. Hier zijn dus 10 outputs.</p>
+		</li>
+	</ol>
+	<a id="Perceptron"></a><br/>
+	<h2>Perceptron: input → output</h2>
+	<p>De bouwstenen van het netwerk zijn dus de perceptrons ofwel de neuronen ofwel de knopen. 
+	</p>
+	<div class="theorie center" style="width: 600px;">
+		<img src="images/ann5.svg"  style="width: 600px;"/><br/>
+		<caption>Figuur 5: De gewichten in de perceptron.
+		</caption>
+	</div>
+	<p>De perceptron in het schema hierboven heeft $n$ verschillende inputs $x_{1},\cdots,x_{n}$. $x_{0}$ is een extra input, de <strong>bias</strong>,  die altijd gelijk aan 1 is. De $n+1$ gewichten $w_{0},\cdots,w_{n}$ moeten worden geleerd. Dit aan de hand van de uitvoer die deze perceptron levert.
+	</p>
+	<p>De output wordt als volgt berekend. Eerst wordt input van de perceptron wordt met behulp van de gewichten via een gewogen optelling omgezet in een som:
+	</p>
+	<p>
+$$
+\text{Som}=w_{0}+w_{1}\cdot x_{1}+w_{2}\cdot x_{2}+\cdots+w_{n}\cdot x_{n}
+$$
+	</p>
+	<p>Vervolgens wordt deze som aangeboden aan een <strong>activeringsfunctie</strong> . Deze activeringsfunctie bepaalt de uitvoer. Er worden verschillende activeringsfuncties gebruikt, afhankelijk van het probleem wat met de AI applicatie moet worden opgelost.
+	</p>
+$$
+\text{uitvoer}=\text{activeringsfunctie}(\text{Som})
+$$
+<p>
+Als het netwerk wordt getraind met trainingsdata  dan worden de gewichten van alle perceptrons in het netwerk zodanig aangepast dat het netwerk na training de trainingsdata voldoende voorspelt. Wat voldoende is, is afhankelijk van de kwaliteit van de trainingsdata en de gewenste nauwkeurigheid van de voorspellingen door het netwerk. De trainingsdata bestaat uit invoer-uitvoer paren, bij een bepaalde invoer hoort een bepaalde uitvoer (b.v. deze tekening hoort bij een kat, de volgende tekening is een huis, ...). In het algemeen moeten de zelfde trainingsdata herhaaldelijk aan het netwerk worden aangeboden. Na iedere herhaling wordt bepaald of de training voldoende is. Zo niet dan worden in de nieuwe ronde eerste de gewichten op een slimme manier aangepast en wordt opnieuw de uitvoer bepaald. Zo'n reeks herhalingen noemt men, net als bij het trainen bij associatie- en clusteranalyse,  recursie.
+	</p>
+	<p>Hoeveel gewichten moeten er in de training van een neuraal netwerk worden bepaald? We kijken in figuur 6 naar het eerdere voorbeeld. Perceptron h11 ontvangt 2 inputs en bevat dan 3 gewichten evenals de knopen h12 en  h2. Knoop h21 ontvangt van de vorige laag 3 inputs en bevat dan 4 gewichten evenals knoop h22. De enige uitvoer perceptron ontvangt 2 inputs en bevat dan 3 gewichten. In totaal $3 \times 3 + 2 \times 4 + 1 \times 3 =20$ gewichten. Je ziet, het aantal te bepalen gewichten is al snel groot.
+	</p>
+	<div class="theorie center" style="width: 600px;">
+		<img src="images/ann2.svg"  style="width: 600px;"/><br/>
+		<caption>Figuur 6: perceptron h11 ontvangt 2 inputs en bevat dan 3 gewichten, perceptron h21 ontvangt van de vorige laag 3 inputs en bevat dan 4 gewichten. De uitvoer perceptron ontvangt 2 inputs en bevat dan 3 gewichten. In totaal 3&times;3 + 2&times;4 + 1&times;3 = 20 gewichten. 
+		</caption>
+	</div>
+	<br/>
+	<div class ='hammer treeview' style="overflow: hidden;">Vragen
+		<div style="padding-left:25px;">
+			<ol>
+				<li>Noem drie toepassingsgebieden van neurale netwerken.
+					<div class="caret doel">antwoord</div>
+					<div class="nested">
+						Zie <a href="#Toepassingen">Toepassingen</a> boven in deze paragraaf.
+					</div>
+				</li>
+				<li>Beschrijf hoe een perceptron tot een output komt.
+					<div class="caret doel">antwoord</div>
+					<div class="nested">
+						Een perceptron ontvangt invoersignalen. Ieder invoersignaal en de bias invoer 1 wordt vermenigvuldigd met de gewichten en opgeteld tot een som. De activeringsfunctie berekent met deze som de uitvoer.
+					</div>
+				</li>
+				<li>Een plaatje heeft 600x800 beeldpunten. Ieder beeldpunt is een input in een neuraal netwerk. Dit netwerk bevat slechts 1 verborgen laag met 4 knopen en heeft 2 output knopen in de output layer. Hoeveel gewichten bevat dit netwerk?
+					<div class="caret doel">antwoord</div>
+					<div class="nested">
+						Input laag: 600x800 = 480000<br/>
+						Dus 4 x 480001 = 1930004 gewichten in de verborgen laag<br/>
+						Iedere output knoop krijgt input van de 4 knopen uit de verborgen laag dus 2 x 5 = 10. <br/>
+						Dus in totaal 1930014 gewichten.
+					</div>
+				</li>
+				<li>Teken een netwerk met 3 inputs 2 verborgen lagen met in de eerste verborgen laag 4 knopen in de tweede 3 en twee uitvoer knopen.
+					<div class="caret doel">antwoord</div>
+					<div class="nested">
+						<div class="theorie center" style="width: 600px;">
+							<img src="images/ann6.svg"  style="width: 600px;"/><br/>
+						</div>
+					</div>
+				</li>
+				<li>Welke lagen worden getraind?
+					<div class="caret doel">antwoord</div>
+					<div class="nested">
+						De verborgen lagen en de output laag.
+					</div>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<p>
+	</p>
+	<p>
+	</p>
+	<p>
+	</p>
+	<a id="voetafdruk"></a><br/>
+	<h2>Ecologische voetafdruk</h2>
+	<p>In vraag 3 hierboven heb je gezien dat er al snel veel parameters geschat moeten worden. Het recursief bepalen van de beste waarden voor parameters is rekenkracht nodig op computers. In de verdieping <a class="book" href="inleiding_neurale_netwerken.html">Neurale netwerken</a> gaan we op het leren van neurale netwerken in en kun je ervaren dat die rekenkracht al merkbaar is bij kleine projecten. Een computer verbruikt energie en hoe meer een computer moet rekenen hoe hoger het energieverbruik wordt. Er zijn een flink aantal artikelen te vinden op het internet die laten zien dat dat verbruik behoorlijk groot kan zijn. Hoe complexer het neurale netwerk hoe groter het aantal parameters en hoe groter het aantal gegevens moet zijn om die parameters te schatten.  Hieronder staan twee artikelen, waarvan wij de informatie niet hebben gecontroleerd, die zorgen over het energieverbruik van AI uitspreken.
+	</p>
+	<p>In het artikel "<a href="https://theconversation.com/it-takes-a-lot-of-energy-for-machines-to-learn-heres-why-ai-is-so-power-hungry-151825" target="technieken">It takes a lot of energy for machines to learn – here’s why AI is so power-hungry</a>" wordt verteld wat de oorzaken zijn van het enorme verbruik van energie in AI gebruikt in tekstanalyse. Als voorbeeld wordt het model "Bidirectional Encoder Representations from Transformers (BERT)" gegeven. Om Bert te trainen werden 3,3 miljard woorden uit Engelstalige boeken en Wikipedia artikelen. In een training van BERT moet deze verzameling niet één keer maar wel liefst 40 keer worden gelezen. In vergelijking een kind dat leert praten hoort ongeveer 45 miljoen woorden in de eerste 5 levensjaren, 3,000 keer minder dan BERT. BERT één keer trainen kost net zoveel energie als één persoon verbruikt voor een retourvlucht New York - San Fransisco. En voor dat het juiste model is gevonden zijn vele trainingen nodig. Een zeer accurate opvolger van BERT, genaamd <a href="https://nl.wikipedia.org/wiki/Gpt-3" target="technieken">GPT-3</a> heeft een onderliggend neuraal netwerk met maar liefst 175 miljard parameters en verbruikt nog veel meer energie. 
+	</p>
+	<p>Ook het artikel "<a href="https://www.wired.com/story/ai-great-things-burn-planet/" target="technieken">AI Can Do Great Things—if It Doesn't Burn the Planet</a>" gaat in op het grote energieverbruik van het trainen van AI. Als eerste voorbeeld geven zij het trainen van een robothand om een Rubricscube op te lossen. Volgens de auteurs hebben hiervoor 1000 desktop computers en een flink aantal computers met veel grafische  processors voor het rekenwerk maanden gerekend om de training af te ronden. Een ruwe schatting is dat hier 2.8 gigawatt-uren elektriciteit voor is verbruikt, ongeveer gelijk aan de opwekking van elektriciteit gedurende 1 uur door drie kernenergiecentrales.
+	</p>
+	<p>Omdat steeds meer organisaties AI modellen maken voor toepassingen binnen deze bedrijven is dit energieverbruik een serieus probleem.
+	</p>
+	<div class ='hammer treeview' style="overflow: hidden;">Opdracht (verdiepend)
+		<div style="padding-left:25px;">
+			<ol>
+				<li>Hoe betrouwbaar vind jij de informatie die te vinden is in de artikelen. Zoek daarvoor de bronnen bij de beweringen die worden gedaan.
+				</li>
+				<li>
+				Zijn er artikelen te vinden die oplossingen voor dit probleem aandragen?
+				</li>
+				<li>
+				Verdieping: Onderzoek het probleem van het energieverbruik van AI diepgaander en schrijf er een essay over volgens de <a href="ethiek_opdracht_essay.html" class="book">richtlijnen bij de verdieping</a>.
+				</li>
+
+			</ol>
+		</div>
+	</div>
+	<a id="Overzicht"></a><br/>
+	<h2>Het grotendeels complete overzicht van neurale netwerken</h2>
+	<p>Om een indruk te geven van de complexiteit van de op dit moment bedachte neurale netwerken tonen we je onderstaande figuur. Het verschil in de netwerken zit in de verbindingen tussen de knopen en de wiskundige manier waarop het signaal wordt doorgegeven naar een volgende knoop.   In de verdieping concentreren we ons slechts op de typen perceptron (P), feed forward (FF) en deep feed forward (DFF).  Meer uitleg over deze figuur vindt je op de website <a href="https://towardsdatascience.com/the-mostly-complete-chart-of-neural-networks-explained-3fb6f2367464" target="technieken">towardsdatascience.com</a> ).
+	</p>
+<a href="https://towardsdatascience.com/the-mostly-complete-chart-of-neural-networks-explained-3fb6f2367464" target="verdieping">
+<img src="images/neuralnetworktypes.png" width="100%"></a>
+</article>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="css/normalize.css" rel="stylesheet">
+    <link href="css/ai.css" rel="stylesheet" type="text/css" />
+	<link href="css/menus.css" rel="stylesheet" type="text/css" />
+	<link href="css/treeview.css" rel="stylesheet" type="text/css" />
+    <script src="treeview.js"></script>
+	<title>Kunstmatige Intelligentie</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script type="text/x-mathjax-config">
+	  MathJax.Hub.Config({
+		tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+	  });
+	</script>
+  </head>
+  <body  id="technieken" onload="addPathLead();initTreeview();" >
+    <a name="Inleiding" style="counter-reset: subsection 0;"></a>
+    <header class="paragraaf titel">Introductie</header>
+    <section>
+	<h4 class="pad" id="path_lead"><a href="index.htm" target="_parent">Kunstmatige Intelligentie</a>/<a href="inleiding_technieken.html" target="_parent">Technieken</a>/Introductie</h4> 
+    <div style="height: 100px;">
+		<div style="float:right;">
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="license">
+			<img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+			<br />This work is licensed under a
+			<br />
+			<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="license">Creative Commons Attribution-NonCommercial-ShareAlike
+				4.0
+			<br />International License</a>.
+		</div>
+			</div>
+	</section>
+	<div class="navbar">
+		<div class="centreer">
+		<a href="#Inleiding">Introductie</a>
+		<a href="#Data_gestuurd">Data gestuurd</a>
+		<a href="#nl">Niet lerende AI</a>
+		<a href="#ml">Machine en deep learning</a>
+		<a href="#kenmerken">Kenmerken voor AI-toepassingen</a>
+		</div>
+	</div>
+	<article>
+	<p>Voordat we een aantal verschillende AI-technieken bekijken, stellen we eerst de  vraag: <i>wanneer is het handig om kunstmatige intelligentie te gebruiken en wanneer niet?</i>
+	</p>
+	<div class="rechts theorie" style="width: 300px;">
+		<img src="images/AlgebraRobot.jfif"  style="width: 300px;"/><br/>
+		<caption><a href="https://www.quantamagazine.org/symbolic-mathematics-finally-yields-to-neural-networks-20200520/" target="techniek">AI doet algebra?<a/> Kan het nog verwarrender? De link brengt je naar een succesvolle poging om het integreren op een bepaalde manier door AI te laten doen. Het is zeker nog geen algemeen inzetbare tool.
+		</caption>
+	</div>
+	<p>Kunstmatige intelligentie heeft volgens de meeste definities iets te maken met het uitvoeren van complexe taken waarvoor intelligentie nodig wordt geacht. Er zijn echter genoeg voorbeelden van software die ook zeer complexe taken uitvoeren door gebruik te maken van heel complexe algoritmen maar geen AI zijn.  Voorbeelden hiervan zijn computer algebra systemen (CAS). Met deze systemen kun je wiskundige problemen exact laten doorrekenen. Tijdens je wiskunde toetsen zouden die goed van pas komen. Helaas verboden tijdens examens. 
+	</p>
+	<p>Een ander voorbeeld van complexe software zonder AI kan een robot in een productielijn zijn. Iedere keer wordt zeer precies en in de juiste volgorde een serie handelingen verricht. Er zijn echter ook weer robots in een productielijn die wel AI gebruiken om een deeltaak te verrichten. Een postsorteerrobot moet bijvoorbeeld  (handgeschreven) postcodes kunnen lezen. Lezen ofwel beeldherkenning  is een taak die we indelen bij AI. Het wordt trouwens steeds meer regel dan uitzondering dat productierobots ook van beeldherkenning gebruik maken.
+	</p>
+	<a id="Data_gestuurd"></a><br/>
+	<h2>Data gestuurd</h2>
+	<p>Wat maakt de intelligentie van AI nu anders dan de intelligentie in CAS systemen of andersoortige niet-AI systemen? Waarom maakt beeldherkenning een deel uit van AI en het exact oplossen van een complexe wiskundige vergelijking niet? Bekijk eerst de volgende indeling binnen de AI applicaties.
+	</p>
+	<div class="midden theorie">
+		<img src="images/AI_ML_DL.jpg"  style="width: 95%;"/><br/>
+		<caption>Figuur 1: Onderverdeling AI. AI-toepassingen laten computers <i>menselijk gedrag nadoen</i> (mimic human behavior). Dat is de meest algemene definitie van AI. Daarbinnen is een groep AI-toepassingen die zelfstandig kunnen leren. Daarbinnen is er weer deep learning. Het lichtgrijze buitengebied is dus niet-lerende AI.
+		</caption>
+	</div>
+	<a id="nl"></a><br/>
+	<h2>Niet lerende AI</h2>	
+	<p>
+	Bij AI denken we tegenwoordig vooral aan lerende systemen: machine learning. Waarom is er dan nog niet-lerende AI? De reden is vooral historisch. De jaartallen in het plaatje geven aan dat het vooral gaat over de periode van 1950 tot de jaren tachtig. Toen werden AI-systemen nog helemaal geprogrammeerd, ofwel <a href="https://www.linkedin.com/pulse/what-artificial-intelligence-without-machine-learning-claudia-pohlink" target="techniek">AI die niet leert</a>. Voorbeelden zijn op regels gebaseerde systemen zoals de eerste chatbots 
+	(b.v. <a href="https://www.chatbots.org/chatbot/eliza/" target="techniek">Eliza</a>, 
+	<a href="https://www.chatbots.org/chatbot/parry/" target="techniek">Parry</a>, 
+	<a href="http://www.jabberwacky.com/" target="techniek">Jabberwacky</a> ). Door de mens gedefinieerde regels laten de chatbot vragen beantwoorden en - in beperkte mate - klanten helpen . Er is geen machine learning nodig en de chatbot krijgt zijn intelligentie alleen door een grote hoeveelheid kennis door menselijke inbreng.
+</p>
+<p>In de sectie 'Achtergrond' werd het programma MYCIN genoemd. Dat kon medische diagnoses stellen door regels te gebruiken (<i>ALS rode bultjes DAN mogelijk rode hond.</i>). Al die regels werden door mensen ingevoerd.</p>
+<p>Een ander voorbeeld is natuurlijke taalverwerking (Natural Language Processing, NLP), waarbij de kennis van experts met betrekking tot grammatica en de betekenis van woorden van menselijke taal wordt gecodeerd in computermodellen en methoden om taal te interpreteren en te produceren.</p>
+                
+<p>Deze toepassingen heten nog AI, omdat de regels zo enorm ingewikkeld of er heel veel regels zijn, teveel om door slechts enkele personen te bevatten. Het hoort niet meer tot het front van de ontwikkelingen.	In 1985 kreeg dit type AI zelfs een naam: <a href="https://www.cambridge.org/core/books/cambridge-handbook-of-artificial-intelligence/gofai/FCF7D6DD921658FE8AE9F2A2B0FECBDD" target="techniek">“Good Old-Fashioned Artificial Intelligence”</a> (GOFAI). We gaan er hier niet verder op in.
+	</p>
+<p>Belangrijk is dat deze toepassingen uiteindelijk werken als ieder 'gewoon' programma. Er is input, dat wordt verwerkt door een algoritme, dat daarbij gebruik maakt van data en het levert uiteindelijk output op.
+Dit is weergegeven in de meest linkse situatie in <a href="#figuur2">figuur 2</a>.
+</p>
+	<div class="midden theorie" id="figuur2">
+		<img src="images/App_AI_ML_DL.svg"  style="width: 95%;"/><br/>
+		<caption>Figuur 2: Verschil tussen lerende en niet lerende applicaties. De agent is een zelfstandige uitvoerder (vertegenwoordiger) van het geleerde die reageert op invoer. Er zijn trouwens ook agents die zelf nog bij kunnen leren, maar die situatie is hier niet in beeld gebracht.
+		</caption>
+	</div><br/>
+                
+	<a id="ml"></a><br/>
+	<h2>Machine en deep learning</h2>
+	<p>Het verschil tussen de 'gewone' programma's en niet-lerende AI enerzijds en <em>machine learning</em> anderzijds zit in de programmeerbaarheid. Bij een gewone app is alles wat die app kan er door de programmeurs ingebouwd. Bij AI is dat niet zo.</p>
+	
+<div class="rechts"><a href="https://quickdraw.withgoogle.com/" target="app"><img src="images/Quickdraw.png"  style="width: 300px;"/></a><br>
+</div>
+<p>Je hebt het spel <i>Quickdraw</i> gespeeld, een spel dat AI gebruikt. Het heeft je vast verbaasd dat ook een slechte tekening werd herkend. Quickdraw zoekt het antwoord op een vraag: wat stelt je tekening voor? Het is zeer onwaarschijnlijk dat jouw tekening precies - pixel (één beeldpuntje in een afbeelding) voor pixel - in de database met tekeningen van Quickdraw zit.</p>
+<p>Quickdraw gebruikt een algoritme om te bepalen of een tekening voldoende lijkt op een tekening die in de database zit. Als dat zo is, kan Quickdraw claimen dat het weet wat je getekend hebt. Tot zover niets bijzonders.<br>
+Het bijzondere is dat dit algoritme niet door een mens geschreven is. Het is ontstaan, opgebouwd door Quickdraw zelf met behulp van <em>training</em>. Het <em>trainingsalgoritme</em> bevat instructies die juist wel door de mens zijn ontwikkeld. Men heeft Quickdraw een massa tekeningen gevoerd en daarbij aangegeven wat de tekeningen voorstelden. Zo 'leerde' het tekeningen herkennen, dat is: het bouwde het algoritme op.</p>
+<p>Er is van tevoren in Quickdraw dus <i>geen</i> algoritme voor het herkennen van tekeningen, maar er is wel degelijk <i>iets</i>. Er moet een trainingsalgoritme zijn, iets dat de app in staat stelt te leren. We komen daar op terug, deze technieken zijn juist het onderwerp van deze sectie. Het verschil met 'gewone' algoritmen zie je in weergegeven in de meest linkse situatie in <a href="#figuur2">figuur 2</a>.
+</p>
+<p>Drie opmerkingen zijn hierbij belangrijk. Ten eerste: Bij machine learning <a href="#figuur2">figuur 2</a> zie je het woord algoritme staan bij training en bij agent (de app die na training gebruikt gaat worden). De algemene definitie van een algoritme is: <em>een eindige set van <b>instructies</b> om een doel te bereiken</em>. Zoals al bij het Quickdraw voorbeeld is genoem is het van belang te beseffen dat de instructies in de agent niet door de mens zijn gegenereerd maar door het trainingsalgoritme. Het trainingsalgoritme bevat instructies die juist wel door de mens zijn ontwikkeld.</p>
+<p>
+Ten tweede: het trainen is <i>data-gestuurd</i>. Quickdraw leert, doordat het tekeningen (= data) voorgeschoteld krijgt. 
+De agent, ofwel de app die na training gebruikt gaat worden, is een statistisch resultaat. Iedere training met dezelfde data kan een net iets andere agent leveren. 
+Het algoritme hoeft na de training ook niet vast te staan. Het kan zijn dat er op basis van aanvullende data opnieuw getraind wordt en er dus een nieuwe agent ontstaat. Deze aanvullende data kan eventueel door de agent zelf worden gemaakt, zoals de app AlphaGo die zelflerend uiteindenlijk de beste Go speler kon verslaan.
+Dit aanpassen van de agent is typisch bij veel AI-toepassingen. We noemen dit het <i>adaptief vermogen</i> van AI.</p>
+<p>Ten derde moet er bij deep-learning waarbij gebruikt wordt gemaakt van neurale netwerken een <i>input-output-relatie</i> zijn. 
+Later gaan we dieper in op <a href="techniek_associatie_analyse.html" class="book">neurale netwerken</a>. Quickdraw is een toepassing die gebruik maakt van neurale netwerken. Bij Quickdraw is de input een tekening en de output is dat Quickdraw zegt wat het voorstelt. Bij het trainen geef je de tekening én wat het voorstelt. Als je alleen de tekening zou geven, leert het nooit wat het voorstelt.</p>
+<p>De data die bij de training gebruikt worden, liggen niet vast. Vaak zijn dit data uit de 'gewone' wereld. Neem bijvoorbeeld de AI die de reclames verzorgt op allerlei sites. Een manier om reclames te kiezen is: kijk naar wat mensen vaak tegelijk kopen: kopen ze x, dan kopen ze ook y. Dan krijg jij een speciale aanbieding voor y als je een keer x koopt.</p>
+  <p>Zo'n systeem wordt getraind door het 100.000 (of zo) kassabonnen te voeren. Zoek maar uit wat veel samen gekocht wordt. Het resultaat wordt nu mede door toeval bepaald: het hangt af van wat er toevallig op die kassabonnen staat. Zo krijg je algoritmen die niet allemaal hetzelfde zijn. Als je kassabonnen van de dorpssuper uit Oldambt, de super op de grachtengordel in Amsterdam of een super in Tokio gebruikt, zal een zelfde trainingsalgoritme behoorlijk verschillende agent algoritmen opleveren. </p>
+
+	
+                
+	<p>Ingewikkelde neurale netwerken vallen onder "deep learning". Deze groep is bevat in de groep "machine learning" van lerende AI, die weer onderdeel uitmaakt van AI in zijn geheel. We beschouwen eerst het anders zijn van machine learning en deep learning ten opzichte van niet AI-systemen.
+	</p>
+	<p>Het verschil tussen de "niet AI-systemen" en machine learning zit in de programmeerbaarheid van een directe oplossing. Beschouw weer het CAS systeem. De wiskunde kent een grote maar eindige overzichtelijke verzameling van bekende functies en strategieën om een wiskundig probleem op te lossen. Een CAS systeem bevat al die functies en strategieën. Geef je zo'n systeem een probleem dan kan de precieze, van te voren geprogrammeerde en dus niet geleerde, oplossingsstrategie worden opgezocht en uitgevoerd.
+	</p>
+
+	<p>Er is dus wel een algoritme dat direct onderzoekt tot welke categorie jouw tekening behoort. Het stuurt jouw data door een recept (algoritme) ongeveer net zo als het CAS systeem dat doet. Maarrrrrr....., het recept dat jouw vragen beantwoordt is niet van te voren in de applicatie geprogrammeerd maar tot stand gekomen met behulp van een algoritme dat door middel van <strong>training</strong> die dit recept filtert uit <strong>data</strong>. De mogelijkheid tot aanpassen van een applicatie aan data noemt men het <strong>adaptieve vermogen</strong>. AI toepassingen hebben alle een adaptief vermogen. De data vormt de invoer van het trainingsproces. Een AI applicatie is dus <strong>data-gestuurd</strong>. Het trainingsalgoritme is natuurlijk wel van te voren geprogrammeerd.
+	</p>
+	<p>De Quickdraw app heeft dus een algoritme dat tot stand is gekomen door training, dit algoritme is niet het algoritme van het leerproces maar is het resultaat van de training. De Quickdraw app wordt dan een <strong>agent</strong> (vertegenwoordiger) genoemd van het geleerde.
+	</p>
+	<p>Bij training is het noodzakelijk dat er een <strong>input-output relatie</strong> is, ofwel de data moet op de een of andere manier worden gekoppeld aan de oplossing. Je zult straks zien dat bij <a href="techniek_associatie_analyse.html" class="book">winkelmandjes analyse</a> (associatie analyse) en <a href="techniek_cluster_analyse.html" class="book">clustering</a> deze koppeling vast ligt in het trainingsalgoritme. Alleen de data zorgt dan voor de variatie in het recept. Het verkregen recept of wel het algoritme van de agent wordt een <strong>statistisch resultaat</strong>. 
+	</p>
+	<p>Bij deep learning en eenvoudigere neurale netwerken (b.v. postcode herkennen),  is ook de input-output relatie niet bekend. Bij deze vorm van AI wordt verwacht dat de training plaats vindt met input en bijbehorende output. Echter het is niet bekend hoe de relatie tussen die input en die output is. Het trainingsalgoritme heeft dan de taak de input-output relatie te schatten. Het algoritme geeft geen zekerheid over de gevonden relatie. De gevonden input-output relatie, die wordt gebruikt in de agent, is nu zelf ook een <strong>statistisch resultaat</strong>. 
+	In figuur 2 is dit weergegeven. Een applicatie die geen AI is en die eventueel gebruikt maakt van data verwerkt de invoer direct tot een uitvoer. De agents in de rechter twee diagrammen berekenen ook direct de uitvoer bij een invoer, maar kunnen dit pas nadat het algoritme in de agent door training is gemaakt.
+	</p>
+	<div class="theorie example">Voorbeeld: N-term
+		<div style="padding-left 20px;">
+			<div class="rechts">
+				<img src="images/fokke-en-sukke-rekenen.gif"  style="width:300px;"/><br/>
+				<caption>Figuur 3: <a href="https://www.foksuk.nl" target="techniek">Fokke en Sukke</a>
+				</caption>
+			</div>
+			<p>We geven een simpel voorbeeld van een onderscheid tussen een rechttoe rechtaan berekening en één die gebaseerd is op een statistisch resultaat. Neem jouw eindrapportcijfer voor informatica. Dit cijfer is een gemiddelde van behaalde cijfers. Haal jij gemiddeld lager dan een 5,5 dan wordt jij bij de leerlingen met een onvoldoende ingedeeld. De grens 5,5 is door de school vast gekozen. Het recept is een simpele wiskundige berekening: vergelijk het cijfer met 5,5.
+			</p>
+			<p>Nu bekijken we jouw resultaat voor het wiskunde op het eindexamen. Je docent kijkt dan jouw werk na en geeft het puntentotaal door aan het College voor Examens (CVE). Het CVE krijgt de cijfers binnen van alle leerlingen die een examentoets (bijvoorbeeld wiskunde) maken, maar gebruikt slechts een deel van die cijfers voor het bepalen van de **N-term** voor dit examen. De N-term is één getal, behorend bij het examen van één vak, waarmee jouw puntenaantal wordt omgezet in een cijfer voor het examen. Leerlingen en docenten zitten na afloop van de examens in spanning af te wachten wat de N-termen voor de vakken dit examenjaar weer zullen zijn. **Deze N-termen zijn op data gebaseerd en daarom een statistisch resultaat**. Je kunt het gebruik van de N-term in het bepalen van het eindcijfer nu beschouwen als een statistisch recept  (b.v. <a href="https://www.examenblad.nl/9336121/d/ex2021/omzet/vlk4oglb5pvs_havo_vwo_tv2/vwo-tv2.htm" target="techniek">vwo 2-de tijdvak 2021</a>, <a href="https://www.examenblad.nl/9336119/d/ex2019/omzet/vkz5je2x54u4_havo_vwo/havo-tv1.htm" target="techniek">havo 1-ste tijdvak</a>).
+			</p>
+		</div>
+	</div>
+	<p>Het voorbeeld van het examencijfer voor wiskunde is nog te simpel om er AI voor in te zetten. Er hoeft maar één getal te worden bepaald op basis van data die ook slechts uit de score van de leerlingen bestaat. <a href="https://www.examenblad.nl/onderwerp/n-term/2021" target="techniek">Het algoritme om de N-term te bepalen</a> is daarom relatief eenvoudig. Het wordt pas nuttig om AI in te zetten als het recept of de data complex is. Deze complexiteit is er vaak al snel. Hoe kan een auto zelf rijden? Hoe herkent een postsorteerrobot een bijvoorbeeld een postcode? Hoe krijg je al die aanvullingen bij je zoekopdrachten in Google? Hoe kan ik een verzameling cd's zo goed mogelijk in groepen indelen? Hoe kan Quickdraw herkennen wat je getekend hebt? Op dit laatste voorbeeld gaan we verder in.
+	</p>
+	<p>Het Quickdraw voorbeeld is vergelijkbaar met het postcode lezen door de robot. Voordat Quickdraw jouw plaatje kan classificeren moet er dus een classificeringsrecept worden gemaakt. Dit classificeringsrecept moet worden gemaakt op basis van voorbeeldtekeningen. Eén tekening is wel maar één datapunt, maar dit datapunt is complex. Het bestaat uit heel veel beeldpunten, namelijk de grootte van het canvas. Al die beeldpunten moeten worden meegenomen, waardoor het datapunt dus niet maar één getal is, zoals bij het N-term voorbeeld hierboven.
+	</p>
+	<p>Om het nog lastiger te maken zijn de beeldpunten niet onafhankelijk van elkaar, een lijnstuk is een verzameling van punten. Deze relatie moet door de AI applicatie worden ontdekt. Ieder van die beeldpunten krijgt invloed door daar een getal (parameter) aan te koppelen. Net als bij de bepaling van de N-term moeten al deze parameters worden geschat. Dit gaat helaas niet in één keer. Er wordt een set parameters gekozen, dan wordt er gekeken of de output behorende bij de trainingsdata door het nieuwe recept goed worden voorspeld. Zo nee dan worden de parameters in het recept weer aangepast enz. <strong>Het trainen van AI is in het algemeen een algoritme waarin herhaling (recursie) aanwezig is</strong>.
+	</p>
+
+	<a id="kenmerken"></a><br/>
+	<h2>Kenmerken voor AI-toepassingen</h2>
+	<p>Na de koppeling tussen AI en data te hebben gelegd geven we hier een aantal argumenten om AI in te zetten.
+	</p>
+	<dl>
+		<dt>Je kunt geen direct algoritme schrijven voor het vraagstuk.
+		</dt>
+		<dd>Bij het examencijfer voorbeeld kan de statistische N-Term met een relatief eenvoudig direct algoritme worden bepaald. Als de data complex is dan lukt dat vaak niet en wordt het vinden van het beste statistische algoritme complex.  
+		</dd>
+		<dt>De invoer die het programma krijgt, is niet volledig te bepalen en is complex .
+		</dt>
+		<dd>De invoer is bepalend voor de uitkomst van het algoritme. Als niet alle mogelijke invoer beschikbaar is (b.v. alle mogelijke schetsen van een kat) en bovendien de input niet zo simpel is dat er een direct algoritme kan worden gemaakt dan kan AI worden ingezet.  
+		</dd>
+		<dt>De oplossingsstrategie is niet bekend.
+		</dt>
+		<dd>Met behulp van kunstmatige intelligentie is het vaak mogelijk een oplossingsstrategie te vinden. Deze oplossingsstrategie is dan niet verklarend, maar werkt wel.
+		</dd>
+	</dl>
+	<p>In de volgende secties behandelen we Machine Learning (ML). We beginnen met een algemeen deel <a href="techniek_machine_learning.html" class="book">machine learning</a> waarin we het leerproces algemeen beschouwen. Daarna ga je leren wat de algoritmen van de meest verklaarbare ML technieken <a href="techniek_associatie_analyse.html" class="book">associatie analyse</a> en  <a href="techniek_cluster_analyse.html" class="book">cluster analyse</a>. Vervolgens behandelen we de minder verklaarbare resultaten van <a href="techniek_neurale_netwerken.html" class="book">neurale netwerken</a> gebruikt in deep learning (DL) en als laatste de inzet van deze technieken in <a href="techniek_multi_agent.html" class="book">multi-agent systemen</a>. 
+	</p>
+
+	<div class ='hammer treeview'>Vragen
+		<div style="padding-left: 20px;">
+				<ol>
+					<li>Leg uit wat het verschil is tussen het algoritme dat het probleem beantwoordt bij een applicatie die op AI is gebaseerd en een applicatie die dat niet is.
+						<div class="caret doel">antwoord</div>
+						<ul class="nested">
+							<li>Bij een op AI gebaseerde applicatie is het algoritme dat het probleem beantwoordt een een statistisch resultaat na training met data. Het algoritme dat het probleem beantwoordt in het andere geval is een bedacht algoritme dat het probleem direct oplost.
+							</li>
+						</ul>
+					</li>
+					<li>Wanneer is voor een probleemstelling kunstmatige intelligentie te gebruiken? Welke kenmerken ken je?
+						<div class="caret doel">antwoord</div>
+						<ul class="nested">
+							<li>In de theorie worden 3 kenmerken genoemd:
+								<ul>
+									<li>Je kunt geen direct algoritme te schrijven voor het vraagstuk.
+									</li>
+									<li>De invoer die het programma krijgt, is niet volledig te bepalen en is complex.
+									</li>
+									<li>De oplossingsstrategie is niet bekend.
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>Geef een voorbeeld van een vraagstuk waar kunstmatige intelligentie toe te passen is. Geef ook aan waarom dit zo is.
+						<div class="caret doel">antwoord</div>
+						<ul class="nested">
+							<li>...
+							</li>
+						</ul>
+					</li>
+					<li>Geef van de volgende toepassingen aan welke van de 3 kenmerken de grootste rol speelt en verklaar waarom.
+					<ol style="list-style-type: upper-roman;">
+						<li>Suggesties voor andere producten in een webwinkel</li>
+						<li>Het herkennen van postcodes</li>
+						<li>Het indelen in groepjes van vergelijkbare films.</li>
+					</ol>
+						<div class="caret doel">antwoord</div>
+						<ul class="nested">
+							<li>
+							<ol style="list-style-type: upper-roman;">
+								<li>De invoer die het programma krijgt, is niet volledig te bepalen en is complex. Er is een algoritme voor dit probleem. Echter, de aankopen van andere klanten bepalen welke suggesties je krijgt.</li>
+								<li>De oplossingsstrategie is niet bekend. Hoewel het voor ons brein heel eenvoudig is om cijfers en letters te herkennen, is het niet mogelijk om uit te leggen hoe je dat precies aanpakt. Een direct algoritme kan niet worden geschreven.</li>
+								<li>De invoer die het programma krijgt, is niet volledig te bepalen en is complex. Je kunt een aantal kenmerken aan een film koppelen en daar de film op laten indelen. Echter de hele verdeling van de eigenschappen over de films is niet bekend. De AI groepeert dan op de meeste overeenkomsten in de kenmerken.</li>
+							</ol>						
+							</li>
+						</ul>
+					</li>
+					<li>Geef de termen waarvan AI, DL, ML de afkortingen zijn en zet die in de volgende zin.<br/>
+					... is een onderdeel van ... dat weer onderdeel is van ...
+						<div class="caret doel">antwoord</div>
+						<ul class="nested">
+							<li>Deep learning is een onderdeel van machine learning dat weer een onderdeel is van artificiële intelligentie.
+							</li>
+						</ul>
+					</li>
+					<li>Noem een techniek die onder kunstmatige intelligentie valt maar  niet onder machine learning.
+						<div class="caret doel">antwoord</div>
+						<ul class="nested">
+							<li>De oudere chatbots of natuurlijke taalverwerking.
+							</li>
+						</ul>
+					</li>
+					<li>Leg uit wat adaptief vermogen van een applicatie is.
+						<div class="caret doel">antwoord</div>
+						<ul class="nested">
+							<li>Het adaptief vermogen van een applicatie is dat de werking van een applicatie door het aanbieden van trainingsdata kan veranderen.
+							</li>
+						</ul>
+					</li>
+					<li>Verdedig de uitspraak "Het aanscherpen van de Corona maatregelen is gebaseerd op een statistisch resultaat".
+						<div class="caret doel">antwoord</div>
+						<ul class="nested">
+							<li>Het RIVM houdt bij hoeveel besmettingen er per dag zijn, hoeveel personen er in de ziekenhuizen belanden. De test, om vast te stellen of iemand besmet is, is niet 100% betrouwbaar. Bovendien laat niet iedereen zich testen. Er zijn dus onzekerheden in de data die ervoor zorgen dat de afgeleide informatie statistisch is. Op basis van deze informatie worden besluiten genomen.
+							</li>
+						</ul>
+					</li>
+					<li>Verdedig de uitspraak "Het aanscherpen van de Corona maatregelen is gebaseerd op een vaste regel".
+						<div class="caret doel">antwoord</div>
+						<ul class="nested">
+							<li>De rijksoverheid heeft een <a href="https://www.rijksoverheid.nl/binaries/rijksoverheid/documenten/publicaties/2021/04/13/routekaart-coronamaatregelen/routekaart-coronamaatregelen.pdf" target="techniek">routekaart</a> voor het reageren op Covid-19 gemaakt waarin verschillende risiconiveaus zijn aangegeven. De grenzen, om van het ene risiconiveau naar het andere over te gaan, zijn door de overheid vastgesteld en lijken vooralsnog onafhankelijk van de virusvariant die er heerst. Hoewel er statistische variatie is in de data zijn de grenzen onveranderlijk gesteld. De grens is vooralsnog niet adaptief.
+							</li>
+						</ul>
+					</li>
+				</ol>
+			</div>
+	</div>
+		
+	</article>
+  </body>
+</html>
