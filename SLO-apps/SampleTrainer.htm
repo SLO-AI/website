@@ -35,14 +35,50 @@
 				document.getElementById('uitvoer').innerHTML="";
 				// Maak een trainer object
 				trainer = new Trainer(3, Math.sign, leersnelheid);
-
+				
 			}
 			
-			function zetLeerSnelheid()
+			function setLeerSnelheid()
 			{
-				console.log(Number(document.getElementById('leersnelheid').value))
-				init();
+				if(trainer)
+				{
+					console.log(Number(document.getElementById('leersnelheid').value))
+					var leersnelheid = Math.max( 0.001,Number(document.getElementById('leersnelheid').value))
+					trainer.setLeerSnelheid(leersnelheid);
+				// init();
+				}
+				else init();
 			}
+
+			
+			function doeActie(obj)
+			{
+				
+				var pos=obj.selectedIndex;
+				obj.selectedIndex = -1;
+				console.log(obj.options[pos]);
+				switch(obj.options[pos].value)
+				{
+					case "Herlaad": init();
+						break;
+					case "peen": trainer.eenTraining(2,-1)
+						break;
+					case "p100": trainer.nTraining(2,-1,100)
+						break;
+					case "feen": trainer.eenTrainingTotKlopt(2,-1)
+						break;
+					case "f100": trainer.eenTrainingTotKlopt(2,-1,100)
+						break;
+					case "v25":  trainer.sampleTrainingTotKlopt(2,-1,25)
+						break;
+					case "tstart": trainer.tussenTweeLijnenInit(2,-1);
+						break;
+					case "tnext": trainer.tussenTweeLijnenNext(2,-1,1);
+						break;
+				}
+			}
+
+		
 			// Het gebruik van objecten in javascript
 			// wordt uitgelegd op https://www.w3schools.com/js/js_classes.asp
 			// Definitie class Perceptron
@@ -153,6 +189,11 @@
 					this.setPerceptron(n,f,c)
 					this.settings.mygrapics=
 						new Graphics(this.settings.myPerceptron);
+				}
+				
+				setLeerSnelheid(leersnelheid)
+				{
+					this.settings.myPerceptron.leersnelheid = leersnelheid;
 				}
 				
 				setPerceptron(n,f,c)
@@ -461,6 +502,110 @@
 						"y<br/>Als benadering voor de lijn<br/>0="
 						+(-b)+"+" + (-a)+"x + y<br/><br/>"+tekst;
 				}
+				
+				tussenTweeLijnenInit(a,b)
+				{
+					
+					var myPerceptron=this.settings.myPerceptron;
+					var tekening = this.settings.mygrapics;
+					tekening.removeObjects();
+					this.settings.puntenVerzameling=[];
+					myPerceptron.gewichten=[b,1,a];
+					tekening.toonVergelijkingPerceptron();
+					
+				}
+				
+				getPuntTussenLijnen(l1,l2, c = 2)
+				{
+					var S; // snijpunt
+					// lengten normaalvector
+					//console.log(l1);
+					//console.log(l2);
+					var len_n1= Math.sqrt(l1[1]*l1[1]+l1[2]*l1[2]);
+					var len_n2= Math.sqrt(l2[1]*l2[1]+l2[2]*l2[2]);
+					// normaalvector bisectrice
+					var nk=[l1[1]/len_n1+l2[1]/len_n2,
+							l1[2]/len_n1+l2[2]/len_n2];
+					var len_nk= Math.sqrt(nk[1]*nk[1]+nk[0]*nk[0])
+					nk[0]/=len_nk;
+					nk[1]/=len_nk;
+					
+					// snijpunt l1,l2
+					var det = l1[1]*l2[2]-l2[1]*l1[2];
+					if( det !=0 ) // Niet evenwijdig
+					{
+						// snijpunt
+						S=	[ (-l1[0]*l2[2]+l2[0]*l1[2])/det,
+							  (l1[0]*l2[1]-l2[0]*l1[1])/det,
+							];
+						// this.settings.mygrapics.voegToeTrainingsPunt(S,"green");
+						// maak punt twee eenheden weg van snijpunt
+						return [ S[0]+c*nk[1],S[1]-c*nk[0]];
+						
+					}
+					else
+					{
+						if(nk[1]!=0) // non vertical line
+						{
+							return [ 0,
+									 (-l1[0]/l1[2]-l2[0]/l2[2])/2
+									]
+						}
+						else
+						{
+							return [ 
+									 (-l1[0]/l1[1]-l2[0]/l2[1])/2,0
+									]
+						}
+					}
+					
+				}
+				tussenTweeLijnenNext(a,b)
+				{
+
+					var myPerceptron=this.settings.myPerceptron;
+					var tekening = this.settings.mygrapics;
+					
+					tekening.removeObjects();
+					var tekst,x,y,punt,invoer,gewenst,uitgevoerd,som,i=1;
+					punt = this.getPuntTussenLijnen( myPerceptron.gewichten, 
+								[-b,-a,1] )
+					x = punt[0];
+					y = punt[1];
+					som = -b - a*x + y;
+					invoer=[1,x,y];
+					gewenst=myPerceptron.activeringsfunctie(som);
+					tekst="Stap 0: Begingewichten: [" + arrayToString(myPerceptron.gewichten,3) +"]<br/>";
+					tekst+="Trainings punt ["+arrayToString(invoer,2)  + "]<br/>met gewenste uitvoer: "+gewenst+ "<br/><br/>";
+						
+					do
+					{
+						tekst+="Stap "+i+":Voorspelling:<br/>";
+						tekst+="voor training "+myPerceptron.geefDoor(invoer) +"<br/>";
+						myPerceptron.train(invoer,gewenst);
+						tekst+="na training "+myPerceptron.geefDoor(invoer) +"<br/>";
+						tekst+=
+							"Nieuwe gewichten: [" + arrayToString(myPerceptron.gewichten,3) +"]<br/><br/>";
+						uitgevoerd=myPerceptron.geefDoor(invoer);
+						tekening.voegToeVergelijkingPerceptron(
+								"stap "+i,
+								"rgb(0, "+((20*i)%255)+", "+((255-20*i)%255)+")");
+						i++;
+					}
+					while(uitgevoerd!=gewenst)
+					var gewichtenGeschaald = myPerceptron.schaalPerceptron();
+					document.getElementById("uitvoer").innerHTML =
+						"Aantal aanpassingen: "+ i+
+						"<br/>Gevonden vergelijking van de lijn is<br/>0 = 1 + " +
+						gewichtenGeschaald[1].toFixed(3) + "x + " + 
+						gewichtenGeschaald[2].toFixed(3) +
+						"y<br/>Als benadering voor de lijn<br/>0="
+						+(-b)+"+" + (-a)+"x + y<br/><br/>"+tekst;
+					
+					tekening.toonVergelijkingPerceptron();
+					tekening.settings.p1.name='uitvoer ='+myPerceptron.geefDoor([1,x,y]);
+					tekening.settings.p1.moveTo([x,y]);
+				}
 			}
 			
 			//einde trainer
@@ -614,9 +759,33 @@
 	</header>
 	<main class="center midden" style="width: 250px; height: auto; padding: 0px; text-align: justify;">
 		<label>Leersnelheid:<label><input type="number" id="leersnelheid" value="0.01" min="0.001" max="1" step="0.001" 
-		 onfocusout="zetLeerSnelheid()"
+		 onchange="setLeerSnelheid()"
 		>
 		<br/>
+		<!--
+		<label>actie</label>
+		<select  
+			
+			onchange="doeActie(this);">
+			<option value="herlaad" onfocus="console.log(this.value);">Herlaad</option>
+			<optgroup label="Per punt één training:">
+			  <option value="peen">Één keer</option>
+			  <option value="p100">100 keer</option>
+			</optgroup>
+			<optgroup label="Tot goede voorspelling:">
+			  <option value="feen">Één keer</option>
+			  <option value="f100">100 keer</option>
+			</optgroup>
+			<optgroup label="per verzameling:">
+			  <option value="v25">voeg 25 punten toe</option>
+			</optgroup>
+			<optgroup label="tussenin:">
+			  <option value="tstart">start</option>
+			  <option value="tnext">next</option>
+			</optgroup>
+
+		</select>
+		-->
 		Per punt één training:<br/>
 		<!-- <button class="knop" onclick="location.reload();"
 			style="width: 31%;">Herlaad</button> -->
@@ -630,11 +799,14 @@
 		-per punt:<br/>
 		<button style="width: 47%;" class="knop" onclick="trainer.eenTrainingTotKlopt(2,-1)">Één keer</button>
 		<button class="knop" style="width: 47%;"  onclick="trainer.nTrainingTotKlopt(2,-1,100)">100 keer</button><br/>
+		-telkens tussen de lijnen:<br/>
+		<button style="width: 47%;" class="knop" onclick="trainer.tussenTweeLijnenInit(2,-1)">start</button>
+		<button style="width: 47%;" class="knop" onclick="trainer.tussenTweeLijnenNext(2,-1,1)">volgende</button>
 		-per verzameling:<br/>
 		<button style="width: 100%;" class="knop" onclick="trainer.sampleTrainingTotKlopt(2,-1,25)">voeg 25 punten toe</button>
 		<div id="box" class="jxgbox" style="width:inherit; height:250px;align-self:center;">
 		</div>	
-		<p id="uitvoer" style="font-size: smaller; overflow-y: auto; width: inherit; height: 200px;"></p>
+		<p id="uitvoer" style="font-size: smaller; overflow-y: auto; width: inherit; height: 160px;"></p>
 	  </main>
     </body>
 </html>
